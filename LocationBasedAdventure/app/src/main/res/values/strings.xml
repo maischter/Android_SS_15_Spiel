@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">LocationBasedAdventure</string>
+    <string name="notregisteredText">Doch noch nicht registriert?</string>
+    <string name="alreadyregisteredText">Diese E-Mail-Adresse ist bereits registriert!</string>
+    <string name="charakterErstellen">Charakter erstellen</string>
+    <string name="anmelden">Anmelden</string>
+    <string name="registrieren">Registrieren</string>
+    <string name="action_settings">Settings</string>
+    <string name="angemeldet_bleiben">Angemeldet bleiben</string>
+    <string name="passwortWrong">Das eingegebene Passwort ist nicht korrekt.</string>
+    <string name="passwortShort">"Ihr Passwort muss mindestens 7 Zeichen lang sein."</string>
+    <string name="emailNotRegistered">Die eingegebene E-Mail-Adresse ist noch nicht registriert!</string>
+    <string name="emailAlreadyRegistered">Die eingegebene E-Mail-Adresse ist bereits registriert!</string>
+    <string name="emailWrong">"Ungültige Emailadresse!"</string>
+    <string-array name="sex_array">
+        <item>Männlich</item>
+        <item>Weiblich</item>
+    </string-array>
+    <string-array name="typ_array">
+
+        <item>Bogen</item>
+        <item>Einhandaxt</item>
+        <item>Einhandschwert</item>
+        <item>Gewehr</item>
+        <item>Zauberstab</item>
+        <item>Zwei-Hand-Axt</item>
+        <item>Zwei-Hand-Schwert</item>
+
+    </string-array>
+</resources>

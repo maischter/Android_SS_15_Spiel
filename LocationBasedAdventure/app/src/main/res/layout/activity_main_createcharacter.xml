@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="@color/background_material_dark"
+    android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".MainActivity">
+
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/charakterErstellen"
+        android:id="@+id/createCharakter"
+        android:background="@color/accent_material_light"
+        android:width="200dp"
+        android:layout_alignRight="@+id/checkBoxSchild"
+        android:layout_alignEnd="@+id/checkBoxSchild"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="30dp"/>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/characterImage"
+        android:src="@drawable/bogenmannlich"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/characterName"
+        android:layout_marginBottom="20dp"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Name"
+        android:ems="10"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/characterName"
+        android:layout_marginBottom="20dp"/>
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerCharacterTyp"
+        android:layout_below="@+id/spinnerSex"
+        android:layout_alignRight="@+id/spinnerSex"
+        android:layout_alignEnd="@+id/spinnerSex"
+        android:layout_alignLeft="@+id/spinnerSex"
+        android:layout_alignStart="@+id/spinnerSex"
+        android:popupBackground="@color/accent_material_light"
+        />
+
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinnerSex"
+        android:layout_below="@+id/characterName"
+        android:layout_alignLeft="@+id/characterName"
+        android:layout_alignStart="@+id/characterName"
+        android:layout_alignRight="@+id/characterName"
+        android:layout_alignEnd="@+id/characterName"
+        android:layout_marginBottom="20dp"
+        android:popupBackground="@color/accent_material_light"/>
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Schild?"
+        android:id="@+id/checkBoxSchild"
+        android:layout_below="@+id/spinnerCharacterTyp"
+        android:layout_alignRight="@+id/spinnerCharacterTyp"
+        android:layout_alignEnd="@+id/spinnerCharacterTyp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="20dp"/>
+
+
+</RelativeLayout>
