@@ -37,6 +37,10 @@
             android:name=".GifActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".BattleActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>
