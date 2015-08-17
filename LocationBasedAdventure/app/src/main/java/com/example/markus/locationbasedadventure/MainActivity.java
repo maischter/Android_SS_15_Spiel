@@ -2,34 +2,48 @@ package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.TextView;
 
-import com.example.markus.locationbasedadventure.Server.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 
-
-//Serverport   url = "jdbc:mysql://87.106.18.104:3306/LocationBasedGame?user=Entwickler&password=Qu1Ma2Ch3";
 
 public class MainActivity extends Activity{
 
     Button anmeldenPage;
     Button registrierenPage;
+    MySqlDatabase db;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
+        initDB();
+        checkAnmeldung();
         initButtons();
+    }
+
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();
+    }
+
+
+    //Überprüft ob die Datenbank leer ist ( = Erster Aufruf der APP) und füllt  in diesem Fall eine leere Standartzeile.
+    //Überprüft dann ob die Stay angemeldet in der ersten ( =einzige) Zeile 1 ist, falls ja, wechseln in GIF.
+
+
+    private void checkAnmeldung() {
+        if(db.isEmpty()){
+            db.insertAllmainActivity();
+        }
+        if(db.getStayAngemeldet() == 1){
+            Intent i = new Intent(getApplicationContext(),GifActivity.class); // Hier eigentlich MapActivity
+            startActivity(i);
+        }
     }
 
 
@@ -50,6 +64,13 @@ public class MainActivity extends Activity{
                 startActivity(i);
             }
         });
+    }
+
+    // Opening the Database
+
+    private void initDB(){
+        db = new MySqlDatabase(this);
+        db.open();
     }
 
 }

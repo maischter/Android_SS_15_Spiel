@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.AnmeldenTask;
+import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 import com.example.markus.locationbasedadventure.Hashing.PasswordHash;
 import com.example.markus.locationbasedadventure.Items.AnmeldenItem;
 
@@ -30,6 +31,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     EditText email;
     EditText passwort;
     TextView diskurs;
+    MySqlDatabase db;
     private String address = "http://sruball.de/game/checkAnmelden.php";
 
 
@@ -37,9 +39,15 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_anmelden);
+        initDB();
         initViews();
         initButtons();
     }
+
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();    }
 
 
     //Initialisieren der EditText und TextView
@@ -88,7 +96,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
             if(stayAngemeldet.isChecked()){
                 saveStayAngemeldetIntoDBOnPhone();
             }
-            Intent i = new Intent(getApplicationContext(),MainActivity.class);
+            Intent i = new Intent(getApplicationContext(),MainActivity.class); // eigentlich zu MAPActivity
             startActivity(i);
         }
 
@@ -99,7 +107,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     //noch leer
 
     private void saveStayAngemeldetIntoDBOnPhone() {
-
+        db.updateStayAngemeldet(1);
     }
 
     //Ruft AsynchronousTask auf, um Daten aus der Datenbank zu bekommen
@@ -107,7 +115,14 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     private void checkInputOnServer() {
         String email = this.email.getText().toString();
         String passwort = this.passwort.getText().toString();
-        new AnmeldenTask(this).execute(address,email,passwort);
+        new AnmeldenTask(this).execute(address, email, passwort);
+    }
+
+    // Opening the Database
+
+    private void initDB(){
+        db = new MySqlDatabase(this);
+        db.open();
     }
 
 
@@ -124,7 +139,6 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
                 emailNotKnownDiskurs();
             }else{
                 if(PasswordHash.validatePassword(passwort.getText().toString(),passworthash)){
-                    System.out.println(passworthash);
                     dataCorrect();
                 }else{
                     passwortWrongDiskurs();

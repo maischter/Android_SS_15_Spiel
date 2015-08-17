@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.RegistrierenTask;
+import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 import com.example.markus.locationbasedadventure.Hashing.PasswordHash;
 
 import java.security.NoSuchAlgorithmException;
@@ -27,7 +28,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
     EditText email;
     EditText passwort;
     TextView diskurs;
-    String usernr = "";
+    MySqlDatabase db;
     private String address = "http://sruball.de/game/insertIntoAnmeldedaten.php";
     String TAG_USERNR = "USERNR";
 
@@ -35,12 +36,23 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_registrieren);
+        initDB();
         initViews();
         initButton();
     }
 
 
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();    }
 
+    // Opening the Database
+
+    private void initDB(){
+        db = new MySqlDatabase(this);
+        db.open();
+    }
     //
 
     private void initButton() {
@@ -58,8 +70,6 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
             @Override
             public void onClick(View v) {
                 checkInput();
-
-
             }
         });
     }
@@ -77,6 +87,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
             e.printStackTrace();
         }
         new RegistrierenTask(this).execute(emailText, passwort, address);
+        db.rememberEmail(emailText);
         emptyEditTexts();
     }
 

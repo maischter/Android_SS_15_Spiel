@@ -2,9 +2,6 @@ package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -17,39 +14,58 @@ import android.widget.Spinner;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.CreateCharacterTask;
+import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 
 /**
  * Created by Markus on 20.07.2015.
  */
 public class CreateCharacterActivity extends Activity{
 
-    Button characterErstellen;
-    ImageView characterImage;
-    CheckBox schild;
-    EditText name;
-    Spinner sex;
-    Spinner typ;
-    String waponTyp= "Bogen";
+    private Button characterErstellen;
+    private ImageView characterImage;
+    private CheckBox schild;
+    private EditText name;
+    private Spinner sex;
+    private Spinner typ;
+    private String weaponTyp= "Bogen";
+    MySqlDatabase db;
 
-    String sexTyp = "Maennlich";
+    private String sexTyp = "Maennlich";
     private String address = "http://sruball.de/game/updateCreateCharacter.php";
-    String usernr ="";
-    String TAG_USERNR = "USERNR";
+    private String usernr ="";
+    private String TAG_USERNR = "USERNR";
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_createcharacter);
-        Intent i = getIntent();
-        usernr = i.getStringExtra(TAG_USERNR);
-        System.out.println(usernr);
+        getIntentData();
+        initDB();
         initViews();
         initButtons();
         initSpinners();
     }
 
-    // Initialisieren der Spinner + zugehoerige Listener;
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();    }
 
+
+    private void getIntentData(){
+        Intent i = getIntent();
+        usernr = i.getStringExtra(TAG_USERNR);
+    }
+    // Opening the Database
+
+    private void initDB(){
+        db = new MySqlDatabase(this);
+        db.open();
+    }
+
+
+
+    // Initialisieren der Spinner + zugehoerige Listener;
     private void initSpinners() {
 
         sex =(Spinner) findViewById(R.id.spinnerSex);
@@ -81,7 +97,7 @@ public class CreateCharacterActivity extends Activity{
         typ.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                waponTyp = parent.getItemAtPosition(position).toString();
+                weaponTyp = parent.getItemAtPosition(position).toString();
                 selectShowSchild();
                 selectImage();
                 schild.setOnClickListener(new View.OnClickListener() {
@@ -104,7 +120,7 @@ public class CreateCharacterActivity extends Activity{
     // Setzt CheckBox Sichtbar, um das Schild auszuwaehlen
 
     private void selectShowSchild() {
-            switch(waponTyp){
+            switch(weaponTyp){
                 case "Einhandschwert":checkBoxVisible(); break;
                 case "Einhandaxt":checkBoxVisible(); break;
                 default: checkBoxInvisible();
@@ -114,7 +130,6 @@ public class CreateCharacterActivity extends Activity{
 
     }
 
-    //asynchronustask!!
 
 
 
@@ -143,7 +158,9 @@ public class CreateCharacterActivity extends Activity{
     private void saveInput() {
 
         String characterName = name.getText().toString();
-        new CreateCharacterTask().execute(address, characterName, sexTyp, waponTyp, usernr);
+        new CreateCharacterTask().execute(address, characterName, sexTyp, weaponTyp, usernr);
+        db.updateAll(characterName,weaponTyp,"","","");
+
     }
 
     //Initialisieren des Edit Texts und des Image Views
@@ -177,24 +194,24 @@ public class CreateCharacterActivity extends Activity{
 
         if(sexTyp.equals("Weiblich")) {
 
-            switch (waponTyp) {
+            switch (weaponTyp) {
                 case ("Bogen"):
                     //icon = getResources().getDrawable(R.drawable.bogenweiblich);
                     loadBitmap(R.drawable.bogenweiblich, characterImage);
                     break;
                 case "Einhandschwert":
                     if(schild.isChecked()){
-                        waponTyp = "Einhandschwert mit Schild";
+                        weaponTyp = "Einhandschwert mit Schild";
                         //icon = getResources().getDrawable(R.drawable.einhandschwertschildweiblich);
                         loadBitmap(R.drawable.einhandschwertschildweiblich, characterImage);
                     }else{
                         //icon = getResources().getDrawable(R.drawable.einhandschwertweiblich);
-                        loadBitmap(R.drawable.einhandschwertweiblich, characterImage);;
+                        loadBitmap(R.drawable.einhandschwertweiblich, characterImage);
                     }
                     break;
                 case "Einhandaxt":
                     if(schild.isChecked()){
-                        waponTyp = "Einhandaxt mit Schild";
+                        weaponTyp = "Einhandaxt mit Schild";
                         //icon = getResources().getDrawable(R.drawable.einhandaxtschildweiblich);
                         loadBitmap(R.drawable.einhandaxtschildweiblich, characterImage);
                     }else{
@@ -221,14 +238,14 @@ public class CreateCharacterActivity extends Activity{
             }
         }
         else{
-            switch (waponTyp) {
+            switch (weaponTyp) {
                 case ("Bogen"):
                     //icon = getResources().getDrawable(R.drawable.bogenweiblich);
                     loadBitmap(R.drawable.bogenmannlich, characterImage);
                     break;
                 case "Einhandschwert":
                     if(schild.isChecked()){
-                        waponTyp = "Einhandschwert mit Schild";
+                        weaponTyp = "Einhandschwert mit Schild";
                         //icon = getResources().getDrawable(R.drawable.einhandschwertschildweiblich);
                         loadBitmap(R.drawable.einhandschwertschildmannlich, characterImage);
                     }else{
@@ -238,7 +255,7 @@ public class CreateCharacterActivity extends Activity{
                     break;
                 case "Einhandaxt":
                     if(schild.isChecked()){
-                        waponTyp = "Einhandaxt mit Schild";
+                        weaponTyp = "Einhandaxt mit Schild";
                         //icon = getResources().getDrawable(R.drawable.einhandaxtschildweiblich);
                         loadBitmap(R.drawable.einhandaxtschildmannlich, characterImage);
                     }else{
