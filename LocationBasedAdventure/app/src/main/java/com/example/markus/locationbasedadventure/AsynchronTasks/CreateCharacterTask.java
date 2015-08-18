@@ -1,8 +1,10 @@
 package com.example.markus.locationbasedadventure.AsynchronTasks;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.markus.locationbasedadventure.CreateCharacterActivity;
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
 
 import org.apache.http.NameValuePair;
@@ -20,9 +22,10 @@ public class CreateCharacterTask extends AsyncTask<String,Integer,Integer>{
     JSONParser jsonParser = new JSONParser();
     private static final String TAG_SUCCESS = "success";
 
+    private ProgressDialog dialog;
 
-    public CreateCharacterTask(){
-
+    public CreateCharacterTask(CreateCharacterActivity activity){
+            dialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -65,7 +68,20 @@ public class CreateCharacterTask extends AsyncTask<String,Integer,Integer>{
 
     @Override
     protected void onPostExecute(Integer result) {
+
         super.onPostExecute(result);
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
+    }
+
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        dialog.setMessage("Loading.");
+        dialog.setCancelable(false);
+        dialog.show();
     }
 
 

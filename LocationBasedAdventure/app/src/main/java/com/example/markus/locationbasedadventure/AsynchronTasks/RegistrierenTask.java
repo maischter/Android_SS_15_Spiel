@@ -1,10 +1,12 @@
 package com.example.markus.locationbasedadventure.AsynchronTasks;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
 
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
+import com.example.markus.locationbasedadventure.RegistrierenActivity;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -20,23 +22,24 @@ public class RegistrierenTask extends AsyncTask<String,Integer,Integer> {
     private JSONParser jsonParser = new JSONParser();
     private static final String TAG_SUCCESS = "success";
     private int email;
+    private ProgressDialog dialog;
 
     RegistrierenTaskListener registrierenTaskListener;
 
-    public RegistrierenTask(RegistrierenTaskListener registrierenTaskListener){
+    public RegistrierenTask(RegistrierenActivity activity , RegistrierenTaskListener registrierenTaskListener){
         this.registrierenTaskListener = registrierenTaskListener;
+        dialog = new ProgressDialog(activity);
     }
 
 
-   /* @Override
+
+    @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        pDialog = new ProgressDialog(NewProductActivity.this);
-        pDialog.setMessage("Creating Product..");
-        pDialog.setIndeterminate(false);
-        pDialog.setCancelable(true);
-        pDialog.show();
-    }*/
+        dialog.setMessage("Loading.");
+        dialog.setCancelable(false);
+        dialog.show();
+    }
 
     @Override
     protected Integer doInBackground(String... params) {
@@ -79,6 +82,9 @@ public class RegistrierenTask extends AsyncTask<String,Integer,Integer> {
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
         registrierenTaskListener.UserNrRetrieved("" + result, email);
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
 
 
     }

@@ -86,7 +86,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
-        new RegistrierenTask(this).execute(emailText, passwort, address);
+        new RegistrierenTask(this,this).execute(emailText, passwort, address);
         db.rememberEmail(emailText);
         emptyEditTexts();
     }

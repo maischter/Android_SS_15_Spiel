@@ -29,7 +29,6 @@ public class CreateCharacterActivity extends Activity{
     private Spinner typ;
     private String weaponTyp= "Bogen";
     MySqlDatabase db;
-
     private String sexTyp = "Maennlich";
     private String address = "http://sruball.de/game/updateCreateCharacter.php";
     private String usernr ="";
@@ -158,7 +157,7 @@ public class CreateCharacterActivity extends Activity{
     private void saveInput() {
 
         String characterName = name.getText().toString();
-        new CreateCharacterTask().execute(address, characterName, sexTyp, weaponTyp, usernr);
+        new CreateCharacterTask(this).execute(address, characterName, sexTyp, weaponTyp, usernr);
         db.updateAll(characterName,weaponTyp,"","","");
 
     }
@@ -196,43 +195,34 @@ public class CreateCharacterActivity extends Activity{
 
             switch (weaponTyp) {
                 case ("Bogen"):
-                    //icon = getResources().getDrawable(R.drawable.bogenweiblich);
                     loadBitmap(R.drawable.bogenweiblich, characterImage);
                     break;
                 case "Einhandschwert":
                     if(schild.isChecked()){
                         weaponTyp = "Einhandschwert mit Schild";
-                        //icon = getResources().getDrawable(R.drawable.einhandschwertschildweiblich);
                         loadBitmap(R.drawable.einhandschwertschildweiblich, characterImage);
                     }else{
-                        //icon = getResources().getDrawable(R.drawable.einhandschwertweiblich);
                         loadBitmap(R.drawable.einhandschwertweiblich, characterImage);
                     }
                     break;
                 case "Einhandaxt":
                     if(schild.isChecked()){
                         weaponTyp = "Einhandaxt mit Schild";
-                        //icon = getResources().getDrawable(R.drawable.einhandaxtschildweiblich);
                         loadBitmap(R.drawable.einhandaxtschildweiblich, characterImage);
                     }else{
-                        //icon = getResources().getDrawable(R.drawable.einhandaxtweiblich);
                         loadBitmap(R.drawable.einhandaxtweiblich, characterImage);
                     }
                     break;
                 case "Gewehr":
-                    //icon = getResources().getDrawable(R.drawable.gewehrweiblich);
                     loadBitmap(R.drawable.gewehrweiblich, characterImage);
                     break;
                 case "Zauberstab":
-                    // icon = getResources().getDrawable(R.drawable.zauberstabweiblich);
                     loadBitmap(R.drawable.zauberstabweiblich, characterImage);
                     break;
                 case "Zwei-Hand-Axt":
-                    //icon = getResources().getDrawable(R.drawable.zweihandaxtweiblich);
                     loadBitmap(R.drawable.zweihandaxtweiblich, characterImage);
                     break;
                 case "Zwei-Hand-Schwert":
-                    //icon = getResources().getDrawable(R.drawable.zweihandschwertweiblich);
                     loadBitmap(R.drawable.zweihandschwertweiblich, characterImage);
                     break;
             }
@@ -240,43 +230,34 @@ public class CreateCharacterActivity extends Activity{
         else{
             switch (weaponTyp) {
                 case ("Bogen"):
-                    //icon = getResources().getDrawable(R.drawable.bogenweiblich);
                     loadBitmap(R.drawable.bogenmannlich, characterImage);
                     break;
                 case "Einhandschwert":
                     if(schild.isChecked()){
                         weaponTyp = "Einhandschwert mit Schild";
-                        //icon = getResources().getDrawable(R.drawable.einhandschwertschildweiblich);
                         loadBitmap(R.drawable.einhandschwertschildmannlich, characterImage);
                     }else{
-                        //icon = getResources().getDrawable(R.drawable.einhandschwertweiblich);
                         loadBitmap(R.drawable.einhandschwertmannlich, characterImage);
                     }
                     break;
                 case "Einhandaxt":
                     if(schild.isChecked()){
                         weaponTyp = "Einhandaxt mit Schild";
-                        //icon = getResources().getDrawable(R.drawable.einhandaxtschildweiblich);
                         loadBitmap(R.drawable.einhandaxtschildmannlich, characterImage);
                     }else{
-                        //icon = getResources().getDrawable(R.drawable.einhandaxtweiblich);
                         loadBitmap(R.drawable.einhandaxtmannlich, characterImage);
                     }
                     break;
                 case "Gewehr":
-                    //icon = getResources().getDrawable(R.drawable.gewehrweiblich);
                     loadBitmap(R.drawable.gewehrmannlich, characterImage);
                     break;
                 case "Zauberstab":
-                    // icon = getResources().getDrawable(R.drawable.zauberstabweiblich);
                     loadBitmap(R.drawable.zauberstabmannlich, characterImage);
                     break;
                 case "Zwei-Hand-Axt":
-                    //icon = getResources().getDrawable(R.drawable.zweihandaxtweiblich);
                     loadBitmap(R.drawable.zweihandaxtmannlich, characterImage);
                     break;
                 case "Zwei-Hand-Schwert":
-                    //icon = getResources().getDrawable(R.drawable.zweihandschwertweiblich);
                     loadBitmap(R.drawable.zweihandschwertmannlich, characterImage);
                     break;
             }

@@ -115,7 +115,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     private void checkInputOnServer() {
         String email = this.email.getText().toString();
         String passwort = this.passwort.getText().toString();
-        new AnmeldenTask(this).execute(address, email, passwort);
+        new AnmeldenTask(this,this).execute(address, email, passwort);
     }
 
     // Opening the Database

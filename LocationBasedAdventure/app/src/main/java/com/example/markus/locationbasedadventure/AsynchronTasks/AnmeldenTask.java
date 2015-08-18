@@ -1,8 +1,11 @@
 package com.example.markus.locationbasedadventure.AsynchronTasks;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.example.markus.locationbasedadventure.AnmeldenActivity;
 import com.example.markus.locationbasedadventure.Items.AnmeldenItem;
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
 import com.example.markus.locationbasedadventure.JSON.JSONToObjectConverter;
@@ -30,9 +33,11 @@ public class AnmeldenTask extends AsyncTask<String, Integer, Integer> {
     private AnmeldenTaskListener anmeldenTaskListener;
     private int diskurs = 0;
     private String passwort = "";
+    private ProgressDialog dialog;
 
-    public AnmeldenTask(AnmeldenTaskListener anmeldenTaskListener){
+    public AnmeldenTask(AnmeldenActivity activity, AnmeldenTaskListener anmeldenTaskListener){
         this.anmeldenTaskListener = anmeldenTaskListener;
+        dialog = new ProgressDialog(activity);
     }
 
     @Override
@@ -69,9 +74,20 @@ public class AnmeldenTask extends AsyncTask<String, Integer, Integer> {
 
 
     @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+        dialog.setMessage("Loading.");
+        dialog.setCancelable(false);
+        dialog.show();
+    }
+
+    @Override
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
         anmeldenTaskListener.registrationDataRetrieved(result,passwort);
+        if (dialog.isShowing()) {
+            dialog.dismiss();
+        }
 
     }
 
