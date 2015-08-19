@@ -12,6 +12,11 @@
     <string name="emailNotRegistered">Die eingegebene E-Mail-Adresse ist noch nicht registriert!</string>
     <string name="emailAlreadyRegistered">Die eingegebene E-Mail-Adresse ist bereits registriert!</string>
     <string name="emailWrong">"Ungültige Emailadresse!"</string>
+    <string name="buttonStats">Stats</string>
+    <string name="buttonInventar">Inventar/Ausrüstung</string>
+    <string name="buttonRanking">Ranking</string>
+    <string name="buttonEinstellungen">Einstellungen</string>
+    <string name="buutonMap">Map</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

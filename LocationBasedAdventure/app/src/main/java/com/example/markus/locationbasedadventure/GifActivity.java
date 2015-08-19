@@ -20,8 +20,6 @@ public class GifActivity extends Activity {
         setContentView(R.layout.activity_gif);
 
         ImageView animationVid = (ImageView) findViewById(R.id.imageViewAnimation);
-        //animationVid.setBackgroundResource(R.drawable.gifactivityanimation);
-        //animation = (AnimationDrawable) animationVid.getBackground();
         animation = (AnimationDrawable) animationVid.getDrawable();
 
         animationVid.post(new Runnable() {

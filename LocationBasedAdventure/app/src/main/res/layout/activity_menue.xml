@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/characterImageMenue"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/characterNameMenue"
+        android:layout_marginBottom="15dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ems="8"
+        android:textSize="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:id="@+id/characterNameMenue"
+        android:layout_marginBottom="15dp"
+        android:text="Charactername"
+        android:gravity="center"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonStats"
+        android:id="@+id/ButtonStats"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/characterNameMenue"
+        android:layout_alignRight="@+id/characterNameMenue"
+        android:layout_alignEnd="@+id/characterNameMenue"
+        android:layout_alignLeft="@+id/characterNameMenue"
+        android:layout_alignStart="@+id/characterNameMenue"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonInventar"
+        android:id="@+id/ButtonInventar"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/ButtonStats"
+        android:layout_alignRight="@+id/ButtonStats"
+        android:layout_alignEnd="@+id/ButtonStats"
+        android:layout_alignLeft="@+id/ButtonStats"
+        android:layout_alignStart="@+id/ButtonStats"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonRanking"
+        android:id="@+id/ButtonRanking"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/ButtonInventar"
+        android:layout_alignRight="@+id/ButtonInventar"
+        android:layout_alignEnd="@+id/ButtonInventar"
+        android:layout_alignLeft="@+id/ButtonInventar"
+        android:layout_alignStart="@+id/ButtonInventar"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonEinstellungen"
+        android:id="@+id/ButtonEinstellungen"
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/ButtonRanking"
+        android:layout_alignLeft="@+id/ButtonRanking"
+        android:layout_alignStart="@+id/ButtonRanking"
+        android:layout_alignRight="@+id/ButtonRanking"
+        android:layout_alignEnd="@+id/ButtonRanking"
+        android:layout_marginBottom="10dp"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buutonMap"
+        android:id="@+id/ButtonBackToMap"
+        android:background="@color/accent_material_light"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_below="@+id/ButtonEinstellungen"/>
+
+</RelativeLayout>

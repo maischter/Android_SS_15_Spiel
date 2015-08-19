@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySqlDatabase {
-    private static final String DATABASE_NAME = "Game2.db";
+    private static final String DATABASE_NAME = "Game3.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Games";
@@ -21,6 +21,7 @@ public class MySqlDatabase {
     public static final String KEY_WEAPONDAMAGE = "weapondamage";
     public static final String KEY_WEAPONHITCHANCE = "weaponhitchance";
     public static final String KEY_WEAPONKRITCHANCE = "weaponkritchance";
+    public static final String KEY_SEX = "sex";
 
     public String email = "";
 
@@ -50,7 +51,7 @@ public class MySqlDatabase {
     //add Data into the Database
 
     public long insertAll(String charactername, String weapon,
-                              String weapondamage, String weaponhitchance, String weaponkritchance) {
+                              String weapondamage, String weaponhitchance, String weaponkritchance,String sex) {
 
         ContentValues newFoodieValues = new ContentValues();
 
@@ -61,6 +62,7 @@ public class MySqlDatabase {
         newFoodieValues.put(KEY_WEAPONDAMAGE, weapondamage);
         newFoodieValues.put(KEY_WEAPONHITCHANCE, weaponhitchance);
         newFoodieValues.put(KEY_WEAPONKRITCHANCE, weaponkritchance);
+        newFoodieValues.put(KEY_SEX, sex);
 
         return db.insert(DATABASE_TABLE, null, newFoodieValues);
     }
@@ -74,12 +76,13 @@ public class MySqlDatabase {
         ContentValues newFoodieValues = new ContentValues();
 
         newFoodieValues.put(KEY_EMAIL, "");
-        newFoodieValues.put(KEY_CHARCTERNAME, "charactername");
+        newFoodieValues.put(KEY_CHARCTERNAME, "Louie");
         newFoodieValues.put(KEY_STAYANGEMELDET, 0);         // Standartmäßig ist stayangemeldet deaktiviert --> 0
-        newFoodieValues.put(KEY_WEAPON,"bogen");
+        newFoodieValues.put(KEY_WEAPON,"Bogen");
         newFoodieValues.put(KEY_WEAPONDAMAGE, "");
         newFoodieValues.put(KEY_WEAPONHITCHANCE, "");
         newFoodieValues.put(KEY_WEAPONKRITCHANCE, "");
+        newFoodieValues.put(KEY_SEX, "Männlich");
 
         return db.insert(DATABASE_TABLE, null, newFoodieValues);
     }
@@ -110,7 +113,7 @@ public class MySqlDatabase {
 
     // update all values of database row 1
 
-    public void updateAll(String charactername, String weapon, String weapondamage, String weaponhitchance, String weaponkritchance){
+    public void updateAll(String charactername, String weapon, String weapondamage, String weaponhitchance, String weaponkritchance,String sex){
         ContentValues values = new ContentValues();
 
         values.put(KEY_EMAIL, email);
@@ -120,6 +123,7 @@ public class MySqlDatabase {
         values.put(KEY_WEAPONDAMAGE, weapondamage);
         values.put(KEY_WEAPONHITCHANCE, weaponhitchance);
         values.put(KEY_WEAPONKRITCHANCE, weaponkritchance);
+        values.put(KEY_SEX, sex);
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
@@ -144,17 +148,51 @@ public class MySqlDatabase {
     public int getStayAngemeldet(){
 
               Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
-                            KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE}, KEY_ID + "=?",
+                            KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_SEX}, KEY_ID + "=?",
                     new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
             if (cursor != null)
                 cursor.moveToFirst();
 
             return cursor.getInt(3);
-
-
     }
 
+    public String getCharactername(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getString(2);
+    }
+
+    public String getWeapon(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getString(4);
+    }
+
+
+    public String getSex(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getString(8);
+    }
 
     public int countEntries(){
         String countQuery = "SELECT  * FROM " + DATABASE_TABLE;
@@ -185,7 +223,8 @@ public class MySqlDatabase {
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_EMAIL + " text, " + KEY_CHARCTERNAME
                 + " text, " + KEY_STAYANGEMELDET + " integer, "+ KEY_WEAPON
-                + " text, " + KEY_WEAPONDAMAGE + " text, "+ KEY_WEAPONHITCHANCE + " text, "+ KEY_WEAPONKRITCHANCE
+                + " text, " + KEY_WEAPONDAMAGE + " text, " + KEY_WEAPONHITCHANCE
+                + " text, " + KEY_WEAPONKRITCHANCE + " text, " + KEY_SEX
                 + " text);";
 
         public ToDoDBOpenHelper(Context c, String dbname,
