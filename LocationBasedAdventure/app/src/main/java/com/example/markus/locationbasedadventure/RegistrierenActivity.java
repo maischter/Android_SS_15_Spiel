@@ -31,6 +31,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
     MySqlDatabase db;
     private String address = "http://sruball.de/game/insertIntoAnmeldedaten.php";
     String TAG_USERNR = "USERNR";
+    String emailToRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -53,7 +54,6 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         db = new MySqlDatabase(this);
         db.open();
     }
-    //
 
     private void initButton() {
         anmelden = (Button) findViewById(R.id.buttonAnmeldenAkt);
@@ -86,9 +86,9 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
+        emailToRemember = emailText;
+        System.out.println(emailToRemember);
         new RegistrierenTask(this,this).execute(emailText, passwort, address);
-        db.rememberEmail(emailText);
-        emptyEditTexts();
     }
 
     //prueft ob gueltiges Email eingegeben wurde --> nein : EmailWrong Diskurs, Email & Passwort leer
@@ -159,6 +159,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
             diskurs.setText(R.string.alreadyregisteredText);
             emptyEditTexts();
         }else{
+            db.updateEmail(emailToRemember);
             Intent i = new Intent(getApplicationContext(), CreateCharacterActivity.class);
             i.putExtra(TAG_USERNR, data);
             startActivity(i);

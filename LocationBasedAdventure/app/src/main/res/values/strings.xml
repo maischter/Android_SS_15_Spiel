@@ -16,7 +16,13 @@
     <string name="buttonInventar">Inventar/Ausrüstung</string>
     <string name="buttonRanking">Ranking</string>
     <string name="buttonEinstellungen">Einstellungen</string>
-    <string name="buutonMap">Map</string>
+    <string name="achievements">Achievements</string>
+    <string name="buttonMap">Map</string>
+    <string name="level">Level</string>
+    <string name="exp">Erfahrungspunkte</string>
+    <string name="rank">Rang</string>
+    <string name="charactername">Charaktername</string>
+    <string name="empty---">---</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

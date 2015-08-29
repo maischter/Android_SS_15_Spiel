@@ -155,7 +155,7 @@ public class CreateCharacterActivity extends Activity{
 
         String characterName = name.getText().toString();
         new CreateCharacterTask(this).execute(address, characterName, sexTyp, weaponTyp, usernr);
-        db.updateAll(characterName,weaponTyp,"","","",sexTyp);
+        db.updateAllWithoutEmail(characterName,weaponTyp,"","","",sexTyp);
 
     }
 

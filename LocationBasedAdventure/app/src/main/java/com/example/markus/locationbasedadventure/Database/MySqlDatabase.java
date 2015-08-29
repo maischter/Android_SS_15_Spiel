@@ -23,7 +23,6 @@ public class MySqlDatabase {
     public static final String KEY_WEAPONKRITCHANCE = "weaponkritchance";
     public static final String KEY_SEX = "sex";
 
-    public String email = "";
 
 
     private ToDoDBOpenHelper dbHelper;
@@ -55,7 +54,7 @@ public class MySqlDatabase {
 
         ContentValues newFoodieValues = new ContentValues();
 
-        newFoodieValues.put(KEY_EMAIL, email);
+       // newFoodieValues.put(KEY_EMAIL, email);
         newFoodieValues.put(KEY_CHARCTERNAME, charactername);
         newFoodieValues.put(KEY_STAYANGEMELDET, 0);         // Standartmäßig ist stayangemeldet deaktiviert --> 0
         newFoodieValues.put(KEY_WEAPON, weapon);
@@ -111,12 +110,20 @@ public class MySqlDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    public void updateEmail(String email) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_EMAIL, email);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
     // update all values of database row 1
 
-    public void updateAll(String charactername, String weapon, String weapondamage, String weaponhitchance, String weaponkritchance,String sex){
+    public void updateAllWithoutEmail(String charactername, String weapon, String weapondamage, String weaponhitchance, String weaponkritchance,String sex){
         ContentValues values = new ContentValues();
 
-        values.put(KEY_EMAIL, email);
+        //values.put(KEY_EMAIL, email);
         values.put(KEY_CHARCTERNAME, charactername);
         values.put(KEY_STAYANGEMELDET, 0);
         values.put(KEY_WEAPON, weapon);
@@ -131,7 +138,7 @@ public class MySqlDatabase {
 
 
     public boolean isEmpty(){
-        Cursor cur = db.rawQuery("SELECT COUNT(*) FROM "+ DATABASE_TABLE, null);
+        Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
         if (cur != null){
             cur.moveToFirst();
             if (cur.getInt(0) == 0) {
@@ -156,6 +163,23 @@ public class MySqlDatabase {
 
             return cursor.getInt(3);
     }
+
+
+    public String getEmail(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        System.out.println(cursor.getString(1));
+        return cursor.getString(1);
+    }
+
+
 
     public String getCharactername(){
 
@@ -213,9 +237,7 @@ public class MySqlDatabase {
         db.delete(DATABASE_TABLE, null, null);
     }
 
-    public void rememberEmail(String email) {
-        this.email = email;
-    }
+    //public void rememberEmail(String email) {this.email = email;}
 
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {

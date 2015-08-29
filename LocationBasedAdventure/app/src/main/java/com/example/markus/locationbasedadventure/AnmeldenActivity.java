@@ -96,7 +96,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
             if(stayAngemeldet.isChecked()){
                 saveStayAngemeldetIntoDBOnPhone();
             }
-            Intent i = new Intent(getApplicationContext(),MainActivity.class); // eigentlich zu MAPActivity
+            Intent i = new Intent(getApplicationContext(),MenueActivity.class); // eigentlich zu MAPActivity
             startActivity(i);
         }
 

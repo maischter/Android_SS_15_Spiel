@@ -84,11 +84,11 @@ public class AnmeldenTask extends AsyncTask<String, Integer, Integer> {
     @Override
     protected void onPostExecute(Integer result) {
         super.onPostExecute(result);
-        anmeldenTaskListener.registrationDataRetrieved(result,passwort);
+
         if (dialog.isShowing()) {
             dialog.dismiss();
         }
-
+        anmeldenTaskListener.registrationDataRetrieved(result,passwort);
     }
 
 
