@@ -153,8 +153,8 @@
             android:weightSum="1">
 
             <ImageButton
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="38dp"
+                android:layout_height="53dp"
                 android:id="@+id/imageButton_skill1" />
         </LinearLayout>
 

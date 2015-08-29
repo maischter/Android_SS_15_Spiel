@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySqlDatabase {
-    private static final String DATABASE_NAME = "Game3.db";
+    private static final String DATABASE_NAME = "Game4.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Games";
@@ -22,6 +22,12 @@ public class MySqlDatabase {
     public static final String KEY_WEAPONHITCHANCE = "weaponhitchance";
     public static final String KEY_WEAPONKRITCHANCE = "weaponkritchance";
     public static final String KEY_SEX = "sex";
+    public static final String KEY_LEVEL = "level";
+    public static final String KEY_EXP = "exp";
+    public static final String KEY_STAMINA = "stamina";
+    public static final String KEY_STRENGTH = "strength";
+    public static final String KEY_DEXTERITY = "dexterity";
+    public static final String KEY_INTELLIGENCE = "intelligence";
 
 
 
@@ -72,18 +78,25 @@ public class MySqlDatabase {
 
     public long insertAllmainActivity() {
 
-        ContentValues newFoodieValues = new ContentValues();
+        ContentValues newValues = new ContentValues();
 
-        newFoodieValues.put(KEY_EMAIL, "");
-        newFoodieValues.put(KEY_CHARCTERNAME, "Louie");
-        newFoodieValues.put(KEY_STAYANGEMELDET, 0);         // Standartmäßig ist stayangemeldet deaktiviert --> 0
-        newFoodieValues.put(KEY_WEAPON,"Bogen");
-        newFoodieValues.put(KEY_WEAPONDAMAGE, "");
-        newFoodieValues.put(KEY_WEAPONHITCHANCE, "");
-        newFoodieValues.put(KEY_WEAPONKRITCHANCE, "");
-        newFoodieValues.put(KEY_SEX, "Männlich");
+        newValues.put(KEY_EMAIL, "");
+        newValues.put(KEY_CHARCTERNAME, "Louie");
+        newValues.put(KEY_STAYANGEMELDET, 0);         // Standartmäßig ist stayangemeldet deaktiviert --> 0
+        newValues.put(KEY_WEAPON,"Bogen");
+        newValues.put(KEY_WEAPONDAMAGE, "");
+        newValues.put(KEY_WEAPONHITCHANCE, "");
+        newValues.put(KEY_WEAPONKRITCHANCE, "");
+        newValues.put(KEY_SEX, "Männlich");
+        newValues.put(KEY_LEVEL, 1);
+        newValues.put(KEY_EXP, 1);
+        newValues.put(KEY_STAMINA, 15);
+        newValues.put(KEY_STRENGTH, 15);
+        newValues.put(KEY_DEXTERITY, 15);
+        newValues.put(KEY_INTELLIGENCE, 15);
 
-        return db.insert(DATABASE_TABLE, null, newFoodieValues);
+
+        return db.insert(DATABASE_TABLE, null, newValues);
     }
 
     //update a StayAngemeldet in databaserow 1
@@ -119,6 +132,7 @@ public class MySqlDatabase {
     }
 
     // update all values of database row 1
+    //Email & Stats werden nicht geupdatet, da diese bereits passen
 
     public void updateAllWithoutEmail(String charactername, String weapon, String weapondamage, String weaponhitchance, String weaponkritchance,String sex){
         ContentValues values = new ContentValues();
@@ -131,6 +145,7 @@ public class MySqlDatabase {
         values.put(KEY_WEAPONHITCHANCE, weaponhitchance);
         values.put(KEY_WEAPONKRITCHANCE, weaponkritchance);
         values.put(KEY_SEX, sex);
+
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
@@ -150,12 +165,13 @@ public class MySqlDatabase {
         return false;
     }
 
-    // get a FoodieItem from the Database
+    // get a Item from the Database
 
     public int getStayAngemeldet(){
 
-              Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
-                            KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_SEX}, KEY_ID + "=?",
+              Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
+                              KEY_WEAPON, KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_SEX, KEY_LEVEL, KEY_EXP,
+                              KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
                     new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
             if (cursor != null)
@@ -168,7 +184,8 @@ public class MySqlDatabase {
     public String getEmail(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
-                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -184,7 +201,8 @@ public class MySqlDatabase {
     public String getCharactername(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
-                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -196,7 +214,8 @@ public class MySqlDatabase {
     public String getWeapon(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
-                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -209,7 +228,8 @@ public class MySqlDatabase {
     public String getSex(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
-                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX}, KEY_ID + "=?",
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -246,8 +266,9 @@ public class MySqlDatabase {
                 + " integer primary key autoincrement, " + KEY_EMAIL + " text, " + KEY_CHARCTERNAME
                 + " text, " + KEY_STAYANGEMELDET + " integer, "+ KEY_WEAPON
                 + " text, " + KEY_WEAPONDAMAGE + " text, " + KEY_WEAPONHITCHANCE
-                + " text, " + KEY_WEAPONKRITCHANCE + " text, " + KEY_SEX
-                + " text);";
+                + " text, " + KEY_WEAPONKRITCHANCE + " text, " + KEY_SEX + " text, " + KEY_LEVEL + " integer, " + KEY_EXP
+                + " integer, " + KEY_STAMINA + " integer, " + KEY_STRENGTH + " integer, " + KEY_DEXTERITY + " integer, " + KEY_INTELLIGENCE
+                + " integer);";
 
         public ToDoDBOpenHelper(Context c, String dbname,
                                 SQLiteDatabase.CursorFactory factory, int version) {

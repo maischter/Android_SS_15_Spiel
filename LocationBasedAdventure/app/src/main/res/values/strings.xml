@@ -22,7 +22,7 @@
     <string name="exp">Erfahrungspunkte</string>
     <string name="rank">Rang</string>
     <string name="charactername">Charaktername</string>
-    <string name="empty---">---</string>
+    <string name="empty">---</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>
