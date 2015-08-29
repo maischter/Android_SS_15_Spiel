@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.UpdateHitpointsbarTask;
+import com.example.markus.locationbasedadventure.Items.Entity;
 import com.example.markus.locationbasedadventure.Items.Skill;
 
 import java.util.Random;
@@ -37,30 +38,17 @@ public class BattleActivity extends Activity{
     ImageButton skill_b;
     ImageButton skill_c;
     ImageButton skill_d;
-    int sp_int;
     int level;
     int exp;
+    int sp_int;
     int sp_str;
     int sp_dex;
     int sp_sta;
-    Skill a;
-    Skill b;
-    Skill c;
-    Skill d;
+    Entity Player;
+    Entity NonPlayer;
     Random rand = new Random();
     int turn;
-    double physical_dmg;
-    double magical_dmg;
-    double magical_wand_dmg;
-    double hitpoints;
-    double physical_res;
-    double magical_res;
-    double crit_chance;
-    double crit_dmg;
-    double dodge;
-    double physical_bow_dmg;
-    double hitrate;
-
+    boolean turnDone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,18 +60,20 @@ public class BattleActivity extends Activity{
         calcBattleStats();
 
         turn = rand.nextInt(2);
-
+        turnDone = true;
         int FPS = 40;
+
         //Überprüft wer am Zug ist
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                if (turn==players_turn){
+                if (turn==players_turn && turnDone){
                     playersTurn();
-
-                } else if (turn==nonplayers_turn){
+                    turnDone=false;
+                } else if (turn==nonplayers_turn && turnDone){
                     nonplayersTurn();
+                    turnDone=false;
 
                 }
 
@@ -129,6 +119,7 @@ public class BattleActivity extends Activity{
         skill_b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                int dmg = Player.Skill1.damage;
 
                 updateProgressbar();
                 nextTurn();
@@ -145,6 +136,7 @@ public class BattleActivity extends Activity{
         skill_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 updateProgressbar();
                 nextTurn();
@@ -177,30 +169,13 @@ public class BattleActivity extends Activity{
         loadSkillPNG(R.drawable.power_up, skill_c);
         loadSkillPNG(R.drawable.special_attk, skill_d);
 
-        a = new Skill(R.string.skillA,30);
-        b = new Skill(R.string.skillB,0);
-        c = new Skill(R.string.skillC,80);
-        d = new Skill(R.string.skillD,0);
-
     }
 
     private void calcBattleStats() {
-        physical_dmg = sp_str * 20;
-        magical_dmg = sp_int * 10;
-        magical_wand_dmg = sp_int * 10;
-        hitpoints = sp_sta * 50;
-        physical_res = sp_str * 5 + sp_sta * 10;
-        magical_res = sp_int * 5 + sp_sta * 10;
-        crit_chance = sp_dex * 0.1 ;
-        crit_dmg = 1.5;
-        hitrate = 0.5 + sp_dex*0.1;
-        dodge = sp_dex * 0.1;
-        physical_bow_dmg = sp_dex * 10;
-        randomizeEnemy();
-    }
+        Player = new Entity(sp_str,sp_sta,sp_dex,sp_int);
 
-    public void randomizeEnemy(){
-        // Gegner an die Stats des Spieler anpassen
+        NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int);
+
     }
 
     private void nextTurn(){
@@ -210,7 +185,7 @@ public class BattleActivity extends Activity{
         if (turn==nonplayers_turn){
             turn=players_turn;
         }
-        updateProgressbar();
+        turnDone=true;
     }
 
     private void updateProgressbar() {

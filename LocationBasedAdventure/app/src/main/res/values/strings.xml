@@ -43,7 +43,7 @@
     <string name="skillA">AutoAttack</string>
     <string name="skillB">Defense</string>
     <string name="skillC">Power-UP</string>
-    <string name="skillD">Special</string>
+    <string name="skillD">SpecialAttack</string>
 
 
 </resources>
