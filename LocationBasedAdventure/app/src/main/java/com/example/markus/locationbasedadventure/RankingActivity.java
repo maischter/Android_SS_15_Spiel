@@ -77,7 +77,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
         initDB();
         initTextViews();
-        new LoadRankingTask(this,this).execute(address,db.getEmail());
+        new LoadRankingTask(this,this).execute(address, db.getEmail());
 
     }
 
@@ -192,7 +192,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         rank6.setText(""+rank+".");
         charactername6.setText(charactername);
         level6.setText(""+level);
-        exp6.setText(""+exp);
+        exp6.setText("" + exp);
     }
 
 
@@ -205,10 +205,12 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     public void rankingDataRetrieved(ArrayList<RankingItem> rankingList, int persusernr) {
         setTextViewRow1(rankingList.get(0).getRank(), rankingList.get(0).getCharactername(), rankingList.get(0).getLevel(), rankingList.get(0).getExp());
         setTextViewRow2(rankingList.get(1).getRank(), rankingList.get(1).getCharactername(), rankingList.get(1).getLevel(), rankingList.get(1).getExp());
-        setTextViewRow3(rankingList.get(2).getRank(),rankingList.get(2).getCharactername(),rankingList.get(2).getLevel(),rankingList.get(2).getExp());
-        setTextViewRow4(rankingList.get(3).getRank(),rankingList.get(3).getCharactername(),rankingList.get(3).getLevel(),rankingList.get(3).getExp());
-        setTextViewRow5(rankingList.get(4).getRank(),rankingList.get(4).getCharactername(),rankingList.get(4).getLevel(),rankingList.get(4).getExp());
-        setTextViewRow6(rankingList.get(5).getRank(), rankingList.get(5).getCharactername(), rankingList.get(5).getLevel(), rankingList.get(5).getExp());
+        setTextViewRow3(rankingList.get(2).getRank(), rankingList.get(2).getCharactername(), rankingList.get(2).getLevel(), rankingList.get(2).getExp());
+        setTextViewRow4(rankingList.get(3).getRank(), rankingList.get(3).getCharactername(), rankingList.get(3).getLevel(), rankingList.get(3).getExp());
+        setTextViewRow5(rankingList.get(4).getRank(), rankingList.get(4).getCharactername(), rankingList.get(4).getLevel(), rankingList.get(4).getExp());
+        if(rankingList.size()==6){
+            setTextViewRow6(rankingList.get(5).getRank(), rankingList.get(5).getCharactername(), rankingList.get(5).getLevel(), rankingList.get(5).getExp());
+        }
         if(persusernr>3){
             setBackgroundRow1Normal();
             setBackgroundRow2Normal();

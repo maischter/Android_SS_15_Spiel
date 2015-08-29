@@ -130,7 +130,11 @@ public class LoadRankingTask extends AsyncTask<String,Integer,Integer> {
             rankingData.add(arrayList.get(2));
             rankingData.add(arrayList.get(persRank-2));
             rankingData.add(arrayList.get(persRank-1));
-            rankingData.add(arrayList.get(persRank));
+            System.out.println(arrayList);
+            if(persRank != arrayList.size()){
+                rankingData.add(arrayList.get(persRank));
+            }
+
             System.out.println(rankingData.get(0).getCharactername());
         }else{
             for(int i=0;i<6;i++){

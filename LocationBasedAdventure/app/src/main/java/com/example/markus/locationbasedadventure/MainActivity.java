@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.markus.locationbasedadventure.AsynchronTasks.syndciateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 
 
@@ -14,6 +15,8 @@ public class MainActivity extends Activity{
     Button anmeldenPage;
     Button registrierenPage;
     MySqlDatabase db;
+
+    private String address2 = "http://sruball.de/game/syndicateData.php";
 
 
     @Override
@@ -42,6 +45,7 @@ public class MainActivity extends Activity{
             db.insertAllmainActivity();
         }
         if(db.getStayAngemeldet() == 1){
+            new syndciateStatsLocalToServerTask(this).execute(address2,db.getEmail(),""+db.getLevel(),""+db.getExp(),""+db.getStamina(),""+db.getStrength(),""+db.getDexterity(),""+db.getIntelligence());
             Intent i = new Intent(getApplicationContext(),GifActivity.class); // Hier eigentlich MapActivity
             startActivity(i);
         }
@@ -54,8 +58,8 @@ public class MainActivity extends Activity{
         anmeldenPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(),BattleActivity.class);
-                //Intent i = new Intent(getApplicationContext(),AnmeldenActivity.class);
+                //Intent i = new Intent(getApplicationContext(),BattleActivity.class);
+                Intent i = new Intent(getApplicationContext(),AnmeldenActivity.class);
                 startActivity(i);
             }
         });

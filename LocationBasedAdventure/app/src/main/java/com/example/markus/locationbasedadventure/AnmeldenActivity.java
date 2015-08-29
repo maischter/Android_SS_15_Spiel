@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.AnmeldenTask;
+import com.example.markus.locationbasedadventure.AsynchronTasks.syndciateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 import com.example.markus.locationbasedadventure.Hashing.PasswordHash;
 import com.example.markus.locationbasedadventure.Items.AnmeldenItem;
@@ -33,7 +34,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     TextView diskurs;
     MySqlDatabase db;
     private String address = "http://sruball.de/game/checkAnmelden.php";
-
+    private String address2 = "http://sruball.de/game/syndicateData.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,6 +97,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
             if(stayAngemeldet.isChecked()){
                 saveStayAngemeldetIntoDBOnPhone();
             }
+            new syndciateStatsLocalToServerTask(this).execute(address2,db.getEmail(),""+db.getLevel(),""+db.getExp(),""+db.getStamina(),""+db.getStrength(),""+db.getDexterity(),""+db.getIntelligence());
             Intent i = new Intent(getApplicationContext(),MenueActivity.class); // eigentlich zu MAPActivity
             startActivity(i);
         }

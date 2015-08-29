@@ -192,8 +192,92 @@ public class MySqlDatabase {
             cursor.moveToFirst();
 
 
-        System.out.println(cursor.getString(1));
         return cursor.getString(1);
+    }
+
+    public int getLevel(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        return cursor.getInt(9);
+    }
+
+    public int getExp(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        return cursor.getInt(10);
+    }
+
+    public int getStamina(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        return cursor.getInt(11);
+    }
+
+    public int getStrength(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        return cursor.getInt(12);
+    }
+
+
+    public int getDexterity(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        return cursor.getInt(13);
+    }
+
+    public int getIntelligence(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+
+        return cursor.getInt(14);
     }
 
 
