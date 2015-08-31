@@ -13,7 +13,8 @@ public class Entity {
     public double physical_dmg;
     public double magical_dmg;
     public double magical_wand_dmg;
-    public double hitpoints;
+    public double maxHitpoints;
+    public double curHitpoints;
     public double physical_res;
     public double magical_res;
     public double crit_chance;
@@ -50,16 +51,17 @@ public class Entity {
 
 
         Skill1 = new Skill(R.string.skillA,30);
-        Skill2 = new Skill(R.string.skillB,0);
-        Skill3 = new Skill(R.string.skillC,80);
-        Skill4 = new Skill(R.string.skillD,0);
+        Skill2 = new Skill(R.string.skillDef,0);
+        Skill3 = new Skill(R.string.skillPower,0);
+        Skill4 = new Skill(R.string.skillSpecA,60);
     }
 
     public void calcDetailStats (){
         physical_dmg = str * 20;
         magical_dmg = intell * 10;
         magical_wand_dmg = intell * 10;
-        hitpoints = sta * 50;
+        maxHitpoints = sta * 50;
+        curHitpoints = maxHitpoints;
         physical_res = str * 5 + sta * 10;
         magical_res = str * 5 + sta * 10;
         crit_chance = dex * 0.1 ;

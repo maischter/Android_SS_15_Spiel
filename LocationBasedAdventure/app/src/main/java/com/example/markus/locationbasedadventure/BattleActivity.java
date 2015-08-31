@@ -120,7 +120,7 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                updateProgressbar();
+                updateProgressbar(Player.Skill1,NonPlayer);
                 nextTurn();
             }
         });
@@ -128,9 +128,8 @@ public class BattleActivity extends Activity{
         skill_b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int dmg = Player.Skill1.damage;
 
-                updateProgressbar();
+                updateProgressbar(Player.Skill2,NonPlayer);
                 nextTurn();
             }
         });
@@ -138,7 +137,7 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                updateProgressbar();
+                updateProgressbar(Player.Skill3,NonPlayer);
                 nextTurn();
             }
         });
@@ -147,7 +146,7 @@ public class BattleActivity extends Activity{
             public void onClick(View v) {
 
 
-                updateProgressbar();
+                updateProgressbar(Player.Skill4,NonPlayer);
                 nextTurn();
             }
         });
@@ -199,7 +198,7 @@ public class BattleActivity extends Activity{
         turnDone=true;
     }
 
-    private void updateProgressbar() {
+    private void updateProgressbar(Skill skill,Entity target) {
 
     }
 
