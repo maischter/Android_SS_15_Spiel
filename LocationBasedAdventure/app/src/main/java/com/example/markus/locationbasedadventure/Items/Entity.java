@@ -33,6 +33,7 @@ public class Entity {
     int dex;
     int intell;
     int lvl;
+    Weapon entityWeapon;
 
     public Entity (int strength, int stamina, int dexterity, int intelligence,int level, boolean npc){
 

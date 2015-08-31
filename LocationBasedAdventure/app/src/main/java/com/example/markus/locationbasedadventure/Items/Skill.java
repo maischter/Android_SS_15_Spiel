@@ -9,6 +9,7 @@ public class Skill {
 
     public int skillName;
     public int damage;
+    public int skillDMG;
 
     public Skill (int sName, int dmg){
         this.skillName = sName;
@@ -21,6 +22,7 @@ public class Skill {
                 //Skills machen 1,5 mehr dmg
             case R.string.skillSpecA:
                 //Skill macht 2 mehr dmg,aber man muss eine Runde aussetzen
+                this.damage = dmg;
 
         }
     }
