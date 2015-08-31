@@ -295,6 +295,26 @@ public class MySqlDatabase {
         return cursor.getString(2);
     }
 
+    public int [] getBattleData(){
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        int [] BattleData = new int[6];
+        BattleData[0] = cursor.getInt(9);  //lvl
+        BattleData[1] = cursor.getInt(10); //exp
+        BattleData[2] = cursor.getInt(11); //sta
+        BattleData[3] = cursor.getInt(12); //str
+        BattleData[4] = cursor.getInt(13); //Dex
+        BattleData[5] = cursor.getInt(14); //Int
+
+        return BattleData;
+    }
+
     public String getWeapon(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,

@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.UpdateHitpointsbarTask;
+import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
 import com.example.markus.locationbasedadventure.Items.Skill;
 
@@ -50,10 +51,13 @@ public class BattleActivity extends Activity{
     int turn;
     boolean turnDone;
 
+    MySqlDatabase db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
+        initDB();
         initProgressbars();
         initImageButtons();
         loadBattleData();
@@ -61,7 +65,7 @@ public class BattleActivity extends Activity{
 
         turn = rand.nextInt(2);
         turnDone = true;
-        int FPS = 40;
+        int FPS = 20;
 
         //Überprüft wer am Zug ist
         Timer timer = new Timer();
@@ -74,17 +78,22 @@ public class BattleActivity extends Activity{
                 } else if (turn==nonplayers_turn && turnDone){
                     nonplayersTurn();
                     turnDone=false;
-
                 }
-
             }
         },0,1000/FPS);
 
-
-
     }
 
+    @Override
+    protected void onDestroy() {
+        db.close();
+        super.onDestroy();
+    }
 
+    private void initDB(){
+        db = new MySqlDatabase(this);
+        db.open();
+    }
 
     private void playersTurn(){
         skill_a.setClickable(true);
@@ -154,12 +163,15 @@ public class BattleActivity extends Activity{
 
     public void loadBattleData(){
         //Laden aller relevanten Kampfdaten
-        level = 1;
-        exp = 0;
-        sp_dex = 15;
-        sp_int = 15;
-        sp_sta = 15;
-        sp_str = 15;
+        int [] BattleData = db.getBattleData();
+        level = BattleData[0];
+        exp = BattleData[1];
+        sp_sta = BattleData[2];
+        sp_str = BattleData[3];
+        sp_dex = BattleData[4];
+        sp_int = BattleData[5];
+        String weapon = db.getWeapon();
+
         loadingSkills();
     }
 
@@ -172,9 +184,8 @@ public class BattleActivity extends Activity{
     }
 
     private void calcBattleStats() {
-        Player = new Entity(sp_str,sp_sta,sp_dex,sp_int);
-
-        NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int);
+        Player = new Entity(sp_str,sp_sta,sp_dex,sp_int,level,false);
+        NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level,true);
 
     }
 
