@@ -1,6 +1,6 @@
 package com.example.markus.locationbasedadventure.Items;
 
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.R;
 
 import java.util.Random;
@@ -26,7 +26,7 @@ public class Entity {
     public Skill Skill2;
     public Skill Skill3;
     public Skill Skill4;
-    MySqlDatabase db;
+    CharacterdataDatabase db;
     Random rand;
     int str;
     int sta;

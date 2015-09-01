@@ -5,7 +5,7 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.markus.locationbasedadventure.AnmeldenActivity;
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
 import com.example.markus.locationbasedadventure.MainActivity;
 
@@ -25,17 +25,17 @@ public class syndciateStatsLocalToServerTask extends AsyncTask<String, Integer, 
     private JSONParser jsonParser = new JSONParser();
     private static final String TAG_SUCCESS = "success";
     private ProgressDialog dialog;
-    MySqlDatabase db;
+    CharacterdataDatabase db;
 
     public syndciateStatsLocalToServerTask(AnmeldenActivity activity){
         dialog = new ProgressDialog(activity);
-        db = new MySqlDatabase(activity);
+        db = new CharacterdataDatabase(activity);
     }
 
 
     public syndciateStatsLocalToServerTask(MainActivity activity){
         dialog = new ProgressDialog(activity);
-        db = new MySqlDatabase(activity);
+        db = new CharacterdataDatabase(activity);
     }
 
 

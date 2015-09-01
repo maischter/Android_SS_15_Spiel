@@ -14,12 +14,13 @@ import android.widget.Spinner;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.CreateCharacterTask;
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 
 /**
  * Created by Markus on 20.07.2015.
  */
-public class CreateCharacterActivity extends Activity{
+public class CreateCharacterActivity extends Activity implements CreateCharacterTask.CreateCharakterTaskListener{
 
     private Button characterErstellen;
     private ImageView characterImage;
@@ -28,7 +29,9 @@ public class CreateCharacterActivity extends Activity{
     private Spinner sex;
     private Spinner typ;
     private String weaponTyp= "Bogen";
-    MySqlDatabase db;
+    private int weaponNr;
+    CharacterdataDatabase characterdataDb;
+    WeaponDatabase weaponDb;
     private String sexTyp = "Maennlich";
     private String address = "http://sruball.de/game/updateCreateCharacter.php";
     private String usernr ="";
@@ -47,7 +50,8 @@ public class CreateCharacterActivity extends Activity{
 
     @Override
     protected void onDestroy() {
-        db.close();
+        characterdataDb.close();
+        weaponDb.close();
         super.onDestroy();    }
 
 
@@ -58,8 +62,10 @@ public class CreateCharacterActivity extends Activity{
     // Opening the Database
 
     private void initDB(){
-        db = new MySqlDatabase(this);
-        db.open();
+        characterdataDb = new CharacterdataDatabase(this);
+        characterdataDb.open();
+        weaponDb = new WeaponDatabase(this);
+        weaponDb.open();
     }
 
 
@@ -97,6 +103,7 @@ public class CreateCharacterActivity extends Activity{
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 weaponTyp = parent.getItemAtPosition(position).toString();
+                weaponNr = getWeaponNr(weaponTyp);
                 selectShowSchild();
                 selectImage();
                 schild.setOnClickListener(new View.OnClickListener() {
@@ -154,10 +161,11 @@ public class CreateCharacterActivity extends Activity{
     private void saveInput() {
 
         String characterName = name.getText().toString();
-        new CreateCharacterTask(this).execute(address, characterName, sexTyp, weaponTyp, usernr);
-        db.updateAllWithoutEmail(characterName,weaponTyp,"","","",sexTyp);
-
+        new CreateCharacterTask(this,this).execute(address, characterName, sexTyp, weaponTyp, usernr);
+        characterdataDb.updateCreatecharacter(characterName, sexTyp);
     }
+
+
 
     //Initialisieren des Edit Texts und des Image Views
 
@@ -182,6 +190,31 @@ public class CreateCharacterActivity extends Activity{
         schild.setEnabled(true);
         schild.setVisibility(View.VISIBLE);
         schild.setChecked(false);
+    }
+
+
+    public int getWeaponNr(String weapon){
+        switch(weapon){
+            case ("Bogen"):
+                return 8;
+            case "Einhandschwert":
+                return 1;
+            case "Einhandaxt":
+                return 2;
+            case "Gewehr":
+                return 9;
+            case "Zauberstab":
+                return 7;
+            case "Zwei-Hand-Axt":
+                return 6;
+            case "Zwei-Hand-Schwert":
+                return 5;
+            case "Einhandschwert mit Schild":
+                return 3;
+            case "Einhandaxt mit Schild":
+                return 4;
+        }
+        return 0;
     }
 
 
@@ -262,11 +295,19 @@ public class CreateCharacterActivity extends Activity{
         }
     }
 
+
+
+
     public void loadBitmap(int resID , ImageView imageView) {
         BitmapWorkerTask task = new BitmapWorkerTask(imageView);
         task.execute(resID);
     }
 
+    @Override
+    public void weaponDataRetrieved(int[] weaponArray) {
+        weaponDb.updateAll(weaponArray);
+        System.out.println(weaponDb.getWeaponTyp());
+    }
 }
 
 

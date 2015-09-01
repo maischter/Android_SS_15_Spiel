@@ -1,24 +1,15 @@
 package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
-import android.content.Intent;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.CheckBox;
-import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
-import com.example.markus.locationbasedadventure.AsynchronTasks.UpdateHitpointsbarTask;
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
 import com.example.markus.locationbasedadventure.Items.Skill;
 
@@ -51,7 +42,8 @@ public class BattleActivity extends Activity{
     int turn;
     boolean turnDone;
 
-    MySqlDatabase db;
+    ArmorDatabase armorDb;
+    WeaponDatabase weaponDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,13 +78,16 @@ public class BattleActivity extends Activity{
 
     @Override
     protected void onDestroy() {
-        db.close();
+        weaponDb.close();
+        armorDb.close();
         super.onDestroy();
     }
 
     private void initDB(){
-        db = new MySqlDatabase(this);
-        db.open();
+        weaponDb = new WeaponDatabase(this);
+        weaponDb.open();
+        armorDb = new ArmorDatabase(this);
+        armorDb.open();
     }
 
     private void playersTurn(){
@@ -162,14 +157,14 @@ public class BattleActivity extends Activity{
 
     public void loadBattleData(){
         //Laden aller relevanten Kampfdaten
-        int [] BattleData = db.getBattleData();
+        int [] BattleData = armorDb.getArmor();
         level = BattleData[0];
         exp = BattleData[1];
         sp_sta = BattleData[2];
         sp_str = BattleData[3];
         sp_dex = BattleData[4];
         sp_int = BattleData[5];
-        String weapon = db.getWeapon();
+        int[] weapon = weaponDb.getWeapon();
 
         loadingSkills();
     }

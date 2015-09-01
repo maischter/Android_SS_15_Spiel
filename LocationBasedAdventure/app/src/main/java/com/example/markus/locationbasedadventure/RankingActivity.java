@@ -6,7 +6,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadRankingTask;
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Items.RankingItem;
 
 import java.util.ArrayList;
@@ -55,7 +55,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     TextView characternameLeer;
     TextView levelLeer;
     TextView expLeer;
-    MySqlDatabase db;
+    CharacterdataDatabase characterdataDb;
 
 
 
@@ -77,7 +77,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
         initDB();
         initTextViews();
-        new LoadRankingTask(this,this).execute(address, db.getEmail());
+        new LoadRankingTask(this,this).execute(address, characterdataDb.getEmail());
 
     }
 
@@ -86,7 +86,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
     @Override
     protected void onDestroy() {
-        db.close();
+        characterdataDb.close();
         super.onDestroy();
     }
 
@@ -197,8 +197,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
 
     private void initDB(){
-        db = new MySqlDatabase(this);
-        db.open();
+        characterdataDb = new CharacterdataDatabase(this);
+        characterdataDb.open();
     }
 
     @Override

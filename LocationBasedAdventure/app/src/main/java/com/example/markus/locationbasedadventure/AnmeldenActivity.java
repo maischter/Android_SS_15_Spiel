@@ -11,13 +11,12 @@ import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.AnmeldenTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.syndciateStatsLocalToServerTask;
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Hashing.PasswordHash;
-import com.example.markus.locationbasedadventure.Items.AnmeldenItem;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
-import java.util.ArrayList;
 
 /**
  * Created by Markus on 20.07.2015.
@@ -32,7 +31,8 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     EditText email;
     EditText passwort;
     TextView diskurs;
-    MySqlDatabase db;
+    CharacterdataDatabase characterdataDb;
+    StatsDatabase statsDb;
     private String address = "http://sruball.de/game/checkAnmelden.php";
     private String address2 = "http://sruball.de/game/syndicateData.php";
 
@@ -47,7 +47,8 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
 
     @Override
     protected void onDestroy() {
-        db.close();
+        characterdataDb.close();
+        statsDb.close();
         super.onDestroy();    }
 
 
@@ -97,7 +98,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
             if(stayAngemeldet.isChecked()){
                 saveStayAngemeldetIntoDBOnPhone();
             }
-            new syndciateStatsLocalToServerTask(this).execute(address2,db.getEmail(),""+db.getLevel(),""+db.getExp(),""+db.getStamina(),""+db.getStrength(),""+db.getDexterity(),""+db.getIntelligence());
+            new syndciateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
             Intent i = new Intent(getApplicationContext(),MenueActivity.class); // eigentlich zu MAPActivity
             startActivity(i);
         }
@@ -109,7 +110,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     //noch leer
 
     private void saveStayAngemeldetIntoDBOnPhone() {
-        db.updateStayAngemeldet(1);
+        characterdataDb.updateStayAngemeldet(1);
     }
 
     //Ruft AsynchronousTask auf, um Daten aus der Datenbank zu bekommen
@@ -123,8 +124,10 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     // Opening the Database
 
     private void initDB(){
-        db = new MySqlDatabase(this);
-        db.open();
+        characterdataDb = new CharacterdataDatabase(this);
+        characterdataDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
     }
 
 

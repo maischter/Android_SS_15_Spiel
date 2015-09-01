@@ -2,17 +2,15 @@ package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
 
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 
 /**
  * Created by Markus on 31.08.2015.
@@ -26,7 +24,7 @@ public class EinstellungenActivity extends Activity {
     Button kampferklaerung;
     Button hilfe;
     Button aboutUs;
-    MySqlDatabase db;
+    CharacterdataDatabase characterdataDb;
 
 
     @Override
@@ -40,8 +38,8 @@ public class EinstellungenActivity extends Activity {
     }
 
     private void initDB() {
-        db = new MySqlDatabase(this);
-        db.open();
+        characterdataDb = new CharacterdataDatabase(this);
+        characterdataDb.open();
     }
 
     private void initViews() {
@@ -67,7 +65,7 @@ public class EinstellungenActivity extends Activity {
 
     private void initSwitchs() {
         ton = (Switch) findViewById(R.id.switchTon);
-        if(db.getTon()==1){
+        if(characterdataDb.getTon()==1){
             ton.setChecked(true);
         }else{
             ton.setChecked(false);
@@ -75,11 +73,11 @@ public class EinstellungenActivity extends Activity {
         ton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                db.updateTon(isChecked);
+                characterdataDb.updateTon(isChecked);
             }
         });
         pushup = (Switch) findViewById(R.id.switchPushup);
-        if(db.getPushup()==1){
+        if(characterdataDb.getPushup()==1){
             pushup.setChecked(true);
         }else{
             pushup.setChecked(false);
@@ -87,14 +85,14 @@ public class EinstellungenActivity extends Activity {
         pushup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                db.updatePushup(isChecked);
+                characterdataDb.updatePushup(isChecked);
             }
         });
     }
 
     private void initCheckBox() {
         angemeldetBleiben = (CheckBox) findViewById(R.id.checkBoxAngemeldetBleibenEinstellungen);
-        if(db.getStayAngemeldet()==1){
+        if(characterdataDb.getStayAngemeldet()==1){
             angemeldetBleiben.setChecked(true);
         }else{
             angemeldetBleiben.setChecked(false);
@@ -104,9 +102,9 @@ public class EinstellungenActivity extends Activity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    db.updateStayAngemeldet(1);
+                    characterdataDb.updateStayAngemeldet(1);
                 }else{
-                    db.updateStayAngemeldet(0);
+                    characterdataDb.updateStayAngemeldet(0);
                 }
             }
         });

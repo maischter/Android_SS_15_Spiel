@@ -7,14 +7,20 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.syndciateStatsLocalToServerTask;
-import com.example.markus.locationbasedadventure.Database.MySqlDatabase;
+import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
+import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 
 
 public class MainActivity extends Activity{
 
     Button anmeldenPage;
     Button registrierenPage;
-    MySqlDatabase db;
+    CharacterdataDatabase characterdataDb;
+    StatsDatabase statsDb;
+    WeaponDatabase weaponDb;
+    ArmorDatabase armorDb;
 
     private String address2 = "http://sruball.de/game/syndicateData.php";
 
@@ -24,14 +30,17 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDB();
-        db.updateStayAngemeldet(0);
+        characterdataDb.updateStayAngemeldet(0);
         checkAnmeldung();
         initButtons();
     }
 
     @Override
     protected void onDestroy() {
-        db.close();
+        characterdataDb.close();
+        statsDb.close();
+        armorDb.close();
+        weaponDb.close();
         super.onDestroy();
     }
 
@@ -41,11 +50,21 @@ public class MainActivity extends Activity{
 
 
     private void checkAnmeldung() {
-        if(db.isEmpty()){
-            db.insertAllmainActivity();
+        if(characterdataDb.isEmpty()) {
+            characterdataDb.insertAllmainActivity();
         }
-        if(db.getStayAngemeldet() == 1){
-            new syndciateStatsLocalToServerTask(this).execute(address2,db.getEmail(),""+db.getLevel(),""+db.getExp(),""+db.getStamina(),""+db.getStrength(),""+db.getDexterity(),""+db.getIntelligence());
+        if(statsDb.isEmpty()) {
+            statsDb.insertAllmainActivity();
+        }
+        if(weaponDb.isEmpty()) {
+            weaponDb.insertAllmainActivity();
+        }
+        if(armorDb.isEmpty()) {
+
+            armorDb.insertAllmainActivity();
+        }
+        if(characterdataDb.getStayAngemeldet() == 1){
+            new syndciateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
             Intent i = new Intent(getApplicationContext(),GifActivity.class); // Hier eigentlich MapActivity
             startActivity(i);
         }
@@ -75,8 +94,14 @@ public class MainActivity extends Activity{
     // Opening the Database
 
     private void initDB(){
-        db = new MySqlDatabase(this);
-        db.open();
+        characterdataDb = new CharacterdataDatabase(this);
+        characterdataDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
+        weaponDb = new WeaponDatabase(this);
+        weaponDb.open();
+        armorDb = new ArmorDatabase(this);
+        armorDb.open();
     }
 
 }

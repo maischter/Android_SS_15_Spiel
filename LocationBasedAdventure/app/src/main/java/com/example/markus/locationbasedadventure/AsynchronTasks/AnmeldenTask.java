@@ -31,7 +31,6 @@ public class AnmeldenTask extends AsyncTask<String, Integer, Integer> {
     private JSONParser jsonParser = new JSONParser();
     private static final String TAG_SUCCESS = "success";
     private AnmeldenTaskListener anmeldenTaskListener;
-    private int diskurs = 0;
     private String passwort = "";
     private ProgressDialog dialog;
 
