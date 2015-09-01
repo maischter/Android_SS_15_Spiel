@@ -23,6 +23,11 @@
     <string name="rank">Rang</string>
     <string name="charactername">Charaktername</string>
     <string name="empty">---</string>
+    <string name="ton">Ton</string>
+    <string name="kampferklaerung">Kampferklärung</string>
+    <string name="aboutUs">About Us</string>
+    <string name="hilfe">Hilfe</string>
+    <string name="pushup">Pushup</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

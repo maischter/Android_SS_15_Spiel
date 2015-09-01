@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/buttonEinstellungen"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:textColor="@color/accent_material_light"
+        android:id="@+id/textViewEinstellungen"
+        android:layout_marginBottom="40dp" />
+
+    <CheckBox
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/angemeldet_bleiben"
+        android:id="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_below="@+id/textViewEinstellungen"
+        android:layout_marginTop="40dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="80dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="80dp"
+        android:layout_marginBottom="25dp"
+        android:textSize="20sp" />
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/ton"
+        android:id="@+id/switchTon"
+        android:layout_below="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignLeft="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignStart="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignRight="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignEnd="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:textSize="20sp"
+        android:layout_marginBottom="25dp" />
+
+
+    <Switch
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/pushup"
+        android:id="@+id/switchPushup"
+        android:layout_below="@+id/switchTon"
+        android:layout_alignLeft="@+id/switchTon"
+        android:layout_alignStart="@+id/switchTon"
+        android:layout_alignRight="@+id/switchTon"
+        android:layout_alignEnd="@+id/switchTon"
+        android:textSize="20sp"
+        android:layout_marginBottom="30dp" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/kampferklaerung"
+        android:id="@+id/buttonKampferklaerung"
+        android:layout_below="@+id/switchPushup"
+        android:layout_alignLeft="@+id/switchPushup"
+        android:layout_alignStart="@+id/switchPushup"
+        android:layout_alignRight="@+id/switchPushup"
+        android:layout_alignEnd="@+id/switchPushup"
+        android:layout_marginBottom="20dp"
+
+        android:background="@color/accent_material_light"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hilfe"
+        android:id="@+id/buttonHilfe"
+        android:layout_below="@+id/buttonKampferklaerung"
+        android:layout_alignLeft="@+id/buttonKampferklaerung"
+        android:layout_alignStart="@+id/buttonKampferklaerung"
+        android:layout_alignRight="@+id/buttonKampferklaerung"
+        android:layout_alignEnd="@+id/buttonKampferklaerung"
+        android:layout_marginBottom="20dp"
+
+        android:background="@color/accent_material_light"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/aboutUs"
+        android:id="@+id/buttonAboutUs"
+        android:layout_below="@+id/buttonHilfe"
+        android:layout_alignRight="@+id/buttonHilfe"
+        android:layout_alignEnd="@+id/buttonHilfe"
+        android:layout_alignLeft="@+id/buttonHilfe"
+        android:layout_alignStart="@+id/buttonHilfe"
+
+        android:background="@color/accent_material_light"/>
+
+
+</RelativeLayout>

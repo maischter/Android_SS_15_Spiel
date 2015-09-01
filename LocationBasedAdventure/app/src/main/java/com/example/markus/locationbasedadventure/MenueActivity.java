@@ -101,7 +101,8 @@ public class MenueActivity extends Activity {
         einstellungen.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(getApplicationContext(),EinstellungenActivity.class);
+                startActivity(i);
             }
         });
     }

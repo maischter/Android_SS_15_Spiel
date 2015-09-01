@@ -8,7 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 public class MySqlDatabase {
-    private static final String DATABASE_NAME = "Game4.db";
+    private static final String DATABASE_NAME = "Game5.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Games";
@@ -28,6 +28,8 @@ public class MySqlDatabase {
     public static final String KEY_STRENGTH = "strength";
     public static final String KEY_DEXTERITY = "dexterity";
     public static final String KEY_INTELLIGENCE = "intelligence";
+    public static final String KEY_TON = "ton";
+    public static final String KEY_PUSHUP ="pushup";
 
 
 
@@ -53,24 +55,7 @@ public class MySqlDatabase {
     }
 
 
-    //add Data into the Database
 
-    public long insertAll(String charactername, String weapon,
-                              String weapondamage, String weaponhitchance, String weaponkritchance,String sex) {
-
-        ContentValues newFoodieValues = new ContentValues();
-
-       // newFoodieValues.put(KEY_EMAIL, email);
-        newFoodieValues.put(KEY_CHARCTERNAME, charactername);
-        newFoodieValues.put(KEY_STAYANGEMELDET, 0);         // Standartmäßig ist stayangemeldet deaktiviert --> 0
-        newFoodieValues.put(KEY_WEAPON, weapon);
-        newFoodieValues.put(KEY_WEAPONDAMAGE, weapondamage);
-        newFoodieValues.put(KEY_WEAPONHITCHANCE, weaponhitchance);
-        newFoodieValues.put(KEY_WEAPONKRITCHANCE, weaponkritchance);
-        newFoodieValues.put(KEY_SEX, sex);
-
-        return db.insert(DATABASE_TABLE, null, newFoodieValues);
-    }
 
 
     //inserts standartvalues in a new row.
@@ -94,6 +79,8 @@ public class MySqlDatabase {
         newValues.put(KEY_STRENGTH, 15);
         newValues.put(KEY_DEXTERITY, 15);
         newValues.put(KEY_INTELLIGENCE, 15);
+        newValues.put(KEY_TON, 0);
+        newValues.put(KEY_PUSHUP, 0);
 
 
         return db.insert(DATABASE_TABLE, null, newValues);
@@ -126,6 +113,32 @@ public class MySqlDatabase {
     public void updateEmail(String email) {
         ContentValues values = new ContentValues();
         values.put(KEY_EMAIL, email);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+    public void updateTon(boolean checked) {
+        ContentValues values = new ContentValues();
+        if(checked){
+            values.put(KEY_TON, 1);
+        }else{
+            values.put(KEY_TON, 0);
+        }
+
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+    public void updatePushup(boolean checked) {
+        ContentValues values = new ContentValues();
+        if(checked){
+            values.put(KEY_PUSHUP, 1);
+        }else{
+            values.put(KEY_PUSHUP, 0);
+        }
+
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
@@ -171,7 +184,7 @@ public class MySqlDatabase {
 
               Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
                               KEY_WEAPON, KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_SEX, KEY_LEVEL, KEY_EXP,
-                              KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                              KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                     new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
             if (cursor != null)
@@ -185,7 +198,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -199,7 +212,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -213,7 +226,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -227,7 +240,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -241,7 +254,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -256,7 +269,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -270,7 +283,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -286,7 +299,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -319,7 +332,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE,KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -333,7 +346,7 @@ public class MySqlDatabase {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
-                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -341,6 +354,34 @@ public class MySqlDatabase {
 
         return cursor.getString(8);
     }
+
+    public int getTon(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getInt(15);
+    }
+
+    public int getPushup(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE,KEY_SEX, KEY_LEVEL, KEY_EXP,
+                        KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getInt(16);
+    }
+
+
 
     public int countEntries(){
         String countQuery = "SELECT  * FROM " + DATABASE_TABLE;
@@ -368,10 +409,11 @@ public class MySqlDatabase {
         private static final String DATABASE_CREATE = "create table "
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_EMAIL + " text, " + KEY_CHARCTERNAME
-                + " text, " + KEY_STAYANGEMELDET + " integer, "+ KEY_WEAPON
-                + " text, " + KEY_WEAPONDAMAGE + " text, " + KEY_WEAPONHITCHANCE
-                + " text, " + KEY_WEAPONKRITCHANCE + " text, " + KEY_SEX + " text, " + KEY_LEVEL + " integer, " + KEY_EXP
-                + " integer, " + KEY_STAMINA + " integer, " + KEY_STRENGTH + " integer, " + KEY_DEXTERITY + " integer, " + KEY_INTELLIGENCE
+                + " text, " + KEY_STAYANGEMELDET + " integer, "+ KEY_WEAPON + " text, " + KEY_WEAPONDAMAGE
+                + " text, " + KEY_WEAPONHITCHANCE + " text, " + KEY_WEAPONKRITCHANCE + " text, " + KEY_SEX
+                + " text, " + KEY_LEVEL + " integer, " + KEY_EXP + " integer, " + KEY_STAMINA
+                + " integer, " + KEY_STRENGTH + " integer, " + KEY_DEXTERITY + " integer, " + KEY_INTELLIGENCE
+                + " integer, " + KEY_TON + " integer, " + KEY_PUSHUP
                 + " integer);";
 
         public ToDoDBOpenHelper(Context c, String dbname,
