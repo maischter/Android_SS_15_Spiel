@@ -28,6 +28,8 @@
     <string name="aboutUs">About Us</string>
     <string name="hilfe">Hilfe</string>
     <string name="pushup">Pushup</string>
+    <string name="weiter">Weiter</string>
+    <string name="zurueck">Zurück</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

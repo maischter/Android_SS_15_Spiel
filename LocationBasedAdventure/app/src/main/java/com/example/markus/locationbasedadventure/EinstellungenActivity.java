@@ -56,6 +56,7 @@ public class EinstellungenActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplication(),GifActivity.class);
+                i.putExtra("activity",1);
                 startActivity(i);
             }
         });

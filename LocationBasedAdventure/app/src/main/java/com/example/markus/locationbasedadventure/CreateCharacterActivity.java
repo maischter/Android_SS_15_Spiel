@@ -147,7 +147,9 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
             public void onClick(View v) {
                 saveInput();
                 Intent i = new Intent(getApplicationContext(),GifActivity.class);
+                i.putExtra("activity",2);
                 startActivity(i);
+                finish();
             }
         });
         schild = (CheckBox) findViewById(R.id.checkBoxSchild);
