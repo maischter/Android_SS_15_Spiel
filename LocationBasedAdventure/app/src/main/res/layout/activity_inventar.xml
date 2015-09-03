@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark"
+    >
+
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBackInventar"
+        android:text="@string/zurueck"
+        android:adjustViewBounds="false"
+
+        android:background="@color/accent_material_light"
+        android:minWidth="50dp"
+        android:minHeight="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/waffen"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp"
+        android:textSize="25sp"
+        android:textColor="@color/accent_material_light"
+        android:id="@+id/textViewWaffen"
+        android:layout_marginBottom="10dp" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewWeapon"
+        android:minHeight="60dp"
+        android:minWidth="50dp"
+        android:layout_below="@+id/textViewWaffen"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginLeft="10dp" />
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@+id/imageViewWeapon"
+        android:layout_toEndOf="@+id/imageViewWeapon"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignTop="@+id/imageViewWeapon"
+        android:id="@+id/tableLayoutWeapon"
+        android:layout_alignBottom="@+id/imageViewWeapon">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowText">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DAM"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDamage"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HIT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewHitchance"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KRI"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewKritchance"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STA"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaInv"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STR"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthInv"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEX"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityInv"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceInv"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewExtra"
+                android:layout_marginRight="10dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowTextValue">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDamageValue"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewHitchanceValue"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewKritchanceValue"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaInvValue"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthInvValue"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityInvValue"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceInvValue"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewExtraValue"
+                android:layout_marginRight="10dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Einhandschwert und Einhandaxt"
+        android:id="@+id/textViewWeaponText"
+        android:gravity="center"
+        android:layout_above="@+id/tableLayoutWeapon"
+        android:layout_alignLeft="@+id/imageViewWeapon"
+        android:layout_alignStart="@+id/imageViewWeapon"
+        android:layout_alignRight="@+id/tableLayoutWeapon"
+        android:layout_alignEnd="@+id/tableLayoutWeapon"
+        android:textStyle="bold" />
+
+
+</RelativeLayout>

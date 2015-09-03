@@ -13,9 +13,9 @@
     <string name="emailAlreadyRegistered">Die eingegebene E-Mail-Adresse ist bereits registriert!</string>
     <string name="emailWrong">"Ungültige Emailadresse!"</string>
     <string name="buttonStats">Stats</string>
-    <string name="buttonInventar">Inventar/Ausrüstung</string>
+    <string name="buttonInventar">Inventar</string>
     <string name="buttonRanking">Ranking</string>
-    <string name="buttonEinstellungen">Einstellungen</string>
+    <string name="buttonEinstellungen"> Einstellungen </string>
     <string name="achievements">Achievements</string>
     <string name="buttonMap">Map</string>
     <string name="level">Level</string>
@@ -30,6 +30,7 @@
     <string name="pushup">Pushup</string>
     <string name="weiter">Weiter</string>
     <string name="zurueck">Zurück</string>
+    <string name="waffen">Waffen</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

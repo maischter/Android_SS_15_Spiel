@@ -24,16 +24,30 @@ public class GifActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gif);
 
-
-        buttonWeiter = (Button) findViewById(R.id.buttonWeiter);
-        buttonBack = (Button) findViewById(R.id.buttonBack);
-
-        Intent i = getIntent();
-        activity  = i.getIntExtra("activity", 1);
-
+        initButtons();
+        getValueFromIntent();
 
         diffButtons(activity);
+        buttonListeners();
 
+
+        ImageView animationVid = (ImageView) findViewById(R.id.imageViewAnimation);
+        animation = (AnimationDrawable) animationVid.getDrawable();
+        animationVid.post(new Runnable() {
+            @Override
+            public void run() {
+
+                animation.start();
+
+
+            }
+        });
+
+
+    }
+
+
+    private void buttonListeners() {
         buttonWeiter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -51,26 +65,26 @@ public class GifActivity extends Activity {
                 finish();
             }
         });
-
-
-        ImageView animationVid = (ImageView) findViewById(R.id.imageViewAnimation);
-        animation = (AnimationDrawable) animationVid.getDrawable();
-        animationVid.post(new Runnable() {
-            @Override
-            public void run() {
-
-                animation.start();
-                System.out.println("But here i am!");
-
-
-            }
-        });
-
-
     }
+
+    private void getValueFromIntent() {
+        Intent i = getIntent();
+        activity  = i.getIntExtra("activity", 1);
+    }
+
+    private void initButtons() {
+        buttonWeiter = (Button) findViewById(R.id.buttonWeiter);
+        buttonBack = (Button) findViewById(R.id.buttonBack);
+    }
+
+    // Unterscheidet von welchen Activity man kommt & zeigt entsprechend einen Button an.
+
 
     private void diffButtons(int activity) {
         switch (activity) {
+
+            //kommt von EinstellungenActivity
+
             case 1:
                 buttonWeiter.setClickable(false);
                 buttonWeiter.setVisibility(View.INVISIBLE);
@@ -78,6 +92,9 @@ public class GifActivity extends Activity {
                 buttonBack.setClickable(true);
                 buttonBack.setVisibility(View.VISIBLE);
                 break;
+
+
+            // kommt von CreateCharacterActitivty
             case 2:
 
                 buttonWeiter.setClickable(true);

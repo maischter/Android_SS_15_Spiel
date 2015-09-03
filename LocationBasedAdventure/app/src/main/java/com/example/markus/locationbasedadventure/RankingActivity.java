@@ -2,6 +2,8 @@ package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
 
@@ -57,6 +59,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     TextView expLeer;
     CharacterdataDatabase characterdataDb;
 
+    Button back;
+
 
 
     TableRow tablerowText;
@@ -77,6 +81,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
         initDB();
         initTextViews();
+        initButton();
         new LoadRankingTask(this,this).execute(address, characterdataDb.getEmail());
 
     }
@@ -88,6 +93,18 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     protected void onDestroy() {
         characterdataDb.close();
         super.onDestroy();
+    }
+
+
+
+    private void initButton(){
+        back = (Button) findViewById(R.id.buttonBackRanking);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initTextViews() {

@@ -53,6 +53,10 @@
             android:name=".EinstellungenActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".InventarActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

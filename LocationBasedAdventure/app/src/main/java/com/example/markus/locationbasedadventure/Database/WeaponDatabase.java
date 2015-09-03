@@ -7,6 +7,8 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.markus.locationbasedadventure.R;
+
 /**
  * Created by Markus on 01.09.2015.
  */
@@ -116,8 +118,17 @@ public class WeaponDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+
+    public Cursor getCursorForAllItemsFromDatabase() {
+        Cursor cursor = db.query(DATABASE_TABLE, new String[]{ KEY_ID, KEY_WEAPON, KEY_WEAPONDAMAGE,KEY_WEAPONHITCHANCE,
+                                                                KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA, KEY_WEAPONSTAMINA,
+                                                                KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE
+                                                                }, null, null, null, null, null);
+        return cursor;
+    }
+
     public int[] getWeapon(){
-        int[] weaponArray = new int[8];
+        int[] weaponArray = new int[9];
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_WEAPON,
                         KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
@@ -157,8 +168,50 @@ public class WeaponDatabase {
         return cursor.getInt(1);
     }
 
+    public String getWeaponString() {
 
+        Cursor cursor = db.query(DATABASE_TABLE, new String[]{KEY_ID, KEY_WEAPON,
+                        KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
+                        KEY_WEAPONSTAMINA, KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE}, KEY_ID + "=?",
+                new String[]{String.valueOf(1)}, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return selectImage(cursor.getInt(1));
+    }
+
+    private String selectImage(int weaponTyp) {
+        switch (weaponTyp) {
+            case 8:
+                return "Bogen";
+            case 1:
+                return "Einhandschwert";
+            case 3:
+                return "Einhandschwert mit Schild";
+            case 2:
+                return "Einhandaxt";
+            case 4:
+                return "Einhandaxt mit Schild";
+            case 9:
+                return "Gewehr";
+            case 7:
+                return "Zauberstab";
+            case 6:
+                return "Zweihandaxt";
+            case 5:
+                return "Zweihandschwert";
+            case 10:
+                return "2 Einhandschwerter";
+            case 11:
+                return "Einhandschwert und Einhandaxt";
+            case 12:
+                return "2 Einhandäxte";
+
+        }
+        return null;
+
+    }
 
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {

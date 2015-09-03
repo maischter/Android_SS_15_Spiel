@@ -25,16 +25,15 @@
         android:textSize="25sp"
         android:textColor="@color/accent_material_light"
         android:id="@+id/textView3"
-        android:layout_marginBottom="159dp"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/tableLayout"
         android:layout_centerHorizontal="true" />
 
     <TableLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_below="@+id/textView2"
         android:layout_centerHorizontal="true"
-        android:layout_above="@+id/textView3">
+        android:id="@+id/tableLayout">
 
         <TableRow
             android:layout_width="match_parent"
@@ -385,5 +384,19 @@
         </TableRow>
 
     </TableLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBackRanking"
+        android:text="@string/zurueck"
+        android:adjustViewBounds="false"
+
+        android:background="@color/accent_material_light"
+        android:minWidth="50dp"
+        android:minHeight="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>

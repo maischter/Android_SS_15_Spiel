@@ -24,6 +24,7 @@ public class EinstellungenActivity extends Activity {
     Button kampferklaerung;
     Button hilfe;
     Button aboutUs;
+    Button back;
     CharacterdataDatabase characterdataDb;
 
 
@@ -61,7 +62,26 @@ public class EinstellungenActivity extends Activity {
             }
         });
         hilfe =(Button) findViewById(R.id.buttonHilfe);
+        hilfe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
         aboutUs = (Button) findViewById(R.id.buttonAboutUs);
+        aboutUs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        back = (Button) findViewById(R.id.buttonBackEinstellungen);
+        back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
     }
 
     private void initSwitchs() {

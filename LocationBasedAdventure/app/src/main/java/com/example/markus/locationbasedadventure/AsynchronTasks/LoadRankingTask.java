@@ -4,10 +4,8 @@ import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
-import com.example.markus.locationbasedadventure.Items.AnmeldenItem;
 import com.example.markus.locationbasedadventure.Items.RankingItem;
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
-import com.example.markus.locationbasedadventure.JSON.JSONToObjectConverter;
 import com.example.markus.locationbasedadventure.RankingActivity;
 
 import org.apache.http.NameValuePair;

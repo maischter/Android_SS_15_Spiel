@@ -1,26 +1,17 @@
 package com.example.markus.locationbasedadventure.AsynchronTasks;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.example.markus.locationbasedadventure.AnmeldenActivity;
-import com.example.markus.locationbasedadventure.Items.AnmeldenItem;
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
-import com.example.markus.locationbasedadventure.JSON.JSONToObjectConverter;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 import java.util.ArrayList;
 
 /**

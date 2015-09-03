@@ -102,4 +102,19 @@
         android:background="@color/accent_material_light"/>
 
 
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBackEinstellungen"
+        android:text="@string/zurueck"
+        android:adjustViewBounds="false"
+        android:background="@color/accent_material_light"
+        android:minWidth="50dp"
+        android:minHeight="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
 </RelativeLayout>

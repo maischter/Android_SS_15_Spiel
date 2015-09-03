@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 
 /**
@@ -21,23 +22,34 @@ public class MenueActivity extends Activity {
     int weaponTyp;
     ImageView characterImage;
     TextView characterName;
-    Button stats;
     Button inventar;
     Button ranking;
     Button einstellungen;
     Button backToMap;
+    TextView stamina;
+    TextView staminaValue;
+    TextView strength;
+    TextView strengthValue;
+    TextView dexterity;
+    TextView dexterityValue;
+    TextView intelligence;
+    TextView intelligenceValue;
+
     CharacterdataDatabase characterdataDb;
     WeaponDatabase weaponDb;
+    StatsDatabase statsDb;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menue);
+
         initDB();
         initViews();
         initButtons();
         loadCharacterData();
+        loadStatsData();
     }
 
     @Override
@@ -45,6 +57,7 @@ public class MenueActivity extends Activity {
         super.onDestroy();
         weaponDb.close();
         characterdataDb.close();
+        statsDb.close();
     }
 
     private void initDB(){
@@ -52,18 +65,26 @@ public class MenueActivity extends Activity {
         weaponDb.open();
         characterdataDb = new CharacterdataDatabase(this);
         characterdataDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
+
     }
 
     private void loadCharacterData(){
         characterName.setText(characterdataDb.getCharactername());
         sexTyp = characterdataDb.getSex();
-        System.out.println(weaponDb.getWeaponTyp());
         weaponTyp = weaponDb.getWeaponTyp();
         selectImage();
     }
 
+    private void loadStatsData(){
+        staminaValue.setText(""+statsDb.getStamina());
+        strengthValue.setText(""+statsDb.getStrength());
+        dexterityValue.setText(""+statsDb.getDexterity());
+        intelligenceValue.setText(""+statsDb.getIntelligence());
+    }
+
     private void initButtons() {
-        initStatsButton();
         initInventarButton();
         initRankingButton();
         initEinstellungenButton();
@@ -71,22 +92,13 @@ public class MenueActivity extends Activity {
 
     }
 
-    private void initStatsButton(){
-        stats = (Button) findViewById(R.id.ButtonStats);
-        stats.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-    }
-
     private void initInventarButton(){
         inventar = (Button) findViewById(R.id.ButtonInventar);
         inventar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent i = new Intent(getApplicationContext(),InventarActivity.class);
+                startActivity(i);
             }
         });
     }
@@ -127,7 +139,14 @@ public class MenueActivity extends Activity {
     private void initViews() {
         characterImage = (ImageView) findViewById(R.id.characterImageMenue);
         characterName =(TextView) findViewById(R.id.characterNameMenue);
-
+        stamina = (TextView)findViewById(R.id.TextViewStamina);
+        staminaValue = (TextView)findViewById(R.id.TextViewStaminaValue);
+        strength = (TextView)findViewById(R.id.TextViewStrength);
+        strengthValue = (TextView)findViewById(R.id.TextViewStrengthValue);
+        dexterity = (TextView)findViewById(R.id.TextViewDexterity);
+        dexterityValue = (TextView)findViewById(R.id.TextViewDexterityValue);
+        intelligence = (TextView)findViewById(R.id.TextViewIntelligence);
+        intelligenceValue = (TextView)findViewById(R.id.TextViewIntelligenceValue);
     }
 
 
