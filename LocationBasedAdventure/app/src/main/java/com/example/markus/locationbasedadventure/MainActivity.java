@@ -60,7 +60,6 @@ public class MainActivity extends Activity{
             weaponDb.insertAllmainActivity();
         }
         if(armorDb.isEmpty()) {
-
             armorDb.insertAllmainActivity();
         }
         if(characterdataDb.getStayAngemeldet() == 1){

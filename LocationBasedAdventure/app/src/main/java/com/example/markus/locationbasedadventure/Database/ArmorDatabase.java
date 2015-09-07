@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class ArmorDatabase {
 
 
-    private static final String DATABASE_NAME = "Armor3.db";
+    private static final String DATABASE_NAME = "Armor4.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Armors";
@@ -77,7 +77,7 @@ public class ArmorDatabase {
 
 
     public int[] getArmor(){
-        int[] armorArray = new int[7];
+        int[] armorArray = new int[5];
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_ARMOR,
                         KEY_ARMORSTAMINA, KEY_ARMORSTRENGTH, KEY_ARMORDEXTERITY, KEY_ARMORINTELLIGENCE}, KEY_ID + "=?",
@@ -85,11 +85,34 @@ public class ArmorDatabase {
 
         if (cursor != null)
             cursor.moveToFirst();
-        for(int i = 0;i<=4;i++){
-           armorArray[i] = cursor.getInt(i+1);
-        }
+
+
+        armorArray[0] = cursor.getInt(1);
+        armorArray[1] = cursor.getInt(2);
+        armorArray[2] = cursor.getInt(3);
+        armorArray[3] = cursor.getInt(4);
+        armorArray[4] = cursor.getInt(5);
 
         return armorArray;
+    }
+
+    public String getArmorString(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_ARMOR,
+                        KEY_ARMORSTAMINA, KEY_ARMORSTRENGTH, KEY_ARMORDEXTERITY, KEY_ARMORINTELLIGENCE}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return selectImage(cursor.getInt(1));
+    }
+
+    private String selectImage(int armorTyp) {
+        switch(armorTyp){
+            case 1: return "Standartrüstung";
+        }
+        return "Leer";
     }
 
 

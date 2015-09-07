@@ -178,6 +178,8 @@ public class WeaponDatabase {
         if (cursor != null)
             cursor.moveToFirst();
 
+
+
         return selectImage(cursor.getInt(1));
     }
 
