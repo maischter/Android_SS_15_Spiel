@@ -31,6 +31,9 @@ public class BattleActivity extends Activity{
     ImageButton skill_b;
     ImageButton skill_c;
     ImageButton skill_d;
+
+    public Skill [] pSkill;
+
     int level;
     int exp;
 
@@ -84,6 +87,12 @@ public class BattleActivity extends Activity{
             }
         },0,1000/FPS);
 
+        pSkill = new Skill[4];
+        pSkill[0] = new Skill(R.string.skillA,Player.getWeaponDmg());
+        pSkill[1] = new Skill(R.string.skillDef,0);
+        pSkill[2] = new Skill(R.string.skillPower,0);
+        pSkill[3] = new Skill(R.string.skillSpecA,Player.getWeaponDmg());
+
     }
 
     @Override
@@ -127,8 +136,7 @@ public class BattleActivity extends Activity{
         skill_a.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                updateProgressbar(Player.Skill1,NonPlayer);
+                updateProgressbar(pSkill[0],NonPlayer, Player);
                 nextTurn();
             }
         });
@@ -137,7 +145,7 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                updateProgressbar(Player.Skill2,NonPlayer);
+                updateProgressbar(pSkill[1],NonPlayer, Player);
                 nextTurn();
             }
         });
@@ -145,7 +153,7 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-                updateProgressbar(Player.Skill3,NonPlayer);
+                updateProgressbar(pSkill[2],NonPlayer, Player);
                 nextTurn();
             }
         });
@@ -154,7 +162,7 @@ public class BattleActivity extends Activity{
             public void onClick(View v) {
 
 
-                updateProgressbar(Player.Skill4,NonPlayer);
+                updateProgressbar(pSkill[3],NonPlayer, Player);
                 nextTurn();
             }
         });
@@ -212,7 +220,35 @@ public class BattleActivity extends Activity{
         turnDone=true;
     }
 
-    private void updateProgressbar(Skill skill,Entity target) {
+    private void updateProgressbar(Skill skill,Entity target, Entity source) {
+        // random skill dmg hier
+        int hit = rand.nextInt(99);
+        int crit = rand.nextInt(99);
+        int dodge = rand.nextInt(99);
+
+        //ausweichen
+        if (dodge <= target.getDodge()){
+            //Nothing to do here
+        }
+        //nicht getroffen
+        if (hit > source.getHitrate()){
+            //nothing to do here
+        }
+        //normal getroffen
+        if (hit <= source.getHitrate() && crit > source.getCritrate() && dodge > source.getDodge()){
+            target.curHitpoints = target.curHitpoints - skill.damage;
+        }
+        //kritischer treffer
+        if (hit <= source.getHitrate() && crit <= source.getCritrate() && dodge > source.getDodge()){
+            target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg;
+        }
+
+        if (turn==players_turn){
+            nonPlayerHitpoints.setProgress((int)(target.curHitpoints/target.maxHitpoints));
+        }
+        if (turn==nonplayers_turn){
+            playerHitpoints.setProgress((int)(target.curHitpoints/target.maxHitpoints));
+        }
 
     }
 

@@ -8,18 +8,20 @@ import com.example.markus.locationbasedadventure.R;
 public class Skill {
 
     public int skillName;
-    public int damage;
-    public int skillDMG;
+    public double damage;
+    public int multiply = 1;
 
-    public Skill (int sName, int dmg){
+    public Skill (int sName, double dmg){
         this.skillName = sName;
         this.damage = dmg;
 
         switch (sName){
-            case R.string.skillDef:
-                //nächster skill macht keinen schaden
-            case R.string.skillPower:
-                //Skills machen 1,5 mehr dmg
+            case R.string.skillA:
+
+            case R.string.skillDef: // Blockt den nächsten Schaden
+                this.damage = 0;
+            case R.string.skillPower: //
+                this.damage = 0;
             case R.string.skillSpecA:
                 //Skill macht 2 mehr dmg,aber man muss eine Runde aussetzen
                 this.damage = dmg;

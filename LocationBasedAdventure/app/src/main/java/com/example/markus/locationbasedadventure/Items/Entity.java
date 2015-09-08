@@ -22,10 +22,7 @@ public class Entity {
     public double dodge;
     public double physical_bow_dmg;
     public double hitrate;
-    public Skill Skill1;
-    public Skill Skill2;
-    public Skill Skill3;
-    public Skill Skill4;
+
     CharacterdataDatabase db;
 
 
@@ -54,10 +51,6 @@ public class Entity {
         calcDetailStats();
 
 
-        Skill1 = new Skill(R.string.skillA,30);
-        Skill2 = new Skill(R.string.skillDef,0);
-        Skill3 = new Skill(R.string.skillPower,0);
-        Skill4 = new Skill(R.string.skillSpecA,60);
     }
 
     public void setEntityEQ(int [] weaponData, int [] armorData){
@@ -69,6 +62,32 @@ public class Entity {
         this.str = this.str + entityEQ.armorStats[1] + entityEQ.weaponStats[1];
         this.dex = this.dex + entityEQ.armorStats[2] + entityEQ.weaponStats[2];
         this.intell = this.intell + entityEQ.armorStats[3] + entityEQ.weaponStats[3];
+    }
+
+    public double getDodge(){
+        return dodge;
+    }
+
+    public double getHitrate(){
+        return hitrate;
+    }
+
+    public double getCritrate(){
+        return crit_chance;
+    }
+
+    public double getWeaponDmg(){
+        if (entityEQ.weaponTyp==1 || entityEQ.weaponTyp==2 || entityEQ.weaponTyp==3 || entityEQ.weaponTyp==4 || entityEQ.weaponTyp==5 || entityEQ.weaponTyp==6
+                || entityEQ.weaponTyp==10 || entityEQ.weaponTyp==11 || entityEQ.weaponTyp==12) { // Physical DMG
+            return physical_dmg;
+        }
+        if (entityEQ.weaponTyp==7) { // Magical DMG
+            return magical_dmg;
+        }
+        if (entityEQ.weaponTyp==8 || entityEQ.weaponTyp==9){ // Physical Bow DMG
+            return physical_bow_dmg;
+        }
+        return -1;
     }
 
     public void calcDetailStats (){
@@ -90,11 +109,10 @@ public class Entity {
         curHitpoints = maxHitpoints;
         physical_res = str * 5 + sta * 10;
         magical_res = str * 5 + sta * 10;
-        crit_chance = dex * 0.1 ;
+        crit_chance = entityEQ.weaponCritrate*0.01 + dex * 0.1 ;
         crit_dmg = 1.5;
-        hitrate = 0.5 + dex * 0.1;
+        hitrate = entityEQ.weaponHitrate*0.01 + dex * 0.1;
         dodge = dex * 0.1;
-
 
 
     }
