@@ -27,22 +27,25 @@ public class Entity {
     public Skill Skill3;
     public Skill Skill4;
     CharacterdataDatabase db;
-    Random rand;
-    int str;
-    int sta;
-    int dex;
-    int intell;
-    int lvl;
-    Weapon entityWeapon;
 
-    public Entity (int strength, int stamina, int dexterity, int intelligence,int level, boolean npc){
+
+    Random rand;
+    public int sta;
+    public int str;
+    public int dex;
+    public int intell;
+    public int lvl;
+    public Equip entityEQ;
+
+    public Entity (int stamina, int strength, int dexterity, int intelligence,int level, boolean npc){
 
         //initStats
         this.lvl = level;
-        this.str = strength;
         this.sta = stamina;
+        this.str = strength;
         this.dex = dexterity;
         this.intell = intelligence;
+        calcEqStats();
 
         if (npc){
             randomizeStats();
@@ -57,10 +60,32 @@ public class Entity {
         Skill4 = new Skill(R.string.skillSpecA,60);
     }
 
+    public void setEntityEQ(int [] weaponData, int [] armorData){
+        entityEQ = new Equip (weaponData, armorData);
+    }
+
+    public void calcEqStats(){
+        this.sta = this.sta + entityEQ.armorStats[0] + entityEQ.weaponStats[0];
+        this.str = this.str + entityEQ.armorStats[1] + entityEQ.weaponStats[1];
+        this.dex = this.dex + entityEQ.armorStats[2] + entityEQ.weaponStats[2];
+        this.intell = this.intell + entityEQ.armorStats[3] + entityEQ.weaponStats[3];
+    }
+
     public void calcDetailStats (){
-        physical_dmg = str * 20;
-        magical_dmg = intell * 10;
-        magical_wand_dmg = intell * 10;
+        if (entityEQ.weaponTyp==1 || entityEQ.weaponTyp==2 || entityEQ.weaponTyp==3 || entityEQ.weaponTyp==4 || entityEQ.weaponTyp==5 || entityEQ.weaponTyp==6
+                || entityEQ.weaponTyp==10 || entityEQ.weaponTyp==11 || entityEQ.weaponTyp==12) { // Physical DMG
+            magical_dmg = intell * 0.1;
+            physical_dmg = str * 20 + entityEQ.weaponDmg + magical_dmg;
+        }
+        if (entityEQ.weaponTyp==7) { // Magical DMG
+            magical_wand_dmg = intell * 10 + entityEQ.weaponDmg;
+            physical_dmg = str * 0.1;
+            magical_dmg = intell * 10 + magical_wand_dmg + physical_dmg;
+        }
+        if (entityEQ.weaponTyp==8 || entityEQ.weaponTyp==9){ // Physical Bow DMG
+            physical_dmg = str * 0.2;
+            physical_bow_dmg = dex * 10 + physical_dmg;
+        }
         maxHitpoints = sta * 50;
         curHitpoints = maxHitpoints;
         physical_res = str * 5 + sta * 10;
@@ -69,25 +94,27 @@ public class Entity {
         crit_dmg = 1.5;
         hitrate = 0.5 + dex * 0.1;
         dodge = dex * 0.1;
-        physical_bow_dmg = dex * 10;
+
+
+
     }
 
     public void randomizeStats(){
         int [] newStats = new int [4];
-        newStats[0] = this.str;
-        newStats[1] = this.sta;
+        newStats[0] = this.sta;
+        newStats[1] = this.str;
         newStats[2] = this.dex;
         newStats[3] = this.intell;
         int newStatsCombined = 0;
-        int statsCombined = this.str + this.sta + this.dex + this.intell;
+        int statsCombined = this.sta + this.str + this.dex + this.intell;
 
         for (int i = 0; i <4; i++){
            newStats[i] = newStats[i] + rand.nextInt(10) - 5;
             newStatsCombined = newStatsCombined + newStats[i];
         }
 
-        this.str = newStats[0];
-        this.sta = newStats[1];
+        this.sta = newStats[0];
+        this.str = newStats[1];
         this.dex = newStats[2];
         this.intell = newStats[3];
 

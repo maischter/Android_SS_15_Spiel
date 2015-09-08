@@ -9,6 +9,7 @@ import android.widget.ProgressBar;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
 import com.example.markus.locationbasedadventure.Items.Skill;
@@ -32,24 +33,33 @@ public class BattleActivity extends Activity{
     ImageButton skill_d;
     int level;
     int exp;
-    int sp_int;
+
+    int sp_sta;
     int sp_str;
     int sp_dex;
-    int sp_sta;
-    Entity Player;
-    Entity NonPlayer;
+    int sp_int;
+
+
     Random rand = new Random();
     int turn;
     boolean turnDone;
 
     ArmorDatabase armorDb;
     WeaponDatabase weaponDb;
+    StatsDatabase statsDb;
+
+    Entity Player;
+    Entity NonPlayer;
+
+    int [] weaponData;
+    int [] armorData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         initDB();
+
         initProgressbars();
         initImageButtons();
         loadBattleData();
@@ -80,6 +90,7 @@ public class BattleActivity extends Activity{
     protected void onDestroy() {
         weaponDb.close();
         armorDb.close();
+        statsDb.close();
         super.onDestroy();
     }
 
@@ -88,6 +99,8 @@ public class BattleActivity extends Activity{
         weaponDb.open();
         armorDb = new ArmorDatabase(this);
         armorDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
     }
 
     private void playersTurn(){
@@ -157,14 +170,19 @@ public class BattleActivity extends Activity{
 
     public void loadBattleData(){
         //Laden aller relevanten Kampfdaten
-        int [] BattleData = armorDb.getArmor();
-        level = BattleData[0];
-        exp = BattleData[1];
-        sp_sta = BattleData[2];
-        sp_str = BattleData[3];
-        sp_dex = BattleData[4];
-        sp_int = BattleData[5];
-        int[] weapon = weaponDb.getWeapon();
+        int [] battleData = statsDb.getStats(); // KEY_ID,KEY_LEVEL,
+        // KEY_EXP,KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE
+        level = battleData[0];
+        exp = battleData[1];
+        sp_sta = battleData[2];
+        sp_str = battleData[3];
+        sp_dex = battleData[4];
+        sp_int = battleData[5];
+        armorData = armorDb.getArmor(); // KEY_ID,KEY_ARMOR,
+        // KEY_ARMORSTAMINA, KEY_ARMORSTRENGTH, KEY_ARMORDEXTERITY, KEY_ARMORINTELLIGENCE
+        weaponData = weaponDb.getWeapon(); // KEY_ID,KEY_WEAPON,
+        // KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
+        // KEY_WEAPONSTAMINA, KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE
 
         loadingSkills();
     }
@@ -178,8 +196,9 @@ public class BattleActivity extends Activity{
     }
 
     private void calcBattleStats() {
-        Player = new Entity(sp_str,sp_sta,sp_dex,sp_int,level,false);
+        Player = new Entity(sp_sta,sp_str,sp_dex,sp_int,level,false);
         NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level,true);
+        Player.setEntityEQ(weaponData, armorData);
 
     }
 
@@ -197,14 +216,10 @@ public class BattleActivity extends Activity{
 
     }
 
-
-
     public void loadSkillPNG(int resID , ImageButton imageButton) {
         LoadingBattleTask task = new LoadingBattleTask(imageButton);
         task.execute(resID);
     }
-
-
 
 
 }

@@ -92,17 +92,23 @@ public class StatsDatabase {
     }
 
     public int[] getStats(){
-        int[] statsArray = new int[7];
+
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_LEVEL,
                         KEY_EXP,KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
-        if (cursor != null)
+        if (cursor != null) {
             cursor.moveToFirst();
-        for(int i = 0;i<=5;i++){
-            statsArray[i] = cursor.getInt(i+1);
         }
+        int[] statsArray = new int[6];
+        statsArray[0]=cursor.getInt(1);
+        statsArray[1]=cursor.getInt(2);
+        statsArray[2]=cursor.getInt(3);
+        statsArray[3]=cursor.getInt(4);
+        statsArray[4]=cursor.getInt(5);
+        statsArray[5]=cursor.getInt(6);
+
 
         return statsArray;
     }
