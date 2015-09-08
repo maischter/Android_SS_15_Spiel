@@ -6,8 +6,12 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.net.Uri;
 
+import com.example.markus.locationbasedadventure.Items.Equip;
 import com.example.markus.locationbasedadventure.R;
+
+import java.util.ArrayList;
 
 /**
  * Created by Markus on 01.09.2015.
@@ -181,6 +185,35 @@ public class WeaponDatabase {
 
 
         return selectImage(cursor.getInt(1));
+    }
+
+
+
+    public ArrayList<Equip> getAllFoodieItems(){
+        ArrayList<Equip> items = new ArrayList<Equip>();
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] {KEY_ID, KEY_WEAPON,
+                KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
+                KEY_WEAPONSTAMINA, KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE}, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            do {
+
+                int[] weapon = new int[9];
+                weapon[0] = cursor.getInt(1);
+                weapon[1] = cursor.getInt(2);
+                weapon[2] = cursor.getInt(3);
+                weapon[3] = cursor.getInt(4);
+                weapon[4] = cursor.getInt(5);
+                weapon[5] = cursor.getInt(6);
+                weapon[6] = cursor.getInt(7);
+                weapon[7] = cursor.getInt(8);
+                weapon[8] = cursor.getInt(9);
+                items.add(new Equip(weapon,true));
+
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return items;
+
     }
 
     private String selectImage(int weaponTyp) {

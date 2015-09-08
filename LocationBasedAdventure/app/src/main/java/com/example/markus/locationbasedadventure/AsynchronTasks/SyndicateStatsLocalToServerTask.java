@@ -19,7 +19,7 @@ import java.util.ArrayList;
 /**
  * Created by Markus on 29.08.2015.
  */
-public class syndciateStatsLocalToServerTask extends AsyncTask<String, Integer, Integer> {
+public class SyndicateStatsLocalToServerTask extends AsyncTask<String, Integer, Integer> {
 
 
     private JSONParser jsonParser = new JSONParser();
@@ -27,13 +27,13 @@ public class syndciateStatsLocalToServerTask extends AsyncTask<String, Integer, 
     private ProgressDialog dialog;
     CharacterdataDatabase db;
 
-    public syndciateStatsLocalToServerTask(AnmeldenActivity activity){
+    public SyndicateStatsLocalToServerTask(AnmeldenActivity activity){
         dialog = new ProgressDialog(activity);
         db = new CharacterdataDatabase(activity);
     }
 
 
-    public syndciateStatsLocalToServerTask(MainActivity activity){
+    public SyndicateStatsLocalToServerTask(MainActivity activity){
         dialog = new ProgressDialog(activity);
         db = new CharacterdataDatabase(activity);
     }

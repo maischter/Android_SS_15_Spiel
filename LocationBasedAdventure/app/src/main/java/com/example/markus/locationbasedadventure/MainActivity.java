@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.markus.locationbasedadventure.AsynchronTasks.syndciateStatsLocalToServerTask;
+import com.example.markus.locationbasedadventure.AsynchronTasks.SyndicateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
@@ -63,7 +63,7 @@ public class MainActivity extends Activity{
             armorDb.insertAllmainActivity();
         }
         if(characterdataDb.getStayAngemeldet() == 1){
-            new syndciateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
+            new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
             Intent i = new Intent(getApplicationContext(),GifActivity.class); // Hier eigentlich MapActivity
             startActivity(i);
         }

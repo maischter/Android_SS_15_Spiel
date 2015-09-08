@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.AnmeldenTask;
-import com.example.markus.locationbasedadventure.AsynchronTasks.syndciateStatsLocalToServerTask;
+import com.example.markus.locationbasedadventure.AsynchronTasks.SyndicateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Hashing.PasswordHash;
@@ -99,7 +99,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
             if(stayAngemeldet.isChecked()){
                 saveStayAngemeldetIntoDBOnPhone();
             }
-            new syndciateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
+            new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
             Intent i = new Intent(getApplicationContext(),MenueActivity.class); // eigentlich zu MAPActivity
             startActivity(i);
         }

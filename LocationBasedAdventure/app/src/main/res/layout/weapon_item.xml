@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/background_material_dark">
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageViewWeaponItem"
+        android:minHeight="60dp"
+        android:minWidth="50dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/tableLayoutWeaponItem"
+        android:showDividers="middle|beginning|end"
+        android:layout_marginTop="10dp">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowTextWeaponItem"
+            android:layout_marginBottom="5dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STA"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaWeaponItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STR"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthWeaponItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEX"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityWeaponItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceWeaponItem"
+                android:layout_marginRight="10dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DAM"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDamageWeaponItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="HIT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewHitchanceWeaponItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="KRI"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewKritchanceWeaponItem"
+                android:layout_marginRight="10dp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="EXT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewExtraWeaponItem"
+                android:layout_marginRight="10dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowTextValueWeaponItem"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaValueWeaponItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthValueWeaponItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityValueWeaponItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceValueWeaponItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDamageValueWeaponItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewHitchanceValueWeaponItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewKritchanceValueWeaponItem"
+                android:layout_marginRight="10dp" />
+
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewExtraValueWeaponItem"
+                android:layout_marginRight="10dp" />
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>
