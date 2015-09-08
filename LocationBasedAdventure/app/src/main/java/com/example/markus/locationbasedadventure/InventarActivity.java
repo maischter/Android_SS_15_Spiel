@@ -1,10 +1,12 @@
 package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
@@ -41,6 +43,10 @@ public class InventarActivity extends Activity {
     TextView intelligenceValue;
 
 
+    TableLayout weaponLayout;
+    TableLayout armorLayout;
+
+
 
     ImageView armorImage;
     TextView armor;
@@ -55,7 +61,7 @@ public class InventarActivity extends Activity {
     TextView intelligencearmorValue;
 
 
-
+    //LongClickListeners!!
 
 
     WeaponDatabase weaponDb;
@@ -70,8 +76,30 @@ public class InventarActivity extends Activity {
         initButton();
         initTextViews();
         initTextViewsValue();
+        initTableLayouts();
         loadTextViewWeaponValue();
         loadTextViewsArmorValue();
+    }
+
+    private void initTableLayouts() {
+        weaponLayout = (TableLayout) findViewById(R.id.tableLayoutWeapon);
+        weaponLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i = new Intent(getApplicationContext(),WeaponChangeActivity.class);
+                startActivity(i);
+                return false;
+            }
+        });
+        armorLayout = (TableLayout) findViewById(R.id.tableLayoutArmor);
+        armorLayout.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Intent i = new Intent(getApplicationContext(),ArmorChangeActivity.class);
+                startActivity(i);
+                return false;
+            }
+        });
     }
 
     @Override

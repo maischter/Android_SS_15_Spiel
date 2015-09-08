@@ -49,7 +49,8 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     protected void onDestroy() {
         characterdataDb.close();
         statsDb.close();
-        super.onDestroy();    }
+        super.onDestroy();
+    }
 
 
     //Initialisieren der EditText und TextView

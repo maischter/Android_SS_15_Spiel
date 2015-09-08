@@ -57,6 +57,14 @@
             android:name=".InventarActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name=".WeaponChangeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".ArmorChangeActivity"
+            android:label="@string/app_name" >
+        </activity>
     </application>
 
 </manifest>

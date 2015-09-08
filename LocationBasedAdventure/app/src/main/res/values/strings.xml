@@ -32,6 +32,8 @@
     <string name="zurueck">Zurück</string>
     <string name="waffen">Waffen</string>
     <string name="armor">Rüstungen</string>
+    <string name="items">Items</string>
+    <string name="changewaffen">Waffe wechseln</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>
