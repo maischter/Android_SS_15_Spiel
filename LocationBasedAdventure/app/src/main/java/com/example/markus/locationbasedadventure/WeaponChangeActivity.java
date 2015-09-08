@@ -52,11 +52,17 @@ public class WeaponChangeActivity extends Activity {
         initStaticViews();
         initValueViews();
         initDiffViews();
+        initImageView();
         setValueViews();
         initGridView();
         initListAdapter();
         updateList();
 
+    }
+
+    private void initImageView() {
+        usedWeapon = (ImageView)findViewById(R.id.imageViewUsedWeapon);
+        usedWeapon.setImageResource(R.drawable.power_up);
     }
 
     private void updateList() {

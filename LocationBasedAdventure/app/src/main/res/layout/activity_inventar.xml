@@ -36,16 +36,16 @@
         android:layout_marginBottom="10dp" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
         android:id="@+id/imageViewWeapon"
-        android:minHeight="65dp"
-        android:minWidth="50dp"
         android:layout_below="@+id/textViewWaffen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="34dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
 
     <TableLayout
         android:layout_width="match_parent"
@@ -261,16 +261,17 @@
         android:layout_centerHorizontal="true" />
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="50dp"
+        android:layout_height="65dp"
         android:id="@+id/imageViewArmor"
-        android:minHeight="65dp"
-        android:minWidth="50dp"
         android:layout_below="@+id/textViewArmor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="34dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
 
     <TableLayout
         android:layout_width="match_parent"

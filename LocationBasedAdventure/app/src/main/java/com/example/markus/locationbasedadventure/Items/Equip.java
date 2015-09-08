@@ -56,6 +56,7 @@ public class Equip {
 
     }
 
+
     public int getWeaponCritrate() {
         return weaponCritrate;
     }

@@ -7,6 +7,10 @@ import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.markus.locationbasedadventure.Items.Equip;
+
+import java.util.ArrayList;
+
 /**
  * Created by Markus on 01.09.2015.
  */
@@ -106,6 +110,31 @@ public class ArmorDatabase {
             cursor.moveToFirst();
 
         return selectImage(cursor.getInt(1));
+    }
+
+
+
+    public ArrayList<Equip> getAllFoodieItems(){
+        ArrayList<Equip> items = new ArrayList<Equip>();
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] {KEY_ID,KEY_ARMOR,
+                KEY_ARMORSTAMINA, KEY_ARMORSTRENGTH, KEY_ARMORDEXTERITY, KEY_ARMORINTELLIGENCE}, null, null, null, null, null);
+        if (cursor.moveToFirst()) {
+            //cursor.moveToNext()
+            do {
+
+                int[] armor = new int[9];
+                armor[0] = cursor.getInt(1);
+                armor[1] = cursor.getInt(2);
+                armor[2] = cursor.getInt(3);
+                armor[3] = cursor.getInt(4);
+                armor[4] = cursor.getInt(5);
+                items.add(new Equip(armor,false));
+                ;
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        return items;
+
     }
 
     private String selectImage(int armorTyp) {

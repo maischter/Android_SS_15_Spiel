@@ -187,7 +187,7 @@ public class InventarActivity extends Activity {
     }
 
     private void loadTextViewWeaponValue(){
-
+        weaponImage.setImageResource(R.drawable.power_up);
         kindofweapon.setText(weaponDb.getWeaponString());
         damageValue.setText(""+weaponDb.getWeapon()[1]);
         hitchanceValue.setText(""+weaponDb.getWeapon()[2]);
@@ -201,7 +201,7 @@ public class InventarActivity extends Activity {
 
 
     private void loadTextViewsArmorValue() {
-
+        armorImage.setImageResource(R.drawable.power_up);
         kindofarmor.setText(armorDb.getArmorString());
         staminaarmorValue.setText(""+armorDb.getArmor()[1]);
         strengtharmorValue.setText(""+armorDb.getArmor()[2]);

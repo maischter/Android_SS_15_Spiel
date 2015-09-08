@@ -33,17 +33,28 @@
         android:layout_marginBottom="10dp" />
 
 
-    <ImageView
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/imageViewUsedWeapon"
-        android:minHeight="75dp"
-        android:minWidth="60dp"
+        android:id="@+id/layoutUsedWeapon"
+
         android:layout_below="@+id/textViewChangeWaffen"
+        android:background="@color/background_floating_material_light">
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="75dp"
+        android:id="@+id/imageViewUsedWeapon"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="25dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_marginLeft="10dp"
+
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_marginRight="5dp"
+        android:layout_marginBottom="5dp" />
 
 
 
@@ -197,8 +208,7 @@
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewIntelligenceWeaponChangeValue"
-                android:layout_marginRight="10dp"
-                android:text="14" />
+                android:layout_marginRight="10dp" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -334,14 +344,18 @@
 
     </TableLayout>
 
+    </RelativeLayout>
+
     <GridView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/gridViewWeapon"
-        android:layout_below="@+id/imageViewUsedWeapon"
+        android:layout_below="@+id/layoutUsedWeapon"
         android:layout_toEndOf="@+id/buttonBackWeaponchange"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="15dp" />
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
 
 </RelativeLayout>

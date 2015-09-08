@@ -1,6 +1,244 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/background_material_dark">
 
-</LinearLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBackArmorchange"
+        android:text="@string/zurueck"
+        android:adjustViewBounds="false"
+        android:background="@color/accent_material_light"
+        android:minWidth="50dp"
+        android:minHeight="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/changeArmor"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:textSize="25sp"
+        android:textColor="@color/accent_material_light"
+        android:id="@+id/textViewChangeArmor"
+        android:layout_marginBottom="10dp" />
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layoutUsedArmor"
+
+        android:layout_below="@+id/textViewChangeArmor"
+        android:background="@color/background_floating_material_light">
+
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="75dp"
+        android:id="@+id/imageViewUsedArmor"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="25dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"
+        android:layout_marginBottom="5dp" />
+
+
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:id="@+id/textViewWeaponChangeArmorText"
+        android:text="Bogen"
+        android:layout_above="@+id/tableLayoutUsedArmor"
+        android:layout_centerHorizontal="true" />
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/imageViewUsedArmor"
+        android:layout_toEndOf="@+id/imageViewUsedArmor"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="15dp"
+        android:layout_alignTop="@+id/imageViewUsedArmor"
+        android:id="@+id/tableLayoutUsedArmor"
+        android:showDividers="middle|beginning|end"
+        android:layout_alignBottom="@+id/imageViewUsedArmor">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowTextArmorChange"
+            android:layout_marginBottom="5dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STA"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaArmorChange"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STR"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthArmorChange"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEX"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityArmorChange"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INT"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceArmorChange"
+                android:layout_marginRight="10dp" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableRowTextArmorChangeValue"
+            android:layout_marginRight="6dp"
+            android:layout_marginLeft="6dp"
+            android:layout_marginBottom="5dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaArmorChangeValue"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthArmorChangeValue"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityArmorChangeValue"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceArmorChangeValue"
+                android:layout_marginRight="10dp"
+                android:text="14" />
+
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/tableRowTextArmorChangeDiff"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FF0000"
+                android:id="@+id/textViewStaminaArmorChangeDiff"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FF0000"
+                android:id="@+id/textViewStrengthArmorChangeDiff"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FF0000"
+                android:id="@+id/textViewDexterityArmorChangeDiff"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="15sp"
+                android:textColor="#FF0000"
+                android:id="@+id/textViewIntelligenceArmorChangeDiff"
+                android:layout_marginRight="10dp" />
+
+
+
+        </TableRow>
+
+    </TableLayout>
+
+        </RelativeLayout>
+
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridViewArmor"
+        android:layout_below="@+id/layoutUsedArmor"
+        android:layout_toEndOf="@+id/buttonBackArmorchange"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp" />
+
+</RelativeLayout>

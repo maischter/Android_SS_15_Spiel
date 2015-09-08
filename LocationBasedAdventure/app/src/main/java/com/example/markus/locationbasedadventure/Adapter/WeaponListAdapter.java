@@ -42,6 +42,8 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
         if (weapon != null) {
 
+            TextView weaponText = (TextView) v.findViewById(R.id.textViewWeaponItemText);
+
             ImageView weaponImage = (ImageView) v.findViewById(R.id.imageViewWeaponItem);
 
             TextView stamina = (TextView) v.findViewById(R.id.textViewStaminaWeaponItem);
@@ -64,8 +66,13 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
             TextView extraValue = (TextView) v.findViewById(R.id.textViewExtraValueWeaponItem);
 
 
+
+            weaponImage.setImageResource(R.drawable.power_up);
+
             int[] weaponStats = weapon.getWeaponStats();
 
+
+            weaponText.setText(selectImage(weapon.getWeaponTyp()));
             staminaValue.setText(""+weaponStats[0]);
             strengthValue.setText(""+weaponStats[1]);
             dexterityValue.setText(""+weaponStats[2]);
@@ -79,4 +86,38 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
         return v;
     }
+
+    private String selectImage(int weaponTyp) {
+        switch (weaponTyp) {
+            case 8:
+                return "Bogen";
+            case 1:
+                return "Einhandschwert";
+            case 3:
+                return "Einhandschwert mit Schild";
+            case 2:
+                return "Einhandaxt";
+            case 4:
+                return "Einhandaxt mit Schild";
+            case 9:
+                return "Gewehr";
+            case 7:
+                return "Zauberstab";
+            case 6:
+                return "Zweihandaxt";
+            case 5:
+                return "Zweihandschwert";
+            case 10:
+                return "2 Einhandschwerter";
+            case 11:
+                return "Einhandschwert und Einhandaxt";
+            case 12:
+                return "2 Einhandäxte";
+
+        }
+        return null;
+
+    }
+
+
 }

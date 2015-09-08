@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/background_material_dark">
+
+
+
+    <ImageView
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/imageViewArmorItem"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:scaleType="fitXY"
+        android:adjustViewBounds="true"/>
+
+    <TableLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/tableLayoutArmorItem"
+        android:showDividers="middle|beginning|end"
+        android:layout_marginTop="10dp">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowTextArmorItem"
+            android:layout_marginBottom="5dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STA"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaArmorItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="STR"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthArmorItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DEX"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityArmorItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="INT"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceArmorItem"
+                android:layout_marginRight="10dp" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="6dp"
+            android:id="@+id/tableRowTextValueArmorItem"
+            android:layout_marginBottom="10dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStaminaValueArmorItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewStrengthValueArmorItem"
+                android:layout_marginRight="10dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewDexterityValueArmorItem"
+                android:layout_marginRight="10dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:gravity="center"
+                android:textSize="12sp"
+                android:textColor="@color/accent_material_light"
+                android:id="@+id/textViewIntelligenceValueArmorItem"
+                android:layout_marginRight="10dp" />
+
+
+        </TableRow>
+
+    </TableLayout>
+
+</LinearLayout>

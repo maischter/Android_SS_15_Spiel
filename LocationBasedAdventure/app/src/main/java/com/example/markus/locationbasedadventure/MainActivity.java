@@ -30,7 +30,6 @@ public class MainActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initDB();
-        characterdataDb.updateStayAngemeldet(0);
         checkAnmeldung();
         initButtons();
     }
@@ -64,7 +63,7 @@ public class MainActivity extends Activity{
         }
         if(characterdataDb.getStayAngemeldet() == 1){
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
-            Intent i = new Intent(getApplicationContext(),GifActivity.class); // Hier eigentlich MapActivity
+            Intent i = new Intent(getApplicationContext(),MenueActivity.class); // Hier eigentlich MapActivity
             startActivity(i);
         }
     }
