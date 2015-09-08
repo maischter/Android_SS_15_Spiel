@@ -24,7 +24,7 @@ public class Skill {
                 this.damage = 0;
             case R.string.skillSpecA:
                 //Skill macht 2 mehr dmg,aber man muss eine Runde aussetzen
-                this.damage = dmg;
+                this.damage = dmg * 2;
 
         }
     }
