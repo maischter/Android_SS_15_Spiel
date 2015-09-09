@@ -42,7 +42,7 @@ public class Entity {
         this.str = strength;
         this.dex = dexterity;
         this.intell = intelligence;
-        calcEqStats();
+
 
         if (npc){
             randomizeStats();
@@ -54,7 +54,7 @@ public class Entity {
     }
 
     public void setEntityEQ(int [] weaponData, int [] armorData){
-        entityEQ = new Equip (weaponData, armorData);
+        this.entityEQ = new Equip (weaponData, armorData);
     }
 
     public void calcEqStats(){

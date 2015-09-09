@@ -69,9 +69,9 @@ public class BattleActivity extends Activity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
         initDB();
-
         initProgressbars();
         initImageButtons();
+
         loadBattleData();
         calcBattleStats();
 
@@ -231,7 +231,12 @@ public class BattleActivity extends Activity{
         sp_str = battleData[3];
         sp_dex = battleData[4];
         sp_int = battleData[5];
+        System.out.println(battleData[5]);
+        System.out.println(battleData[5]);
+        System.out.println(battleData[5]);
+        System.out.println(battleData[5]);
         armorData = armorDb.getArmor(); // KEY_ID,KEY_ARMOR,
+        System.out.println(armorData[0]);
         // KEY_ARMORSTAMINA, KEY_ARMORSTRENGTH, KEY_ARMORDEXTERITY, KEY_ARMORINTELLIGENCE
         weaponData = weaponDb.getWeapon(); // KEY_ID,KEY_WEAPON,
         // KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
@@ -253,6 +258,8 @@ public class BattleActivity extends Activity{
         NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level,true);
         Player.setEntityEQ(weaponData, armorData);
         NonPlayer.setEntityEQ(weaponData, armorData);
+        Player.calcEqStats();
+        NonPlayer.calcEqStats();
 
     }
 
@@ -273,7 +280,7 @@ public class BattleActivity extends Activity{
         int hit = rand.nextInt(99);
         int crit = rand.nextInt(99);
         int dodge = rand.nextInt(99);
-        int nextDmg = 0;
+        int nullDMG = 0;
         double powerUpDmg = 1.5;
 
         //ausweichen
@@ -300,7 +307,7 @@ public class BattleActivity extends Activity{
         //normal getroffen
         if (hit <= source.getHitrate() && crit > source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * 0;
+                target.curHitpoints = target.curHitpoints - skill.damage * nullDMG;
                 defSuspend = false;
             } else if (powerUpSuspend){
                 target.curHitpoints = target.curHitpoints - skill.damage * powerUpDmg ;
@@ -311,7 +318,7 @@ public class BattleActivity extends Activity{
         //kritischer treffer
         if (hit <= source.getHitrate() && crit <= source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * 0;
+                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * nullDMG;
                 defSuspend = false;
             }else if (powerUpSuspend){
                 target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * powerUpDmg;
