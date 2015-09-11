@@ -25,26 +25,30 @@ public class BattleActivity extends Activity{
 
     ProgressBar playerHitpoints;
     ProgressBar nonPlayerHitpoints;
-    final int players_turn = 0;
-    final int nonplayers_turn = 1;
     ImageButton skill_a;
     ImageButton skill_b;
     ImageButton skill_c;
     ImageButton skill_d;
-
     public Skill [] pSkill;
+
 
     int level;
     int exp;
-
     int sp_sta;
     int sp_str;
     int sp_dex;
     int sp_int;
+    ArmorDatabase armorDb;
+    WeaponDatabase weaponDb;
+    StatsDatabase statsDb;
 
+    int [] weaponData;
+    int [] armorData;
 
-    Random rand = new Random();
+    final int players_turn = 0;
+    final int nonplayers_turn = 1;
     int turn;
+    Random rand = new Random();
     boolean turnDone;
     boolean def;
     boolean defSuspend;
@@ -54,26 +58,24 @@ public class BattleActivity extends Activity{
     boolean specialSuspend;
     int suspend;
 
-    ArmorDatabase armorDb;
-    WeaponDatabase weaponDb;
-    StatsDatabase statsDb;
-
     Entity Player;
     Entity NonPlayer;
-
-    int [] weaponData;
-    int [] armorData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_battle);
+
         initDB();
         initProgressbars();
         initImageButtons();
 
+
         loadBattleData();
+        setBattleStats();
         calcBattleStats();
+
+        initSkills();
 
         turn = rand.nextInt(2);
         turnDone = true;
@@ -83,7 +85,7 @@ public class BattleActivity extends Activity{
         powerUpSuspend = false;
         special = false;
         specialSuspend = false;
-        int FPS = 20;
+        int FPS = 10;
 
         //Überprüft wer am Zug ist
         Timer timer = new Timer();
@@ -92,23 +94,103 @@ public class BattleActivity extends Activity{
             public void run() {
                 if (turn==players_turn && turnDone){
 
-                        playersTurn();
-                        turnDone = false;
+                    playersTurn();
+                    turnDone = false;
 
                 } else if (turn==nonplayers_turn && turnDone){
                     nonplayersTurn();
                     actionKI();
-                    turnDone=false;
+                    turnDone = false;
                 }
+                System.out.println("Zug: " + turn);
             }
         },0,1000/FPS);
 
+
+
+    }
+    //init all GUI Elements
+    private void initProgressbars() {
+        playerHitpoints = (ProgressBar) findViewById(R.id.progressBar);
+        playerHitpoints.setMax(100);
+        playerHitpoints.setProgress(100);
+        nonPlayerHitpoints = (ProgressBar) findViewById(R.id.progressBarNP);
+        nonPlayerHitpoints.setMax(100);
+        nonPlayerHitpoints.setProgress(100);
+
+    }
+
+    private void initDB(){
+        weaponDb = new WeaponDatabase(this);
+        weaponDb.open();
+        armorDb = new ArmorDatabase(this);
+        armorDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
+    }
+
+    private void initImageButtons(){
+        skill_a = (ImageButton) findViewById(R.id.imageButton_skill1);
+        skill_b = (ImageButton) findViewById(R.id.imageButton_skill2);
+        skill_c = (ImageButton) findViewById(R.id.imageButton_skill3);
+        skill_d = (ImageButton) findViewById(R.id.imageButton_skill4);
+        loadSkillPNG(R.drawable.normal_attk, skill_a);
+        loadSkillPNG(R.drawable.def, skill_b);
+        loadSkillPNG(R.drawable.power_up, skill_c);
+        loadSkillPNG(R.drawable.special_attk, skill_d);
+        skill_a.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                updateProgressbar(pSkill[0],NonPlayer, Player);
+                System.out.println(pSkill[0].skillName);
+                nextTurn();
+
+            }
+        });
+
+        skill_b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                def = true;
+                updateProgressbar(pSkill[1],NonPlayer, Player);
+                System.out.println(pSkill[1].skillName);
+                nextTurn();
+
+            }
+        });
+        skill_c.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                powerUp = true;
+                updateProgressbar(pSkill[2],NonPlayer, Player);
+                System.out.println(pSkill[2].skillName);
+                nextTurn();
+            }
+        });
+        skill_d.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                updateProgressbar(pSkill[3],NonPlayer, Player);
+                System.out.println(pSkill[3].skillName);
+                nextTurn();
+            }
+        });
+    }
+
+    private void initSkills(){
         pSkill = new Skill[4];
         pSkill[0] = new Skill(R.string.skillA,Player.getWeaponDmg());
         pSkill[1] = new Skill(R.string.skillDef,0);
         pSkill[2] = new Skill(R.string.skillPower,0);
         pSkill[3] = new Skill(R.string.skillSpecA,Player.getWeaponDmg());
-
+    }
+    //Tasks zum Bilder laden
+    public void loadSkillPNG(int resID , ImageButton imageButton) {
+        LoadingBattleTask task = new LoadingBattleTask(imageButton);
+        task.execute(resID);
     }
 
     @Override
@@ -118,7 +200,7 @@ public class BattleActivity extends Activity{
         statsDb.close();
         super.onDestroy();
     }
-
+    // KI wählt per Random aus welchen Skill er einsetzt
     private void actionKI(){
         int action = rand.nextInt(4);
 
@@ -147,15 +229,7 @@ public class BattleActivity extends Activity{
 
     }
 
-    private void initDB(){
-        weaponDb = new WeaponDatabase(this);
-        weaponDb.open();
-        armorDb = new ArmorDatabase(this);
-        armorDb.open();
-        statsDb = new StatsDatabase(this);
-        statsDb.open();
-    }
-
+    // Setzt GUI Element clickbar/unclickbar
     private void playersTurn(){
         skill_a.setClickable(true);
         skill_b.setClickable(true);
@@ -172,53 +246,14 @@ public class BattleActivity extends Activity{
         skill_d.setClickable(false);
     }
 
-    private void initImageButtons(){
-        skill_a = (ImageButton) findViewById(R.id.imageButton_skill1);
-        skill_b = (ImageButton) findViewById(R.id.imageButton_skill2);
-        skill_c = (ImageButton) findViewById(R.id.imageButton_skill3);
-        skill_d = (ImageButton) findViewById(R.id.imageButton_skill4);
-        skill_a.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                updateProgressbar(pSkill[0],NonPlayer, Player);
-                nextTurn();
-            }
-        });
-
-        skill_b.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                def = true;
-                updateProgressbar(pSkill[1],NonPlayer, Player);
-                nextTurn();
-            }
-        });
-        skill_c.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                powerUp = true;
-                updateProgressbar(pSkill[2],NonPlayer, Player);
-                nextTurn();
-            }
-        });
-        skill_d.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                updateProgressbar(pSkill[3],NonPlayer, Player);
-                nextTurn();
-            }
-        });
-    }
-
-    private void initProgressbars() {
-        playerHitpoints = (ProgressBar) findViewById(R.id.progressBar);
-        playerHitpoints.setMax(100);
-        nonPlayerHitpoints = (ProgressBar) findViewById(R.id.progressBarNP);
-        nonPlayerHitpoints.setMax(100);
-
+    private void nextTurn(){
+        if (turn==players_turn){
+            turn=nonplayers_turn;
+        }
+        if (turn==nonplayers_turn){
+            turn=players_turn;
+        }
+        turnDone=true;
     }
 
     public void loadBattleData(){
@@ -241,38 +276,26 @@ public class BattleActivity extends Activity{
         weaponData = weaponDb.getWeapon(); // KEY_ID,KEY_WEAPON,
         // KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
         // KEY_WEAPONSTAMINA, KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE
-
-        loadingSkills();
     }
 
-    private void loadingSkills(){
-        loadSkillPNG(R.drawable.normal_attk, skill_a);
-        loadSkillPNG(R.drawable.def, skill_b);
-        loadSkillPNG(R.drawable.power_up, skill_c);
-        loadSkillPNG(R.drawable.special_attk, skill_d);
-
-    }
-
-    private void calcBattleStats() {
-        Player = new Entity(sp_sta,sp_str,sp_dex,sp_int,level,false);
-        NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level,true);
+    private void setBattleStats() {
+        Player = new Entity(sp_sta,sp_str,sp_dex,sp_int,level);
+        NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level);
         Player.setEntityEQ(weaponData, armorData);
         NonPlayer.setEntityEQ(weaponData, armorData);
+    }
+
+    private void calcBattleStats(){
+        int [] randomValues = new int [4];
+        for (int i=0; i <4; i++){
+            randomValues[i]= rand.nextInt(10)-5;
+        }
         Player.calcEqStats();
         NonPlayer.calcEqStats();
-
+        NonPlayer.randomizeStats(randomValues);
+        Player.calcDetailStats();
+        NonPlayer.calcDetailStats();
     }
-
-    private void nextTurn(){
-        if (turn==players_turn){
-            turn=nonplayers_turn;
-        }
-        if (turn==nonplayers_turn){
-            turn=players_turn;
-        }
-        turnDone=true;
-    }
-
 
 
     private void updateProgressbar(Skill skill,Entity target, Entity source) {
@@ -356,18 +379,15 @@ public class BattleActivity extends Activity{
         }
 
         if (turn==players_turn){
-            nonPlayerHitpoints.setProgress((int)(target.curHitpoints/target.maxHitpoints));
+            nonPlayerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints)*100));
         }
         if (turn==nonplayers_turn){
-            playerHitpoints.setProgress((int)(target.curHitpoints/target.maxHitpoints));
+            playerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints)*100));
         }
 
     }
 
-    public void loadSkillPNG(int resID , ImageButton imageButton) {
-        LoadingBattleTask task = new LoadingBattleTask(imageButton);
-        task.execute(resID);
-    }
+
 
 
 }

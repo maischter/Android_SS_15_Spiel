@@ -34,7 +34,7 @@ public class Entity {
     public int lvl;
     public Equip entityEQ;
 
-    public Entity (int stamina, int strength, int dexterity, int intelligence,int level, boolean npc){
+    public Entity (int stamina, int strength, int dexterity, int intelligence,int level){
 
         //initStats
         this.lvl = level;
@@ -42,14 +42,6 @@ public class Entity {
         this.str = strength;
         this.dex = dexterity;
         this.intell = intelligence;
-
-
-        if (npc){
-            randomizeStats();
-        }
-
-        calcDetailStats();
-
 
     }
 
@@ -117,7 +109,7 @@ public class Entity {
 
     }
 
-    public void randomizeStats(){
+    public void randomizeStats(int [] randomValues){
         int [] newStats = new int [4];
         newStats[0] = this.sta;
         newStats[1] = this.str;
@@ -127,7 +119,7 @@ public class Entity {
         int statsCombined = this.sta + this.str + this.dex + this.intell;
 
         for (int i = 0; i <4; i++){
-           newStats[i] = newStats[i] + rand.nextInt(10) - 5;
+           newStats[i] = newStats[i] + randomValues[i];
             newStatsCombined = newStatsCombined + newStats[i];
         }
 
