@@ -3,12 +3,14 @@ package com.example.markus.locationbasedadventure;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
+import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter.WeaponListener;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Equip;
 
@@ -19,7 +21,7 @@ import java.util.ArrayList;
 /**
  * Created by Markus on 07.09.2015.
  */
-public class WeaponChangeActivity extends Activity {
+public class WeaponChangeActivity extends Activity implements WeaponListener {
 
     Button back;
     ImageView usedWeapon;
@@ -67,18 +69,30 @@ public class WeaponChangeActivity extends Activity {
 
     private void updateList() {
         weaponList.clear();
-        weaponList.addAll(weaponDb.getAllFoodieItems());
+        weaponList.addAll(weaponDb.getAllWeaponItems());
         weaponListAdapter.notifyDataSetChanged();
     }
 
     private void initListAdapter() {
         weaponGrid = (GridView) findViewById(R.id.gridViewWeapon);
-        weaponListAdapter = new WeaponListAdapter(this,weaponList);
+        weaponListAdapter = new WeaponListAdapter(this,weaponList,this);
         weaponGrid.setAdapter(weaponListAdapter);
     }
 
     private void initGridView() {
+
         weaponGrid = (GridView) findViewById(R.id.gridViewWeapon);
+    }
+
+    private void setDiffViewsEmpty() {
+        tableStatsDiff[0].setText("");
+        tableStatsDiff[1].setText("");
+        tableStatsDiff[2].setText("");
+        tableStatsDiff[3].setText("");
+        tableStatsDiff[4].setText("");
+        tableStatsDiff[5].setText("");
+        tableStatsDiff[6].setText("");
+        tableStatsDiff[7].setText("");
     }
 
     @Override
@@ -109,7 +123,7 @@ public class WeaponChangeActivity extends Activity {
     }
 
     private void initButtons() {
-        Button back = (Button) findViewById(R.id.buttonBackWeaponchange);
+        back = (Button) findViewById(R.id.buttonBackWeaponchange);
         back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -152,5 +166,92 @@ public class WeaponChangeActivity extends Activity {
         tableStatsText[5] = (TextView) findViewById(R.id.textViewHitchanceWeaponChange);
         tableStatsText[6] = (TextView) findViewById(R.id.textViewKritchanceWeaponChange);
         tableStatsText[7] = (TextView) findViewById(R.id.textViewExtraWeaponChange);
+    }
+
+    @Override
+    public void deleteWeapon(int position) {
+
+        Equip weapon = weaponList.get(position);
+        weaponDb.deleteWeapon(weapon.getWeaponID());
+        updateList();
+    }
+
+    @Override
+    public void changeWeapon(int position) {
+        Equip weapon = weaponList.get(position);
+        weaponDb.changeToUsedWeapon(weapon);
+        setValueViews();
+        setDiffViewsEmpty();
+        updateList();
+    }
+
+    @Override
+    public void showDiff(int position) {
+        Equip weapon = weaponList.get(position);
+
+        if((weapon.getWeaponStats()[0] - weaponDb.getWeapon()[5]) >= 0) {
+            tableStatsDiff[0].setText("+" + (weapon.getWeaponStats()[0] - weaponDb.getWeapon()[5]));
+            tableStatsDiff[0].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[0].setText("" + (weapon.getWeaponStats()[0] - weaponDb.getWeapon()[5]));
+            tableStatsDiff[0].setTextColor(0xFFFF0000);
+
+        }
+
+        if((weapon.getWeaponStats()[1] - weaponDb.getWeapon()[6]) >= 0) {
+            tableStatsDiff[1].setText("+" + (weapon.getWeaponStats()[1] - weaponDb.getWeapon()[6]));
+            tableStatsDiff[1].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[1].setText("" + (weapon.getWeaponStats()[1] - weaponDb.getWeapon()[6]));
+            tableStatsDiff[1].setTextColor(0xFFFF0000);
+        }
+
+        if((weapon.getWeaponStats()[2] - weaponDb.getWeapon()[7]) >= 0) {
+            tableStatsDiff[2].setText("+" + (weapon.getWeaponStats()[2] - weaponDb.getWeapon()[7]));
+            tableStatsDiff[2].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[2].setText("" + (weapon.getWeaponStats()[2] - weaponDb.getWeapon()[7]));
+            tableStatsDiff[2].setTextColor(0xFFFF0000);
+        }
+
+        if((weapon.getWeaponStats()[3] - weaponDb.getWeapon()[8]) >= 0) {
+            tableStatsDiff[3].setText("+" + (weapon.getWeaponStats()[3] - weaponDb.getWeapon()[8]));
+            tableStatsDiff[3].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[3].setText("" + (weapon.getWeaponStats()[3] - weaponDb.getWeapon()[8]));
+            tableStatsDiff[3].setTextColor(0xFFFF0000);
+        }
+
+        if((weapon.getWeaponDmg() - weaponDb.getWeapon()[1]) >= 0) {
+            tableStatsDiff[4].setText("+" + (weapon.getWeaponDmg() - weaponDb.getWeapon()[1]));
+            tableStatsDiff[4].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[4].setText("" + (weapon.getWeaponDmg() - weaponDb.getWeapon()[1]));
+            tableStatsDiff[4].setTextColor(0xFFFF0000);
+        }
+
+        if((weapon.getWeaponHitrate() - weaponDb.getWeapon()[2]) >= 0) {
+            tableStatsDiff[5].setText("+" + (weapon.getWeaponHitrate() - weaponDb.getWeapon()[2]));
+            tableStatsDiff[5].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[5].setText("" + (weapon.getWeaponHitrate() - weaponDb.getWeapon()[2]));
+            tableStatsDiff[5].setTextColor(0xFFFF0000);
+        }
+
+        if((weapon.getWeaponCritrate() - weaponDb.getWeapon()[3]) >= 0) {
+            tableStatsDiff[6].setText("+" + (weapon.getWeaponCritrate() - weaponDb.getWeapon()[3]));
+            tableStatsDiff[6].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[6].setText("" + (weapon.getWeaponCritrate() - weaponDb.getWeapon()[3]));
+            tableStatsDiff[6].setTextColor(0xFFFF0000);
+        }
+
+        if((weapon.getWeaponExtra() - weaponDb.getWeapon()[4]) >= 0) {
+            tableStatsDiff[7].setText("+" + (weapon.getWeaponExtra() - weaponDb.getWeapon()[4]));
+            tableStatsDiff[7].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[7].setText("" + (weapon.getWeaponExtra() - weaponDb.getWeapon()[4]));
+            tableStatsDiff[7].setTextColor(0xFFFF0000);
+        }
     }
 }

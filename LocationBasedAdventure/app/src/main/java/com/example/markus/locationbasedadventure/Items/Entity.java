@@ -50,6 +50,7 @@ public class Entity {
     }
 
     public void calcEqStats(){
+        System.out.println("Hans"+ entityEQ.getArmorStats()[0]);
         this.sta = this.sta + entityEQ.armorStats[0] + entityEQ.weaponStats[0];
         this.str = this.str + entityEQ.armorStats[1] + entityEQ.weaponStats[1];
         this.dex = this.dex + entityEQ.armorStats[2] + entityEQ.weaponStats[2];

@@ -1,15 +1,18 @@
 package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Adapter.ArmorListAdapter;
+import com.example.markus.locationbasedadventure.Adapter.ArmorListAdapter.ArmorListener;
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
@@ -20,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by Markus on 07.09.2015.
  */
-public class ArmorChangeActivity extends Activity {
+public class ArmorChangeActivity extends Activity implements ArmorListener {
 
 
     Button back;
@@ -67,13 +70,13 @@ public class ArmorChangeActivity extends Activity {
 
     private void updateList() {
         armorList.clear();
-        armorList.addAll(armorDb.getAllFoodieItems());
+        armorList.addAll(armorDb.getAllArmorItems());
         armorListAdapter.notifyDataSetChanged();
     }
 
     private void initListAdapter() {
         armorGrid = (GridView) findViewById(R.id.gridViewArmor);
-        armorListAdapter = new ArmorListAdapter(this,armorList);
+        armorListAdapter = new ArmorListAdapter(this,armorList,this);
         armorGrid.setAdapter(armorListAdapter);
     }
 
@@ -93,6 +96,12 @@ public class ArmorChangeActivity extends Activity {
         armorDb.open();
     }
 
+    private void setDiffViewsEmpty() {
+        tableStatsDiff[0].setText("");
+        tableStatsDiff[1].setText("");
+        tableStatsDiff[2].setText("");
+        tableStatsDiff[3].setText("");
+    }
 
 
     private void setValueViews() {
@@ -135,5 +144,56 @@ public class ArmorChangeActivity extends Activity {
         tableStatsText[1] = (TextView) findViewById(R.id.textViewStrengthArmorChange);
         tableStatsText[2] = (TextView) findViewById(R.id.textViewDexterityArmorChange);
         tableStatsText[3] = (TextView) findViewById(R.id.textViewIntelligenceArmorChange);
+    }
+
+    @Override
+    public void deleteArmor(int position) {
+        Equip armor = armorList.get(position);
+        armorDb.deleteArmor(armor.getArmorID());
+        updateList();
+    }
+
+    @Override
+    public void changeArmor(int position) {
+        Equip armor = armorList.get(position);
+        armorDb.changeToUsedArmor(armor);
+        setValueViews();
+        setDiffViewsEmpty();
+        updateList();
+    }
+
+    @Override
+    public void showDiff(int position) {
+        Equip armor = armorList.get(position);
+        if((armor.getArmorStats()[0] - armorDb.getArmor()[1]) >= 0){
+            tableStatsDiff[0].setText("+" + (armor.getArmorStats()[0] - armorDb.getArmor()[1]));
+            tableStatsDiff[0].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[0].setText("" + (armor.getArmorStats()[0] - armorDb.getArmor()[1]));
+            tableStatsDiff[0].setTextColor(0xFFFF0000);
+        }
+        if((armor.getArmorStats()[1] - armorDb.getArmor()[2]) >= 0){
+            tableStatsDiff[1].setText("+" + (armor.getArmorStats()[1] - armorDb.getArmor()[2]));
+            tableStatsDiff[1].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[1].setText("" + (armor.getArmorStats()[1] - armorDb.getArmor()[2]));
+            tableStatsDiff[1].setTextColor(0xFFFF0000);
+        }
+        if((armor.getArmorStats()[2] - armorDb.getArmor()[3]) >= 0){
+            tableStatsDiff[2].setText("+" + (armor.getArmorStats()[2] - armorDb.getArmor()[3]));
+            tableStatsDiff[2].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[2].setText("" + (armor.getArmorStats()[2] - armorDb.getArmor()[3]));
+            tableStatsDiff[2].setTextColor(0xFFFF0000);
+        }
+        if((armor.getArmorStats()[3] - armorDb.getArmor()[4]) >= 0){
+            tableStatsDiff[3].setText("+" + (armor.getArmorStats()[3] - armorDb.getArmor()[4]));
+            tableStatsDiff[3].setTextColor(0xFF00CD00);
+        }else{
+            tableStatsDiff[3].setText("" + (armor.getArmorStats()[3] - armorDb.getArmor()[4]));
+            tableStatsDiff[3].setTextColor(0xFFFF0000);
+        }
+
+
     }
 }

@@ -10,6 +10,8 @@ public class Equip {
     public int weaponHitrate;
     public int weaponCritrate;
     public int weaponExtra;
+    public int weaponID;
+    public int armorID;
     public int armorTyp;
     public int [] weaponStats = new int[4];
     public int [] armorStats = new int[4];// Reihenfolge sta,str,dex,int
@@ -45,12 +47,14 @@ public class Equip {
             this.weaponStats[1] = stats[6];
             this.weaponStats[2] = stats[7];
             this.weaponStats[3] = stats[8];
+            this.weaponID = stats[9];
         }else{
             this.armorTyp = stats[0];
             this.armorStats[0] = stats[1];
             this.armorStats[1] = stats[2];
             this.armorStats[2] = stats[3];
             this.armorStats[3] = stats[4];
+            this.armorID = stats[5];
         }
 
 
@@ -81,10 +85,22 @@ public class Equip {
         return weaponStats;
     }
 
+    public int getArmorID() {
+        return armorID;
+    }
+
+    public int getWeaponID() {
+        return weaponID;
+    }
+
+
     public int[] getArmorStats() {
         return armorStats;
     }
 
+    public int getArmorTyp() {
+        return armorTyp;
+    }
 }
 
 

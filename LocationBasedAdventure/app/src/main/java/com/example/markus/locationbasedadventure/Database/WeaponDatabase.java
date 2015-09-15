@@ -75,6 +75,34 @@ public class WeaponDatabase {
     }
 
 
+
+    public long insertNewWeapon(int weapon, int weapondamage, int weaponhitchance, int weaponkritchance,int weaponextra, int weaponstamina, int weaponstrength, int weapondexterity, int weaponintelligence) {
+
+        if(getAllWeaponItems().size()==10){
+
+        }else{
+
+
+
+        ContentValues newValues = new ContentValues();
+
+        newValues.put(KEY_WEAPON,weapon);
+        newValues.put(KEY_WEAPONDAMAGE, weapondamage);
+        newValues.put(KEY_WEAPONHITCHANCE, weaponhitchance);
+        newValues.put(KEY_WEAPONKRITCHANCE, weaponkritchance);
+        newValues.put(KEY_WEAPONEXTRA, weaponextra);
+        newValues.put(KEY_WEAPONSTAMINA, weaponstamina);
+        newValues.put(KEY_WEAPONSTRENGTH, weaponstrength);
+        newValues.put(KEY_WEAPONDEXTERITY, weapondexterity);
+        newValues.put(KEY_WEAPONINTELLIGENCE, weaponintelligence);
+
+        return db.insert(DATABASE_TABLE, null, newValues);
+
+        }
+        return 0;
+    }
+
+
     public boolean isEmpty(){
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
         if (cur != null){
@@ -106,7 +134,7 @@ public class WeaponDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
-    public void updateAll(int[] weapon) {
+    public void updateAll(int[] weapon,int id) {
         ContentValues values = new ContentValues();
         values.put(KEY_WEAPON, weapon[0]);
         values.put(KEY_WEAPONDAMAGE, weapon[1]);
@@ -118,7 +146,7 @@ public class WeaponDatabase {
         values.put(KEY_WEAPONDEXTERITY, weapon[7]);
         values.put(KEY_WEAPONINTELLIGENCE, weapon[8]);
         String where_clause = KEY_ID + "=?";
-        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        String[] where_args = new String[]{String.valueOf(id)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
@@ -189,15 +217,18 @@ public class WeaponDatabase {
 
 
 
-    public ArrayList<Equip> getAllFoodieItems(){
+    public ArrayList<Equip> getAllWeaponItems(){
         ArrayList<Equip> items = new ArrayList<Equip>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] {KEY_ID, KEY_WEAPON,
                 KEY_WEAPONDAMAGE, KEY_WEAPONHITCHANCE, KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA,
                 KEY_WEAPONSTAMINA, KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
+            if(!cursor.moveToNext()){
+                return items;
+            }
             do {
 
-                int[] weapon = new int[9];
+                int[] weapon = new int[10];
                 weapon[0] = cursor.getInt(1);
                 weapon[1] = cursor.getInt(2);
                 weapon[2] = cursor.getInt(3);
@@ -207,6 +238,7 @@ public class WeaponDatabase {
                 weapon[6] = cursor.getInt(7);
                 weapon[7] = cursor.getInt(8);
                 weapon[8] = cursor.getInt(9);
+                weapon[9] = cursor.getInt(0);
                 items.add(new Equip(weapon,true));
 
             } while (cursor.moveToNext());
@@ -247,6 +279,32 @@ public class WeaponDatabase {
         return null;
 
     }
+
+    public void changeToUsedWeapon(Equip weaponItem) {
+        updateAll(getWeapon(),weaponItem.getWeaponID());
+        int[] newNumberOne = new int[9];
+        newNumberOne[0] = weaponItem.getWeaponTyp();
+        newNumberOne[1] = weaponItem.getWeaponDmg();
+        newNumberOne[2] = weaponItem.getWeaponHitrate();
+        newNumberOne[3] = weaponItem.getWeaponCritrate();
+        newNumberOne[4] = weaponItem.getWeaponExtra();
+        newNumberOne[5] = weaponItem.getWeaponStats()[0];
+        newNumberOne[6] = weaponItem.getWeaponStats()[1];
+        newNumberOne[7] = weaponItem.getWeaponStats()[2];
+        newNumberOne[8] = weaponItem.getWeaponStats()[3];
+        updateAll(newNumberOne,1);
+
+
+    }
+
+    public int deleteWeapon(int weaponID){
+
+        //String whereClause = KEY_ID + " = '" + foodieItemID + "'";
+        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" + weaponID);
+
+        return 0;
+    }
+
 
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {

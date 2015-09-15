@@ -307,7 +307,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
     @Override
     public void weaponDataRetrieved(int[] weaponArray) {
-        weaponDb.updateAll(weaponArray);
+        weaponDb.updateAll(weaponArray,1);
         System.out.println(weaponDb.getWeaponTyp());
     }
 }

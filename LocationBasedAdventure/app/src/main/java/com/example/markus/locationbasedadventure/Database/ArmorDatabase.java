@@ -65,6 +65,29 @@ public class ArmorDatabase {
         return db.insert(DATABASE_TABLE, null, newValues);
     }
 
+
+    public long insertNewArmor(int armor, int armorstamina, int armorstrength, int armordexterity, int armorintelligence) {
+
+        if(getAllArmorItems().size()==10){
+
+        }else{
+
+
+
+            ContentValues newValues = new ContentValues();
+
+            newValues.put(KEY_ARMOR,armor);
+            newValues.put(KEY_ARMORSTAMINA, armorstamina);
+            newValues.put(KEY_ARMORSTRENGTH, armorstrength);
+            newValues.put(KEY_ARMORDEXTERITY, armordexterity);
+            newValues.put(KEY_ARMORINTELLIGENCE, armorintelligence);
+
+            return db.insert(DATABASE_TABLE, null, newValues);
+
+        }
+        return 0;
+    }
+
     //update weapon and weaponstats of databaserow 1
 
     public void updateAll(int armor,int armorstamina, int armorstrength, int armordexterity, int armorintelligence) {
@@ -76,6 +99,20 @@ public class ArmorDatabase {
         values.put(KEY_ARMORINTELLIGENCE, armorintelligence);
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+
+
+    public void updateAll(int[] armor,int id) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_ARMOR, armor[0]);
+        values.put(KEY_ARMORSTAMINA, armor[1]);
+        values.put(KEY_ARMORSTRENGTH, armor[2]);
+        values.put(KEY_ARMORDEXTERITY, armor[3]);
+        values.put(KEY_ARMORINTELLIGENCE, armor[4]);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(id)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
@@ -114,12 +151,14 @@ public class ArmorDatabase {
 
 
 
-    public ArrayList<Equip> getAllFoodieItems(){
+    public ArrayList<Equip> getAllArmorItems(){
         ArrayList<Equip> items = new ArrayList<Equip>();
         Cursor cursor = db.query(DATABASE_TABLE, new String[] {KEY_ID,KEY_ARMOR,
                 KEY_ARMORSTAMINA, KEY_ARMORSTRENGTH, KEY_ARMORDEXTERITY, KEY_ARMORINTELLIGENCE}, null, null, null, null, null);
         if (cursor.moveToFirst()) {
-            //cursor.moveToNext()
+            if(!cursor.moveToNext()){
+                return items;
+            }
             do {
 
                 int[] armor = new int[9];
@@ -128,12 +167,27 @@ public class ArmorDatabase {
                 armor[2] = cursor.getInt(3);
                 armor[3] = cursor.getInt(4);
                 armor[4] = cursor.getInt(5);
+                armor[5] = cursor.getInt(0);
                 items.add(new Equip(armor,false));
-                ;
+
             } while (cursor.moveToNext());
         }
         cursor.close();
         return items;
+
+    }
+
+
+    public void changeToUsedArmor(Equip armorItem) {
+        updateAll(getArmor(),armorItem.getArmorID());
+        int[] newNumberOne = new int[5];
+        newNumberOne[0] = armorItem.getArmorTyp();
+        newNumberOne[1] = armorItem.getArmorStats()[0];
+        newNumberOne[2] = armorItem.getArmorStats()[1];
+        newNumberOne[3] = armorItem.getArmorStats()[2];
+        newNumberOne[4] = armorItem.getArmorStats()[3];
+        updateAll(newNumberOne, 1);
+
 
     }
 
@@ -156,6 +210,14 @@ public class ArmorDatabase {
 
         }
         return false;
+    }
+
+    public int deleteArmor(int armorID){
+
+        //String whereClause = KEY_ID + " = '" + foodieItemID + "'";
+        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" +armorID);
+
+        return 0;
     }
 
 
