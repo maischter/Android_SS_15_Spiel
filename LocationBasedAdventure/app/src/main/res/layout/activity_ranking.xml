@@ -400,4 +400,30 @@
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true" />
 
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridViewAchievement"
+        android:numColumns="6"
+        android:layout_below="@+id/textViewAchievementInfo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Klick auf ein Achievement um mehr darüber zu erfahren!"
+        android:id="@+id/textViewAchievementInfo"
+        android:gravity="center"
+        android:layout_below="@+id/textView3"
+        android:layout_alignRight="@+id/tableLayout"
+        android:layout_alignEnd="@+id/tableLayout"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textSize="12sp" />
+
+
 </RelativeLayout>

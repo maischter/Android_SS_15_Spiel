@@ -4,11 +4,18 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.Adapter.AchievementListAdapter;
+import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadRankingTask;
+import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.ItemDatabase;
+import com.example.markus.locationbasedadventure.Items.Achievement;
+import com.example.markus.locationbasedadventure.Items.Item;
 import com.example.markus.locationbasedadventure.Items.RankingItem;
 
 import java.util.ArrayList;
@@ -16,7 +23,7 @@ import java.util.ArrayList;
 /**
  * Created by Markus on 24.08.2015.
  */
-public class RankingActivity extends Activity implements LoadRankingTask.RankingTaskListener {
+public class RankingActivity extends Activity implements LoadRankingTask.RankingTaskListener, AchievementListAdapter.AchievementListener {
 
     TextView rankText;
     TextView characternameText;
@@ -62,6 +69,16 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     Button back;
 
 
+    private GridView achievementGrid;
+    private TextView achievementInfo;
+
+
+    private ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
+    AchievementListAdapter achievementListAdapter;
+
+    AchievementDatabase achievementDb;
+
+
 
     TableRow tablerowText;
     TableRow tablerow1;
@@ -83,7 +100,29 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         initTextViews();
         initButton();
         new LoadRankingTask(this,this).execute(address, characterdataDb.getEmail());
+        initGridView();
+        initListAdapter();
 
+        updateList();
+    }
+
+
+
+    private void updateList() {
+        achievementList.clear();
+        achievementList.addAll(achievementDb.getAllAchievementItems());
+        achievementListAdapter.notifyDataSetChanged();
+    }
+
+    private void initListAdapter() {
+        achievementGrid = (GridView) findViewById(R.id.gridViewAchievement);
+        achievementListAdapter = new AchievementListAdapter(this,achievementList,this);
+        achievementGrid.setAdapter(achievementListAdapter);
+    }
+
+    private void initGridView() {
+
+        achievementGrid = (GridView) findViewById(R.id.gridViewAchievement);
     }
 
 
@@ -92,6 +131,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     @Override
     protected void onDestroy() {
         characterdataDb.close();
+        achievementDb.close();
         super.onDestroy();
     }
 
@@ -124,6 +164,9 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         tablerow5 = (TableRow) findViewById(R.id.tableRow5);
         tablerow6 = (TableRow) findViewById(R.id.tableRow6);
         tablerowLeer = (TableRow) findViewById(R.id.tableRowLeer);
+
+
+        achievementInfo = (TextView) findViewById(R.id.textViewAchievementInfo);
     }
 
     private void initTextViewText() {
@@ -216,6 +259,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);
         characterdataDb.open();
+        achievementDb = new AchievementDatabase(this);
+        achievementDb.open();
     }
 
     @Override
@@ -263,6 +308,30 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
             case 1: tablerow1.setBackgroundColor(getResources().getColor(R.color.background_material_dark));break;
             case 2: tablerow2.setBackgroundColor(getResources().getColor(R.color.background_material_dark));break;
             case 3: tablerow3.setBackgroundColor(getResources().getColor(R.color.background_material_dark));break;
+        }
+    }
+
+    @Override
+    public void showAchievementInfo(int achievementTyp) {
+        achievementInfo.setText(selectAchievement(achievementTyp));
+    }
+
+
+    private String selectAchievement(int itemTyp) {
+        switch (itemTyp) {
+            case 1:
+                return "Level 5 erreicht!";
+            case 2:
+                return "Level 15 erreicht!";
+            case 3:
+                return "Level 30 erreicht!";
+            case 4:
+                return "5 Kämpfe bestritten!";
+            case 5:
+                return "50 Kämpfe bestritten!";
+            case 6:
+                return "250 Kämpfe bestritten!";
+            default: return "Leer";
         }
     }
 }

@@ -68,7 +68,7 @@ public class StatsDatabase {
     public void updateAll(int level, int exp,int stamina, int strength, int dexterity, int intelligence) {
         ContentValues values = new ContentValues();
         values.put(KEY_LEVEL, level);
-        values.put(KEY_LEVEL,exp);
+        values.put(KEY_EXP,exp);
         values.put(KEY_STAMINA, stamina);
         values.put(KEY_STRENGTH, strength);
         values.put(KEY_DEXTERITY, dexterity);

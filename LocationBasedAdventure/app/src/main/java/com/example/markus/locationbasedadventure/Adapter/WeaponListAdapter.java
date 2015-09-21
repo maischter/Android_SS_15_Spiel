@@ -38,7 +38,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         View v = convertView;
-    final int aposition = position;
+        final int aposition = position;
         if (v == null) {
             LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             v = inflater.inflate(R.layout.weapon_item, null);
@@ -164,7 +164,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
             int[] weaponStats = weapon.getWeaponStats();
 
 
-            weaponText.setText(selectImage(weapon.getWeaponTyp()));
+            weaponText.setText(selectWeaponTypString(weapon.getWeaponTyp()));
             staminaValue.setText(""+weaponStats[0]);
             strengthValue.setText(""+weaponStats[1]);
             dexterityValue.setText(""+weaponStats[2]);
@@ -179,7 +179,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
         return v;
     }
 
-    private String selectImage(int weaponTyp) {
+    private String selectWeaponTypString(int weaponTyp) {
         switch (weaponTyp) {
             case 8:
                 return "Bogen";

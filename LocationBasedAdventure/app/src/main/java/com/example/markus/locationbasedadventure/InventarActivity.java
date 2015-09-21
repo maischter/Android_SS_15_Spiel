@@ -6,22 +6,32 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
+import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
+import com.example.markus.locationbasedadventure.Database.ItemDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
+import com.example.markus.locationbasedadventure.Items.Equip;
+import com.example.markus.locationbasedadventure.Items.Item;
 
 import org.w3c.dom.Text;
+
+import java.util.ArrayList;
 
 /**
  * Created by Markus on 03.09.2015.
  */
-public class InventarActivity extends Activity {
+public class InventarActivity extends Activity implements ItemListAdapter.ItemListener {
 
 
     Button back;
+    Button changeWeapon;
+    Button changeArmor;
 
     ImageView weaponImage;
     TextView waffen;
@@ -48,7 +58,6 @@ public class InventarActivity extends Activity {
     TableLayout armorLayout;
 
 
-
     ImageView armorImage;
     TextView armor;
     TextView kindofarmor;
@@ -62,9 +71,14 @@ public class InventarActivity extends Activity {
     TextView intelligencearmorValue;
 
 
-    //LongClickListeners!!
+    private GridView itemGrid;
+    private TextView itemInfo;
 
 
+    private ArrayList<Item> itemList = new ArrayList<Item>();
+    ItemListAdapter itemListAdapter;
+
+    ItemDatabase itemDb;
     WeaponDatabase weaponDb;
     ArmorDatabase armorDb;
 
@@ -74,55 +88,58 @@ public class InventarActivity extends Activity {
         setContentView(R.layout.activity_inventar);
 
         initDB();
+
         initButton();
         initTextViews();
         initTextViewsValue();
-        initTableLayouts();
+        initListAdapter();
+        initGridView();
+        initTextViewItem();
         loadTextViewWeaponValue();
         loadTextViewsArmorValue();
+        updateList();
     }
 
-    private void initTableLayouts() {
-        weaponLayout = (TableLayout) findViewById(R.id.tableLayoutWeapon);
-        weaponLayout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent i = new Intent(getApplicationContext(), WeaponChangeActivity.class);
-                startActivity(i);
-                return false;
-            }
-        });
-        armorLayout = (TableLayout) findViewById(R.id.tableLayoutArmor);
-        armorLayout.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                Intent i = new Intent(getApplicationContext(), ArmorChangeActivity.class);
-                startActivity(i);
-                return false;
-            }
-        });
+    private void initTextViewItem() {
+        itemInfo = (TextView) findViewById(R.id.textViewItemInfo);
+    }
 
+
+    private void updateList() {
+        itemList.clear();
+        itemList.addAll(itemDb.getAllItemItems());
+        itemListAdapter.notifyDataSetChanged();
+    }
+
+    private void initListAdapter() {
+        itemGrid = (GridView) findViewById(R.id.gridViewItem);
+        itemListAdapter = new ItemListAdapter(this, itemList, this);
+        itemGrid.setAdapter(itemListAdapter);
+    }
+
+    private void initGridView() {
+
+        itemGrid = (GridView) findViewById(R.id.gridViewItem);
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         weaponDb.close();
         armorDb.close();
+        itemDb.close();
         super.onDestroy();
 
     }
 
 
-    private void initDB(){
+    private void initDB() {
         weaponDb = new WeaponDatabase(this);
         weaponDb.open();
         armorDb = new ArmorDatabase(this);
         armorDb.open();
+        itemDb = new ItemDatabase(this);
+        itemDb.open();
     }
-
-
-
-
 
 
     private void initButton() {
@@ -133,9 +150,30 @@ public class InventarActivity extends Activity {
                 finish();
             }
         });
+
+        changeWeapon = (Button) findViewById(R.id.buttonChangeToWeaponChangeActivity);
+        changeWeapon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), WeaponChangeActivity.class);
+                startActivity(i);
+            }
+        });
+
+        changeArmor = (Button) findViewById(R.id.buttonChangeToArmorChangeActivity);
+        changeArmor.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i = new Intent(getApplicationContext(), ArmorChangeActivity.class);
+                startActivity(i);
+            }
+        });
+
     }
 
-    private void initTextViews(){
+    private void initTextViews() {
         initTextViewsWeapon();
         initTextViewsArmor();
     }
@@ -161,7 +199,7 @@ public class InventarActivity extends Activity {
 
     }
 
-    private void initTextViewsValue(){
+    private void initTextViewsValue() {
         initTextViewsWeaponValue();
         initTextViewsArmorValue();
     }
@@ -188,28 +226,51 @@ public class InventarActivity extends Activity {
         intelligenceValue = (TextView) findViewById(R.id.textViewIntelligenceInvValue);
     }
 
-    private void loadTextViewWeaponValue(){
+    private void loadTextViewWeaponValue() {
         weaponImage.setImageResource(R.drawable.power_up);
         kindofweapon.setText(weaponDb.getWeaponString());
-        damageValue.setText(""+weaponDb.getWeapon()[1]);
-        hitchanceValue.setText(""+weaponDb.getWeapon()[2]);
-        kritchanceValue.setText(""+weaponDb.getWeapon()[3]);
+        damageValue.setText("" + weaponDb.getWeapon()[1]);
+        hitchanceValue.setText("" + weaponDb.getWeapon()[2]);
+        kritchanceValue.setText("" + weaponDb.getWeapon()[3]);
         extraValue.setText("" + weaponDb.getWeapon()[4]);
-        staminaValue.setText(""+weaponDb.getWeapon()[5]);
-        strengthValue.setText(""+weaponDb.getWeapon()[6]);
-        dexterityValue.setText(""+weaponDb.getWeapon()[7]);
-        intelligenceValue.setText(""+weaponDb.getWeapon()[8]);
+        staminaValue.setText("" + weaponDb.getWeapon()[5]);
+        strengthValue.setText("" + weaponDb.getWeapon()[6]);
+        dexterityValue.setText("" + weaponDb.getWeapon()[7]);
+        intelligenceValue.setText("" + weaponDb.getWeapon()[8]);
     }
 
 
     private void loadTextViewsArmorValue() {
         armorImage.setImageResource(R.drawable.power_up);
         kindofarmor.setText(armorDb.getArmorString());
-        staminaarmorValue.setText(""+armorDb.getArmor()[1]);
-        strengtharmorValue.setText(""+armorDb.getArmor()[2]);
-        dexterityarmorValue.setText(""+armorDb.getArmor()[3]);
-        intelligencearmorValue.setText(""+armorDb.getArmor()[4]);
+        staminaarmorValue.setText("" + armorDb.getArmor()[1]);
+        strengtharmorValue.setText("" + armorDb.getArmor()[2]);
+        dexterityarmorValue.setText("" + armorDb.getArmor()[3]);
+        intelligencearmorValue.setText("" + armorDb.getArmor()[4]);
     }
 
+
+    @Override
+    public void showItemInfo(int itemTyp) {
+        itemInfo.setText(selectItem(itemTyp));
+    }
+
+    private String selectItem(int itemTyp) {
+        switch (itemTyp) {
+            case 1:
+                return "Trank: Stellt eine Anzahl an LP wieder her.";
+            case 2:
+                return "Gegengift: Heilt eine Vergiftung.";
+            case 3:
+                return "StaUP: Erhöht Stamina für die Dauer dieses Kampfes.";
+            case 4:
+                return "StrUP: Erhöht Strength für die Dauer dieses Kampfes.";
+            case 5:
+                return "DexUP: Erhöht Dexterity für die Dauer dieses Kampfes.";
+            case 6:
+                return "IntUP: Erhöht Intelligence für die Dauer dieses Kampfes.";
+            default: return "Leer";
+        }
+    }
 
 }

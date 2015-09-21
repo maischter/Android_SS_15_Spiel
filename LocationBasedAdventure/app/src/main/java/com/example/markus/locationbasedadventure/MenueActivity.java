@@ -5,9 +5,12 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.Adapter.AchievementListAdapter;
+import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
@@ -59,6 +62,8 @@ public class MenueActivity extends Activity {
         characterdataDb.close();
         statsDb.close();
     }
+
+
 
     private void initDB(){
         weaponDb = new WeaponDatabase(this);

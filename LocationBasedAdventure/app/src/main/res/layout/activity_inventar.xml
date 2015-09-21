@@ -29,23 +29,39 @@
         android:text="@string/waffen"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:textSize="25sp"
         android:textColor="@color/accent_material_light"
-        android:id="@+id/textViewWaffen"
-        android:layout_marginBottom="10dp" />
+        android:id="@+id/textViewWaffen" />
 
     <ImageView
         android:layout_width="50dp"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:id="@+id/imageViewWeapon"
         android:layout_below="@+id/textViewWaffen"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="10dp"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"/>
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="Change"
+        android:id="@+id/buttonChangeToWeaponChangeActivity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/tableLayoutWeapon"
+        android:layout_toStartOf="@+id/tableLayoutWeapon"
+        android:layout_below="@+id/imageViewWeapon"
+        android:textSize="9sp"
+
+        android:background="@color/accent_material_light"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -56,8 +72,8 @@
         android:layout_marginRight="15dp"
         android:layout_alignTop="@+id/imageViewWeapon"
         android:id="@+id/tableLayoutWeapon"
-        android:layout_alignBottom="@+id/imageViewWeapon"
-        android:showDividers="middle|beginning|end">
+        android:showDividers="middle|beginning|end"
+        android:layout_alignBottom="@+id/buttonChangeToWeaponChangeActivity">
 
 
         <TableRow
@@ -256,22 +272,40 @@
         android:textSize="25sp"
         android:textColor="@color/accent_material_light"
         android:id="@+id/textViewArmor"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/tableLayoutWeapon"
         android:layout_centerHorizontal="true" />
 
     <ImageView
         android:layout_width="50dp"
-        android:layout_height="65dp"
+        android:layout_height="50dp"
         android:id="@+id/imageViewArmor"
         android:layout_below="@+id/textViewArmor"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginTop="34dp"
+        android:layout_marginTop="25dp"
         android:layout_marginLeft="10dp"
 
         android:scaleType="fitXY"
         android:adjustViewBounds="true"/>
+
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="20dp"
+        android:text="Change"
+        android:id="@+id/buttonChangeToArmorChangeActivity"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@+id/tableLayoutArmor"
+        android:layout_toStartOf="@+id/tableLayoutArmor"
+        android:layout_below="@+id/imageViewArmor"
+        android:textSize="9sp"
+
+        android:background="@color/accent_material_light"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="2dp" />
 
     <TableLayout
         android:layout_width="match_parent"
@@ -282,7 +316,7 @@
         android:layout_marginRight="15dp"
         android:layout_alignTop="@+id/imageViewArmor"
         android:id="@+id/tableLayoutArmor"
-        android:layout_alignBottom="@+id/imageViewArmor">
+        android:layout_alignBottom="@+id/buttonChangeToArmorChangeActivity">
 
 
         <TableRow
@@ -403,11 +437,36 @@
         android:textSize="25sp"
         android:textColor="@color/accent_material_light"
         android:id="@+id/textViewItems"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_below="@+id/tableLayoutArmor"
         android:layout_centerHorizontal="true" />
 
+    <GridView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gridViewItem"
+        android:numColumns="5"
+        android:layout_below="@+id/textViewItemInfo"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp" />
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Klick auf ein Item, um mehr darüber zu erfahren!"
+        android:id="@+id/textViewItemInfo"
+        android:gravity="center"
+        android:layout_below="@+id/textViewItems"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:textSize="12sp" />
 
 
 
