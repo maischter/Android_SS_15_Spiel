@@ -100,7 +100,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
                 saveStayAngemeldetIntoDBOnPhone();
             }
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
-            Intent i = new Intent(getApplicationContext(),MenueActivity.class); // eigentlich zu MAPActivity
+            Intent i = new Intent(getApplicationContext(),MapsActivity.class); // eigentlich zu MAPActivity
             startActivity(i);
         }
 
