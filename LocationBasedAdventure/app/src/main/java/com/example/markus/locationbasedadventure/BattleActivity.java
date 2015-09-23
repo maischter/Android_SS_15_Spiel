@@ -352,18 +352,12 @@ public class BattleActivity extends Activity{
 
         if (powerUpSuspend && suspend == 2){
             suspend = suspend - 1;
-        }
+        } else if (specialSuspend){
 
-        if (specialSuspend){
-
-        }
-
-        if (def){
+        } else if (def){
             defSuspend = true;
             def = false;
-        }
-
-        if (powerUp){
+        } else if (powerUp){
             //todo
             if (powerUpSuspend = false) {
                 suspend = 2;
@@ -371,9 +365,7 @@ public class BattleActivity extends Activity{
             powerUpSuspend = true;
             powerUp = false;
 
-        }
-
-        if (special){
+        } else if (special){
             //todo
             if (specialSuspend = false) {
                 suspend = 2;
@@ -384,12 +376,12 @@ public class BattleActivity extends Activity{
         }
 
         if (turn==players_turn){
-            nonPlayerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints)*100));
+            nonPlayerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints) * 100));
             System.out.println("Ziel HP: " + target.curHitpoints);
         }
         if (turn==nonplayers_turn) {
             playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
-            System.out.println("Ziel HP: " + Player.curHitpoints);
+            System.out.println("Ziel HP: " + target.curHitpoints);
         }
 
     }
