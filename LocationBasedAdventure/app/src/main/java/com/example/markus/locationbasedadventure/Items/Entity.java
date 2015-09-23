@@ -102,9 +102,9 @@ public class Entity {
         curHitpoints = maxHitpoints;
         physical_res = str * 5 + sta * 10;
         magical_res = str * 5 + sta * 10;
-        crit_chance = entityEQ.weaponCritrate*0.01 + dex * 0.1 ;
+        crit_chance = entityEQ.weaponCritrate * 0.5 + dex * 0.1 ;
         crit_dmg = 1.5;
-        hitrate = entityEQ.weaponHitrate*0.01 + dex * 0.1;
+        hitrate = entityEQ.weaponHitrate + dex * 0.1;
         dodge = dex * 0.1;
 
 

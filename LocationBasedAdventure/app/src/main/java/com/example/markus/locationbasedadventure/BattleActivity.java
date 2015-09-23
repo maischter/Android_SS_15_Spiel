@@ -31,7 +31,6 @@ public class BattleActivity extends Activity{
     ImageButton skill_d;
     public Skill [] pSkill;
 
-
     int level;
     int exp;
     int sp_sta;
@@ -49,7 +48,7 @@ public class BattleActivity extends Activity{
     final int nonplayers_turn = 1;
     int turn;
     Random rand = new Random();
-    boolean turnDone;
+
     boolean def;
     boolean defSuspend;
     boolean powerUp;
@@ -70,7 +69,6 @@ public class BattleActivity extends Activity{
         initProgressbars();
         initImageButtons();
 
-
         loadBattleData();
         setBattleStats();
         calcBattleStats();
@@ -78,36 +76,21 @@ public class BattleActivity extends Activity{
         initSkills();
 
         turn = rand.nextInt(2);
-        turnDone = true;
+        System.out.println("Zug:" + turn);
+
+        if (turn==players_turn){
+            playersTurn();
+        } else if (turn==nonplayers_turn){
+            nonplayersTurn();
+            actionKI();
+        }
+
         def = false;
         defSuspend = false;
         powerUp = false;
         powerUpSuspend = false;
         special = false;
         specialSuspend = false;
-        int FPS = 10;
-
-        //Überprüft wer am Zug ist
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                if (turn==players_turn && turnDone){
-
-                    playersTurn();
-                    turnDone = false;
-
-                } else if (turn==nonplayers_turn && turnDone){
-                    nonplayersTurn();
-                    actionKI();
-                    turnDone = false;
-                }
-                System.out.println("Zug: " + turn);
-            }
-        },0,1000/FPS);
-
-
-
     }
     //init all GUI Elements
     private void initProgressbars() {
@@ -117,7 +100,6 @@ public class BattleActivity extends Activity{
         nonPlayerHitpoints = (ProgressBar) findViewById(R.id.progressBarNP);
         nonPlayerHitpoints.setMax(100);
         nonPlayerHitpoints.setProgress(100);
-
     }
 
     private void initDB(){
@@ -142,9 +124,8 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
                 updateProgressbar(pSkill[0],NonPlayer, Player);
-                System.out.println(pSkill[0].skillName);
+                System.out.println("Skill A wurde aktiviert" + pSkill[0].skillName);
                 nextTurn();
-
             }
         });
 
@@ -172,7 +153,6 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
 
-
                 updateProgressbar(pSkill[3],NonPlayer, Player);
                 System.out.println(pSkill[3].skillName);
                 nextTurn();
@@ -187,6 +167,7 @@ public class BattleActivity extends Activity{
         pSkill[2] = new Skill(R.string.skillPower,0);
         pSkill[3] = new Skill(R.string.skillSpecA,Player.getWeaponDmg());
     }
+
     //Tasks zum Bilder laden
     public void loadSkillPNG(int resID , ImageButton imageButton) {
         LoadingBattleTask task = new LoadingBattleTask(imageButton);
@@ -202,30 +183,29 @@ public class BattleActivity extends Activity{
     }
     // KI wählt per Random aus welchen Skill er einsetzt
     private void actionKI(){
-        int action = rand.nextInt(4);
+
+        int action = 0;//rand.nextInt(4);
 
         switch (action){
-            case 0:{
-                updateProgressbar(pSkill[0],Player, NonPlayer);
+            case 0:
+                updateProgressbar(pSkill[0], Player, NonPlayer);
                 nextTurn();
-            }
-            case 1:{
+                break;
+            case 1:
                 def = true;
                 updateProgressbar(pSkill[1],Player, NonPlayer);
                 nextTurn();
-            }
-            case 2:{
+                break;
+            case 2:
                 powerUp = true;
                 updateProgressbar(pSkill[2],Player, NonPlayer);
                 nextTurn();
-            }
-            case 3: {
+                break;
+            case 3:
                 updateProgressbar(pSkill[3], Player, NonPlayer);
                 nextTurn();
-            }
+                break;
         }
-
-
 
     }
 
@@ -247,13 +227,26 @@ public class BattleActivity extends Activity{
     }
 
     private void nextTurn(){
+
+        try {
+            Thread.sleep(10000, 0);
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        }
+
+
         if (turn==players_turn){
+            System.out.println("NonPlayer ist am Zug");
             turn=nonplayers_turn;
-        }
-        if (turn==nonplayers_turn){
+            nonplayersTurn();
+            actionKI();
+        }else if (turn==nonplayers_turn){
+            System.out.println("Player ist am Zug");
             turn=players_turn;
+            playersTurn();
         }
-        turnDone=true;
+
+
     }
 
     public void loadBattleData(){
@@ -306,26 +299,19 @@ public class BattleActivity extends Activity{
         int nullDMG = 0;
         double powerUpDmg = 1.5;
 
-        //ausweichen
-        if (dodge <= target.getDodge()){
-            //Nothing to do here
+        //kritischer treffer
+        if (hit <= source.getHitrate() && crit <= source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
+                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * nullDMG;
                 defSuspend = false;
-            }
-            if (powerUpSuspend && suspend ==1){
+            }else if (powerUpSuspend){
+                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * powerUpDmg;
                 powerUpSuspend=false;
+            } else {
+                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg;
+                System.out.println("Kritischer Hit: " + skill.damage * source.crit_dmg );
             }
-        }
-        //nicht getroffen
-        if (hit > source.getHitrate()){
-            //nothing to do here
-            if (defSuspend){
-                defSuspend = false;
-            }
-            if (powerUpSuspend && suspend ==1){
-                powerUpSuspend = false;
-            }
-        }
+        } else
 
         //normal getroffen
         if (hit <= source.getHitrate() && crit > source.getCritrate() && dodge > source.getDodge()){
@@ -335,19 +321,34 @@ public class BattleActivity extends Activity{
             } else if (powerUpSuspend){
                 target.curHitpoints = target.curHitpoints - skill.damage * powerUpDmg ;
                 powerUpSuspend=false;
-            } else target.curHitpoints = target.curHitpoints - skill.damage;
+            } else {
+                target.curHitpoints = target.curHitpoints - skill.damage;
+                System.out.println("Normaler Hit:" + skill.damage);
+            }
         }
 
-        //kritischer treffer
-        if (hit <= source.getHitrate() && crit <= source.getCritrate() && dodge > source.getDodge()){
+        //ausweichen
+        if (dodge <= target.getDodge()){
+            //Nothing to do here
             if (defSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * nullDMG;
                 defSuspend = false;
-            }else if (powerUpSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * powerUpDmg;
+            } else if (powerUpSuspend && suspend ==1){
                 powerUpSuspend=false;
-            } else target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg;
+            }
+            System.out.println("Ausgewichen");
+        } else if (hit > source.getHitrate()){ //nicht getroffen
+            //nothing to do here
+            if (defSuspend){
+                defSuspend = false;
+            } else if (powerUpSuspend && suspend ==1){
+                powerUpSuspend = false;
+            }
+            System.out.println("Nicht getroffen");
         }
+
+
+
+
 
         if (powerUpSuspend && suspend == 2){
             suspend = suspend - 1;
@@ -361,28 +362,34 @@ public class BattleActivity extends Activity{
             defSuspend = true;
             def = false;
         }
+
         if (powerUp){
             //todo
             if (powerUpSuspend = false) {
                 suspend = 2;
-            }
+            } else
             powerUpSuspend = true;
             powerUp = false;
+
         }
+
         if (special){
             //todo
             if (specialSuspend = false) {
                 suspend = 2;
-            }
+            } else
             specialSuspend = true;
             special = false;
+
         }
 
         if (turn==players_turn){
             nonPlayerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints)*100));
+            System.out.println("Ziel HP: " + target.curHitpoints);
         }
-        if (turn==nonplayers_turn){
-            playerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints)*100));
+        if (turn==nonplayers_turn) {
+            playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
+            System.out.println("Ziel HP: " + Player.curHitpoints);
         }
 
     }
