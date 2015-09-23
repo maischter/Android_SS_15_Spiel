@@ -3,11 +3,13 @@ package com.example.markus.locationbasedadventure;
 import android.content.Context;
 import android.location.Criteria;
 import android.location.Location;
+import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -17,13 +19,24 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
+    private static final int SECOND = 1000;
+    private static final int LOC_UPDATE_INTERVAL = 2 * SECOND;
+
+    protected LocationRequest mLocationRequest;
+    protected Location mLocation;
+    protected Boolean mapActive = false;
+
+    private double lat, lng;
+    private LatLng latLng;
+
+    private LocationListener mLocationListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
         setUpMapIfNeeded();
-        goWithTheFlow();
     }
 
 
@@ -74,18 +87,21 @@ public class MapsActivity extends FragmentActivity {
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
+        mLocationListener = new MLocationListener();
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOC_UPDATE_INTERVAL, 0, mLocationListener);
+
         Criteria cr = new Criteria();
 
         String provider = lm.getBestProvider(cr, true);
 
-        Location myLocation = lm.getLastKnownLocation(provider);
+        mLocation = lm.getLastKnownLocation(provider);
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        double lat = myLocation.getLatitude();
-        double lng = myLocation.getLongitude();
+        lat = mLocation.getLatitude();
+        lng = mLocation.getLongitude();
 
-        LatLng latLng = new LatLng(lat, lng);
+        latLng = new LatLng(lat, lng);
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
@@ -97,8 +113,35 @@ public class MapsActivity extends FragmentActivity {
 
         //mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Momentaner Standort").snippet("Hat wohl geklappt!"));
 
+        mapActive = true;
     }
 
-    private void goWithTheFlow() {
+    private class MLocationListener implements LocationListener {
+        @Override
+        public void onLocationChanged(Location location) {
+            lat = mLocation.getLatitude();
+            lng = mLocation.getLongitude();
+
+            latLng = new LatLng(lat, lng);
+
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+            Log.d("New Pos", "Lat: " + lat + ", Lng: " + lng);
+        }
+
+        @Override
+        public void onStatusChanged(String provider, int status, Bundle extras) {
+
+        }
+
+        @Override
+        public void onProviderEnabled(String provider) {
+
+        }
+
+        @Override
+        public void onProviderDisabled(String provider) {
+
+        }
     }
 }
