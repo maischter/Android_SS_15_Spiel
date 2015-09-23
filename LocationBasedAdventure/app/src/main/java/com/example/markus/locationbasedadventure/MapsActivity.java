@@ -9,27 +9,24 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity {
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
-    private static final int SECOND = 1000;
-    private static final int LOC_UPDATE_INTERVAL = 2 * SECOND;
 
-    protected LocationRequest mLocationRequest;
     protected Location mLocation;
-    protected Boolean mapActive = false;
 
     private double lat, lng;
     private LatLng latLng;
 
     private LocationListener mLocationListener;
+
+    private boolean followPlayer;
 
 
     @Override
@@ -80,17 +77,21 @@ public class MapsActivity extends FragmentActivity {
      * <p/>
      * This should only be called once and when we are sure that {@link #mMap} is not null.
      */
+
+
+    // Menu in die Ecke
     private void setUpMap() {
-        mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
+        //mMap.addMarker(new MarkerOptions().position(new LatLng(0, 0)).title("Marker").snippet("Snippet"));
 
         mMap.setMyLocationEnabled(true);
 
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
-        mLocationListener = new MLocationListener();
-        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, LOC_UPDATE_INTERVAL, 0, mLocationListener);
-
         Criteria cr = new Criteria();
+
+        mLocationListener = new MLocationListener();
+
+        lm.requestLocationUpdates(LocationManager.GPS_PROVIDER, 500, 0, mLocationListener);
 
         String provider = lm.getBestProvider(cr, true);
 
@@ -98,35 +99,36 @@ public class MapsActivity extends FragmentActivity {
 
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
-        lat = mLocation.getLatitude();
-        lng = mLocation.getLongitude();
+        updateLoc();
 
-        latLng = new LatLng(lat, lng);
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.fromLatLngZoom(latLng, 18)));
 
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+        //mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
 
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
-
-        mMap.getUiSettings().setScrollGesturesEnabled(false);
+        //mMap.getUiSettings().setScrollGesturesEnabled(false);
+        //mMap.getUiSettings().setAllGesturesEnabled(false);
 
         Log.d("latlng", "lat: " + lat + ", lng: " + lng);
+        followPlayer = true;
 
         //mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Momentaner Standort").snippet("Hat wohl geklappt!"));
 
-        mapActive = true;
+    }
+
+    private void updateLoc() {
+        lat = mLocation.getLatitude();
+        lng = mLocation.getLongitude();
+        latLng = new LatLng(lat, lng);
     }
 
     private class MLocationListener implements LocationListener {
         @Override
         public void onLocationChanged(Location location) {
-            lat = mLocation.getLatitude();
-            lng = mLocation.getLongitude();
-
-            latLng = new LatLng(lat, lng);
-
-            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
-            Log.d("New Pos", "Lat: " + lat + ", Lng: " + lng);
+            if(followPlayer) {
+                updateLoc();
+                mMap.moveCamera(CameraUpdateFactory.newCameraPosition(CameraPosition.fromLatLngZoom(latLng, 18)));
+                //mMap.animateCamera(CameraUpdateFactory.newLatLng(latLng));
+            }
         }
 
         @Override
