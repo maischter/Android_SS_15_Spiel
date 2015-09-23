@@ -14,6 +14,9 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.Random;
 
 public class MapsActivity extends FragmentActivity {
 
@@ -27,6 +30,8 @@ public class MapsActivity extends FragmentActivity {
     private LocationListener mLocationListener;
 
     private boolean followPlayer;
+
+    private LatLng[] enemies = new LatLng[5];
 
 
     @Override
@@ -67,8 +72,32 @@ public class MapsActivity extends FragmentActivity {
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
                 setUpMap();
+
             }
         }
+    }
+
+    private void setupEnemies() {
+        for(int i = 0; i < 5; i++) {
+            enemies[i] = getRandomLat();
+            mMap.addMarker(new MarkerOptions().position(enemies[i]).title("Marker").snippet("Snippet"));
+        }
+    }
+
+    private LatLng getRandomLat() {
+        LatLng result;
+        double rangeMin = 0.001;
+        double rangeMax = 0.01;
+        double elat = generateRandomDouble(rangeMin, rangeMax);
+        double elng = generateRandomDouble(rangeMin, rangeMax);
+        result = new LatLng(elat, elng);
+        return result;
+    }
+
+    private double generateRandomDouble(double rangeMin, double rangeMax) {
+        Random r = new Random();
+        double randomValue = rangeMin + (rangeMax - rangeMin) * r.nextDouble();
+        return randomValue;
     }
 
     /**
@@ -112,7 +141,7 @@ public class MapsActivity extends FragmentActivity {
         followPlayer = true;
 
         //mMap.addMarker(new MarkerOptions().position(new LatLng(lat, lng)).title("Momentaner Standort").snippet("Hat wohl geklappt!"));
-
+        setupEnemies();
     }
 
     private void updateLoc() {
