@@ -19,10 +19,16 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
+    private String provider;
+    private LocationManager locationManager;
+    private Location location;
+    private Criteria cr;
+
     private double lat, lng;
     private LatLng latLng;
 
     private LatLng[] enemies = new LatLng[5];
+    private boolean enemiesSet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,10 +37,18 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         setUpMapIfNeeded();
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        locationManager.removeUpdates(this);
+    }
+
 
     @Override
     protected void onResume() {
         super.onResume();
+        locationManager.requestLocationUpdates(provider, 1000, 0, this);
+        enemies = null;
         setUpMapIfNeeded();
     }
 
@@ -77,20 +91,18 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         mMap.setMyLocationEnabled(true);
         mMap.getUiSettings().setAllGesturesEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
+        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
-        Criteria cr = new Criteria();
+        cr = new Criteria();
 
-        String provider = locationManager.getBestProvider(cr, true);
+        provider = locationManager.getBestProvider(cr, true);
 
-        Location location = locationManager.getLastKnownLocation(provider);
+        location = locationManager.getLastKnownLocation(provider);
 
         if(location!=null){
             onLocationChanged(location);
         }
         locationManager.requestLocationUpdates(provider, 1000, 0, this);
-
-        setupEnemies();
 
     }
 
@@ -126,6 +138,17 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
+
+        if(!enemiesSet) {
+            setupEnemies();
+            enemiesSet = true;
+        }
+
+        detectEnemy();
+    }
+
+    private void detectEnemy() {
+        //TODO
     }
 
     @Override
