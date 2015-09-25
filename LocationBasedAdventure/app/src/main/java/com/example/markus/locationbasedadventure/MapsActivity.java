@@ -1,5 +1,6 @@
 package com.example.markus.locationbasedadventure;
 
+import android.content.Intent;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
@@ -17,6 +18,9 @@ import java.util.Random;
 
 public class MapsActivity extends FragmentActivity implements LocationListener{
 
+    private static final int NUM_ENEMIES = 5;
+    private static final int LOC_UPDATE_TIME = 1000;
+
     private GoogleMap mMap; // Might be null if Google Play services APK is not available.
 
     private String provider;
@@ -27,13 +31,18 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private double lat, lng;
     private LatLng latLng;
 
-    private LatLng[] enemies = new LatLng[5];
+    private LatLng[] enemies = new LatLng[NUM_ENEMIES];
     private boolean enemiesSet = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         setUpMapIfNeeded();
     }
 
@@ -47,26 +56,10 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     @Override
     protected void onResume() {
         super.onResume();
-        locationManager.requestLocationUpdates(provider, 1000, 0, this);
-        enemies = null;
-        setUpMapIfNeeded();
+        locationManager.requestLocationUpdates(provider, LOC_UPDATE_TIME, 0, this);
     }
 
-    /**
-     * Sets up the map if it is possible to do so (i.e., the Google Play services APK is correctly
-     * installed) and the map has not already been instantiated.. This will ensure that we only ever
-     * call {@link #setUpMap()} once when {@link #mMap} is not null.
-     * <p/>
-     * If it isn't installed {@link SupportMapFragment} (and
-     * {@link com.google.android.gms.maps.MapView MapView}) will show a prompt for the user to
-     * install/update the Google Play services APK on their device.
-     * <p/>
-     * A user can return to this FragmentActivity after following the prompt and correctly
-     * installing/updating/enabling the Google Play services. Since the FragmentActivity may not
-     * have been completely destroyed during this process (it is likely that it would only be
-     * stopped or paused), {@link #onCreate(Bundle)} may not be called again so we should call this
-     * method in {@link #onResume()} to guarantee that it will be called.
-     */
+
     private void setUpMapIfNeeded() {
         // Do a null check to confirm that we have not already instantiated the map.
         if (mMap == null) {
@@ -81,15 +74,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     }
 
 
-    /**
-     * This is where we can add markers or lines, add listeners or move the camera. In this case, we
-     * just add a marker near Africa.
-     * <p/>
-     * This should only be called once and when we are sure that {@link #mMap} is not null.
-     */
     private void setUpMap() {
         mMap.setMyLocationEnabled(true);
-        mMap.getUiSettings().setAllGesturesEnabled(false);
+        //mMap.getUiSettings().setAllGesturesEnabled(false);
         mMap.getUiSettings().setMyLocationButtonEnabled(false);
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -107,13 +94,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     }
 
     private void setupEnemies() {
-        for(int i = 0; i < 5; i++) {
-            enemies[i] = getRandomLat();
+        for(int i = 0; i < NUM_ENEMIES; i++) {
+            enemies[i] = getRandomLoc();
             mMap.addMarker(new MarkerOptions().position(enemies[i]).title("Marker").snippet("Snippet"));
         }
+        enemiesSet = true;
     }
 
-    private LatLng getRandomLat() {
+    private LatLng getRandomLoc() {
         LatLng result;
         double rangeMin = -0.001;
         double rangeMax = 0.001;
@@ -129,6 +117,23 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         return randomValue;
     }
 
+
+    private void startBattle() {
+        Intent battleIntent = new Intent(this, BattleActivity.class);
+        startActivity(battleIntent);
+
+    }
+
+    private void detectEnemy() {
+        for(int i = 0; i < NUM_ENEMIES; i++) {
+            float [] result = new float[1];
+            Location.distanceBetween(lat, lng, enemies[i].latitude, enemies[i].longitude, result);
+            if(result[0] <= 3) {
+                startBattle();
+            }
+        }
+    }
+
     @Override
     public void onLocationChanged(Location location) {
         lat = location.getLatitude();
@@ -141,14 +146,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
         if(!enemiesSet) {
             setupEnemies();
-            enemiesSet = true;
+        } else if (enemiesSet) {
+            detectEnemy();
         }
-
-        detectEnemy();
-    }
-
-    private void detectEnemy() {
-        //TODO
     }
 
     @Override
