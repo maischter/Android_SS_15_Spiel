@@ -62,10 +62,17 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
 
     }
 
+    //initialise ImageView of UsedWeapon
+
     private void initImageView() {
         usedWeapon = (ImageView)findViewById(R.id.imageViewUsedWeapon);
         usedWeapon.setImageResource(R.drawable.power_up);
     }
+
+    //update List
+    //clear List
+    //add items to List
+    //inform adapter about changes
 
     private void updateList() {
         weaponList.clear();
@@ -73,16 +80,25 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         weaponListAdapter.notifyDataSetChanged();
     }
 
+
+    //initialises Adapter
+
     private void initListAdapter() {
         weaponGrid = (GridView) findViewById(R.id.gridViewWeapon);
         weaponListAdapter = new WeaponListAdapter(this,weaponList,this);
         weaponGrid.setAdapter(weaponListAdapter);
     }
 
+
+    //initialies GrivView
+
     private void initGridView() {
 
         weaponGrid = (GridView) findViewById(R.id.gridViewWeapon);
     }
+
+
+    //sets View to Show Diff between UsedWeapon and clicked weapon to empty
 
     private void setDiffViewsEmpty() {
         tableStatsDiff[0].setText("");
@@ -95,6 +111,9 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         tableStatsDiff[7].setText("");
     }
 
+
+    //close Database if activity is destroyed
+
     @Override
     protected void onDestroy(){
         weaponDb.close();
@@ -102,12 +121,17 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
 
     }
 
+
+    //initialise Database
+    //open Database
+
     private void initDB(){
         weaponDb = new WeaponDatabase(this);
         weaponDb.open();
     }
 
 
+    //sets View with values of the UsedWeapon
 
     private void setValueViews() {
         weaponTypText.setText(weaponDb.getWeaponString());
@@ -122,6 +146,10 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
 
     }
 
+
+    //initialise buttons
+    //buttonListener
+
     private void initButtons() {
         back = (Button) findViewById(R.id.buttonBackWeaponchange);
         back.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +159,8 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
             }
         });
     }
+
+    //init Views to Show Diff between UsedWeapon and clicked weapon to empty
 
     private void initDiffViews() {
         tableStatsDiff[0] = (TextView) findViewById(R.id.textViewStaminaWeaponChangeDiff);
@@ -142,6 +172,9 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         tableStatsDiff[6] = (TextView) findViewById(R.id.textViewKritchanceWeaponChangeDiff);
         tableStatsDiff[7] = (TextView) findViewById(R.id.textViewExtraWeaponChangeDiff);
     }
+
+
+    //init View with values of the UsedWeapon
 
     private void initValueViews() {
 
@@ -156,6 +189,8 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         tableStatsValue[7] = (TextView) findViewById(R.id.textViewExtraWeaponChangeValue);
     }
 
+    //sets View with TableNames
+
     private void initStaticViews() {
         weaponChangeText = (TextView) findViewById(R.id.textViewChangeWaffen);
         tableStatsText[0] = (TextView) findViewById(R.id.textViewStaminaWeaponChange);
@@ -168,6 +203,9 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         tableStatsText[7] = (TextView) findViewById(R.id.textViewExtraWeaponChange);
     }
 
+    //delete a weapon
+    //call updateList
+
     @Override
     public void deleteWeapon(int position) {
 
@@ -175,6 +213,8 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         weaponDb.deleteWeapon(weapon.getWeaponID());
         updateList();
     }
+
+    //changeWeapon to usedWeapon
 
     @Override
     public void changeWeapon(int position) {
@@ -184,6 +224,10 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         setDiffViewsEmpty();
         updateList();
     }
+
+
+    //show Diff between UsedWeapon and clickedWeapon
+    //setTextColor
 
     @Override
     public void showDiff(int position) {

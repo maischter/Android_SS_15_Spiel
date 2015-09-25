@@ -33,46 +33,20 @@
         android:layout_marginBottom="25dp"
         android:textSize="20sp" />
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/ton"
-        android:id="@+id/switchTon"
-        android:layout_below="@+id/checkBoxAngemeldetBleibenEinstellungen"
-        android:layout_alignLeft="@+id/checkBoxAngemeldetBleibenEinstellungen"
-        android:layout_alignStart="@+id/checkBoxAngemeldetBleibenEinstellungen"
-        android:layout_alignRight="@+id/checkBoxAngemeldetBleibenEinstellungen"
-        android:layout_alignEnd="@+id/checkBoxAngemeldetBleibenEinstellungen"
-        android:textSize="20sp"
-        android:layout_marginBottom="25dp" />
-
-
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/pushup"
-        android:id="@+id/switchPushup"
-        android:layout_below="@+id/switchTon"
-        android:layout_alignLeft="@+id/switchTon"
-        android:layout_alignStart="@+id/switchTon"
-        android:layout_alignRight="@+id/switchTon"
-        android:layout_alignEnd="@+id/switchTon"
-        android:textSize="20sp"
-        android:layout_marginBottom="30dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/kampferklaerung"
         android:id="@+id/buttonKampferklaerung"
-        android:layout_below="@+id/switchPushup"
-        android:layout_alignLeft="@+id/switchPushup"
-        android:layout_alignStart="@+id/switchPushup"
-        android:layout_alignRight="@+id/switchPushup"
-        android:layout_alignEnd="@+id/switchPushup"
         android:layout_marginBottom="20dp"
 
-        android:background="@color/accent_material_light"/>
+        android:background="@color/accent_material_light"
+        android:layout_below="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignLeft="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignStart="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignRight="@+id/checkBoxAngemeldetBleibenEinstellungen"
+        android:layout_alignEnd="@+id/checkBoxAngemeldetBleibenEinstellungen" />
 
     <Button
         android:layout_width="wrap_content"

@@ -62,11 +62,18 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         updateList();
     }
 
+    //Initialises ImageView
+
     private void initImageView() {
         usedArmor = (ImageView) findViewById(R.id.imageViewUsedArmor);
         usedArmor.setImageResource(R.drawable.power_up);
     }
 
+
+    //updates List
+    //clears List
+    //adds Items to List
+    //informs Adapter about changes
 
     private void updateList() {
         armorList.clear();
@@ -74,15 +81,23 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         armorListAdapter.notifyDataSetChanged();
     }
 
+    //initialises Adapter
+
     private void initListAdapter() {
         armorGrid = (GridView) findViewById(R.id.gridViewArmor);
         armorListAdapter = new ArmorListAdapter(this,armorList,this);
         armorGrid.setAdapter(armorListAdapter);
     }
 
+
+    //initialises GridVew
+
     private void initGridView() {
         armorGrid = (GridView) findViewById(R.id.gridViewArmor);
     }
+
+
+    //closes Database if Activity is destroyed
 
     @Override
     protected void onDestroy(){
@@ -91,10 +106,18 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
 
     }
 
+
+    //initialises Database
+    //open Database
+
     private void initDB(){
         armorDb = new ArmorDatabase(this);
         armorDb.open();
     }
+
+
+
+    //empty Views which show the Diff
 
     private void setDiffViewsEmpty() {
         tableStatsDiff[0].setText("");
@@ -104,6 +127,8 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
     }
 
 
+    //sets Values of the UsedArmor
+
     private void setValueViews() {
         armorTypText.setText(armorDb.getArmorString());
         tableStatsValue[0].setText(""+ armorDb.getArmor()[1]);
@@ -111,6 +136,10 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         tableStatsValue[2].setText("" + armorDb.getArmor()[3]);
         tableStatsValue[3].setText("" + armorDb.getArmor()[4]);
     }
+
+
+    //initialises back button
+    //buttonListener
 
     private void initButtons() {
         Button back = (Button) findViewById(R.id.buttonBackArmorchange);
@@ -122,12 +151,18 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         });
     }
 
+
+    //initialises the Views which show the diff between usedArmor and selected Armor
+
     private void initDiffViews() {
         tableStatsDiff[0] = (TextView) findViewById(R.id.textViewStaminaArmorChangeDiff);
         tableStatsDiff[1] = (TextView) findViewById(R.id.textViewStrengthArmorChangeDiff);
         tableStatsDiff[2] = (TextView) findViewById(R.id.textViewDexterityArmorChangeDiff);
         tableStatsDiff[3] = (TextView) findViewById(R.id.textViewIntelligenceArmorChangeDiff);
     }
+
+
+    //initialises the Views which show Values of the UsedArmor
 
     private void initValueViews() {
 
@@ -138,6 +173,8 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         tableStatsValue[3] = (TextView) findViewById(R.id.textViewIntelligenceArmorChangeValue);
     }
 
+    //initialises View which show Table Names( Stamina,Strength,Dexterity,Intelligence)
+
     private void initStaticViews() {
         armorChangeText = (TextView) findViewById(R.id.textViewChangeArmor);
         tableStatsText[0] = (TextView) findViewById(R.id.textViewStaminaArmorChange);
@@ -146,12 +183,21 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         tableStatsText[3] = (TextView) findViewById(R.id.textViewIntelligenceArmorChange);
     }
 
+
+    //deletes an Armor
+    //calls update List
+
     @Override
     public void deleteArmor(int position) {
         Equip armor = armorList.get(position);
         armorDb.deleteArmor(armor.getArmorID());
         updateList();
     }
+
+
+    //changeArmor to UsedArmor
+    //updatesList
+
 
     @Override
     public void changeArmor(int position) {
@@ -161,6 +207,11 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         setDiffViewsEmpty();
         updateList();
     }
+
+
+    //shows Diff between usedArmor and clickedArmor
+    //sets TextColor green or red to show diff
+
 
     @Override
     public void showDiff(int position) {

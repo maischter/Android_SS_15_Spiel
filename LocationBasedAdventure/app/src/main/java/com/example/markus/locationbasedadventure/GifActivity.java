@@ -47,6 +47,8 @@ public class GifActivity extends Activity {
     }
 
 
+    //buttonListeners
+
     private void buttonListeners() {
         buttonWeiter.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,23 +69,29 @@ public class GifActivity extends Activity {
         });
     }
 
+
+    //gets Value from Intent
+
     private void getValueFromIntent() {
         Intent i = getIntent();
         activity  = i.getIntExtra("activity", 1);
     }
+
+
+    //initialises Buttons
 
     private void initButtons() {
         buttonWeiter = (Button) findViewById(R.id.buttonWeiter);
         buttonBack = (Button) findViewById(R.id.buttonBack);
     }
 
-    // Unterscheidet von welchen Activity man kommt & zeigt entsprechend einen Button an.
+    // Diffs by using int value from which activity we come
 
 
     private void diffButtons(int activity) {
         switch (activity) {
 
-            //kommt von EinstellungenActivity
+            //comes from EinstellungenActivity
 
             case 1:
                 buttonWeiter.setClickable(false);
@@ -94,7 +102,7 @@ public class GifActivity extends Activity {
                 break;
 
 
-            // kommt von CreateCharacterActitivty
+            // comes from CreateCharacterActitivty
             case 2:
 
                 buttonWeiter.setClickable(true);

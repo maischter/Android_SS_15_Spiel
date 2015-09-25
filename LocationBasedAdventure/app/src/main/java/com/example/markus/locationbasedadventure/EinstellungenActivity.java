@@ -19,8 +19,6 @@ public class EinstellungenActivity extends Activity {
 
     TextView einstellungen;
     CheckBox angemeldetBleiben;
-    Switch ton;
-    Switch pushup;
     Button kampferklaerung;
     Button hilfe;
     Button aboutUs;
@@ -38,6 +36,9 @@ public class EinstellungenActivity extends Activity {
 
     }
 
+    //initialises Database
+    //open Database
+
     private void initDB() {
         characterdataDb = new CharacterdataDatabase(this);
         characterdataDb.open();
@@ -47,9 +48,12 @@ public class EinstellungenActivity extends Activity {
 
         initTextView();
         initCheckBox();
-        initSwitchs();
         initButtons();
     }
+
+
+    //initialises Button
+    //buttonListeners
 
     private void initButtons() {
         kampferklaerung = (Button) findViewById(R.id.buttonKampferklaerung);
@@ -84,32 +88,11 @@ public class EinstellungenActivity extends Activity {
         });
     }
 
-    private void initSwitchs() {
-        ton = (Switch) findViewById(R.id.switchTon);
-        if(characterdataDb.getTon()==1){
-            ton.setChecked(true);
-        }else{
-            ton.setChecked(false);
-        }
-        ton.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                characterdataDb.updateTon(isChecked);
-            }
-        });
-        pushup = (Switch) findViewById(R.id.switchPushup);
-        if(characterdataDb.getPushup()==1){
-            pushup.setChecked(true);
-        }else{
-            pushup.setChecked(false);
-        }
-        pushup.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                characterdataDb.updatePushup(isChecked);
-            }
-        });
-    }
+
+
+
+    //initialises checkBox
+    //checkBoxListener
 
     private void initCheckBox() {
         angemeldetBleiben = (CheckBox) findViewById(R.id.checkBoxAngemeldetBleibenEinstellungen);
@@ -130,6 +113,8 @@ public class EinstellungenActivity extends Activity {
             }
         });
     }
+
+    //initialises textView
 
     private void initTextView() {
         einstellungen = (TextView) findViewById(R.id.textViewEinstellungen);

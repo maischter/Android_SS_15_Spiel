@@ -55,15 +55,21 @@ public class MenueActivity extends Activity {
         loadStatsData();
     }
 
+
+    //closes opened Database if Activity is destroyed
+
     @Override
     protected void onDestroy(){
-        super.onDestroy();
+
         weaponDb.close();
         characterdataDb.close();
         statsDb.close();
+        super.onDestroy();
     }
 
 
+    //initialises Databases
+    //opens Databases
 
     private void initDB(){
         weaponDb = new WeaponDatabase(this);
@@ -75,12 +81,17 @@ public class MenueActivity extends Activity {
 
     }
 
+    //loads CharacterData from Database
+    //calls selectImage()
+
     private void loadCharacterData(){
         characterName.setText(characterdataDb.getCharactername());
         sexTyp = characterdataDb.getSex();
         weaponTyp = weaponDb.getWeaponTyp();
         selectImage();
     }
+
+    //loads Stats from Database
 
     private void loadStatsData(){
         staminaValue.setText(""+statsDb.getStamina());
@@ -89,6 +100,9 @@ public class MenueActivity extends Activity {
         intelligenceValue.setText(""+statsDb.getIntelligence());
     }
 
+
+    //calls methods to initButtons
+
     private void initButtons() {
         initInventarButton();
         initRankingButton();
@@ -96,6 +110,9 @@ public class MenueActivity extends Activity {
         initBackToMapButton();
 
     }
+
+    //initialises InventarButton
+    //buttonListener
 
     private void initInventarButton(){
         inventar = (Button) findViewById(R.id.ButtonInventar);
@@ -108,6 +125,10 @@ public class MenueActivity extends Activity {
         });
     }
 
+
+    //initialises RankingButton
+    //buttonListener
+
     private void initRankingButton(){
         ranking = (Button) findViewById(R.id.ButtonRanking);
         ranking.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +139,9 @@ public class MenueActivity extends Activity {
             }
         });
     }
+
+    //initialises EinstellungenButtons
+    //buttonListener
 
     private void initEinstellungenButton(){
         einstellungen = (Button) findViewById(R.id.ButtonEinstellungen);
@@ -130,6 +154,10 @@ public class MenueActivity extends Activity {
         });
     }
 
+
+    //initialises backButton
+    //buttonListener
+
     private void initBackToMapButton(){
         backToMap = (Button) findViewById(R.id.ButtonBackToMap);
         backToMap.setOnClickListener(new View.OnClickListener() {
@@ -140,6 +168,8 @@ public class MenueActivity extends Activity {
         });
     }
 
+
+    //initialises Views
 
     private void initViews() {
         characterImage = (ImageView) findViewById(R.id.characterImageMenue);
@@ -154,6 +184,10 @@ public class MenueActivity extends Activity {
         intelligenceValue = (TextView)findViewById(R.id.TextViewIntelligenceValue);
     }
 
+
+    //selectsImage
+    // diffs String sexTyp
+    //diffs String weaponTyp --->Calls loadBitmap
 
     private void selectImage() {
 
@@ -242,6 +276,8 @@ public class MenueActivity extends Activity {
         }
     }
 
+
+    //loads Bitmap into ImageView by Using backgroundTask
 
     public void loadBitmap(int resID , ImageView imageView) {
         BitmapWorkerTask task = new BitmapWorkerTask(imageView);

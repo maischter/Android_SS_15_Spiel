@@ -44,17 +44,23 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
     }
 
 
+    //closes Database if activtiy is destroyed
+
     @Override
     protected void onDestroy() {
         characterdataDb.close();
         super.onDestroy();    }
 
-    // Opening the Database
+    //initialises Database
+    // Open Database
 
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);
         characterdataDb.open();
     }
+
+    //initialises Button
+    //buttonListener
 
     private void initButton() {
         anmelden = (Button) findViewById(R.id.buttonAnmeldenAkt);
@@ -75,8 +81,8 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         });
     }
 
-    //Liest Daten aus den EditViews
-    //Speichert Daten ueber die Klasse RegistrierenTask per AsyncTask in Server
+    //read Data from EditText
+    //Saves Data in Server by using BackgroundTask
 
     private void saveInput(String emailText,String passwortText) {
         String passwort = "";
@@ -88,13 +94,13 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
             e.printStackTrace();
         }
         emailToRemember = emailText;
-        System.out.println(emailToRemember);
         new RegistrierenTask(this,this).execute(emailText, passwort, address);
     }
 
-    //prueft ob gueltiges Email eingegeben wurde --> nein : EmailWrong Diskurs, Email & Passwort leer
-    // --> ja : ueberprueft passwort --> nein: passwort falsch diskurs
-    //              --> ja: ruft saveInput() auf
+    //checks if email is valid
+    // --> no : EmailWrong Diskurs, set Email & Password empty
+    // --> ja : checkes password --> no: password wrong diskurs
+    //                           --> yes: calls saveInput()
 
     private void checkInput(){
         if(isValidEmail(email.getText().toString())){
@@ -110,7 +116,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         }
     }
 
-    //initialisieren der Views und EditText
+    //initialises TextViews and EditTexts
 
 
     private void initViews() {
@@ -120,7 +126,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         diskurs = (TextView) findViewById(R.id.textViewDiskurs);
     }
 
-    // setzt edittext auf leer zurueck
+    // set edittext empty
 
     private void emptyEditTexts() {
         email.setText("");
@@ -138,7 +144,7 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
         return matcher.matches();
     }
 
-    // prueft Passwort --> muss laenger als 6 Zeichen sein.
+    // checkes password --> must be longer then 6
 
 
     private boolean isValidPassword(String pass) {
@@ -149,13 +155,15 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
     }
 
 
-    //Methode des Interfaces, um die UserNummer zurueck zu bekommen
-    // Wenn registered == 0 --> bereits registriert diskurs
-    // registered != 0 -->Startet die neue Aktivity und uebergibt ihr die Usernr
+    //interface method to get usernr
+    //  registered == 0 --> aleready registered diskurs
+    //  registered != 0 -->starts createCharacterActivty
+    //                  -->putsExtra to intent
+    //                  -->update Database
+    //                  -->finish this activity
 
     @Override
     public void UserNrRetrieved(String data,int registered) {
-        System.out.println(registered);
         if(registered == 0){
             diskurs.setText(R.string.alreadyregisteredText);
             emptyEditTexts();

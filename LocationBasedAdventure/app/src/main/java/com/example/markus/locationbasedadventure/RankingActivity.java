@@ -108,11 +108,19 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
 
 
+    //updates List
+    //clears List
+    //adds Item to List
+    //informs adapter about change
+
     private void updateList() {
         achievementList.clear();
         achievementList.addAll(achievementDb.getAllAchievementItems());
         achievementListAdapter.notifyDataSetChanged();
     }
+
+
+    //initialises Adapter
 
     private void initListAdapter() {
         achievementGrid = (GridView) findViewById(R.id.gridViewAchievement);
@@ -120,13 +128,16 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         achievementGrid.setAdapter(achievementListAdapter);
     }
 
+
+    //initialises GridView
+
     private void initGridView() {
 
         achievementGrid = (GridView) findViewById(R.id.gridViewAchievement);
     }
 
 
-
+    //closes Databases if Activity is destroyed
 
     @Override
     protected void onDestroy() {
@@ -135,7 +146,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         super.onDestroy();
     }
 
-
+    //initialises button
+    //buttonListener --> finish this activity
 
     private void initButton(){
         back = (Button) findViewById(R.id.buttonBackRanking);
@@ -146,6 +158,9 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
             }
         });
     }
+
+
+    //initialises TextViews by calling Methods to initialises the Rows of the Table
 
     private void initTextViews() {
         initTextViewText();
@@ -169,48 +184,75 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         achievementInfo = (TextView) findViewById(R.id.textViewAchievementInfo);
     }
 
+    //initialises TextViews
+
     private void initTextViewText() {
         rankText = (TextView) findViewById(R.id.textViewRankText);
         characternameText = (TextView) findViewById(R.id.textViewCharacternameText);
         levelText = (TextView) findViewById(R.id.textViewLevelText);
         expText = (TextView) findViewById(R.id.textViewExpText);
     }
+
+
+    //initialises TextViews of row 1
+
     private void initTextViewRow1() {
         rank1 = (TextView) findViewById(R.id.textViewRank1);
         charactername1 = (TextView) findViewById(R.id.textViewCharactername1);
         level1 = (TextView) findViewById(R.id.textViewLevel1);
         exp1 = (TextView) findViewById(R.id.textViewExp1);
     }
+
+    //initialises TextViews of row 2
+
     private void initTextViewRow2() {
         rank2 = (TextView) findViewById(R.id.textViewRank2);
         charactername2 = (TextView) findViewById(R.id.textViewCharactername2);
         level2 = (TextView) findViewById(R.id.textViewLevel2);
         exp2 = (TextView) findViewById(R.id.textViewExp2);
     }
+
+    //initialises TextViews of row 3
+
+
     private void initTextViewRow3() {
         rank3 = (TextView) findViewById(R.id.textViewRank3);
         charactername3 = (TextView) findViewById(R.id.textViewCharactername3);
         level3 = (TextView) findViewById(R.id.textViewLevel3);
         exp3 = (TextView) findViewById(R.id.textViewExp3);
     }
+
+    //initialises TextViews of row 4
+
+
     private void initTextViewRow4() {
         rank4 = (TextView) findViewById(R.id.textViewRank4);
         charactername4 = (TextView) findViewById(R.id.textViewCharactername4);
         level4 = (TextView) findViewById(R.id.textViewLevel4);
         exp4 = (TextView) findViewById(R.id.textViewExp4);
     }
+
+    //initialises TextViews of row 5
+
     private void initTextViewRow5() {
         rank5 = (TextView) findViewById(R.id.textViewRank5);
         charactername5 = (TextView) findViewById(R.id.textViewCharactername5);
         level5 = (TextView) findViewById(R.id.textViewLevel5);
         exp5 = (TextView) findViewById(R.id.textViewExp5);
     }
+
+    //initialises TextViews of row 6
+
+
     private void initTextViewRow6() {
         rank6 = (TextView) findViewById(R.id.textViewRank6);
         charactername6 = (TextView) findViewById(R.id.textViewCharactername6);
         level6 = (TextView) findViewById(R.id.textViewLevel6);
         exp6 = (TextView) findViewById(R.id.textViewExp6);
     }
+
+    //initialises TextViews of ran emptyRow
+
     private void initTextViewLeer() {
         rankLeer = (TextView) findViewById(R.id.textViewRankLeer);
         characternameLeer = (TextView) findViewById(R.id.textViewCharacternameLeer);
@@ -218,36 +260,53 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         expLeer = (TextView) findViewById(R.id.textViewExpLeer);
     }
 
+    //sets TextViews of row 1
+
     private void setTextViewRow1(int rank, String charactername, int level, int exp){
         rank1.setText(""+rank+".");
         charactername1.setText(charactername);
         level1.setText(""+level);
         exp1.setText(""+exp);
     }
+
+    //sets TextViews of row 2
+
     private void setTextViewRow2(int rank, String charactername, int level, int exp){
         rank2.setText(""+rank+".");
         charactername2.setText(charactername);
         level2.setText(""+level);
         exp2.setText(""+exp);
     }
+
+    //sets TextViews of row 3
+
     private void setTextViewRow3(int rank, String charactername, int level, int exp){
         rank3.setText(""+rank+".");
         charactername3.setText(charactername);
         level3.setText(""+level);
         exp3.setText(""+exp);
     }
+
+    //sets TextViews of row 4
+
     private void setTextViewRow4(int rank, String charactername, int level, int exp){
         rank4.setText(""+rank+".");
         charactername4.setText(charactername);
         level4.setText(""+level);
         exp4.setText(""+exp);
     }
+
+    //sets TextViews of row 5
+
     private void setTextViewRow5(int rank, String charactername, int level, int exp){
         rank5.setText(""+rank+".");
         charactername5.setText(charactername);
         level5.setText(""+level);
         exp5.setText(""+exp);
     }
+
+    //sets TextViews of row 6
+
     private void setTextViewRow6(int rank, String charactername, int level, int exp){
         rank6.setText(""+rank+".");
         charactername6.setText(charactername);
@@ -255,6 +314,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         exp6.setText("" + exp);
     }
 
+    //initialises Databases
+    //opens Databases
 
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);
@@ -262,6 +323,10 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         achievementDb = new AchievementDatabase(this);
         achievementDb.open();
     }
+
+
+    //calls setMethods to setTextView for the Row
+    //sets BackgroundColor to highlight user
 
     @Override
     public void rankingDataRetrieved(ArrayList<RankingItem> rankingList, int persusernr) {
@@ -285,37 +350,59 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         }
     }
 
+    //setsBackgroundColor of Row1 to Normal (==black)
+
     private void setBackgroundRow1Normal(){
         tablerow1.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
     }
+
+    //setsBackgroundColor of Row2 to Normal (==black)
+
     private void setBackgroundRow2Normal(){
         tablerow2.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
     }
+
+    //setsBackgroundColor of Row3 to Normal (==black)
+
     private void setBackgroundRow3Normal(){
         tablerow3.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
     }
+
+    //setsBackgroundColor of Row5 to Highlight (==white)
+
     private void setBackgroundRow5Highlight() {
         tablerow5.setBackgroundColor(getResources().getColor(R.color.background_material_light));
     }
+
+    //setsBackgroundColor of Row5 to Normal (==black)
+
     private void setBackgroundRow5Normal() {
         tablerow5.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
     }
+
+    //setsBackgroundColor of Row1,2,3 to Normal (==black)
+
     private void setBackgroundRow(int persusernr){
         setBackgroundRow1Normal();
         setBackgroundRow2Normal();
         setBackgroundRow3Normal();
         switch(persusernr){
-            case 1: tablerow1.setBackgroundColor(getResources().getColor(R.color.background_material_dark));break;
-            case 2: tablerow2.setBackgroundColor(getResources().getColor(R.color.background_material_dark));break;
-            case 3: tablerow3.setBackgroundColor(getResources().getColor(R.color.background_material_dark));break;
+            case 1: tablerow1.setBackgroundColor(getResources().getColor(R.color.background_material_light));break;
+            case 2: tablerow2.setBackgroundColor(getResources().getColor(R.color.background_material_light));break;
+            case 3: tablerow3.setBackgroundColor(getResources().getColor(R.color.background_material_light));break;
         }
     }
+
+    //sets TextView to showAchievementInfo
 
     @Override
     public void showAchievementInfo(int achievementTyp) {
         achievementInfo.setText(selectAchievement(achievementTyp));
     }
 
+
+    //gets int itemTyp
+    //returns String with Info about Achievement
 
     private String selectAchievement(int itemTyp) {
         switch (itemTyp) {

@@ -48,18 +48,26 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
         initSpinners();
     }
 
+    //closes opened Database if activity is destroyed
+
     @Override
     protected void onDestroy() {
         characterdataDb.close();
         weaponDb.close();
-        super.onDestroy();    }
+        super.onDestroy();
+    }
+
+    //gets Intent
 
 
     private void getIntentData(){
         Intent i = getIntent();
         usernr = i.getStringExtra(TAG_USERNR);
     }
-    // Opening the Database
+
+
+    //Initialises the Databases
+    // Opening the Databases
 
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);
@@ -70,7 +78,9 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
 
 
-    // Initialisieren der Spinner + zugehoerige Listener;
+    // Initialises Spinners
+    //SpinnerListener
+
     private void initSpinners() {
 
         sex =(Spinner) findViewById(R.id.spinnerSex);
@@ -123,7 +133,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     }
 
 
-    // Setzt CheckBox Sichtbar, um das Schild auszuwaehlen
+    // Set checkbox visible
 
     private void selectShowSchild() {
             switch(weaponTyp){
@@ -137,8 +147,10 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
 
 
-    //Initialisieren des Button + Listener
-    //Und der Checkbox -->Unsichtbar
+    //Initialises button
+    //ButtonListener
+    //initialises Checkbox
+    //set Checkbox invisible
 
     private void initButtons() {
         characterErstellen = (Button)findViewById(R.id.createCharakter);
@@ -156,9 +168,9 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
         checkBoxInvisible();
     }
 
-
-    //Auslesen der Daten
-    //Speichern der Daten in den Server
+    //Read data
+    //Save data on server
+    //update Database
 
     private void saveInput() {
 
@@ -169,7 +181,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
 
 
-    //Initialisieren des Edit Texts und des Image Views
+    //Initialises EditText and ImageView
 
     private void initViews() {
         name = (EditText) findViewById(R.id.characterName);
@@ -177,7 +189,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     }
 
 
-    //Set checkBox unsichtbar,  not enabled
+    //Set checkBox invisible,  not enabled
 
     private void checkBoxInvisible(){
         schild.setChecked(false);
@@ -186,13 +198,16 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     }
 
 
-    //Set checkBox sichtbar, enabled
+    //Set checkBox visible, enabled
 
     private void checkBoxVisible(){
         schild.setEnabled(true);
         schild.setVisibility(View.VISIBLE);
         schild.setChecked(false);
     }
+
+    //get String weaponName
+    //return int weapon
 
 
     public int getWeaponNr(String weapon){
@@ -219,7 +234,10 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
         return 0;
     }
 
-
+    //selectsImage
+    //diffsBetween String sexTyp ( "Männlich" and "Weiblich")
+    //diffs between String weaponTyp
+    //calls loadBitmap()
 
     private void selectImage() {
 
@@ -299,16 +317,19 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
 
 
+    //loads an Bitmap into ImageView by using BackgroundTask
 
     public void loadBitmap(int resID , ImageView imageView) {
         BitmapWorkerTask task = new BitmapWorkerTask(imageView);
         task.execute(resID);
     }
 
+
+    //updates weaponDatabase
+
     @Override
     public void weaponDataRetrieved(int[] weaponArray) {
         weaponDb.updateAll(weaponArray,1);
-        System.out.println(weaponDb.getWeaponTyp());
     }
 }
 

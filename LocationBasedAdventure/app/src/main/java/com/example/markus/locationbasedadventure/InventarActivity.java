@@ -100,10 +100,17 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         updateList();
     }
 
+    //initialises TextView
+
     private void initTextViewItem() {
         itemInfo = (TextView) findViewById(R.id.textViewItemInfo);
     }
 
+
+    //updates List
+    //clearList
+    //adds items again to List
+    //informs adapter about changes
 
     private void updateList() {
         itemList.clear();
@@ -111,16 +118,25 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         itemListAdapter.notifyDataSetChanged();
     }
 
+
+    //initialies ListAdapter
+
     private void initListAdapter() {
         itemGrid = (GridView) findViewById(R.id.gridViewItem);
         itemListAdapter = new ItemListAdapter(this, itemList, this);
         itemGrid.setAdapter(itemListAdapter);
     }
 
+
+    //initialies GridView
+
     private void initGridView() {
 
         itemGrid = (GridView) findViewById(R.id.gridViewItem);
     }
+
+
+    //closes opened Database when activity is destroyed
 
     @Override
     protected void onDestroy() {
@@ -131,6 +147,8 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
 
     }
 
+    //initialises Databases
+    //opens Databases
 
     private void initDB() {
         weaponDb = new WeaponDatabase(this);
@@ -140,6 +158,10 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         itemDb = new ItemDatabase(this);
         itemDb.open();
     }
+
+
+    //initialises buttons
+    //buttonListeners
 
 
     private void initButton() {
@@ -173,10 +195,14 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
 
     }
 
+    //initTextViews
+
     private void initTextViews() {
         initTextViewsWeapon();
         initTextViewsArmor();
     }
+
+    //initTextViews to show Armor
 
     private void initTextViewsArmor() {
         armor = (TextView) findViewById(R.id.textViewArmor);
@@ -185,6 +211,8 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         dexterityarmor = (TextView) findViewById(R.id.textViewDexterityInvArmor);
         intelligencearmor = (TextView) findViewById(R.id.textViewIntelligenceInvArmor);
     }
+
+    //initTextViews to show Weapon
 
     private void initTextViewsWeapon() {
         waffen = (TextView) findViewById(R.id.textViewWaffen);
@@ -204,6 +232,8 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         initTextViewsArmorValue();
     }
 
+    //initTextViews to show UsedArmor values
+
     private void initTextViewsArmorValue() {
         armorImage = (ImageView) findViewById(R.id.imageViewArmor);
         kindofarmor = (TextView) findViewById(R.id.textViewArmorText);
@@ -212,6 +242,8 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         dexterityarmorValue = (TextView) findViewById(R.id.textViewDexterityInvValueArmor);
         intelligencearmorValue = (TextView) findViewById(R.id.textViewIntelligenceInvValueArmor);
     }
+
+    //initTextViews to show UsedWeapon Values
 
     private void initTextViewsWeaponValue() {
         weaponImage = (ImageView) findViewById(R.id.imageViewWeapon);
@@ -225,6 +257,9 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         dexterityValue = (TextView) findViewById(R.id.textViewDexterityInvValue);
         intelligenceValue = (TextView) findViewById(R.id.textViewIntelligenceInvValue);
     }
+
+
+    //Loads usedWeapon values and sets textViews
 
     private void loadTextViewWeaponValue() {
         weaponImage.setImageResource(R.drawable.power_up);
@@ -240,6 +275,10 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
     }
 
 
+
+    //Loads usedArmor values and sets textViews
+
+
     private void loadTextViewsArmorValue() {
         armorImage.setImageResource(R.drawable.power_up);
         kindofarmor.setText(armorDb.getArmorString());
@@ -250,10 +289,19 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
     }
 
 
+
+    //setsText to show info about clicked Item
+
     @Override
     public void showItemInfo(int itemTyp) {
         itemInfo.setText(selectItem(itemTyp));
     }
+
+
+
+    //selects Item
+    //gets int itemTyp
+    //return String
 
     private String selectItem(int itemTyp) {
         switch (itemTyp) {

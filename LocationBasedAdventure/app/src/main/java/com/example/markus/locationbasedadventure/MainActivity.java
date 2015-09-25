@@ -34,6 +34,9 @@ public class MainActivity extends Activity{
         initButtons();
     }
 
+
+    //closes Database if Activity is destroyed
+
     @Override
     protected void onDestroy() {
         characterdataDb.close();
@@ -44,8 +47,10 @@ public class MainActivity extends Activity{
     }
 
 
-    //Überprüft ob die Datenbank leer ist ( = Erster Aufruf der APP) und füllt  in diesem Fall eine leere Standartzeile.
-    //Überprüft dann ob die Stay angemeldet in der ersten ( =einzige) Zeile 1 ist, falls ja, wechseln in GIF.
+    //checks if databases are empty and inserts standard values into the databases
+    //checks if stayAngmeldet is true
+    //         true   --> syndicate Server Data with Database by using BackgroundTask
+    //                --> start MapActivity
 
 
     private void checkAnmeldung() {
@@ -63,11 +68,14 @@ public class MainActivity extends Activity{
         }
         if(characterdataDb.getStayAngemeldet() == 1){
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
-            Intent i = new Intent(getApplicationContext(),MenueActivity.class); // Hier eigentlich MapActivity
+            Intent i = new Intent(getApplicationContext(),MapsActivity.class);
             startActivity(i);
         }
     }
 
+
+    //initialisesButtons
+    //buttonListeners
 
     private void initButtons(){
         anmeldenPage = (Button) findViewById(R.id.button);
@@ -89,7 +97,10 @@ public class MainActivity extends Activity{
         });
     }
 
-    // Opening the Database
+
+
+    //initialises Databases
+    // Open Databases
 
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);

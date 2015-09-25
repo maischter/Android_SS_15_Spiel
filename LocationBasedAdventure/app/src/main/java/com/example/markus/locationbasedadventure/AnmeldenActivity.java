@@ -53,7 +53,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     }
 
 
-    //Initialisieren der EditText und TextView
+    //Initialises  EditTexts and TextViews
 
     private void initViews() {
         email = (EditText) findViewById(R.id.editTextEmailAdress);
@@ -62,8 +62,9 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
         diskurs = (TextView) findViewById(R.id.textViewDiskurs);
     }
 
-    //Initialisieren der Button und die zugehoerigen Listener
-    //Initialisieren der CheckBox
+    //Initialises  Buttons
+    //ButtonListeners
+    //Initialises CheckBox
 
     private void initButtons() {
         anmelden = (Button) findViewById(R.id.buttonAnmelden);
@@ -89,10 +90,9 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
 
 
 
-    //Zustand der CheckBox auslesen - bei true, speichern auf dem Smartphone
-    //Wechsel zu neuer Activity, falls Daten korrekt
-
-    //Momentan noch Wechsel zu MainActivity!!
+    //Read CheckBox --> true save StayAngemeldet ind Database
+    //Syndycate ServerData with Databases
+    //Starts MapActivity
 
 
     private void dataCorrect() {
@@ -100,21 +100,21 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
                 saveStayAngemeldetIntoDBOnPhone();
             }
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
-            Intent i = new Intent(getApplicationContext(),MapsActivity.class); // eigentlich zu MAPActivity
+            Intent i = new Intent(getApplicationContext(),MapsActivity.class);
             startActivity(i);
         }
 
 
 
 
-    //Speichern des Angemeldet Bleiben Status in lokaler Datenbank, um bei Neustart der App direkt zur Map zu gelangen
-    //noch leer
+    //Saves stayAngemeldet as true into Database
+
 
     private void saveStayAngemeldetIntoDBOnPhone() {
         characterdataDb.updateStayAngemeldet(1);
     }
 
-    //Ruft AsynchronousTask auf, um Daten aus der Datenbank zu bekommen
+    //Gets Data from Server by using BackgroundTask
 
     private void checkInputOnServer() {
         String email = this.email.getText().toString();
@@ -122,7 +122,8 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
         new AnmeldenTask(this,this).execute(address, email, passwort);
     }
 
-    // Opening the Database
+    // initialises Databases
+    //open Databases
 
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);
@@ -133,9 +134,9 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
 
 
 
-    //Methode des Interface um die gefundenen Email-Adressen + PW mit eingegeben Daten zuvergleichen
-    // Bekommt usernr. usernr = 0 --> diskurs, da email oder passwort nicht korrekt
-    //usernr != 0 --> dataCorrect()
+    //Wrong Email --> calls emailNotKnownDiskurs();
+    //Wrong Password --> calls passwordWrongDiskurs();
+    //calls dataCorrect() if email and password are correct
 
     @Override
     public void registrationDataRetrieved(Integer usernr,String passworthash) {
@@ -160,7 +161,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     }
 
 
-    //Setzt den Diskurs Text im Falle eines falschen Passworts ( EMAIL-RIchtig!)
+    //informs user about wrong password
 
 
     private void passwortWrongDiskurs() {
@@ -169,7 +170,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     }
 
 
-    //Setzt den Diskurs Text im Falle einer falschen Email
+    //informs user about wrong email
 
 
     private void emailNotKnownDiskurs() {
@@ -177,7 +178,8 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
         diskurs.setText(R.string.emailNotRegistered);
     }
 
-    // setzt edittext auf leer zurueck
+    // sets EditText empty
+
     private void emptyEditTexts() {
         email.setText("");
         passwort.setText("");
