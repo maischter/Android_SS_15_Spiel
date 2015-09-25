@@ -58,5 +58,7 @@
     <string name="skillSpecA">SpecialAttack</string>
     <string name="title_activity_maps">Map</string>
 
+    <string name="noGPS">Momentan ist kein GPS verfügbar...</string>
+
 
 </resources>
