@@ -2,21 +2,19 @@ package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
-import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
 import com.example.markus.locationbasedadventure.Items.Skill;
 
 import java.util.Random;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Created by qcd on 14.08.2015.
@@ -44,8 +42,8 @@ public class BattleActivity extends Activity{
     int [] weaponData;
     int [] armorData;
 
-    final int players_turn = 0;
-    final int nonplayers_turn = 1;
+    final int players_turn = 1;
+    final int nonplayers_turn = 0;
     int turn;
     Random rand = new Random();
 
@@ -59,6 +57,9 @@ public class BattleActivity extends Activity{
 
     Entity Player;
     Entity NonPlayer;
+
+    Handler handler = new Handler();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -125,7 +126,11 @@ public class BattleActivity extends Activity{
             public void onClick(View v) {
                 updateProgressbar(pSkill[0],NonPlayer, Player);
                 System.out.println("Skill A wurde aktiviert" + pSkill[0].skillName);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
             }
         });
 
@@ -135,7 +140,11 @@ public class BattleActivity extends Activity{
                 def = true;
                 updateProgressbar(pSkill[1],NonPlayer, Player);
                 System.out.println(pSkill[1].skillName);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
 
             }
         });
@@ -146,7 +155,11 @@ public class BattleActivity extends Activity{
                 powerUp = true;
                 updateProgressbar(pSkill[2],NonPlayer, Player);
                 System.out.println(pSkill[2].skillName);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
             }
         });
         skill_d.setOnClickListener(new View.OnClickListener() {
@@ -155,7 +168,11 @@ public class BattleActivity extends Activity{
 
                 updateProgressbar(pSkill[3],NonPlayer, Player);
                 System.out.println(pSkill[3].skillName);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
             }
         });
     }
@@ -189,21 +206,37 @@ public class BattleActivity extends Activity{
         switch (action){
             case 0:
                 updateProgressbar(pSkill[0], Player, NonPlayer);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
                 break;
             case 1:
                 def = true;
                 updateProgressbar(pSkill[1],Player, NonPlayer);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
                 break;
             case 2:
                 powerUp = true;
                 updateProgressbar(pSkill[2],Player, NonPlayer);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
                 break;
             case 3:
                 updateProgressbar(pSkill[3], Player, NonPlayer);
-                nextTurn();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        nextTurn();
+                    }
+                }, 1000);
                 break;
         }
 
@@ -227,13 +260,13 @@ public class BattleActivity extends Activity{
     }
 
     private void nextTurn(){
-
+        /*
         try {
-            Thread.sleep(10000, 0);
+            Thread.sleep(1000, 0);
         } catch (InterruptedException e){
             e.printStackTrace();
         }
-
+        */
 
         if (turn==players_turn){
             System.out.println("NonPlayer ist am Zug");
@@ -376,14 +409,14 @@ public class BattleActivity extends Activity{
         }
 
         if (turn==players_turn){
-            nonPlayerHitpoints.setProgress((int)((target.curHitpoints/target.maxHitpoints) * 100));
+            nonPlayerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Ziel HP: " + target.curHitpoints);
+
         }
         if (turn==nonplayers_turn) {
             playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
-            System.out.println("Ziel HP: " + target.curHitpoints);
+            System.out.println("Eigene HP: " + target.curHitpoints);
         }
-
     }
 
 
