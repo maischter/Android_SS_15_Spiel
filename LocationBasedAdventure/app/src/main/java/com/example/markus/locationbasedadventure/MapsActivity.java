@@ -10,8 +10,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.view.View;
-import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -37,7 +35,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private LatLng[] enemies = new LatLng[NUM_ENEMIES];
     private boolean enemiesSet = false;
 
-    private TextView gpsText;
+    //private TextView gpsText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,14 +57,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     protected void onResume() {
         super.onResume();
         locationManager.requestLocationUpdates(provider, LOC_UPDATE_TIME, 0, this);
-        gpsText.setVisibility(View.VISIBLE);
         if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertMessageNoGps();
         }
     }
 
     private void setupUI() {
-        gpsText = (TextView) findViewById(R.id.gpsText);
+        //gpsText = (TextView) findViewById(R.id.gpsText);
+        //gpsText.setVisibility(View.VISIBLE);
     }
 
 
@@ -99,6 +97,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         if(location !=null){
             onLocationChanged(location);
         }
+
         locationManager.requestLocationUpdates(provider, 1000, 0, this);
 
     }
@@ -183,7 +182,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     }
 
     private void removeGPSText() {
-        gpsText.setVisibility(View.INVISIBLE);
+        //gpsText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -192,7 +191,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         lng = location.getLongitude();
         LatLng latLng = new LatLng(lat, lng);
 
-        removeGPSText();
+        //removeGPSText();
+        //Log.d("asd ", "" + gpsText.isShown());
+        /*
+        if(gpsText.isShown()){
+            removeGPSText();
+        } */
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 

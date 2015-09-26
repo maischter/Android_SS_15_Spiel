@@ -1,6 +1,9 @@
 package com.example.markus.locationbasedadventure;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
@@ -42,8 +45,8 @@ public class BattleActivity extends Activity{
     int [] weaponData;
     int [] armorData;
 
-    final int players_turn = 1;
-    final int nonplayers_turn = 0;
+    final int players_turn = 0;
+    final int nonplayers_turn = 1;
     int turn;
     Random rand = new Random();
 
@@ -59,6 +62,8 @@ public class BattleActivity extends Activity{
     Entity NonPlayer;
 
     Handler handler = new Handler();
+
+    private boolean gameOver = false;
 
 
     @Override
@@ -76,10 +81,11 @@ public class BattleActivity extends Activity{
 
         initSkills();
 
-        turn = rand.nextInt(2);
+        //turn = rand.nextInt(2);
         System.out.println("Zug:" + turn);
 
         if (turn==players_turn){
+            showTurnMsg();
             playersTurn();
         } else if (turn==nonplayers_turn){
             nonplayersTurn();
@@ -93,6 +99,8 @@ public class BattleActivity extends Activity{
         special = false;
         specialSuspend = false;
     }
+
+
     //init all GUI Elements
     private void initProgressbars() {
         playerHitpoints = (ProgressBar) findViewById(R.id.progressBar);
@@ -126,11 +134,7 @@ public class BattleActivity extends Activity{
             public void onClick(View v) {
                 updateProgressbar(pSkill[0],NonPlayer, Player);
                 System.out.println("Skill A wurde aktiviert" + pSkill[0].skillName);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                execNextTurn();
             }
         });
 
@@ -138,43 +142,38 @@ public class BattleActivity extends Activity{
             @Override
             public void onClick(View v) {
                 def = true;
-                updateProgressbar(pSkill[1],NonPlayer, Player);
+                updateProgressbar(pSkill[1], NonPlayer, Player);
                 System.out.println(pSkill[1].skillName);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                execNextTurn();
+
 
             }
         });
         skill_c.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 powerUp = true;
                 updateProgressbar(pSkill[2],NonPlayer, Player);
                 System.out.println(pSkill[2].skillName);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                execNextTurn();
             }
         });
         skill_d.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                updateProgressbar(pSkill[3],NonPlayer, Player);
+                updateProgressbar(pSkill[3], NonPlayer, Player);
                 System.out.println(pSkill[3].skillName);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                execNextTurn();
             }
         });
+    }
+
+    private void execNextTurn() {
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                nextTurn();
+            }
+        }, 1000);
     }
 
     private void initSkills(){
@@ -201,45 +200,40 @@ public class BattleActivity extends Activity{
     // KI wählt per Random aus welchen Skill er einsetzt
     private void actionKI(){
 
-        int action = 0;//rand.nextInt(4);
+        int action = rand.nextInt(4);
 
         switch (action){
             case 0:
-                updateProgressbar(pSkill[0], Player, NonPlayer);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                enemyAttack(pSkill[action], Player, NonPlayer);
                 break;
             case 1:
                 def = true;
-                updateProgressbar(pSkill[1],Player, NonPlayer);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                enemyAttack(pSkill[action], Player, NonPlayer);
                 break;
             case 2:
                 powerUp = true;
-                updateProgressbar(pSkill[2],Player, NonPlayer);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                enemyAttack(pSkill[action], Player, NonPlayer);
                 break;
             case 3:
-                updateProgressbar(pSkill[3], Player, NonPlayer);
-                handler.postDelayed(new Runnable() {
-                    public void run() {
-                        nextTurn();
-                    }
-                }, 1000);
+                enemyAttack(pSkill[action], Player, NonPlayer);
                 break;
         }
 
+    }
+
+    private void enemyAttack(Skill skill, Entity player, Entity nonPlayer) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Gegner führt einen Angriff aus. Bitte warten!")
+                .setCancelable(false);
+        final AlertDialog alert = builder.create();
+        alert.show();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                updateProgressbar(pSkill[0], Player, NonPlayer);
+                nextTurn();
+                alert.dismiss();
+            }
+        }, 2000);
     }
 
     // Setzt GUI Element clickbar/unclickbar
@@ -260,14 +254,6 @@ public class BattleActivity extends Activity{
     }
 
     private void nextTurn(){
-        /*
-        try {
-            Thread.sleep(1000, 0);
-        } catch (InterruptedException e){
-            e.printStackTrace();
-        }
-        */
-
         if (turn==players_turn){
             System.out.println("NonPlayer ist am Zug");
             turn=nonplayers_turn;
@@ -276,10 +262,24 @@ public class BattleActivity extends Activity{
         }else if (turn==nonplayers_turn){
             System.out.println("Player ist am Zug");
             turn=players_turn;
+            showTurnMsg();
             playersTurn();
         }
 
 
+    }
+
+    private void showTurnMsg() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Du bist am Zug!")
+                .setCancelable(false);
+        final AlertDialog alert = builder.create();
+        alert.show();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                alert.dismiss();
+            }
+        }, 1000);
     }
 
     public void loadBattleData(){
@@ -411,15 +411,32 @@ public class BattleActivity extends Activity{
         if (turn==players_turn){
             nonPlayerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Ziel HP: " + target.curHitpoints);
+            if(target.curHitpoints <= 0) {
+                gameOver();
+            }
 
         }
         if (turn==nonplayers_turn) {
             playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Eigene HP: " + target.curHitpoints);
+            if(target.curHitpoints <= 0) {
+                gameOver();
+            }
         }
     }
 
+    private void gameOver() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Spiel ist zu Ende!")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                    }
+                });
 
+        final AlertDialog alert = builder.create();
+        alert.show();
 
-
+    }
 }
