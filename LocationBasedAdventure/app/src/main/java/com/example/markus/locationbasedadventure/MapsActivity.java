@@ -4,7 +4,9 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.location.Address;
 import android.location.Criteria;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -22,6 +24,9 @@ import com.google.android.gms.maps.model.Circle;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 
+import java.io.IOException;
+import java.util.List;
+import java.util.Locale;
 import java.util.Random;
 
 public class MapsActivity extends FragmentActivity implements LocationListener{
@@ -99,7 +104,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     }
 
     private void setLocationText() {
-        currentLocation.setText("Du bist gerade in: " + "Regensburg");  //TODO: Momentane Stadt herausfinden!
+        Geocoder geoCoder = new Geocoder(this, Locale.getDefault());
+        List<Address> addresses;
+        try {
+            addresses = geoCoder.getFromLocation(lat, lng, 1);
+            currentLocation.setText("Du bist gerade in: " + addresses.get(0).getAddressLine(0));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void setCoordText() {
@@ -256,6 +268,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         LatLng latLng = new LatLng(lat, lng);
 
         if(uiIsSet) {
+            setLocationText();
             removeGPSText();
         }
 
