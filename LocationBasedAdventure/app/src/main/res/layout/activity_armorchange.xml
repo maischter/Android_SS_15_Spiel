@@ -63,7 +63,6 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:id="@+id/textViewWeaponChangeArmorText"
-        android:text="Bogen"
         android:layout_above="@+id/tableLayoutUsedArmor"
         android:layout_centerHorizontal="true" />
 
@@ -91,7 +90,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STA"
+                android:text="@string/staminaShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStaminaArmorChange"
@@ -99,7 +98,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STR"
+                android:text="@string/strengthShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStrengthArmorChange"
@@ -108,7 +107,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEX"
+                android:text="@string/dexterityShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDexterityArmorChange"
@@ -116,7 +115,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INT"
+                android:text="@string/intelligenceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewIntelligenceArmorChange"

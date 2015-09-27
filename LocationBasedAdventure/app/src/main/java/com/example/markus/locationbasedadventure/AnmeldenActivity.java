@@ -24,15 +24,15 @@ import java.security.spec.InvalidKeySpecException;
 public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenTaskListener {
 
 
-    Button anmelden;
-    Button registrieren;
-    CheckBox stayAngemeldet;
-    TextView notRegistered;
-    EditText email;
-    EditText passwort;
-    TextView diskurs;
-    CharacterdataDatabase characterdataDb;
-    StatsDatabase statsDb;
+    private Button anmelden;
+    private Button registrieren;
+    private CheckBox stayAngemeldet;
+    private TextView notRegistered;
+    private EditText email;
+    private EditText passwort;
+    private TextView diskurs;
+    private CharacterdataDatabase characterdataDb;
+    private StatsDatabase statsDb;
     private String address = "http://sruball.de/game/checkAnmelden.php";
     private String address2 = "http://sruball.de/game/syndicateData.php";
 

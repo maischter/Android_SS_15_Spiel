@@ -26,22 +26,22 @@ import java.util.ArrayList;
 public class ArmorChangeActivity extends Activity implements ArmorListener {
 
 
-    Button back;
-    ImageView usedArmor;
+    private Button back;
+    private ImageView usedArmor;
 
-    TextView[] tableStatsText = new TextView[4];
-    TextView[] tableStatsValue = new TextView[4];
-    TextView[] tableStatsDiff = new TextView[4];
-    TextView armorChangeText;
-    TextView armorTypText;
+    private TextView[] tableStatsText = new TextView[4];
+    private TextView[] tableStatsValue = new TextView[4];
+    private  TextView[] tableStatsDiff = new TextView[4];
+    private TextView armorChangeText;
+    private TextView armorTypText;
 
     private GridView armorGrid;
 
 
     private ArrayList<Equip> armorList = new ArrayList<Equip>();
-    ArmorListAdapter armorListAdapter;
+    private  ArmorListAdapter armorListAdapter;
 
-    ArmorDatabase armorDb;
+    private ArmorDatabase armorDb;
 
 
 

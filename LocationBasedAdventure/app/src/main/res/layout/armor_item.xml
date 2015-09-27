@@ -9,7 +9,6 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Standartausrüstung"
         android:textSize="12sp"
         android:id="@+id/textViewArmorItemText"
         android:layout_gravity="center"/>
@@ -54,7 +53,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STA"
+                android:text="@string/staminaShort"
                 android:textSize="12sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStaminaArmorItem"
@@ -62,7 +61,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STR"
+                android:text="@string/strengthShort"
                 android:textSize="12sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStrengthArmorItem"
@@ -71,7 +70,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEX"
+                android:text="@string/dexterityShort"
                 android:textSize="12sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDexterityArmorItem"
@@ -79,7 +78,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INT"
+                android:text="@string/intelligenceShort"
                 android:textSize="12sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewIntelligenceArmorItem"
@@ -152,7 +151,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Benutzen"
+            android:text="@string/benutzen"
             android:id="@+id/buttonChangeArmor"
             android:background="@color/accent_material_light"
             android:layout_marginRight="10dp" />
@@ -161,7 +160,7 @@
             style="?android:attr/buttonStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entfernen"
+            android:text="@string/entfernen"
             android:id="@+id/buttonArmorDelete"
             android:background="@color/accent_material_light"
             />

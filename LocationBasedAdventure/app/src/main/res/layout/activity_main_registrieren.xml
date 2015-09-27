@@ -32,7 +32,7 @@
         android:ems="10"
         android:textSize="15sp"
         android:id="@+id/editTextPasswordReg"
-        android:hint="Passwort (mind 7 Zeichen!)"
+        android:hint="@string/passwordHint"
         android:layout_below="@+id/editTextEmailAdressReg"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"/>
@@ -44,7 +44,7 @@
         android:ems="10"
         android:textSize="15sp"
         android:id="@+id/editTextEmailAdressReg"
-        android:hint="E-Mail-Adresse (xyz@xyz.xyz)"
+        android:hint="@string/emailAdresseHint"
         android:layout_alignParentTop="true"
         android:layout_marginTop="90dp"
         android:layout_alignParentLeft="true"
@@ -57,7 +57,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:text="@string/alreadyregisteredText"
         android:id="@+id/textViewAlreadyRegistered"
         android:gravity="center"

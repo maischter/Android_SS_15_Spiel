@@ -23,10 +23,9 @@ public class ItemDatabase {
 
     private static final String DATABASE_TABLE = "Items";
 
-    public static final String KEY_ID = "_id";
-
-    public static final String KEY_TYP = "typ";
-    public static final String KEY_QUANTITY = "quantity";
+    private static final String KEY_ID = "_id";
+    private static final String KEY_TYP = "typ";
+    private static final String KEY_QUANTITY = "quantity";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;

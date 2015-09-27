@@ -18,14 +18,13 @@ public class StatsDatabase {
 
     private static final String DATABASE_TABLE = "Stats";
 
-    public static final String KEY_ID = "_id";
-
-    public static final String KEY_LEVEL = "level";
-    public static final String KEY_EXP = "exp";
-    public static final String KEY_STAMINA = "stamina";
-    public static final String KEY_STRENGTH = "strength";
-    public static final String KEY_DEXTERITY = "dexterity";
-    public static final String KEY_INTELLIGENCE = "intelligence";
+    private static final String KEY_ID = "_id";
+    private static final String KEY_LEVEL = "level";
+    private static final String KEY_EXP = "exp";
+    private static final String KEY_STAMINA = "stamina";
+    private static final String KEY_STRENGTH = "strength";
+    private static final String KEY_DEXTERITY = "dexterity";
+    private static final String KEY_INTELLIGENCE = "intelligence";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;

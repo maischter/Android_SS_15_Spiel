@@ -13,18 +13,14 @@ public class  CharacterdataDatabase {
 
     private static final String DATABASE_NAME = "Characterdata3.db";
     private static final int DATABASE_VERSION = 1;
-
     private static final String DATABASE_TABLE = "Characterdatas";
-
-    public static final String KEY_ID = "_id";
-    public static final String KEY_EMAIL = "email";
-    public static final String KEY_CHARCTERNAME = "charactername";
-    public static final String KEY_STAYANGEMELDET = "stayangemeldet";
-    public static final String KEY_SEX = "sex";
-    public static final String KEY_TON = "ton";
-    public static final String KEY_PUSHUP ="pushup";
-
-
+    private static final String KEY_ID = "_id";
+    private static final String KEY_EMAIL = "email";
+    private static final String KEY_CHARCTERNAME = "charactername";
+    private static final String KEY_STAYANGEMELDET = "stayangemeldet";
+    private static final String KEY_SEX = "sex";
+    private static final String KEY_TON = "ton";
+    private static final String KEY_PUSHUP ="pushup";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;

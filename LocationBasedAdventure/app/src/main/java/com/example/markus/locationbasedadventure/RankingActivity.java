@@ -25,69 +25,67 @@ import java.util.ArrayList;
  */
 public class RankingActivity extends Activity implements LoadRankingTask.RankingTaskListener, AchievementListAdapter.AchievementListener {
 
-    TextView rankText;
-    TextView characternameText;
-    TextView levelText;
-    TextView expText;
+    private TextView rankText;
+    private TextView characternameText;
+    private TextView levelText;
+    private TextView expText;
 
-    TextView rank1;
-    TextView charactername1;
-    TextView level1;
-    TextView exp1;
+    private TextView rank1;
+    private TextView charactername1;
+    private TextView level1;
+    private TextView exp1;
 
-    TextView rank2;
-    TextView charactername2;
-    TextView level2;
-    TextView exp2;
+    private TextView rank2;
+    private TextView charactername2;
+    private TextView level2;
+    private TextView exp2;
 
-    TextView rank3;
-    TextView charactername3;
-    TextView level3;
-    TextView exp3;
+    private TextView rank3;
+    private TextView charactername3;
+    private TextView level3;
+    private TextView exp3;
 
-    TextView rank4;
-    TextView charactername4;
-    TextView level4;
-    TextView exp4;
+    private TextView rank4;
+    private TextView charactername4;
+    private TextView level4;
+    private TextView exp4;
 
-    TextView rank5;
-    TextView charactername5;
-    TextView level5;
-    TextView exp5;
+    private TextView rank5;
+    private TextView charactername5;
+    private TextView level5;
+    private TextView exp5;
 
-    TextView rank6;
-    TextView charactername6;
-    TextView level6;
-    TextView exp6;
+    private TextView rank6;
+    private TextView charactername6;
+    private TextView level6;
+    private TextView exp6;
 
-    TextView rankLeer;
-    TextView characternameLeer;
-    TextView levelLeer;
-    TextView expLeer;
-    CharacterdataDatabase characterdataDb;
+    private TextView rankLeer;
+    private TextView characternameLeer;
+    private TextView levelLeer;
+    private TextView expLeer;
 
-    Button back;
+    private Button back;
 
 
     private GridView achievementGrid;
     private TextView achievementInfo;
 
 
+    private TableRow tablerowText;
+    private TableRow tablerow1;
+    private TableRow tablerow2;
+    private TableRow tablerow3;
+    private TableRow tablerow4;
+    private TableRow tablerow5;
+    private TableRow tablerow6;
+    private TableRow tablerowLeer;
+
     private ArrayList<Achievement> achievementList = new ArrayList<Achievement>();
-    AchievementListAdapter achievementListAdapter;
+    private AchievementListAdapter achievementListAdapter;
 
-    AchievementDatabase achievementDb;
-
-
-
-    TableRow tablerowText;
-    TableRow tablerow1;
-    TableRow tablerow2;
-    TableRow tablerow3;
-    TableRow tablerow4;
-    TableRow tablerow5;
-    TableRow tablerow6;
-    TableRow tablerowLeer;
+    private AchievementDatabase achievementDb;
+    private CharacterdataDatabase characterdataDb;
     private String address = "http://sruball.de/game/getRanking.php";
 
 

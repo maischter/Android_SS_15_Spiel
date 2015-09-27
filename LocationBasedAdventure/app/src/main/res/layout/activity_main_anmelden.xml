@@ -31,8 +31,8 @@
         android:layout_height="wrap_content"
         android:inputType="textEmailAddress"
         android:ems="10"
-        android:id="@+id/editTextEmailAdress"
-        android:hint="E-Mail-Adresse"
+        android:id="@+id/editTextEmailAdresse"
+        android:hint="@string/emailAdresse"
         android:layout_alignParentTop="true"
         android:layout_alignLeft="@+id/buttonAnmelden"
         android:layout_alignStart="@+id/buttonAnmelden"
@@ -45,8 +45,8 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/editTextPassword"
-        android:hint="Passwort"
-        android:layout_below="@+id/editTextEmailAdress"
+        android:hint="@string/password"
+        android:layout_below="@+id/editTextEmailAdresse"
         android:layout_alignLeft="@+id/buttonAnmelden" />
 
 
@@ -62,7 +62,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="15dp"
+        android:textSize="15sp"
         android:text="@string/notregisteredText"
         android:id="@+id/textViewNotRegistered"
         android:gravity="center"
@@ -72,7 +72,6 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text=""
         android:textColor="#FF0000"
         android:id="@+id/textViewDiskurs"
         android:layout_marginRight="80dp"

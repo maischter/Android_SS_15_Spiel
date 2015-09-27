@@ -23,7 +23,7 @@ public class Entity {
     public double physical_bow_dmg;
     public double hitrate;
 
-    CharacterdataDatabase db;
+    private CharacterdataDatabase db;
 
 
     Random rand;

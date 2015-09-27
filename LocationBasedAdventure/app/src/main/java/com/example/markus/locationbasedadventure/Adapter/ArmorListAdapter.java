@@ -24,7 +24,7 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
 
     private ArrayList<Equip> armorItem;
     private Context context;
-    ArmorListener armorListener;
+    private ArmorListener armorListener;
 
     public ArmorListAdapter(Context context, ArrayList<Equip> armorItem,ArmorListener armorListener) {
         super(context, R.layout.armor_item, armorItem);

@@ -35,7 +35,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Name"
+        android:hint="@string/name"
         android:ems="10"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
@@ -69,7 +69,7 @@
     <CheckBox
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Schild?"
+        android:text="@string/schildQuestion"
         android:id="@+id/checkBoxSchild"
         android:layout_below="@+id/spinnerCharacterTyp"
         android:layout_alignRight="@+id/spinnerCharacterTyp"

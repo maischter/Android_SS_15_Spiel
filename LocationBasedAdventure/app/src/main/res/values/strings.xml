@@ -33,8 +33,31 @@
     <string name="waffen">Waffen</string>
     <string name="armor">Rüstungen</string>
     <string name="items">Items</string>
-    <string name="changewaffen">Waffe wechseln</string>
+    <string name="changeWaffen">Waffe wechseln</string>
     <string name="changeArmor">Rüstung wechseln</string>
+    <string name="staminaShort">STA</string>
+    <string name="strengthShort">STR</string>
+    <string name="dexterityShort">DEX</string>
+    <string name="intelligenceShort">INT</string>
+    <string name="stamina">Stamina</string>
+    <string name="strength">Strength</string>
+    <string name="dexterity">Dexterity</string>
+    <string name="intelligence">Intelligence</string>
+    <string name="damageShort">DAM</string>
+    <string name="hitchanceShort">HIT</string>
+    <string name="kritchanceShort">KRI</string>
+    <string name="extraShort">EXT</string>
+    <string name="klickItem">Klick auf ein Item, um mehr darüber zu erfahren!</string>
+    <string name="klickAchievement">Klick auf ein Achievement um mehr darüber zu erfahren!</string>
+    <string name="emailAdresse">E-Mail-Adresse</string>
+    <string name="emailAdresseHint">E-Mail-Adresse (xyz@xyz.xyz)</string>
+    <string name="password">Passwort</string>
+    <string name="passwordHint">Passwort (mind 7 Zeichen!)</string>
+    <string name="name">Name</string>
+    <string name="schildQuestion">Schild?</string>
+    <string name="change">Change</string>
+    <string name="benutzen">Benutzen</string>
+    <string name="entfernen">Entfernen</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

@@ -25,7 +25,7 @@ public class SyndicateStatsLocalToServerTask extends AsyncTask<String, Integer, 
     private JSONParser jsonParser = new JSONParser();
     private static final String TAG_SUCCESS = "success";
     private ProgressDialog dialog;
-    CharacterdataDatabase db;
+    private CharacterdataDatabase db;
 
     public SyndicateStatsLocalToServerTask(AnmeldenActivity activity){
         dialog = new ProgressDialog(activity);

@@ -23,7 +23,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/changewaffen"
+        android:text="@string/changeWaffen"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
@@ -65,7 +65,6 @@
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:id="@+id/textViewWeaponChangeWeaponText"
-        android:text="Zweihandaxt"
         android:layout_above="@+id/tableLayoutUsedWeapon"
         android:layout_centerHorizontal="true" />
 
@@ -93,7 +92,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STA"
+                android:text="@string/staminaShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStaminaWeaponChange"
@@ -101,7 +100,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STR"
+                android:text="@string/strengthShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStrengthWeaponChange"
@@ -110,7 +109,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEX"
+                android:text="@string/dexterityShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDexterityWeaponChange"
@@ -118,7 +117,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INT"
+                android:text="@string/intelligenceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewIntelligenceWeaponChange"
@@ -128,7 +127,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DAM"
+                android:text="@string/damageShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDamageWeaponChange"
@@ -136,7 +135,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HIT"
+                android:text="@string/hitchanceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewHitchanceWeaponChange"
@@ -145,7 +144,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="KRI"
+                android:text="@string/kritchanceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewKritchanceWeaponChange"
@@ -155,7 +154,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EXT"
+                android:text="@string/extraShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewExtraWeaponChange"

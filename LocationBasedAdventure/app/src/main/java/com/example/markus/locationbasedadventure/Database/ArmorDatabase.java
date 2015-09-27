@@ -22,13 +22,13 @@ public class ArmorDatabase {
 
     private static final String DATABASE_TABLE = "Armors";
 
-    public static final String KEY_ID = "_id";
+    private static final String KEY_ID = "_id";
 
-    public static final String KEY_ARMOR = "armor";
-    public static final String KEY_ARMORSTAMINA = "armorstamina";
-    public static final String KEY_ARMORSTRENGTH = "armorstrength";
-    public static final String KEY_ARMORDEXTERITY = "armordexterity";
-    public static final String KEY_ARMORINTELLIGENCE = "armorintelligence";
+    private  static final String KEY_ARMOR = "armor";
+    private  static final String KEY_ARMORSTAMINA = "armorstamina";
+    private  static final String KEY_ARMORSTRENGTH = "armorstrength";
+    private  static final String KEY_ARMORDEXTERITY = "armordexterity";
+    private  static final String KEY_ARMORINTELLIGENCE = "armorintelligence";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;

@@ -21,26 +21,27 @@ import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
  */
 public class MenueActivity extends Activity {
 
-    String sexTyp = "";
-    int weaponTyp;
-    ImageView characterImage;
-    TextView characterName;
-    Button inventar;
-    Button ranking;
-    Button einstellungen;
-    Button backToMap;
-    TextView stamina;
-    TextView staminaValue;
-    TextView strength;
-    TextView strengthValue;
-    TextView dexterity;
-    TextView dexterityValue;
-    TextView intelligence;
-    TextView intelligenceValue;
+    private String sexTyp = "";
+    private int weaponTyp;
 
-    CharacterdataDatabase characterdataDb;
-    WeaponDatabase weaponDb;
-    StatsDatabase statsDb;
+    private ImageView characterImage;
+    private TextView characterName;
+    private Button inventar;
+    private Button ranking;
+    private Button einstellungen;
+    private Button backToMap;
+    private TextView stamina;
+    private TextView staminaValue;
+    private TextView strength;
+    private TextView strengthValue;
+    private TextView dexterity;
+    private TextView dexterityValue;
+    private TextView intelligence;
+    private TextView intelligenceValue;
+
+    private CharacterdataDatabase characterdataDb;
+    private WeaponDatabase weaponDb;
+    private StatsDatabase statsDb;
 
 
     @Override

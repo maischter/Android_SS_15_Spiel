@@ -30,7 +30,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stamina"
+        android:text="@string/stamina"
         android:id="@+id/TextViewStamina"
         android:layout_below="@+id/characterNameMenue"
         android:layout_marginBottom="10dp"
@@ -42,7 +42,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Strength"
+        android:text="@string/strength"
         android:id="@+id/TextViewStrength"
         android:layout_below="@+id/characterNameMenue"
         android:layout_toRightOf="@+id/TextViewStamina"
@@ -56,7 +56,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Dexterity"
+        android:text="@string/dexterity"
         android:id="@+id/TextViewDexterity"
         android:layout_below="@+id/characterNameMenue"
         android:layout_toRightOf="@+id/TextViewStrength"
@@ -69,7 +69,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Intelligence"
+        android:text="@string/intelligence"
         android:id="@+id/TextViewIntelligence"
         android:layout_below="@+id/characterNameMenue"
         android:layout_toRightOf="@+id/TextViewDexterity"

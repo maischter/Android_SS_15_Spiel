@@ -19,12 +19,9 @@ public class AchievementDatabase {
 
     private static final String DATABASE_NAME = "Achievement.db";
     private static final int DATABASE_VERSION = 1;
-
     private static final String DATABASE_TABLE = "Achievements";
-
-    public static final String KEY_ID = "_id";
-
-    public static final String KEY_TYP = "typ";
+    private  static final String KEY_ID = "_id";
+    private  static final String KEY_TYP = "typ";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;

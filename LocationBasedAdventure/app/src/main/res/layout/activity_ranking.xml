@@ -415,7 +415,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Klick auf ein Achievement um mehr darüber zu erfahren!"
+        android:text="@string/klickAchievement"
         android:id="@+id/textViewAchievementInfo"
         android:gravity="center"
         android:layout_below="@+id/textView3"

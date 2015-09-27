@@ -15,7 +15,6 @@
         android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="5x Gegengift"
         android:id="@+id/textViewInventarItem"
         android:layout_below="@+id/imageViewInventarItem"
         android:layout_marginLeft="10dp"

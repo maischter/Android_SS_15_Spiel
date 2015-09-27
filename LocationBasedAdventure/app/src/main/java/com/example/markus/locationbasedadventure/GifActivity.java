@@ -14,10 +14,10 @@ import android.widget.ImageView;
  */
 public class GifActivity extends Activity {
 
-    AnimationDrawable animation;
-    int activity;
-   Button buttonWeiter;
-    Button buttonBack;
+    private AnimationDrawable animation;
+    private int activity;
+    private Button buttonWeiter;
+    private Button buttonBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +54,7 @@ public class GifActivity extends Activity {
             @Override
             public void onClick(View v) {
 
-                Intent j = new Intent(getApplicationContext(), MenueActivity.class); //eigentlich MapActivity
+                Intent j = new Intent(getApplicationContext(), MapsActivity.class); //eigentlich MapActivity
                 startActivity(j);
                 finish();
             }

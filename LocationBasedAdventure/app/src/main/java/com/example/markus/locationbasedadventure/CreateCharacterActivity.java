@@ -30,8 +30,8 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     private Spinner typ;
     private String weaponTyp= "Bogen";
     private int weaponNr;
-    CharacterdataDatabase characterdataDb;
-    WeaponDatabase weaponDb;
+    private CharacterdataDatabase characterdataDb;
+    private WeaponDatabase weaponDb;
     private String sexTyp = "Maennlich";
     private String address = "http://sruball.de/game/updateCreateCharacter.php";
     private String usernr ="";

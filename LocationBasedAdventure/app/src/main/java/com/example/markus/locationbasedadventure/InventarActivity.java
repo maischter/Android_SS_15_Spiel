@@ -29,46 +29,46 @@ import java.util.ArrayList;
 public class InventarActivity extends Activity implements ItemListAdapter.ItemListener {
 
 
-    Button back;
-    Button changeWeapon;
-    Button changeArmor;
+    private Button back;
+    private Button changeWeapon;
+    private Button changeArmor;
 
-    ImageView weaponImage;
-    TextView waffen;
-    TextView kindofweapon;
-    TextView damage;
-    TextView hitchance;
-    TextView kritchance;
-    TextView extra;
-    TextView stamina;
-    TextView strength;
-    TextView dexterity;
-    TextView intelligence;
-    TextView damageValue;
-    TextView hitchanceValue;
-    TextView kritchanceValue;
-    TextView extraValue;
-    TextView staminaValue;
-    TextView strengthValue;
-    TextView dexterityValue;
-    TextView intelligenceValue;
-
-
-    TableLayout weaponLayout;
-    TableLayout armorLayout;
+    private  ImageView weaponImage;
+    private  TextView waffen;
+    private  TextView kindofweapon;
+    private  TextView damage;
+    private  TextView hitchance;
+    private  TextView kritchance;
+    private  TextView extra;
+    private  TextView stamina;
+    private  TextView strength;
+    private TextView dexterity;
+    private TextView intelligence;
+    private TextView damageValue;
+    private TextView hitchanceValue;
+    private TextView kritchanceValue;
+    private TextView extraValue;
+    private TextView staminaValue;
+    private TextView strengthValue;
+    private TextView dexterityValue;
+    private TextView intelligenceValue;
 
 
-    ImageView armorImage;
-    TextView armor;
-    TextView kindofarmor;
-    TextView staminaarmor;
-    TextView strengtharmor;
-    TextView dexterityarmor;
-    TextView intelligencearmor;
-    TextView staminaarmorValue;
-    TextView strengtharmorValue;
-    TextView dexterityarmorValue;
-    TextView intelligencearmorValue;
+    private TableLayout weaponLayout;
+    private TableLayout armorLayout;
+
+
+    private ImageView armorImage;
+    private TextView armor;
+    private TextView kindofarmor;
+    private TextView staminaarmor;
+    private TextView strengtharmor;
+    private TextView dexterityarmor;
+    private TextView intelligencearmor;
+    private TextView staminaarmorValue;
+    private TextView strengtharmorValue;
+    private TextView dexterityarmorValue;
+    private TextView intelligencearmorValue;
 
 
     private GridView itemGrid;
@@ -76,11 +76,11 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
 
 
     private ArrayList<Item> itemList = new ArrayList<Item>();
-    ItemListAdapter itemListAdapter;
+    private ItemListAdapter itemListAdapter;
 
-    ItemDatabase itemDb;
-    WeaponDatabase weaponDb;
-    ArmorDatabase armorDb;
+    private ItemDatabase itemDb;
+    private WeaponDatabase weaponDb;
+    private ArmorDatabase armorDb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

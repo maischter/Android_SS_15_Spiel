@@ -20,20 +20,18 @@ public class WeaponDatabase {
 
     private static final String DATABASE_NAME = "Weapon4.db";
     private static final int DATABASE_VERSION = 1;
-
     private static final String DATABASE_TABLE = "Weapons";
 
-    public static final String KEY_ID = "_id";
-
-    public static final String KEY_WEAPON = "weapon";
-    public static final String KEY_WEAPONDAMAGE = "weapondamage";
-    public static final String KEY_WEAPONHITCHANCE = "weaponhitchance";
-    public static final String KEY_WEAPONKRITCHANCE = "weaponkritchance";
-    public static final String KEY_WEAPONEXTRA = "weaponextra";
-    public static final String KEY_WEAPONSTAMINA = "weaponStamina";
-    public static final String KEY_WEAPONSTRENGTH = "weaponstrength";
-    public static final String KEY_WEAPONDEXTERITY = "weapondexterity";
-    public static final String KEY_WEAPONINTELLIGENCE = "weaponintelligence";
+    private static final String KEY_ID = "_id";
+    private static final String KEY_WEAPON = "weapon";
+    private static final String KEY_WEAPONDAMAGE = "weapondamage";
+    private static final String KEY_WEAPONHITCHANCE = "weaponhitchance";
+    private static final String KEY_WEAPONKRITCHANCE = "weaponkritchance";
+    private static final String KEY_WEAPONEXTRA = "weaponextra";
+    private static final String KEY_WEAPONSTAMINA = "weaponStamina";
+    private static final String KEY_WEAPONSTRENGTH = "weaponstrength";
+    private static final String KEY_WEAPONDEXTERITY = "weapondexterity";
+    private static final String KEY_WEAPONINTELLIGENCE = "weaponintelligence";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;

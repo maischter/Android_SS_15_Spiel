@@ -23,22 +23,22 @@ import java.util.ArrayList;
  */
 public class WeaponChangeActivity extends Activity implements WeaponListener {
 
-    Button back;
-    ImageView usedWeapon;
+    private Button back;
+    private ImageView usedWeapon;
 
-    TextView[] tableStatsText = new TextView[8];
-    TextView[] tableStatsValue = new TextView[8];
-    TextView[] tableStatsDiff = new TextView[8];
-    TextView weaponChangeText;
-    TextView weaponTypText;
+    private TextView[] tableStatsText = new TextView[8];
+    private TextView[] tableStatsValue = new TextView[8];
+    private TextView[] tableStatsDiff = new TextView[8];
+    private TextView weaponChangeText;
+    private TextView weaponTypText;
 
     private GridView weaponGrid;
 
 
     private ArrayList<Equip> weaponList = new ArrayList<Equip>();
-    WeaponListAdapter weaponListAdapter;
+    private WeaponListAdapter weaponListAdapter;
 
-    WeaponDatabase  weaponDb;
+    private WeaponDatabase  weaponDb;
 
 
 

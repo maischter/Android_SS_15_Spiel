@@ -21,7 +21,7 @@ import java.util.ArrayList;
  */
 public class CreateCharacterTask extends AsyncTask<String,Integer,Integer>{
 
-    JSONParser jsonParser = new JSONParser();
+    private JSONParser jsonParser = new JSONParser();
     private static final String TAG_SUCCESS = "success";
     private static final String TAG_WEAPONNR = "weaponnr";
     private static final String TAG_DAMAGE = "damage";

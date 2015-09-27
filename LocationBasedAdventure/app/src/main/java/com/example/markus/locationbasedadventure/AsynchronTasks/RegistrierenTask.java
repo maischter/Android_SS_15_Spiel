@@ -24,7 +24,7 @@ public class RegistrierenTask extends AsyncTask<String,Integer,Integer> {
     private int email;
     private ProgressDialog dialog;
 
-    RegistrierenTaskListener registrierenTaskListener;
+    private RegistrierenTaskListener registrierenTaskListener;
 
     public RegistrierenTask(RegistrierenActivity activity , RegistrierenTaskListener registrierenTaskListener){
         this.registrierenTaskListener = registrierenTaskListener;

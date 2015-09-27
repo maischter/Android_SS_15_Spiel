@@ -17,13 +17,13 @@ import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
  */
 public class EinstellungenActivity extends Activity {
 
-    TextView einstellungen;
-    CheckBox angemeldetBleiben;
-    Button kampferklaerung;
-    Button hilfe;
-    Button aboutUs;
-    Button back;
-    CharacterdataDatabase characterdataDb;
+    private TextView einstellungen;
+    private CheckBox angemeldetBleiben;
+    private Button kampferklaerung;
+    private Button hilfe;
+    private Button aboutUs;
+    private Button back;
+    private CharacterdataDatabase characterdataDb;
 
 
     @Override

@@ -15,12 +15,12 @@ import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 
 public class MainActivity extends Activity{
 
-    Button anmeldenPage;
-    Button registrierenPage;
-    CharacterdataDatabase characterdataDb;
-    StatsDatabase statsDb;
-    WeaponDatabase weaponDb;
-    ArmorDatabase armorDb;
+    private Button anmeldenPage;
+    private Button registrierenPage;
+    private CharacterdataDatabase characterdataDb;
+    private StatsDatabase statsDb;
+    private WeaponDatabase weaponDb;
+    private ArmorDatabase armorDb;
 
     private String address2 = "http://sruball.de/game/syndicateData.php";
 

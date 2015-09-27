@@ -22,16 +22,17 @@ import java.util.regex.Pattern;
  */
 public class RegistrierenActivity extends Activity implements RegistrierenTask.RegistrierenTaskListener {
 
-    Button anmelden;
-    Button registrieren;
-    TextView alreadyRegistered;
-    EditText email;
-    EditText passwort;
-    TextView diskurs;
-    CharacterdataDatabase characterdataDb;
+    private Button anmelden;
+    private Button registrieren;
+    private TextView alreadyRegistered;
+    private EditText email;
+    private EditText passwort;
+    private TextView diskurs;
+
+    private CharacterdataDatabase characterdataDb;
+    private String TAG_USERNR = "USERNR";
+    private String emailToRemember;
     private String address = "http://sruball.de/game/insertIntoAnmeldedaten.php";
-    String TAG_USERNR = "USERNR";
-    String emailToRemember;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){

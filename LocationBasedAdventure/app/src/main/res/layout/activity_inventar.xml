@@ -50,7 +50,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:text="Change"
+        android:text="@string/change"
         android:id="@+id/buttonChangeToWeaponChangeActivity"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -87,7 +87,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STA"
+                android:text="@string/staminaShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStaminaInv"
@@ -95,7 +95,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STR"
+                android:text="@string/strengthShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStrengthInv"
@@ -104,7 +104,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEX"
+                android:text="@string/dexterityShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDexterityInv"
@@ -112,7 +112,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INT"
+                android:text="@string/intelligenceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewIntelligenceInv"
@@ -122,7 +122,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DAM"
+                android:text="@string/damageShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDamage"
@@ -130,7 +130,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="HIT"
+                android:text="@string/hitchanceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewHitchance"
@@ -139,7 +139,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="KRI"
+                android:text="@string/kritchanceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewKritchance"
@@ -149,7 +149,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="EXT"
+                android:text="@string/extraShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewExtra"
@@ -252,7 +252,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Einhandschwert und Einhandaxt"
         android:id="@+id/textViewWeaponText"
         android:gravity="center"
         android:layout_above="@+id/tableLayoutWeapon"
@@ -294,7 +293,7 @@
         style="?android:attr/buttonStyleSmall"
         android:layout_width="wrap_content"
         android:layout_height="20dp"
-        android:text="Change"
+        android:text="@string/change"
         android:id="@+id/buttonChangeToArmorChangeActivity"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
@@ -331,7 +330,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STA"
+                android:text="@string/staminaShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStaminaInvArmor"
@@ -339,7 +338,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="STR"
+                android:text="@string/strengthShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewStrengthInvArmor"
@@ -348,7 +347,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="DEX"
+                android:text="@string/dexterityShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewDexterityInvArmor"
@@ -356,7 +355,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="INT"
+                android:text="@string/intelligenceShort"
                 android:textSize="15sp"
                 android:textColor="@color/accent_material_light"
                 android:id="@+id/textViewIntelligenceInvArmor"
@@ -456,7 +455,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="Klick auf ein Item, um mehr darüber zu erfahren!"
+        android:text="@string/klickItem"
         android:id="@+id/textViewItemInfo"
         android:gravity="center"
         android:layout_below="@+id/textViewItems"
