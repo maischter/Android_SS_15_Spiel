@@ -16,6 +16,7 @@ import java.util.ArrayList;
 /**
  * Created by Markus on 01.09.2015.
  */
+
 public class WeaponDatabase {
 
     private static final String DATABASE_NAME = "Weapon4.db";

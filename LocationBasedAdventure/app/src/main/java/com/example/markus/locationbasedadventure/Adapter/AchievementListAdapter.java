@@ -21,7 +21,7 @@ public class AchievementListAdapter extends ArrayAdapter<Achievement> {
 
     private ArrayList<Achievement> achievementItem;
     private Context context;
-    private  AchievementListener achievementListener;
+    private AchievementListener achievementListener;
 
     public AchievementListAdapter(Context context, ArrayList<Achievement> achievementItem, AchievementListener achievementListener) {
         super(context, R.layout.achievement_item, achievementItem);

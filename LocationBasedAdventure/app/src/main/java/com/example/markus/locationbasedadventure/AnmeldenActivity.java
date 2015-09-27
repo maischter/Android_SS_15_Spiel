@@ -52,11 +52,10 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
         super.onDestroy();
     }
 
-
     //Initialises  EditTexts and TextViews
 
     private void initViews() {
-        email = (EditText) findViewById(R.id.editTextEmailAdress);
+        email = (EditText) findViewById(R.id.editTextEmailAdresse);
         passwort = (EditText) findViewById(R.id.editTextPassword);
         notRegistered = (TextView) findViewById(R.id.textViewNotRegistered);
         diskurs = (TextView) findViewById(R.id.textViewDiskurs);
@@ -88,8 +87,6 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     }
 
 
-
-
     //Read CheckBox --> true save StayAngemeldet ind Database
     //Syndycate ServerData with Databases
     //Starts MapActivity
@@ -103,8 +100,6 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
             Intent i = new Intent(getApplicationContext(),MapsActivity.class);
             startActivity(i);
         }
-
-
 
 
     //Saves stayAngemeldet as true into Database
@@ -123,7 +118,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     }
 
     // initialises Databases
-    //open Databases
+    // open Databases
 
     private void initDB(){
         characterdataDb = new CharacterdataDatabase(this);

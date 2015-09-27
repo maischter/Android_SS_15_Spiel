@@ -13,6 +13,7 @@ import android.widget.RatingBar;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Items.Equip;
 import com.example.markus.locationbasedadventure.R;
 
@@ -26,6 +27,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
     private ArrayList<Equip> weaponItem;
     private Context context;
     private WeaponListener weaponListener;
+    private ImageView weaponImage;
 
     public WeaponListAdapter(Context context, ArrayList<Equip> weaponItem, WeaponListener weaponListener) {
         super(context, R.layout.weapon_item, weaponItem);
@@ -128,15 +130,15 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                     alertDialogBuilder
                             .setMessage("Möchtest du diese Waffe als Primärwaffe benutzen?")
                             .setCancelable(false)
-                            .setPositiveButton("Ja",new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
+                            .setPositiveButton("Ja", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
                                     // if this button is clicked, close
                                     // current activity
                                     weaponListener.changeWeapon(aposition);
                                 }
                             })
-                            .setNegativeButton("Nein",new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog,int id) {
+                            .setNegativeButton("Nein", new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
                                     // if this button is clicked, just close
                                     // the dialog box and do nothing
                                     dialog.cancel();
@@ -160,6 +162,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
 
             weaponImage.setImageResource(R.drawable.power_up);
+            selectImage(weapon.getWeaponTyp());
 
             int[] weaponStats = weapon.getWeaponStats();
 
@@ -178,6 +181,59 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
         return v;
     }
+
+    private void selectImage(int weaponTyp) {
+
+
+        switch (weaponTyp) {
+
+            //Bogen
+            case 8:
+                loadBitmap(R.drawable.bogenweiblich, weaponImage);
+                break;
+            //Einhandschwert
+            case 1:
+                loadBitmap(R.drawable.einhandschwertweiblich, weaponImage);
+                break;
+            //EinhandschwertMitSchild
+            case 3:
+                loadBitmap(R.drawable.einhandschwertschildweiblich, weaponImage);
+                break;
+            //Einhandaxt
+            case 2:
+                loadBitmap(R.drawable.einhandaxtweiblich, weaponImage);
+                break;
+            //EinhandaxtMitSchild
+            case 4:
+                loadBitmap(R.drawable.einhandaxtschildweiblich, weaponImage);
+                break;
+            //Gewehr
+            case 9:
+                loadBitmap(R.drawable.gewehrweiblich, weaponImage);
+                break;
+            //Zauberstab
+            case 7:
+                loadBitmap(R.drawable.zauberstabweiblich, weaponImage);
+                break;
+            //Zweihandaxt
+            case 6:
+                loadBitmap(R.drawable.zweihandaxtweiblich, weaponImage);
+                break;
+            //Zweihandschwert
+            case 5:
+                loadBitmap(R.drawable.zweihandschwertweiblich, weaponImage);
+                break;
+        }
+
+    }
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    public void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
+    }
+
 
     private String selectWeaponTypString(int weaponTyp) {
         switch (weaponTyp) {
@@ -199,12 +255,6 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                 return "Zweihandaxt";
             case 5:
                 return "Zweihandschwert";
-            case 10:
-                return "2 Einhandschwerter";
-            case 11:
-                return "Einhandschwert und Einhandaxt";
-            case 12:
-                return "2 Einhandäxte";
 
         }
         return null;

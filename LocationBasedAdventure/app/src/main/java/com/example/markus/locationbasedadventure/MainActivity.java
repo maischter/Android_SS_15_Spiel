@@ -83,7 +83,6 @@ public class MainActivity extends Activity{
         anmeldenPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Intent i = new Intent(getApplicationContext(),BattleActivity.class);
                 Intent i = new Intent(getApplicationContext(),AnmeldenActivity.class);
                 startActivity(i);
             }
