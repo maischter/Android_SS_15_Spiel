@@ -12,7 +12,6 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -109,8 +108,12 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         List<Address> addresses;
         try {
             addresses = geoCoder.getFromLocation(lat, lng, 1);
-            currentLocation.setText("Du bist gerade in: " + addresses.get(0).getLocality());
-            Log.d("asd", "" + addresses.get(0).getLocality());
+            if(addresses.size() > 0) {
+                currentLocation.setText("Du bist gerade in: " + addresses.get(0).getLocality());
+            } else {
+                currentLocation.setText("Du bist gerade in: Unbekannt");
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
