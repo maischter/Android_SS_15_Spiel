@@ -19,7 +19,6 @@ public class EinstellungenActivity extends Activity {
 
     private TextView einstellungen;
     private CheckBox angemeldetBleiben;
-    private Button kampferklaerung;
     private Button hilfe;
     private Button back;
     private CharacterdataDatabase characterdataDb;
@@ -55,15 +54,7 @@ public class EinstellungenActivity extends Activity {
     //buttonListeners
 
     private void initButtons() {
-        kampferklaerung = (Button) findViewById(R.id.buttonKampferklaerung);
-        kampferklaerung.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplication(),GifActivity.class);
-                i.putExtra("activity",1);
-                startActivity(i);
-            }
-        });
+
         hilfe =(Button) findViewById(R.id.buttonHilfe);
         hilfe.setOnClickListener(new View.OnClickListener() {
             @Override

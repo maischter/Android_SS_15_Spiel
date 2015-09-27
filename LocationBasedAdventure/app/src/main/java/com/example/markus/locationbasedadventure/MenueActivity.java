@@ -192,90 +192,49 @@ public class MenueActivity extends Activity {
 
     private void selectImage() {
 
-        if (sexTyp.equals("Weiblich")) {
 
             switch (weaponTyp) {
+
+                //Bogen
                 case 8:
                     loadBitmap(R.drawable.bogenweiblich, characterImage);
                     break;
+                //Einhandschwert
                 case 1:
                     loadBitmap(R.drawable.einhandschwertweiblich, characterImage);
                     break;
+                //EinhandschwertMitSchild
                 case 3:
                     loadBitmap(R.drawable.einhandschwertschildweiblich, characterImage);
                     break;
+                //Einhandaxt
                 case 2:
                     loadBitmap(R.drawable.einhandaxtweiblich, characterImage);
                     break;
+                //EinhandaxtMitSchild
                 case 4:
                     loadBitmap(R.drawable.einhandaxtschildweiblich, characterImage);
                     break;
+                //Gewehr
                 case 9:
                     loadBitmap(R.drawable.gewehrweiblich, characterImage);
                     break;
+                //Zauberstab
                 case 7:
                     loadBitmap(R.drawable.zauberstabweiblich, characterImage);
                     break;
+                //Zweihandaxt
                 case 6:
                     loadBitmap(R.drawable.zweihandaxtweiblich, characterImage);
                     break;
+                //Zweihandschwert
                 case 5:
                     loadBitmap(R.drawable.zweihandschwertweiblich, characterImage);
                     break;
-                case 10:
-                    loadBitmap(R.drawable.zweieinhandschwertweiblich, characterImage);
-                    break;
-
-                case 11:
-                    loadBitmap(R.drawable.einhandaxtundeinhandschwertweiblich, characterImage);
-                    break;
-                case 12:
-                    loadBitmap(R.drawable.zweieinhandaxtweiblich, characterImage);
-                    break;
-            }
-        } else {
-            switch (weaponTyp) {
-                case 8:
-                    loadBitmap(R.drawable.bogenmannlich, characterImage);
-                    break;
-                case 1:
-                    loadBitmap(R.drawable.einhandschwertmannlich, characterImage);
-                    break;
-                case 3:
-                    loadBitmap(R.drawable.einhandschwertschildmannlich, characterImage);
-                    break;
-                case 2:
-                    loadBitmap(R.drawable.einhandaxtmannlich, characterImage);
-                    break;
-                case 4:
-                    loadBitmap(R.drawable.einhandaxtschildmannlich, characterImage);
-                    break;
-                case 9:
-                    loadBitmap(R.drawable.gewehrmannlich, characterImage);
-                    break;
-                case 7:
-                    loadBitmap(R.drawable.zauberstabmannlich, characterImage);
-                    break;
-                case 6:
-                    loadBitmap(R.drawable.zweihandaxtmannlich, characterImage);
-                    break;
-                case 5:
-                    loadBitmap(R.drawable.zweihandschwertmannlich, characterImage);
-                    break;
-                case 10:
-                    loadBitmap(R.drawable.zweieinhandschwertmannlich, characterImage);
-                    break;
-                case 11:
-                    loadBitmap(R.drawable.einhandaxtundeinhandschwertmannlich, characterImage);
-                    break;
-                case 12:
-                    loadBitmap(R.drawable.zweieinhandaxtmannlich, characterImage);
-                    break;
-
             }
 
         }
-    }
+
 
 
     //loads Bitmap into ImageView by Using backgroundTask

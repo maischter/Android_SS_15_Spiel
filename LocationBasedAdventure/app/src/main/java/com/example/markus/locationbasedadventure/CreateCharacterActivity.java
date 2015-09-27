@@ -158,8 +158,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
             @Override
             public void onClick(View v) {
                 saveInput();
-                Intent i = new Intent(getApplicationContext(),GifActivity.class);
-                i.putExtra("activity",2);
+                Intent i = new Intent(getApplicationContext(),MapsActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -212,7 +211,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
     public int getWeaponNr(String weapon){
         switch(weapon){
-            case ("Bogen"):
+            case "Bogen":
                 return 8;
             case "Einhandschwert":
                 return 1;
@@ -241,10 +240,9 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
     private void selectImage() {
 
-        if(sexTyp.equals("Weiblich")) {
 
             switch (weaponTyp) {
-                case ("Bogen"):
+                case "Bogen":
                     loadBitmap(R.drawable.bogenweiblich, characterImage);
                     break;
                 case "Einhandschwert":
@@ -276,43 +274,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
                     loadBitmap(R.drawable.zweihandschwertweiblich, characterImage);
                     break;
             }
-        }
-        else{
-            switch (weaponTyp) {
-                case ("Bogen"):
-                    loadBitmap(R.drawable.bogenmannlich, characterImage);
-                    break;
-                case "Einhandschwert":
-                    if(schild.isChecked()){
-                        weaponTyp = "Einhandschwert mit Schild";
-                        loadBitmap(R.drawable.einhandschwertschildmannlich, characterImage);
-                    }else{
-                        loadBitmap(R.drawable.einhandschwertmannlich, characterImage);
-                    }
-                    break;
-                case "Einhandaxt":
-                    if(schild.isChecked()){
-                        weaponTyp = "Einhandaxt mit Schild";
-                        loadBitmap(R.drawable.einhandaxtschildmannlich, characterImage);
-                    }else{
-                        loadBitmap(R.drawable.einhandaxtmannlich, characterImage);
-                    }
-                    break;
-                case "Gewehr":
-                    loadBitmap(R.drawable.gewehrmannlich, characterImage);
-                    break;
-                case "Zauberstab":
-                    loadBitmap(R.drawable.zauberstabmannlich, characterImage);
-                    break;
-                case "Zwei-Hand-Axt":
-                    loadBitmap(R.drawable.zweihandaxtmannlich, characterImage);
-                    break;
-                case "Zwei-Hand-Schwert":
-                    loadBitmap(R.drawable.zweihandschwertmannlich, characterImage);
-                    break;
-            }
 
-        }
     }
 
 
