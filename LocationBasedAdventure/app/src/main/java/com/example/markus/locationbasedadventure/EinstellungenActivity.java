@@ -21,7 +21,6 @@ public class EinstellungenActivity extends Activity {
     private CheckBox angemeldetBleiben;
     private Button kampferklaerung;
     private Button hilfe;
-    private Button aboutUs;
     private Button back;
     private CharacterdataDatabase characterdataDb;
 
@@ -67,13 +66,6 @@ public class EinstellungenActivity extends Activity {
         });
         hilfe =(Button) findViewById(R.id.buttonHilfe);
         hilfe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        aboutUs = (Button) findViewById(R.id.buttonAboutUs);
-        aboutUs.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

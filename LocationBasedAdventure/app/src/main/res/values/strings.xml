@@ -58,6 +58,9 @@
     <string name="change">Change</string>
     <string name="benutzen">Benutzen</string>
     <string name="entfernen">Entfernen</string>
+    <string name="hilfeActivityText">In diesem Spiel wird per GPS ihr Standort ermittelt und auf der Karte dargestellt. In ihren Umfeld befinden sich mehrere "Monster", treffen sie auf eines davon, müssen sie es bekämpfen.</string>
+    <string name="hilfeActivityText2">Im Inventar werden ihre benutzte Waffe, ihre angelegte Rüstung und ihre gesammelten Items dargestellt. Falls sie mehrere Waffen oder Rüstungen gesammelt haben, können sie diese wechseln.</string>
+    <string name="hilfeActivityText3">Unter dem Menüpunkt Ranking, können sie ihr aktuelle Position im Vergleich zu anderen Spielern sehen und ebenso, welche Achievements sie bereits gesammelt haben.</string>
     <string-array name="sex_array">
         <item>Männlich</item>
         <item>Weiblich</item>

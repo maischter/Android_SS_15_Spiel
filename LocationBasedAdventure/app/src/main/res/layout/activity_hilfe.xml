@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:background="@color/background_material_dark">
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonBackHilfe"
+        android:text="@string/zurueck"
+        android:adjustViewBounds="false"
+        android:background="@color/accent_material_light"
+        android:minWidth="50dp"
+        android:minHeight="30dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hilfeActivityText"
+        android:id="@+id/textViewHilfeActivity"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hilfeActivityText2"
+        android:id="@+id/textViewHilfeActivity2"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:textSize="20dp" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/hilfeActivityText3"
+        android:id="@+id/textViewHilfeActivity3"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="15dp"
+        android:gravity="center_horizontal"
+        android:textSize="20dp" />
+
+</LinearLayout>
