@@ -86,31 +86,7 @@ public class  CharacterdataDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
-    public void updateTon(boolean checked) {
-        ContentValues values = new ContentValues();
-        if(checked){
-            values.put(KEY_TON, 1);
-        }else{
-            values.put(KEY_TON, 0);
-        }
 
-        String where_clause = KEY_ID + "=?";
-        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
-        db.update(DATABASE_TABLE, values, where_clause, where_args);
-    }
-
-    public void updatePushup(boolean checked) {
-        ContentValues values = new ContentValues();
-        if(checked){
-            values.put(KEY_PUSHUP, 1);
-        }else{
-            values.put(KEY_PUSHUP, 0);
-        }
-
-        String where_clause = KEY_ID + "=?";
-        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
-        db.update(DATABASE_TABLE, values, where_clause, where_args);
-    }
 
     // update all values of database row 1
     //Email & Stats werden nicht geupdatet, da diese bereits passen
@@ -194,29 +170,6 @@ public class  CharacterdataDatabase {
         return cursor.getString(4);
     }
 
-    public int getTon(){
-
-        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
-                        KEY_SEX, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
-                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        return cursor.getInt(5);
-    }
-
-    public int getPushup(){
-
-        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
-                        KEY_SEX, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
-                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
-
-        if (cursor != null)
-            cursor.moveToFirst();
-
-        return cursor.getInt(6);
-    }
 
 
 

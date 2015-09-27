@@ -38,9 +38,9 @@ public class BattleActivity extends Activity{
     int sp_str;
     int sp_dex;
     int sp_int;
-    ArmorDatabase armorDb;
-    WeaponDatabase weaponDb;
-    StatsDatabase statsDb;
+    private ArmorDatabase armorDb;
+    private WeaponDatabase weaponDb;
+    private StatsDatabase statsDb;
 
     int [] weaponData;
     int [] armorData;
@@ -64,6 +64,9 @@ public class BattleActivity extends Activity{
     Handler handler = new Handler();
 
     private boolean gameOver = false;
+    private boolean levelUp = false;
+
+    private int receiveExperience = 0;
 
 
     @Override
@@ -412,7 +415,16 @@ public class BattleActivity extends Activity{
             nonPlayerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Ziel HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
-                gameOver();
+                updateExperience();
+
+                checkLevelUp();
+                if(levelUp){
+                    playerWinsLevelUp();
+                }else{
+                    playerWins();
+                }
+
+
             }
 
         }
@@ -420,14 +432,124 @@ public class BattleActivity extends Activity{
             playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Eigene HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
-                gameOver();
+                enemyWins();
             }
         }
     }
 
-    private void gameOver() {
+    private void checkLevelUp() {
+
+        levelUp = true;
+        if(statsDb.getExp()>=100){
+            //Level 1 zu 2
+            statsDb.updateAllExceptExp(2, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+        }else{
+            if(statsDb.getExp()>=175){
+                //Level 2 zu 3
+                statsDb.updateAllExceptExp(3, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+            }else{
+                if(statsDb.getExp()>=306){
+                    //Level 3 zu 4
+                    statsDb.updateAllExceptExp(4, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                }else{
+                    if(statsDb.getExp()>=536){
+                        //Level 4 zu 5
+                        statsDb.updateAllExceptExp(5, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                    }else{
+                        if(statsDb.getExp()>=938){
+                            //Level 5 zu 6
+                            statsDb.updateAllExceptExp(6, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                        }else{
+                            if(statsDb.getExp()>=1548){
+                                //Level 6 zu 7
+                                statsDb.updateAllExceptExp(7, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                            }else{
+                                if(statsDb.getExp()>=2553){
+                                    //Level 7 zu 8
+                                    statsDb.updateAllExceptExp(8, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                }else{
+                                    if(statsDb.getExp()>=4213){
+                                        //Level 8 zu 9
+                                        statsDb.updateAllExceptExp(9, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                    }else{
+                                        if(statsDb.getExp()>=6912){
+                                            //Level 9 zu 10
+                                            statsDb.updateAllExceptExp(10, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                        }else{
+                                            if(statsDb.getExp()>=11470){
+                                                //Level 10 zu 11
+                                                statsDb.updateAllExceptExp(11, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                            }else{
+                                                if(statsDb.getExp()>=17205){
+                                                    //Level 11 zu 12
+                                                    statsDb.updateAllExceptExp(12, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                                }else{
+                                                    levelUp = false;
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private void updateExperience() {
+        if(Player.lvl - NonPlayer.lvl < 0){
+            //Spieler kleineres Level +40Exp
+            statsDb.updateExp(40 + statsDb.getExp());
+            receiveExperience = 40;
+        }else{
+            if(Player.lvl - NonPlayer.lvl==0){
+                //Spieler gleiches Level +20Exp
+                statsDb.updateExp(20 + statsDb.getExp());
+                receiveExperience = 20;
+            }else{
+                //Spieler größes Level +10Exp
+                statsDb.updateExp(10 + statsDb.getExp());
+                receiveExperience = 10;
+            }
+        }
+
+    }
+
+    private void enemyWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Spiel ist zu Ende!")
+        builder.setMessage("Sie haben verloren! Spiel ist zu Ende!")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                    }
+                });
+
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+    private void playerWinsLevelUp() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Sie haben gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient! Glückwunsch, sie haben Level"+ statsDb.getLevel()+"erreicht. +3 für alle Stats!")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                    }
+                });
+
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
+    private void playerWins() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Sie haben gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient!")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {

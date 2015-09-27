@@ -77,6 +77,29 @@ public class StatsDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    public void updateAllExceptExp(int level, int stamina, int strength, int dexterity, int intelligence) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_LEVEL, level);
+        values.put(KEY_STAMINA, stamina);
+        values.put(KEY_STRENGTH, strength);
+        values.put(KEY_DEXTERITY, dexterity);
+        values.put(KEY_INTELLIGENCE, intelligence);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+
+    public void updateExp(int exp) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_EXP, exp);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+
+
     public boolean isEmpty(){
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
         if (cur != null){
@@ -93,9 +116,9 @@ public class StatsDatabase {
     public int[] getStats(){
 
 
-        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_LEVEL,
-                        KEY_EXP,KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
-                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+        Cursor cursor = db.query(DATABASE_TABLE, new String[]{KEY_ID, KEY_LEVEL,
+                        KEY_EXP, KEY_STAMINA, KEY_STRENGTH, KEY_DEXTERITY, KEY_INTELLIGENCE}, KEY_ID + "=?",
+                new String[]{String.valueOf(1)}, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null) {
             cursor.moveToFirst();
@@ -185,6 +208,8 @@ public class StatsDatabase {
 
         return cursor.getInt(6);
     }
+
+
 
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {

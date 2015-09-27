@@ -149,61 +149,95 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_weight="0.20"
-            android:weightSum="1">
+            android:weightSum="1"
+            android:gravity="center_horizontal">
 
             <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
                 android:id="@+id/imageButton_skill1"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textViewAttack"
+                android:text="@string/attack"
+                android:textSize="12sp"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_weight="0.20"
             android:weightSum="1">
 
             <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
                 android:id="@+id/imageButton_skill2"
                 android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textViewDef"
+                android:text="@string/def"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_weight="0.20"
             android:weightSum="1">
 
             <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
                 android:id="@+id/imageButton_skill3"
                 android:scaleType="fitXY"
                 android:adjustViewBounds="true" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textViewPowerUp"
+                android:text="@string/powerUp"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal" />
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
+            android:orientation="vertical"
             android:layout_weight="0.20"
             android:weightSum="1">
 
             <ImageButton
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="67dp"
+                android:layout_height="67dp"
                 android:id="@+id/imageButton_skill4"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:id="@+id/textViewSpecialAttack"
+                android:text="@string/specialAttack"
+                android:textSize="12sp"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_horizontal" />
         </LinearLayout>
 
         <LinearLayout

@@ -40,7 +40,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_createcharacter);
+        setContentView(R.layout.activity_createcharacter);
         getIntentData();
         initDB();
         initViews();

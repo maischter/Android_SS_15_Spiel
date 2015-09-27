@@ -39,7 +39,7 @@ public class AnmeldenActivity extends Activity implements AnmeldenTask.AnmeldenT
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_anmelden);
+        setContentView(R.layout.activity_anmelden);
         initDB();
         initViews();
         initButtons();
