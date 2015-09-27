@@ -87,6 +87,7 @@
     <string name="skillPower">Power-UP</string>
     <string name="skillSpecA">SpecialAttack</string>
     <string name="title_activity_maps">Map</string>
+    <string name="button_menu">Menü</string>
 
     <string name="noGPS">Momentan ist kein GPS verfügbar...</string>
     <string name="title_activity_splash">RATISMON</string>

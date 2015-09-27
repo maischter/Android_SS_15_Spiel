@@ -1,3 +1,4 @@
+
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +9,7 @@
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!--
+
         <TextView
             android:id="@+id/gpsText"
             android:layout_width="match_parent"
@@ -16,7 +17,47 @@
             android:gravity="center"
             android:text="@string/noGPS"
             android:textSize="20sp" />
-            -->
+
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_menu"
+            android:background="@color/light_blue_1"
+            android:layout_alignParentBottom="true"
+            android:layout_margin="5dp"
+            android:id="@+id/buttonMenu" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="200/2300 XP"
+            android:id="@+id/map_level"
+            android:textSize="24sp"
+            android:padding="5dp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="X: 19.0033123, Y: 12.0033123"
+            android:id="@+id/map_pos"
+            android:textSize="9sp"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Du bist momentan in Regensburg"
+            android:id="@+id/map_location"
+            android:paddingLeft="5dp"
+            android:layout_below="@+id/map_level"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
     </RelativeLayout>
 
 

@@ -10,7 +10,11 @@ import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -29,13 +33,21 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private String provider;
     private LocationManager locationManager;
+    Location location;
 
     private double lat, lng;
 
     private LatLng[] enemies = new LatLng[NUM_ENEMIES];
     private boolean enemiesSet = false;
 
-    //private TextView gpsText;
+    private TextView gpsText;
+    private TextView locationCoordiantes, experience, currentLocation;
+    private Button menuButton;
+
+    private StatsDatabase stats = new StatsDatabase(this);
+
+    private boolean uiIsSet = false;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,11 +72,63 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         if ( !locationManager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
             buildAlertMessageNoGps();
         }
+        setupUI();
     }
 
     private void setupUI() {
-        //gpsText = (TextView) findViewById(R.id.gpsText);
-        //gpsText.setVisibility(View.VISIBLE);
+        gpsText = (TextView) findViewById(R.id.gpsText);
+        locationCoordiantes = (TextView) findViewById(R.id.map_pos);
+        experience = (TextView) findViewById(R.id.map_level);
+        currentLocation = (TextView) findViewById(R.id.map_location);
+        menuButton = (Button) findViewById(R.id.buttonMenu);
+
+        menuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(MapsActivity.this, MenueActivity.class);
+                startActivity(i);
+            }
+        });
+
+        setExperienceText();
+        setCoordText();
+        setLocationText();
+
+        uiIsSet = true;
+
+    }
+
+    private void setLocationText() {
+        currentLocation.setText("Du bist gerade in: " + "Regensburg");  //TODO: Momentane Stadt herausfinden!
+    }
+
+    private void setCoordText() {
+        locationCoordiantes.setText("X: " + Math.floor(lat * 1e5) / 1e5 + "  Y: " + Math.floor(lng * 1e5) / 1e5);
+    }
+
+    private void setExperienceText() {
+        stats.open();
+        int nextLvl = calcNextLevel();
+        experience.setText(stats.getExp() + " / " + nextLvl);
+    }
+
+    private int calcNextLevel() {
+        switch(stats.getLevel()) {
+            case 1: return 100;
+            case 2: return 175;
+            case 3: return 306;
+            case 4: return 536;
+            case 5: return 938;
+            case 6: return 1548;
+            case 7: return 2553;
+            case 8: return 4213;
+            case 9: return 6952;
+            case 10: return 11470;
+            case 11: return 17205;
+            case 12: return 25808;
+            default: return 0;
+
+        }
     }
 
 
@@ -92,7 +156,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
         provider = locationManager.getBestProvider(cr, true);
 
-        Location location = locationManager.getLastKnownLocation(provider);
+        location = locationManager.getLastKnownLocation(provider);
 
         if(location !=null){
             onLocationChanged(location);
@@ -175,14 +239,14 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         for(int i = 0; i < NUM_ENEMIES; i++) {
             float [] result = new float[1];
             Location.distanceBetween(lat, lng, enemies[i].latitude, enemies[i].longitude, result);
-            if(result[0] <= 3) {
+            if(result[0] <= 8) {
                 startBattle();
             }
         }
     }
 
     private void removeGPSText() {
-        //gpsText.setVisibility(View.INVISIBLE);
+        gpsText.setVisibility(View.INVISIBLE);
     }
 
     @Override
@@ -191,15 +255,11 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
         lng = location.getLongitude();
         LatLng latLng = new LatLng(lat, lng);
 
-        //removeGPSText();
-        //Log.d("asd ", "" + gpsText.isShown());
-        /*
-        if(gpsText.isShown()){
+        if(uiIsSet) {
             removeGPSText();
-        } */
+        }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-
         mMap.animateCamera(CameraUpdateFactory.zoomTo(18));
 
         if(!enemiesSet) {
@@ -223,4 +283,5 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     public void onProviderDisabled(String provider) {
 
     }
+
 }
