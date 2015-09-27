@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
 
 
@@ -133,7 +133,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonInventar"
         android:id="@+id/ButtonInventar"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_1"
         android:layout_above="@+id/ButtonRanking"
         android:layout_alignRight="@+id/ButtonRanking"
         android:layout_alignEnd="@+id/ButtonRanking"
@@ -145,7 +145,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonRanking"
         android:id="@+id/ButtonRanking"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_1"
         android:layout_above="@+id/ButtonEinstellungen"
         android:layout_alignLeft="@+id/ButtonEinstellungen"
         android:layout_alignStart="@+id/ButtonEinstellungen"
@@ -159,7 +159,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonEinstellungen"
         android:id="@+id/ButtonEinstellungen"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_1"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="10dp"
@@ -171,7 +171,7 @@
         android:layout_height="wrap_content"
         android:text="@string/buttonMap"
         android:id="@+id/ButtonBackToMap"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_2"
 
         android:minWidth="50dp"
         android:minHeight="30dp"

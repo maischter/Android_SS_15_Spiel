@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
 
     <Button
@@ -11,7 +11,7 @@
         android:id="@+id/buttonBackArmorchange"
         android:text="@string/zurueck"
         android:adjustViewBounds="false"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_1"
         android:minWidth="50dp"
         android:minHeight="30dp"
         android:layout_alignParentTop="true"
@@ -26,7 +26,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textSize="25sp"
-        android:textColor="@color/accent_material_light"
+        android:textColor="@color/dark_blue"
         android:id="@+id/textViewChangeArmor"
         android:layout_marginBottom="10dp" />
 
@@ -92,7 +92,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/staminaShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStaminaArmorChange"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/strengthShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStrengthArmorChange"
                 android:layout_marginRight="10dp" />
 
@@ -109,7 +109,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dexterityShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDexterityArmorChange"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -117,7 +117,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/intelligenceShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewIntelligenceArmorChange"
                 android:layout_marginRight="10dp" />
 

@@ -2,14 +2,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/registrieren"
         android:id="@+id/buttonRegistrieren"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_1"
         android:width="200dp"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true" />
@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:text="@string/anmelden"
         android:id="@+id/buttonAnmeldenAkt"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_2"
         android:width="100dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"

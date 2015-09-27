@@ -3,6 +3,7 @@ package com.example.markus.locationbasedadventure;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.Button;
 
@@ -32,6 +33,19 @@ public class MainActivity extends Activity{
         initDB();
         checkAnmeldung();
         initButtons();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        Handler handler  = new Handler();
+        handler.postDelayed(new Runnable() {
+            public void run() {
+                anmeldenPage.setBackgroundColor(getResources().getColor(R.color.light_blue_1));
+                registrierenPage.setBackgroundColor(getResources().getColor(R.color.light_blue_1));
+            }
+        }, 1000);
+
     }
 
 
@@ -84,6 +98,7 @@ public class MainActivity extends Activity{
             @Override
             public void onClick(View v) {
                 //Intent i = new Intent(getApplicationContext(),BattleActivity.class);
+                anmeldenPage.setBackgroundColor(getResources().getColor(R.color.red));
                 Intent i = new Intent(getApplicationContext(),AnmeldenActivity.class);
                 startActivity(i);
             }
@@ -91,6 +106,7 @@ public class MainActivity extends Activity{
         registrierenPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                registrierenPage.setBackgroundColor(getResources().getColor(R.color.red));
                 Intent i = new Intent(getApplicationContext(),RegistrierenActivity.class);
                 startActivity(i);
             }

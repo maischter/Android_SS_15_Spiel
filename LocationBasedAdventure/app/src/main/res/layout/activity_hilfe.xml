@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
     <Button
         android:layout_width="wrap_content"
@@ -11,7 +11,7 @@
         android:id="@+id/buttonBackHilfe"
         android:text="@string/zurueck"
         android:adjustViewBounds="false"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_2"
         android:minWidth="50dp"
         android:minHeight="30dp"
         android:layout_alignParentTop="true"
