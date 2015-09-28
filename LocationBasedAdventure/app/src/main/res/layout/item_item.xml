@@ -4,22 +4,27 @@
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:id="@+id/imageViewInventarItem"
-        android:layout_marginLeft="10dp"
+        android:layout_marginLeft="9dp"
         android:layout_marginTop="10dp"
-        android:scaleType="fitXY" />
+        android:scaleType="fitXY"
+        android:layout_marginStart="9dp"
+        android:layout_marginBottom="3dp" />
 
-    <TextView
-        android:layout_width="60dp"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:id="@+id/textViewInventarItem"
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="15dp"
+        android:text="@string/benutzen"
+        android:id="@+id/buttonItemBenutzen"
         android:layout_below="@+id/imageViewInventarItem"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="2dp"
-        android:textSize="9sp"
-        android:gravity="center"
-        android:layout_marginBottom="5dp" />
+        android:textSize="8sp"
+        android:layout_alignRight="@+id/imageViewInventarItem"
+        android:layout_alignEnd="@+id/imageViewInventarItem"
+        android:background="@color/light_blue_1"
+        android:layout_alignLeft="@+id/imageViewInventarItem"
+        android:layout_alignStart="@+id/imageViewInventarItem" />
+
 </RelativeLayout>

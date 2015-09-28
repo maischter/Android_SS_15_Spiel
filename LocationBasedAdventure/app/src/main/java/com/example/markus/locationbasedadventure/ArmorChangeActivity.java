@@ -72,8 +72,8 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
 
     private String selectImage(int armorTyp) {
         switch(armorTyp){
-            case 1: loadBitmap(R.drawable.power_up,usedArmor);break;
-            case 2: loadBitmap(R.drawable.power_up,usedArmor);break;
+            case 1: loadBitmap(R.drawable.standard_ruestung,usedArmor);break;
+            case 2: loadBitmap(R.drawable.verbesserte_ruestung,usedArmor);break;
         }
         return "Leer";
     }

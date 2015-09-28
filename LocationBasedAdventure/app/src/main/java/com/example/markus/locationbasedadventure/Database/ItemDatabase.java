@@ -83,6 +83,18 @@ public class ItemDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    public int getQuantity(int itemID){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_TYP,
+                        KEY_QUANTITY}, KEY_ID + "=?",
+                new String[] { String.valueOf(itemID) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getInt(2);
+    }
+
     //update weapon and weaponstats of databaserow 1
 
     public void updateAll(int typ, int quantity) {

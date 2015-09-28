@@ -154,7 +154,7 @@ public class BattleActivity extends Activity{
             //Zauberstab
             case 7:loadBitmap(R.drawable.einhandschwert,playerImage);break;
             //Bogen
-            case 8:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+            case 8:loadBitmap(R.drawable.bogen,playerImage);break;
             //Armbrust
             case 9:loadBitmap(R.drawable.einhandschwert,playerImage);break;
         }

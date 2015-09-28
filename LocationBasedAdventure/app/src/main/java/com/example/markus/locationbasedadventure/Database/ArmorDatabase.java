@@ -217,7 +217,7 @@ public class ArmorDatabase {
     private String selectString(int armorTyp) {
         switch(armorTyp){
             case 1: return "Standardrüstung";
-            case 2: return "Verstärke Rüstung";
+            case 2: return "Verbesserte Rüstung";
         }
         return "Leer";
     }

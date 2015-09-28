@@ -56,20 +56,51 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         if (item != null) {
 
             itemImage = (ImageView) v.findViewById(R.id.imageViewInventarItem);
-            TextView itemString = (TextView) v.findViewById(R.id.textViewInventarItem);
+            Button itemBenutzen = (Button) v.findViewById(R.id.buttonItemBenutzen);
 
 
             selectImage(item.getItemTyp());
 
             final int itemTyp =item.getItemTyp();
-
-            itemString.setText("" + item.getItemQuantity() + "x " + selectItemTypString(itemTyp));
+            final int itemID = item.getItemID();
 
 
             itemImage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    itemListener.showItemInfo(itemTyp);
+                    itemListener.showItemInfo(itemTyp, itemID);
+                }
+            });
+            itemBenutzen.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                            context);
+
+                    // set dialog message
+                    alertDialogBuilder
+                            .setMessage("Möchtest du "+selectItemTypString(itemTyp)+" tatsächlich benutzen?")
+                            .setCancelable(false)
+                            .setPositiveButton("Ja",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                     itemListener.itemUsed(itemTyp);
+
+                                }
+                            })
+                            .setNegativeButton(selectItemTypString(itemTyp)+" nicht benutzen.",new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog,int id) {
+                                    // if this button is clicked, just close
+                                    // the dialog box and do nothing
+                                    dialog.cancel();
+                                }
+                            });
+
+                    // create alert dialog
+                    AlertDialog alertDialog = alertDialogBuilder.create();
+
+                    // show it
+                    alertDialog.show();
+
                 }
             });
 
@@ -85,7 +116,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         switch (itemTyp) {
             case 1:loadBitmap(R.drawable.power_up,itemImage);break;
             case 2:loadBitmap(R.drawable.power_up,itemImage);break;
-            case 3: loadBitmap(R.drawable.power_up,itemImage);break;
+            case 3:loadBitmap(R.drawable.power_up,itemImage);break;
         }
     }
 
@@ -116,7 +147,8 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
 
     public interface ItemListener{
-        public void showItemInfo(int itemTyp);
+        public void showItemInfo(int itemTyp, int itemID);
+        public void itemUsed(int itemTyp);
     }
 
 }

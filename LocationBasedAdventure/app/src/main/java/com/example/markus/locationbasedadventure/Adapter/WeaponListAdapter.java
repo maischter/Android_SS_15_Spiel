@@ -85,17 +85,12 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                 context);
 
-                        // set title
-                      //  alertDialogBuilder.setTitle("Your Title");
-
                         // set dialog message
                         alertDialogBuilder
                                 .setMessage("Möchtest du diese Waffe tatsächlich entfernen?")
                                 .setCancelable(false)
                                 .setPositiveButton("Ja",new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog,int id) {
-                                        // if this button is clicked, close
-                                        // current activity
                                         weaponListener.deleteWeapon(aposition);
                                     }
                                 })
@@ -189,7 +184,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
         switch (weaponTyp) {
             //Bogen
             case 8:
-                loadBitmap(R.drawable.einhandschwert, weaponImage);
+                loadBitmap(R.drawable.bogen, weaponImage);
                 break;
             //Einhandschwert
             case 1:
@@ -197,7 +192,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                 break;
             //EinhandschwertMitSchild
             case 3:
-                loadBitmap(R.drawable.einhandschwertschildweiblich, weaponImage);
+                loadBitmap(R.drawable.schwert_schild, weaponImage);
                 break;
             //Einhandaxt
             case 2:
@@ -205,15 +200,15 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                 break;
             //EinhandaxtMitSchild
             case 4:
-                loadBitmap(R.drawable.einhandaxtschildweiblich, weaponImage);
+                loadBitmap(R.drawable.axt_schild, weaponImage);
                 break;
             //Armbrust
             case 9:
-                loadBitmap(R.drawable.gewehrweiblich, weaponImage);
+                loadBitmap(R.drawable.armbrust, weaponImage);
                 break;
             //Zauberstab
             case 7:
-                loadBitmap(R.drawable.zauberstabweiblich, weaponImage);
+                loadBitmap(R.drawable.zauberstab, weaponImage);
                 break;
             //Zweihandaxt
             case 6:

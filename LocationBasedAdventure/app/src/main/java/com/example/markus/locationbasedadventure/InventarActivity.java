@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
+import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.ItemDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
@@ -296,8 +297,8 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
 
     private void selectArmorImage(int armorTyp){
         switch(armorTyp){
-            case 1:loadBitmap(R.drawable.power_up,armorImage);break;
-            case 2:loadBitmap(R.drawable.power_up,armorImage);break;
+            case 1:loadBitmap(R.drawable.standard_ruestung,armorImage);break;
+            case 2:loadBitmap(R.drawable.verbesserte_ruestung,armorImage);break;
         }
 
     }
@@ -307,7 +308,7 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
 
             //Bogen
             case 8:
-                loadBitmap(R.drawable.einhandschwert, weaponImage);
+                loadBitmap(R.drawable.bogen, weaponImage);
                 break;
             //Einhandschwert
             case 1:
@@ -315,7 +316,7 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
                 break;
             //EinhandschwertMitSchild
             case 3:
-                loadBitmap(R.drawable.einhandschwertschildweiblich, weaponImage);
+                loadBitmap(R.drawable.schwert_schild, weaponImage);
                 break;
             //Einhandaxt
             case 2:
@@ -323,15 +324,15 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
                 break;
             //EinhandaxtMitSchild
             case 4:
-                loadBitmap(R.drawable.einhandaxtschildweiblich, weaponImage);
+                loadBitmap(R.drawable.axt_schild, weaponImage);
                 break;
             //Armbrust
             case 9:
-                loadBitmap(R.drawable.gewehrweiblich, weaponImage);
+                loadBitmap(R.drawable.armbrust, weaponImage);
                 break;
             //Zauberstab
             case 7:
-                loadBitmap(R.drawable.zauberstabweiblich, weaponImage);
+                loadBitmap(R.drawable.zauberstab, weaponImage);
                 break;
             //Zweihandaxt
             case 6:
@@ -355,24 +356,28 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
     //setsText to show info about clicked Item
 
     @Override
-    public void showItemInfo(int itemTyp) {
-        itemInfo.setText(selectItem(itemTyp));
+    public void showItemInfo(int itemTyp,int itemID) {
+        itemInfo.setText(selectItem(itemTyp,itemID));
     }
 
+    @Override
+    public void itemUsed(int itemTyp) {
+
+    }
 
 
     //selects Item
     //gets int itemTyp
     //return String
 
-    private String selectItem(int itemTyp) {
+    private String selectItem(int itemTyp,int itemID) {
         switch (itemTyp) {
             case 1:
-                return " Schwacher Trank: Stellt eine geringe Anzahl an LP wieder her.";
+                return itemDb.getQuantity(itemID)+"x Schwacher Trank: Stellt eine geringe Anzahl an LP wieder her.";
             case 2:
-                return "Trank: Stellt eine Anzahl an LP wieder her.";
+                return itemDb.getQuantity(itemID)+"x Trank: Stellt eine Anzahl an LP wieder her.";
             case 3:
-                return "Starker Trank: Stellt eine hohe Anzahl an LP wieder her.";
+                return itemDb.getQuantity(itemID)+"x Starker Trank: Stellt eine hohe Anzahl an LP wieder her.";
             default: return "Leer";
         }
     }

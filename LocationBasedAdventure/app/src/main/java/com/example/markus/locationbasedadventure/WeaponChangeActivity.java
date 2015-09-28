@@ -68,7 +68,6 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
     private void initImageView() {
         usedWeapon = (ImageView)findViewById(R.id.imageViewUsedWeapon);
         selectImage(weaponDb.getWeaponTyp());
-        usedWeapon.setImageResource(R.drawable.power_up);
     }
 
     private void selectImage(int weaponTyp) {
@@ -78,7 +77,7 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
 
             //Bogen
             case 8:
-                loadBitmap(R.drawable.einhandschwert, usedWeapon);
+                loadBitmap(R.drawable.bogen, usedWeapon);
                 break;
             //Einhandschwert
             case 1:
@@ -86,7 +85,7 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
                 break;
             //EinhandschwertMitSchild
             case 3:
-                loadBitmap(R.drawable.einhandschwertschildweiblich, usedWeapon);
+                loadBitmap(R.drawable.schwert_schild, usedWeapon);
                 break;
             //Einhandaxt
             case 2:
@@ -94,15 +93,15 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
                 break;
             //EinhandaxtMitSchild
             case 4:
-                loadBitmap(R.drawable.einhandaxtschildweiblich, usedWeapon);
+                loadBitmap(R.drawable.axt_schild, usedWeapon);
                 break;
             //Armbrust
             case 9:
-                loadBitmap(R.drawable.gewehrweiblich, usedWeapon);
+                loadBitmap(R.drawable.armbrust, usedWeapon);
                 break;
             //Zauberstab
             case 7:
-                loadBitmap(R.drawable.zauberstabweiblich, usedWeapon);
+                loadBitmap(R.drawable.zauberstab, usedWeapon);
                 break;
             //Zweihandaxt
             case 6:

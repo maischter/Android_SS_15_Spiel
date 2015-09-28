@@ -197,7 +197,7 @@ public class MenueActivity extends Activity {
 
                 //Bogen
                 case 8:
-                    loadBitmap(R.drawable.einhandschwert, characterImage);
+                    loadBitmap(R.drawable.bogen, characterImage);
                     break;
                 //Einhandschwert
                 case 1:
@@ -205,7 +205,7 @@ public class MenueActivity extends Activity {
                     break;
                 //EinhandschwertMitSchild
                 case 3:
-                    loadBitmap(R.drawable.einhandschwertschildweiblich, characterImage);
+                    loadBitmap(R.drawable.schwert_schild, characterImage);
                     break;
                 //Einhandaxt
                 case 2:
@@ -213,15 +213,15 @@ public class MenueActivity extends Activity {
                     break;
                 //EinhandaxtMitSchild
                 case 4:
-                    loadBitmap(R.drawable.einhandaxtschildweiblich, characterImage);
+                    loadBitmap(R.drawable.axt_schild, characterImage);
                     break;
                 //Armbrust
                 case 9:
-                    loadBitmap(R.drawable.gewehrweiblich, characterImage);
+                    loadBitmap(R.drawable.armbrust, characterImage);
                     break;
                 //Zauberstab
                 case 7:
-                    loadBitmap(R.drawable.zauberstabweiblich, characterImage);
+                    loadBitmap(R.drawable.zauberstab, characterImage);
                     break;
                 //Zweihandaxt
                 case 6:

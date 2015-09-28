@@ -173,8 +173,8 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
 
     private void selectImage(int armorTyp){
         switch(armorTyp){
-            case 1: loadBitmap(R.drawable.power_up,armorImage);break;
-            case 2: loadBitmap(R.drawable.power_up,armorImage);break;
+            case 1: loadBitmap(R.drawable.standard_ruestung,armorImage);break;
+            case 2: loadBitmap(R.drawable.verbesserte_ruestung,armorImage);break;
         }
     }
 
@@ -186,7 +186,7 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
     private String selectArmorTyp(int armorTyp) {
         switch(armorTyp){
             case 1: return "Standardrüstung";
-            case 2: return "Verstärkte Rüstung";
+            case 2: return "Verbesserte Rüstung";
         }
         return "Leer";
     }
