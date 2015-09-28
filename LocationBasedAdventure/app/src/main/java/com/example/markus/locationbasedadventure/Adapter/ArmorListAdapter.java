@@ -70,6 +70,8 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
             Button deleteArmor = (Button) v.findViewById(R.id.buttonArmorDelete);
             Button changeArmor = (Button) v.findViewById(R.id.buttonChangeArmor);
 
+
+
             deleteArmor.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -166,6 +168,9 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
         return v;
     }
 
+    //loads Image by calling loadBitmap
+    //gets int armorTyp to diff
+
     private void selectImage(int armorTyp){
         switch(armorTyp){
             case 1: loadBitmap(R.drawable.power_up,armorImage);break;
@@ -173,6 +178,10 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
         }
     }
 
+
+    //selects Armor typ
+    //gets int armorTyp
+    //returns String
 
     private String selectArmorTyp(int armorTyp) {
         switch(armorTyp){

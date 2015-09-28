@@ -78,6 +78,9 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         return v;
     }
 
+    //select Image by using loadBitmap
+    //gets int itemTyp to diff
+
     private void selectImage(int itemTyp){
         switch (itemTyp) {
             case 1:loadBitmap(R.drawable.power_up,itemImage);break;
@@ -89,11 +92,17 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         }
     }
 
+    //loads Bitmap into ImageView by Using backgroundTask
 
     private void loadBitmap(int resID , ImageView imageView) {
         BitmapWorkerTask task = new BitmapWorkerTask(imageView);
         task.execute(resID);
     }
+
+
+    //selects Image String
+    //gets int itemTyp
+    //returns String
 
     private String selectItemTypString(int itemTyp) {
         switch (itemTyp) {

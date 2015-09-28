@@ -118,6 +118,10 @@ public class CreateCharacterTask extends AsyncTask<String,Integer,Integer>{
 
 
 
+    //diffs between weapon
+    //gets String weapon
+    //return int weaponTyp
+
     public int diffBetweenWeapons(String weapon){
         switch(weapon){
             case ("Bogen"):

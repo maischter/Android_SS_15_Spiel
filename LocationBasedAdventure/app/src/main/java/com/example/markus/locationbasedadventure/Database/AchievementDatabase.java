@@ -44,6 +44,9 @@ public class AchievementDatabase {
         dbHelper.close();
     }
 
+    //insert a new achievement
+    //gets in achievementTyp
+
     public long insertNewAchievement(int typ) {
 
         ContentValues newValues = new ContentValues();
@@ -63,14 +66,14 @@ public class AchievementDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
-    public void deleteAchievement(int achievementID){
-        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" + achievementID);
-    }
-
+    //deletes AllAchievements
 
     public void deleteAchievements(){
         db.execSQL("DELETE FROM " + DATABASE_TABLE);
     }
+
+
+    //gives all achievementItems back
 
     public ArrayList<Achievement> getAllAchievementItems(){
         ArrayList<Achievement> items = new ArrayList<Achievement>();

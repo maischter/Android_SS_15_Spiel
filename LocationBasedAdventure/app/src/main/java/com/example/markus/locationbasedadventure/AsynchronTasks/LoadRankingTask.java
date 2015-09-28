@@ -114,6 +114,11 @@ public class LoadRankingTask extends AsyncTask<String,Integer,Integer> {
 
     }
 
+    //getsRanking Data
+    //gets int perusernr
+    //gets ArrayList<rankingITEM>
+    //creates a 6( or sometimes just 5) items long List, to show the users position in the ranking
+
     public void getRankingData(ArrayList<RankingItem> arrayList,int persusernr){
         int persRank = 0;
         for(int i=0;i<arrayList.size();i++){

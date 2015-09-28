@@ -52,6 +52,9 @@ public class ArmorDatabase {
     }
 
 
+    //inserts standard values into the Database
+    //called in MainActivity
+
     public long insertAllmainActivity() {
 
         ContentValues newValues = new ContentValues();
@@ -65,6 +68,10 @@ public class ArmorDatabase {
         return db.insert(DATABASE_TABLE, null, newValues);
     }
 
+
+    //insert a new Armor
+    //gets five int Values
+    //if you have 10 Armor, nothing happens
 
     public long insertNewArmor(int armor, int armorstamina, int armorstrength, int armordexterity, int armorintelligence) {
 
@@ -102,6 +109,10 @@ public class ArmorDatabase {
 
 
 
+    //updatesAll values of the database
+    //gets int[] armor as updateValues
+    //gets int id as row number which has to be updated
+
     public void updateAll(int[] armor,int id) {
         ContentValues values = new ContentValues();
         values.put(KEY_ARMOR, armor[0]);
@@ -114,6 +125,8 @@ public class ArmorDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+
+    //return the Used Armor Values as int[]  (= first row)
 
     public int[] getArmor(){
         int[] armorArray = new int[5];
@@ -135,6 +148,8 @@ public class ArmorDatabase {
         return armorArray;
     }
 
+    // return the String of the UsedArmor ( = first row)
+
     public String getArmorString(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_ARMOR,
@@ -144,10 +159,12 @@ public class ArmorDatabase {
         if (cursor != null)
             cursor.moveToFirst();
 
-        return selectImage(cursor.getInt(1));
+        return selectString(cursor.getInt(1));
     }
 
 
+
+    //returns an ArrayList with all ArmorItem except the Used Armor
 
     public ArrayList<Equip> getAllArmorItems(){
         ArrayList<Equip> items = new ArrayList<Equip>();
@@ -176,6 +193,8 @@ public class ArmorDatabase {
     }
 
 
+    //changes an Armor to Used Armor ( = to first row)
+
     public void changeToUsedArmor(Equip armorItem) {
         updateAll(getArmor(),armorItem.getArmorID());
         int[] newNumberOne = new int[5];
@@ -189,7 +208,13 @@ public class ArmorDatabase {
 
     }
 
-    private String selectImage(int armorTyp) {
+
+    // selects Armor String
+    //gets int armorTyp to diff
+    //returns String
+
+
+    private String selectString(int armorTyp) {
         switch(armorTyp){
             case 1: return "Standardrüstung";
             case 2: return "Verstärke Rüstung";
@@ -197,6 +222,9 @@ public class ArmorDatabase {
         return "Leer";
     }
 
+
+    // checks if Database is empty
+    //returns true if Dtabase is empty
 
     public boolean isEmpty(){
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
@@ -211,6 +239,9 @@ public class ArmorDatabase {
         return false;
     }
 
+    //deletes an Armor from Database
+    //gets int armorID to diff between rows to delete
+
     public int deleteArmor(int armorID){
 
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" +armorID);
@@ -219,12 +250,17 @@ public class ArmorDatabase {
     }
 
 
+    //deletes All Row except  the given one
+    //gets int armorID to diff
+
     public int deleteAllExceptRow(int armorID){
 
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "!=" +armorID);
 
         return 0;
     }
+
+
 
     public int deleteAll(){
 

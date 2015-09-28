@@ -181,6 +181,9 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
         return v;
     }
 
+    //selects Image by using loadBitmap
+    //gets int weaponTyp to diff
+
     private void selectImage(int weaponTyp) {
 
         switch (weaponTyp) {
@@ -231,6 +234,10 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
         task.execute(resID);
     }
 
+
+    //selects Weapon String
+    //gets int weaponTyp
+    //returns String
 
     private String selectWeaponTypString(int weaponTyp) {
         switch (weaponTyp) {
