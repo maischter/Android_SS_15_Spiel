@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.markus.locationbasedadventure.Adapter.ArmorListAdapter;
 import com.example.markus.locationbasedadventure.Adapter.ArmorListAdapter.ArmorListener;
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Equip;
@@ -66,7 +67,15 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
 
     private void initImageView() {
         usedArmor = (ImageView) findViewById(R.id.imageViewUsedArmor);
-        usedArmor.setImageResource(R.drawable.power_up);
+        selectImage(armorDb.getArmor()[1]);
+    }
+
+    private String selectImage(int armorTyp) {
+        switch(armorTyp){
+            case 1: loadBitmap(R.drawable.power_up,usedArmor);break;
+            case 2: loadBitmap(R.drawable.power_up,usedArmor);break;
+        }
+        return "Leer";
     }
 
 
@@ -181,6 +190,14 @@ public class ArmorChangeActivity extends Activity implements ArmorListener {
         tableStatsText[1] = (TextView) findViewById(R.id.textViewStrengthArmorChange);
         tableStatsText[2] = (TextView) findViewById(R.id.textViewDexterityArmorChange);
         tableStatsText[3] = (TextView) findViewById(R.id.textViewIntelligenceArmorChange);
+    }
+
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    public void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
     }
 
 

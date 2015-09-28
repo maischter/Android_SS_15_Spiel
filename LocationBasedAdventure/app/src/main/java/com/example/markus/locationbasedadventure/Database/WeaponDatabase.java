@@ -260,19 +260,13 @@ public class WeaponDatabase {
             case 4:
                 return "Einhandaxt mit Schild";
             case 9:
-                return "Gewehr";
+                return "Armbrust";
             case 7:
                 return "Zauberstab";
             case 6:
                 return "Zweihandaxt";
             case 5:
                 return "Zweihandschwert";
-            case 10:
-                return "2 Einhandschwerter";
-            case 11:
-                return "Einhandschwert und Einhandaxt";
-            case 12:
-                return "2 Einhandäxte";
 
         }
         return null;

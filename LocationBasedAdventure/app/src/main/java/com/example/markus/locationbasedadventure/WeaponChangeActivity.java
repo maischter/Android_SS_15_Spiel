@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter.WeaponListener;
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Equip;
 
@@ -66,7 +67,53 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
 
     private void initImageView() {
         usedWeapon = (ImageView)findViewById(R.id.imageViewUsedWeapon);
+        selectImage(weaponDb.getWeaponTyp());
         usedWeapon.setImageResource(R.drawable.power_up);
+    }
+
+    private void selectImage(int weaponTyp) {
+
+
+        switch (weaponTyp) {
+
+            //Bogen
+            case 8:
+                loadBitmap(R.drawable.bogenweiblich, usedWeapon);
+                break;
+            //Einhandschwert
+            case 1:
+                loadBitmap(R.drawable.einhandschwertweiblich, usedWeapon);
+                break;
+            //EinhandschwertMitSchild
+            case 3:
+                loadBitmap(R.drawable.einhandschwertschildweiblich, usedWeapon);
+                break;
+            //Einhandaxt
+            case 2:
+                loadBitmap(R.drawable.einhandaxtweiblich, usedWeapon);
+                break;
+            //EinhandaxtMitSchild
+            case 4:
+                loadBitmap(R.drawable.einhandaxtschildweiblich, usedWeapon);
+                break;
+            //Armbrust
+            case 9:
+                loadBitmap(R.drawable.gewehrweiblich, usedWeapon);
+                break;
+            //Zauberstab
+            case 7:
+                loadBitmap(R.drawable.zauberstabweiblich, usedWeapon);
+                break;
+            //Zweihandaxt
+            case 6:
+                loadBitmap(R.drawable.zweihandaxtweiblich, usedWeapon);
+                break;
+            //Zweihandschwert
+            case 5:
+                loadBitmap(R.drawable.zweihandschwertweiblich, usedWeapon);
+                break;
+        }
+
     }
 
     //update List
@@ -78,6 +125,14 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
         weaponList.clear();
         weaponList.addAll(weaponDb.getAllWeaponItems());
         weaponListAdapter.notifyDataSetChanged();
+    }
+
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    private void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
     }
 
 

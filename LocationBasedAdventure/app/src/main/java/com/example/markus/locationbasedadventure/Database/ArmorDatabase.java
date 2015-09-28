@@ -72,8 +72,6 @@ public class ArmorDatabase {
 
         }else{
 
-
-
             ContentValues newValues = new ContentValues();
 
             newValues.put(KEY_ARMOR,armor);

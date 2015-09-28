@@ -379,17 +379,20 @@ public class BattleActivity extends Activity{
         int dodge = rand.nextInt(99);
         int nullDMG = 0;
         double powerUpDmg = 1.5;
-        lastDmg = skill.getDamage();
+
 
         //kritischer treffer
         if (hit <= source.getHitrate() && crit <= source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
+                lastDmg = skill.getDamage() * source.crit_dmg * nullDMG;
                 target.curHitpoints = target.curHitpoints - skill.getDamage() * source.crit_dmg * nullDMG;
                 defSuspend = false;
             }else if (powerUpSuspend && suspend == 1){
+                lastDmg = skill.getDamage() * source.crit_dmg * powerUpDmg;
                 target.curHitpoints = target.curHitpoints - skill.getDamage() * source.crit_dmg * powerUpDmg;
                 powerUpSuspend=false;
             } else {
+                lastDmg = skill.getDamage() * source.crit_dmg;
                 target.curHitpoints = target.curHitpoints - skill.getDamage() * source.crit_dmg;
                 System.out.println("Kritischer Hit: " + skill.getDamage() * source.crit_dmg );
             }
@@ -398,12 +401,15 @@ public class BattleActivity extends Activity{
         //normal getroffen
         if (hit <= source.getHitrate() && crit > source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
+                lastDmg = skill.getDamage()  * nullDMG;
                 target.curHitpoints = target.curHitpoints - skill.getDamage() * nullDMG;
                 defSuspend = false;
             } else if (powerUpSuspend && suspend == 1){
+                lastDmg = skill.getDamage() * powerUpDmg;
                 target.curHitpoints = target.curHitpoints - skill.getDamage() * powerUpDmg ;
                 powerUpSuspend=false;
             } else {
+                lastDmg = skill.getDamage();
                 target.curHitpoints = target.curHitpoints - skill.getDamage();
                 System.out.println("Normaler Hit:" + skill.getDamage());
             }
@@ -565,7 +571,7 @@ public class BattleActivity extends Activity{
 
     private void enemyWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Du hast verloren! Spiel ist zu Ende!")
+        builder.setMessage("Du hast den Kampf verloren!")
                 .setCancelable(false)
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {

@@ -204,7 +204,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
             case 4:
                 loadBitmap(R.drawable.einhandaxtschildweiblich, weaponImage);
                 break;
-            //Gewehr
+            //Armbrust
             case 9:
                 loadBitmap(R.drawable.gewehrweiblich, weaponImage);
                 break;

@@ -215,7 +215,7 @@ public class MenueActivity extends Activity {
                 case 4:
                     loadBitmap(R.drawable.einhandaxtschildweiblich, characterImage);
                     break;
-                //Gewehr
+                //Armbrust
                 case 9:
                     loadBitmap(R.drawable.gewehrweiblich, characterImage);
                     break;
@@ -239,7 +239,7 @@ public class MenueActivity extends Activity {
 
     //loads Bitmap into ImageView by Using backgroundTask
 
-    public void loadBitmap(int resID , ImageView imageView) {
+    private void loadBitmap(int resID , ImageView imageView) {
         BitmapWorkerTask task = new BitmapWorkerTask(imageView);
         task.execute(resID);
     }

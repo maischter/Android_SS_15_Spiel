@@ -223,7 +223,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
                 return 1;
             case "Einhandaxt":
                 return 2;
-            case "Gewehr":
+            case "Armbrust":
                 return 9;
             case "Zauberstab":
                 return 7;
@@ -267,7 +267,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
                         loadBitmap(R.drawable.einhandaxtweiblich, characterImage);
                     }
                     break;
-                case "Gewehr":
+                case "Armbrust":
                     loadBitmap(R.drawable.gewehrweiblich, characterImage);
                     break;
                 case "Zauberstab":
