@@ -8,9 +8,11 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
@@ -25,42 +27,42 @@ import java.util.Random;
  */
 public class BattleActivity extends Activity{
 
-    ProgressBar playerHitpoints;
-    ProgressBar nonPlayerHitpoints;
-    ImageButton skill_a;
-    ImageButton skill_b;
-    ImageButton skill_c;
-    ImageButton skill_d;
+    private ProgressBar playerHitpoints;
+    private ProgressBar nonPlayerHitpoints;
+    private ImageButton skill_a;
+    private ImageButton skill_b;
+    private ImageButton skill_c;
+    private ImageButton skill_d;
     public Skill [] pSkill;
 
-    int level;
-    int exp;
-    int sp_sta;
-    int sp_str;
-    int sp_dex;
-    int sp_int;
+    private int level;
+    private int exp;
+    private int sp_sta;
+    private int sp_str;
+    private int sp_dex;
+    private int sp_int;
     private ArmorDatabase armorDb;
     private WeaponDatabase weaponDb;
     private StatsDatabase statsDb;
 
-    int [] weaponData;
-    int [] armorData;
+    private int [] weaponData;
+    private int [] armorData;
 
-    final int players_turn = 0;
-    final int nonplayers_turn = 1;
-    int turn;
-    Random rand = new Random();
+    private final int players_turn = 0;
+    private final int nonplayers_turn = 1;
+    private int turn;
+    private Random rand = new Random();
 
-    boolean def;
-    boolean defSuspend;
-    boolean powerUp;
-    boolean powerUpSuspend;
-    boolean special;
-    boolean specialSuspend;
-    int suspend;
+    private boolean def;
+    private boolean defSuspend;
+    private boolean powerUp;
+    private boolean powerUpSuspend;
+    private boolean special;
+    private boolean specialSuspend;
+    private int suspend;
 
-    Entity Player;
-    Entity NonPlayer;
+    private Entity Player;
+    private Entity NonPlayer;
 
     Handler handler = new Handler();
 
@@ -71,6 +73,9 @@ public class BattleActivity extends Activity{
     private int receiveExperience = 0;
     private double lastDmg;
 
+    private TextView playerLevel, enemyLevel;
+    private ImageView playerImage, enemyImage;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +85,8 @@ public class BattleActivity extends Activity{
         initDB();
         initProgressbars();
         initImageButtons();
+        initLevels();
+        initImages();
 
         loadBattleData();
         setBattleStats();
@@ -104,6 +111,21 @@ public class BattleActivity extends Activity{
         powerUpSuspend = false;
         special = false;
         specialSuspend = false;
+    }
+
+    private void initImages() {
+        playerImage = (ImageView) findViewById(R.id.player_image);
+        enemyImage = (ImageView) findViewById(R.id.enemy_image);
+        BitmapWorkerTask task = new BitmapWorkerTask(playerImage);
+        task.execute(R.drawable.zauberstabmannlich);
+        task = new BitmapWorkerTask(enemyImage);
+        task.execute(R.drawable.zauberstabmannlich);
+    }
+
+    private void initLevels() {
+        playerLevel = (TextView) findViewById(R.id.player_level);
+        enemyLevel = (TextView) findViewById(R.id.enemy_level);
+
     }
 
 
@@ -332,6 +354,9 @@ public class BattleActivity extends Activity{
         NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level);
         Player.setEntityEQ(weaponData, armorData);
         NonPlayer.setEntityEQ(weaponData, armorData);
+        playerLevel.setText("Level " + Player.lvl);
+        enemyLevel.setText("Level " + NonPlayer.lvl);
+
     }
 
     private void calcBattleStats(){
@@ -572,7 +597,7 @@ public class BattleActivity extends Activity{
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Du hast gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient!")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
                     }

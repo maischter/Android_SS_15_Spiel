@@ -3,7 +3,7 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
 
     <TextView
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/staminaShort"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStaminaArmorItem"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/strengthShort"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStrengthArmorItem"
                 android:layout_marginRight="10dp" />
 
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dexterityShort"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDexterityArmorItem"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -80,7 +80,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/intelligenceShort"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewIntelligenceArmorItem"
                 android:layout_marginRight="10dp" />
 
@@ -101,7 +101,7 @@
 
                 android:gravity="center"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStaminaValueArmorItem"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -110,7 +110,7 @@
 
                 android:gravity="center"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStrengthValueArmorItem"
                 android:layout_marginRight="10dp" />
 
@@ -120,7 +120,7 @@
 
                 android:gravity="center"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDexterityValueArmorItem"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -129,7 +129,7 @@
 
                 android:gravity="center"
                 android:textSize="12sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewIntelligenceValueArmorItem"
                 android:layout_marginRight="10dp" />
 
@@ -153,7 +153,7 @@
             android:layout_height="wrap_content"
             android:text="@string/benutzen"
             android:id="@+id/buttonChangeArmor"
-            android:background="@color/accent_material_light"
+            android:background="@color/light_blue_1"
             android:layout_marginRight="10dp" />
 
         <Button
@@ -162,7 +162,7 @@
             android:layout_height="wrap_content"
             android:text="@string/entfernen"
             android:id="@+id/buttonArmorDelete"
-            android:background="@color/accent_material_light"
+            android:background="@color/light_blue_1"
             />
 
     </LinearLayout>

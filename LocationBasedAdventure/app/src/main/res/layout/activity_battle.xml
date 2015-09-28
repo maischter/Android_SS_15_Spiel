@@ -44,7 +44,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Level XX"
                     android:layout_weight="0.3"
-                    android:id="@+id/textViewNP" />
+                    android:id="@+id/enemy_level" />
 
                 <ProgressBar
                     style="?android:attr/progressBarStyleHorizontal"
@@ -62,9 +62,10 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageViewNP" />
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:id="@+id/enemy_image"
+                    android:scaleType="fitXY" />
             </LinearLayout>
 
 
@@ -102,7 +103,7 @@
                     android:textAppearance="?android:attr/textAppearanceSmall"
                     android:text="Level XX"
                     android:layout_weight="0.3"
-                    android:id="@+id/textView" />
+                    android:id="@+id/player_level" />
 
                 <ProgressBar
                     style="?android:attr/progressBarStyleHorizontal"
@@ -120,9 +121,10 @@
                 android:weightSum="1">
 
                 <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/imageView" />
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:id="@+id/player_image"
+                    android:scaleType="fitXY" />
             </LinearLayout>
 
 

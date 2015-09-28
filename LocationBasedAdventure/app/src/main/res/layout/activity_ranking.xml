@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
 
     <TextView
@@ -13,7 +13,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:textSize="25sp"
-        android:textColor="@color/accent_material_light"
+        android:textColor="@color/dark_blue"
         android:id="@+id/textView2"
         android:layout_marginBottom="10dp" />
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="@string/achievements"
         android:textSize="25sp"
-        android:textColor="@color/accent_material_light"
+        android:textColor="@color/dark_blue"
         android:id="@+id/textView3"
         android:layout_below="@+id/tableLayout"
         android:layout_centerHorizontal="true"
@@ -48,7 +48,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/rank"
                 android:textSize="17sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRankText"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/charactername"
                 android:textSize="17sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharacternameText"
                 android:layout_marginRight="10dp" />
 
@@ -65,7 +65,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/level"
                 android:textSize="17sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevelText"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/exp"
                 android:textSize="17sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExpText"
                 android:layout_marginRight="10dp" />
 
@@ -220,7 +220,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/empty"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRankLeer"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -229,7 +229,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/empty"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharacternameLeer"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -239,7 +239,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/empty"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevelLeer"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -248,7 +248,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/empty"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExpLeer"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -266,7 +266,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRank4"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -274,7 +274,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharactername4"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -283,7 +283,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevel4"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -291,7 +291,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExp4"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -309,7 +309,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRank5"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -317,7 +317,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharactername5"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -326,7 +326,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevel5"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -334,7 +334,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExp5"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -352,7 +352,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRank6"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -360,7 +360,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharactername6"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -369,7 +369,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevel6"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -377,7 +377,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExp6"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -393,7 +393,7 @@
         android:text="@string/zurueck"
         android:adjustViewBounds="false"
 
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_2"
         android:minWidth="50dp"
         android:minHeight="30dp"
         android:layout_alignParentTop="true"

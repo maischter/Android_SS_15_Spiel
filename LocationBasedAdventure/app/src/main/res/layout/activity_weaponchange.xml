@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_material_dark">
+    android:background="@color/white">
 
 
 
@@ -13,7 +13,7 @@
         android:id="@+id/buttonBackWeaponchange"
         android:text="@string/zurueck"
         android:adjustViewBounds="false"
-        android:background="@color/accent_material_light"
+        android:background="@color/light_blue_2"
         android:minWidth="50dp"
         android:minHeight="30dp"
         android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
         android:textSize="25sp"
-        android:textColor="@color/accent_material_light"
+        android:textColor="@color/dark_blue"
         android:id="@+id/textViewChangeWaffen"
         android:layout_marginBottom="10dp" />
 
@@ -38,8 +38,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/layoutUsedWeapon"
 
-        android:layout_below="@+id/textViewChangeWaffen"
-        android:background="@color/background_floating_material_light">
+        android:layout_below="@+id/textViewChangeWaffen">
 
 
     <ImageView
@@ -94,7 +93,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/staminaShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStaminaWeaponChange"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -102,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/strengthShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStrengthWeaponChange"
                 android:layout_marginRight="10dp" />
 
@@ -111,7 +110,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/dexterityShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDexterityWeaponChange"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -119,7 +118,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/intelligenceShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewIntelligenceWeaponChange"
                 android:layout_marginRight="10dp" />
 
@@ -129,7 +128,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/damageShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDamageWeaponChange"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -137,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/hitchanceShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewHitchanceWeaponChange"
                 android:layout_marginRight="10dp" />
 
@@ -146,7 +145,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/kritchanceShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewKritchanceWeaponChange"
                 android:layout_marginRight="10dp" />
 
@@ -156,7 +155,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/extraShort"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExtraWeaponChange"
                 android:layout_marginRight="10dp" />
 
@@ -177,7 +176,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStaminaWeaponChangeValue"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -186,7 +185,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStrengthWeaponChangeValue"
                 android:layout_marginRight="10dp" />
 
@@ -196,7 +195,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDexterityWeaponChangeValue"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -205,7 +204,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewIntelligenceWeaponChangeValue"
                 android:layout_marginRight="10dp" />
 
@@ -215,7 +214,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDamageWeaponChangeValue"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -224,7 +223,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewHitchanceWeaponChangeValue"
                 android:layout_marginRight="10dp" />
 
@@ -234,7 +233,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewKritchanceWeaponChangeValue"
                 android:layout_marginRight="10dp" />
 
@@ -246,7 +245,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExtraWeaponChangeValue"
                 android:layout_marginRight="10dp" />
 
