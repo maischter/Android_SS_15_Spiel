@@ -7,13 +7,11 @@
     tools:context="com.example.markus.locationbasedadventure.SplashActivity"
     android:background="@color/white">
 
-    <TextView android:text="@string/splash_text"
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/splash"
         android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:textSize="@dimen/splash_text"
-        android:textColor="@color/dark_blue"/>
-
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>
