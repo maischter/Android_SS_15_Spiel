@@ -249,14 +249,14 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
             switch (weaponTyp) {
                 case "Bogen":
-                    loadBitmap(R.drawable.bogenweiblich, characterImage);
+                    loadBitmap(R.drawable.einhandschwert, characterImage);
                     break;
                 case "Einhandschwert":
                     if(schild.isChecked()){
                         weaponTyp = "Einhandschwert mit Schild";
                         loadBitmap(R.drawable.einhandschwertschildweiblich, characterImage);
                     }else{
-                        loadBitmap(R.drawable.einhandschwertweiblich, characterImage);
+                        loadBitmap(R.drawable.einhandschwert, characterImage);
                     }
                     break;
                 case "Einhandaxt":

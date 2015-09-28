@@ -197,11 +197,11 @@ public class MenueActivity extends Activity {
 
                 //Bogen
                 case 8:
-                    loadBitmap(R.drawable.bogenweiblich, characterImage);
+                    loadBitmap(R.drawable.einhandschwert, characterImage);
                     break;
                 //Einhandschwert
                 case 1:
-                    loadBitmap(R.drawable.einhandschwertweiblich, characterImage);
+                    loadBitmap(R.drawable.einhandschwert, characterImage);
                     break;
                 //EinhandschwertMitSchild
                 case 3:

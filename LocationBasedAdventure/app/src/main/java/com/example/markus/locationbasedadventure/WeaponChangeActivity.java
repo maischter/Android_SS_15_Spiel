@@ -78,11 +78,11 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
 
             //Bogen
             case 8:
-                loadBitmap(R.drawable.bogenweiblich, usedWeapon);
+                loadBitmap(R.drawable.einhandschwert, usedWeapon);
                 break;
             //Einhandschwert
             case 1:
-                loadBitmap(R.drawable.einhandschwertweiblich, usedWeapon);
+                loadBitmap(R.drawable.einhandschwert, usedWeapon);
                 break;
             //EinhandschwertMitSchild
             case 3:

@@ -176,7 +176,7 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
 
     private String selectArmorTyp(int armorTyp) {
         switch(armorTyp){
-            case 1: return "Standartrüstung";
+            case 1: return "Standardrüstung";
             case 2: return "Verstärkte Rüstung";
         }
         return "Leer";
