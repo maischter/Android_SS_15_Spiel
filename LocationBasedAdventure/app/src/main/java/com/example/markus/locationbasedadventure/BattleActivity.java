@@ -18,8 +18,10 @@ import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
+import com.example.markus.locationbasedadventure.Items.Equip;
 import com.example.markus.locationbasedadventure.Items.Skill;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 /**
@@ -69,9 +71,13 @@ public class BattleActivity extends Activity{
     private boolean gameOver = false;
     private boolean levelUp = false;
     private boolean firstRound = true;
+    boolean getNewWeapon = false;
 
     private int receiveExperience = 0;
     private double lastDmg;
+
+
+
 
     private TextView playerLevel, enemyLevel;
     private ImageView playerImage, enemyImage;
@@ -471,7 +477,13 @@ public class BattleActivity extends Activity{
                 gameOver = true;
                 checkLevelUp();
                 if(levelUp){
-                    playerWinsLevelUp();
+                    if(getNewWeapon){
+                        playerWinsLevelUpAndNewWeapon();
+                        getNewWeapon=false;
+                    }else{
+                        playerWinsLevelUp();
+                    }
+
                 }else{
                     playerWins();
                 }
@@ -496,18 +508,22 @@ public class BattleActivity extends Activity{
         levelUp = true;
         if(statsDb.getLevel() == 1 &&statsDb.getExp()>=100 && statsDb.getExp() <= 175){
             //Level 1 zu 2
-            statsDb.updateAllExceptExp(2, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
+            statsDb.updateAllExceptExp(2, statsDb.getStamina() + 3, statsDb.getStrength() + 3, statsDb.getDexterity() + 3, statsDb.getIntelligence() + 3);
+
         }else{
             if(statsDb.getLevel() == 2 &&statsDb.getExp()>=175 && statsDb.getExp() <= 306){
                 //Level 2 zu 3
+                getNewWeapon();
                 statsDb.updateAllExceptExp(3, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
             }else{
                 if(statsDb.getLevel() == 3 && statsDb.getExp()>=306 && statsDb.getExp() <= 536){
                     //Level 3 zu 4
-                    statsDb.updateAllExceptExp(4, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
+                    statsDb.updateAllExceptExp(4, statsDb.getStamina() + 3, statsDb.getStrength() + 3, statsDb.getDexterity() + 3, statsDb.getIntelligence() + 3);
+
                 }else{
                     if(statsDb.getExp()>=536 && statsDb.getExp() <= 938){
                         //Level 4 zu 5
+                        getNewWeapon();
                         statsDb.updateAllExceptExp(5, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                     }else{
                         if(statsDb.getExp()>=938 && statsDb.getExp() <= 1548){
@@ -516,6 +532,7 @@ public class BattleActivity extends Activity{
                         }else{
                             if(statsDb.getExp()>=1548 && statsDb.getExp() <= 2553){
                                 //Level 6 zu 7
+                                getNewWeapon();
                                 statsDb.updateAllExceptExp(7, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                             }else{
                                 if(statsDb.getExp()>=2553 && statsDb.getExp() <= 4213){
@@ -524,6 +541,7 @@ public class BattleActivity extends Activity{
                                 }else{
                                     if(statsDb.getExp()>=4213 && statsDb.getExp() <= 6912){
                                         //Level 8 zu 9
+                                        getNewWeapon();
                                         statsDb.updateAllExceptExp(9, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                     }else{
                                         if(statsDb.getExp()>=6912 && statsDb.getExp() <= 11470){
@@ -536,6 +554,7 @@ public class BattleActivity extends Activity{
                                             }else{
                                                 if(statsDb.getExp()>=17205 && statsDb.getExp() <= 25808){
                                                     //Level 11 zu 12
+                                                    getNewWeapon();
                                                     statsDb.updateAllExceptExp(12, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                                 }else{
                                                     levelUp = false;
@@ -549,6 +568,42 @@ public class BattleActivity extends Activity{
                     }
                 }
             }
+        }
+    }
+
+    private void getNewWeapon() {
+        getNewWeapon = false;
+        Random random = new Random();
+        int newWeapon;
+        do {
+            newWeapon = random.nextInt(9)+1;
+            ArrayList<Equip> weapons = weaponDb.getAllWeaponItemsFromStart();
+            for(int i = 0;i<weapons.size();i++){
+                if(weapons.get(i).getWeaponTyp()==newWeapon){
+                    getNewWeapon =false;
+                }else {
+                    getNewWeapon = true;
+                }
+            }
+        }while(!getNewWeapon);
+
+        addNewWeapon(newWeapon);
+
+
+    }
+
+    private void addNewWeapon(int newWeapon) {
+        switch(newWeapon){
+
+            case 1:weaponDb.insertNewWeapon(newWeapon,2,70,25,0,0,0,0,0);break;
+            case 2:weaponDb.insertNewWeapon(newWeapon,4,55,25,0,0,0,0,0);break;
+            case 3:weaponDb.insertNewWeapon(newWeapon,2,85,25,10,1,1,1,1);break;
+            case 4:weaponDb.insertNewWeapon(newWeapon,2,85,25,10,1,1,1,1);break;
+            case 5:weaponDb.insertNewWeapon(newWeapon,4,70,10,0,0,0,0,0);break;
+            case 6:weaponDb.insertNewWeapon(newWeapon,6,55,10,0,0,0,0,0);break;
+            case 7:weaponDb.insertNewWeapon(newWeapon,4,100,10,0,0,0,0,0);break;
+            case 8:weaponDb.insertNewWeapon(newWeapon,1,85,60,0,0,0,0,0);break;
+            case 9:weaponDb.insertNewWeapon(newWeapon,2,70,60,0,0,0,0,0);break;
         }
     }
 
@@ -589,6 +644,7 @@ public class BattleActivity extends Activity{
     }
 
     private void playerWinsLevelUp() {
+
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Du hast gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient! Glückwunsch, du hast Level "+ statsDb.getLevel()+" erreicht. +3 für alle Stats!")
                 .setCancelable(false)
@@ -602,6 +658,23 @@ public class BattleActivity extends Activity{
         alert.show();
 
     }
+
+    private void playerWinsLevelUpAndNewWeapon() {
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Du hast gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient! Glückwunsch, du hast Level "+ statsDb.getLevel()+" erreicht. +3 für alle Stats!\n\nDu hast eine neue Waffe gefunden! Sie wurde deinem Inventar hinzugefügt.")
+                .setCancelable(false)
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                    }
+                });
+
+        final AlertDialog alert = builder.create();
+        alert.show();
+
+    }
+
 
     private void playerWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);

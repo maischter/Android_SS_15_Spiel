@@ -264,7 +264,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
                         weaponTyp = "Einhandaxt mit Schild";
                         loadBitmap(R.drawable.einhandaxtschildweiblich, characterImage);
                     }else{
-                        loadBitmap(R.drawable.einhandaxtweiblich, characterImage);
+                        loadBitmap(R.drawable.einhandaxt, characterImage);
                     }
                     break;
                 case "Armbrust":
@@ -274,10 +274,10 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
                     loadBitmap(R.drawable.zauberstabweiblich, characterImage);
                     break;
                 case "Zwei-Hand-Axt":
-                    loadBitmap(R.drawable.zweihandaxtweiblich, characterImage);
+                    loadBitmap(R.drawable.zweihandaxt, characterImage);
                     break;
                 case "Zwei-Hand-Schwert":
-                    loadBitmap(R.drawable.zweihandschwertweiblich, characterImage);
+                    loadBitmap(R.drawable.zweihandschwert, characterImage);
                     break;
             }
 

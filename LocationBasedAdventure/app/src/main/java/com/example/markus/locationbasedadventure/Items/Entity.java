@@ -138,7 +138,12 @@ public class Entity {
 
         if (statsDiff<-10){
             //kleiner als -10
-            this.lvl = this.lvl -2;
+            if(this.lvl == 2){
+                this.lvl = 1;
+            }else{
+                this.lvl = this.lvl -2;
+            }
+
         }
 
         if (statsDiff<=10 && statsDiff>=2){
@@ -152,7 +157,12 @@ public class Entity {
 
         if (statsDiff<=-2 && statsDiff>=-10) {
             //zwischen 2 und - 10
-            this.lvl = this.lvl-1;
+            if(this.lvl == 1){
+                this.lvl = 1;
+            }else{
+                this.lvl = this.lvl-1;
+            }
+
         }
 
 

@@ -84,6 +84,7 @@ public class MainActivity extends Activity{
             armorDb.insertAllmainActivity();
         }
         itemDb.updateAll(1,2);
+        statsDb.updateAll(2,170,18,18,18,18);
         if(characterdataDb.getStayAngemeldet() == 1){
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
             Intent i = new Intent(getApplicationContext(),MapsActivity.class);
