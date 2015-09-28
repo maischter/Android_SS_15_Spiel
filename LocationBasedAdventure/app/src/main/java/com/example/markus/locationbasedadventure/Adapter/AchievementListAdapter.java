@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Items.Achievement;
 import com.example.markus.locationbasedadventure.Items.Item;
 import com.example.markus.locationbasedadventure.R;
@@ -22,6 +23,7 @@ public class AchievementListAdapter extends ArrayAdapter<Achievement> {
     private ArrayList<Achievement> achievementItem;
     private Context context;
     private AchievementListener achievementListener;
+    private ImageView achievementImage;
 
     public AchievementListAdapter(Context context, ArrayList<Achievement> achievementItem, AchievementListener achievementListener) {
         super(context, R.layout.achievement_item, achievementItem);
@@ -47,10 +49,10 @@ public class AchievementListAdapter extends ArrayAdapter<Achievement> {
 
         if (achievement != null) {
 
-            ImageView achievementImage = (ImageView) v.findViewById(R.id.imageViewAchievementItem);
+            achievementImage = (ImageView) v.findViewById(R.id.imageViewAchievementItem);
 
 
-            achievementImage.setImageResource(R.drawable.power_up);
+            selectImage(achievementTyp);
 
 
             achievementImage.setOnClickListener(new View.OnClickListener() {
@@ -64,6 +66,36 @@ public class AchievementListAdapter extends ArrayAdapter<Achievement> {
         }
 
         return v;
+    }
+
+    private void selectImage(int achievementTyp) {
+        switch (achievementTyp) {
+            case 1:
+                loadBitmap(R.drawable.achievement_level_4, achievementImage);
+                break;
+            case 2:
+                loadBitmap(R.drawable.achievement_level_8, achievementImage);
+                break;
+            case 3:
+                loadBitmap(R.drawable.achievement_level_12, achievementImage);
+                break;
+            case 4:
+                loadBitmap(R.drawable.achievement_5_wins, achievementImage);
+                break;
+            case 5:
+                loadBitmap(R.drawable.achievement_50_wins, achievementImage);
+                break;
+            case 6:
+                loadBitmap(R.drawable.achievement_250_wins, achievementImage);
+                break;
+        }
+    }
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    private void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
     }
 
 

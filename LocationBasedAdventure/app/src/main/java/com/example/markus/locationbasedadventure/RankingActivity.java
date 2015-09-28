@@ -407,8 +407,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     //gets int itemTyp
     //returns String with Info about Achievement
 
-    private String selectAchievement(int itemTyp) {
-        switch (itemTyp) {
+    private String selectAchievement(int achievementTyp) {
+        switch (achievementTyp) {
             case 1:
                 return "Level 4 erreicht!";
             case 2:
