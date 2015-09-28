@@ -8,6 +8,7 @@ import com.example.markus.locationbasedadventure.AnmeldenActivity;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.JSON.JSONParser;
 import com.example.markus.locationbasedadventure.MainActivity;
+import com.example.markus.locationbasedadventure.RankingActivity;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
@@ -38,6 +39,11 @@ public class SyndicateStatsLocalToServerTask extends AsyncTask<String, Integer, 
         db = new CharacterdataDatabase(activity);
     }
 
+
+    public SyndicateStatsLocalToServerTask(RankingActivity activity){
+        dialog = new ProgressDialog(activity);
+        db = new CharacterdataDatabase(activity);
+    }
 
 
     @Override

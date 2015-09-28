@@ -11,9 +11,11 @@ import android.widget.TextView;
 import com.example.markus.locationbasedadventure.Adapter.AchievementListAdapter;
 import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadRankingTask;
+import com.example.markus.locationbasedadventure.AsynchronTasks.SyndicateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.ItemDatabase;
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Items.Achievement;
 import com.example.markus.locationbasedadventure.Items.Item;
 import com.example.markus.locationbasedadventure.Items.RankingItem;
@@ -86,7 +88,9 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
 
     private AchievementDatabase achievementDb;
     private CharacterdataDatabase characterdataDb;
+    private StatsDatabase statsDb;
     private String address = "http://sruball.de/game/getRanking.php";
+    private String address2 = "http://sruball.de/game/syndicateData.php";
 
 
     @Override
@@ -97,6 +101,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         initDB();
         initTextViews();
         initButton();
+        new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
         new LoadRankingTask(this,this).execute(address, characterdataDb.getEmail());
         initGridView();
         initListAdapter();
@@ -141,6 +146,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     protected void onDestroy() {
         characterdataDb.close();
         achievementDb.close();
+        statsDb.close();
         super.onDestroy();
     }
 
@@ -320,6 +326,8 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         characterdataDb.open();
         achievementDb = new AchievementDatabase(this);
         achievementDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
     }
 
 
