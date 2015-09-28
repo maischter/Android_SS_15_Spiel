@@ -37,7 +37,7 @@
         android:id="@+id/layoutUsedArmor"
 
         android:layout_below="@+id/textViewChangeArmor"
-        android:background="@color/background_floating_material_light">
+        android:background="@color/red">
 
 
 
@@ -76,7 +76,8 @@
         android:layout_alignTop="@+id/imageViewUsedArmor"
         android:id="@+id/tableLayoutUsedArmor"
         android:showDividers="middle|beginning|end"
-        android:layout_alignBottom="@+id/imageViewUsedArmor">
+        android:layout_alignBottom="@+id/imageViewUsedArmor"
+        android:layout_marginBottom="5dp">
 
 
         <TableRow

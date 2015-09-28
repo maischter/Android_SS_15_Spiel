@@ -11,7 +11,7 @@ public class  CharacterdataDatabase {
 
     //CharacterDatabase
 
-    private static final String DATABASE_NAME = "Characterdata3.db";
+    private static final String DATABASE_NAME = "Characterdata5.db";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE = "Characterdatas";
     private static final String KEY_ID = "_id";
@@ -19,8 +19,7 @@ public class  CharacterdataDatabase {
     private static final String KEY_CHARCTERNAME = "charactername";
     private static final String KEY_STAYANGEMELDET = "stayangemeldet";
     private static final String KEY_SEX = "sex";
-    private static final String KEY_TON = "ton";
-    private static final String KEY_PUSHUP ="pushup";
+    private static final String KEY_FIGHTS = "fights";
 
     private ToDoDBOpenHelper dbHelper;
     private SQLiteDatabase db;
@@ -58,8 +57,7 @@ public class  CharacterdataDatabase {
         newValues.put(KEY_CHARCTERNAME, "");
         newValues.put(KEY_STAYANGEMELDET, 0);         // Standartmäßig ist stayangemeldet deaktiviert --> 0
         newValues.put(KEY_SEX, "Männlich");
-        newValues.put(KEY_TON, 0);
-        newValues.put(KEY_PUSHUP, 0);
+        newValues.put(KEY_FIGHTS, 0);
 
 
         return db.insert(DATABASE_TABLE, null, newValues);
@@ -81,6 +79,15 @@ public class  CharacterdataDatabase {
     public void updateEmail(String email) {
         ContentValues values = new ContentValues();
         values.put(KEY_EMAIL, email);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+
+    public void updateFights(int fights) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_FIGHTS, fights);
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
@@ -121,7 +128,7 @@ public class  CharacterdataDatabase {
     public int getStayAngemeldet(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
-                        KEY_SEX, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
+                        KEY_SEX, KEY_FIGHTS}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -134,7 +141,7 @@ public class  CharacterdataDatabase {
     public String getEmail(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
-                                                                KEY_SEX, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
+                                                                KEY_SEX, KEY_FIGHTS}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -148,7 +155,7 @@ public class  CharacterdataDatabase {
     public String getCharactername(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
-                        KEY_SEX, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
+                        KEY_SEX, KEY_FIGHTS}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
@@ -161,13 +168,26 @@ public class  CharacterdataDatabase {
     public String getSex(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
-                        KEY_SEX, KEY_TON, KEY_PUSHUP}, KEY_ID + "=?",
+                        KEY_SEX, KEY_FIGHTS}, KEY_ID + "=?",
                 new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
 
         if (cursor != null)
             cursor.moveToFirst();
 
         return cursor.getString(4);
+    }
+
+
+    public int getFights(){
+
+        Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
+                        KEY_SEX, KEY_FIGHTS}, KEY_ID + "=?",
+                new String[] { String.valueOf(1) }, null, null, null, null);            // Immer Zeile 1, weil nur eine Zeile vorhanden
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        return cursor.getInt(5);
     }
 
 
@@ -180,8 +200,7 @@ public class  CharacterdataDatabase {
                 + DATABASE_TABLE + " (" + KEY_ID
                 + " integer primary key autoincrement, " + KEY_EMAIL + " text, " + KEY_CHARCTERNAME
                 + " text, " + KEY_STAYANGEMELDET + " integer, " + KEY_SEX
-                + " text, " + KEY_TON + " integer, " + KEY_PUSHUP
-                + " integer);";
+                + " text, " + KEY_FIGHTS + " integer);";
 
         public ToDoDBOpenHelper(Context c, String dbname,
                                 SQLiteDatabase.CursorFactory factory, int version) {

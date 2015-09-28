@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class WeaponDatabase {
 
-    private static final String DATABASE_NAME = "Weapon4.db";
+    private static final String DATABASE_NAME = "Weapon6.db";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE = "Weapons";
 
@@ -147,6 +147,32 @@ public class WeaponDatabase {
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(id)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+
+    public long insertNewWeapon(int[] weapon) {
+
+        if(getAllWeaponItems().size()==10){
+
+        }else{
+
+            ContentValues newValues = new ContentValues();
+
+
+            newValues.put(KEY_WEAPON, weapon[0]);
+            newValues.put(KEY_WEAPONDAMAGE, weapon[1]);
+            newValues.put(KEY_WEAPONHITCHANCE, weapon[2]);
+            newValues.put(KEY_WEAPONKRITCHANCE, weapon[3]);
+            newValues.put(KEY_WEAPONEXTRA,weapon[4]);
+            newValues.put(KEY_WEAPONSTAMINA, weapon[5]);
+            newValues.put(KEY_WEAPONSTRENGTH, weapon[6]);
+            newValues.put(KEY_WEAPONDEXTERITY, weapon[7]);
+            newValues.put(KEY_WEAPONINTELLIGENCE, weapon[8]);
+
+            return db.insert(DATABASE_TABLE, null, newValues);
+
+        }
+        return 0;
     }
 
 
@@ -321,8 +347,22 @@ public class WeaponDatabase {
 
     public int deleteWeapon(int weaponID){
 
-        //String whereClause = KEY_ID + " = '" + foodieItemID + "'";
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" + weaponID);
+
+        return 0;
+    }
+
+
+    public int deleteAllExceptRow(int weaponID){
+
+        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "!=" + weaponID);
+
+        return 0;
+    }
+
+    public int deleteAll(){
+
+        db.delete(DATABASE_TABLE, null, null);
 
         return 0;
     }

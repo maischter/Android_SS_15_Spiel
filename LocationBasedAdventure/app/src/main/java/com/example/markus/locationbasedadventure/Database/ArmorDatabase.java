@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ArmorDatabase {
 
 
-    private static final String DATABASE_NAME = "Armor4.db";
+    private static final String DATABASE_NAME = "Armor6.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Armors";
@@ -213,8 +213,22 @@ public class ArmorDatabase {
 
     public int deleteArmor(int armorID){
 
-        //String whereClause = KEY_ID + " = '" + foodieItemID + "'";
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" +armorID);
+
+        return 0;
+    }
+
+
+    public int deleteAllExceptRow(int armorID){
+
+        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "!=" +armorID);
+
+        return 0;
+    }
+
+    public int deleteAll(){
+
+        db.delete(DATABASE_TABLE, null, null);
 
         return 0;
     }

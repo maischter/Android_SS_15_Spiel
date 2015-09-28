@@ -410,11 +410,11 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     private String selectAchievement(int itemTyp) {
         switch (itemTyp) {
             case 1:
-                return "Level 5 erreicht!";
+                return "Level 4 erreicht!";
             case 2:
-                return "Level 15 erreicht!";
+                return "Level 8 erreicht!";
             case 3:
-                return "Level 30 erreicht!";
+                return "Level 12 erreicht!";
             case 4:
                 return "5 Kämpfe bestritten!";
             case 5:

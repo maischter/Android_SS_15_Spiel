@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class AchievementDatabase {
 
-    private static final String DATABASE_NAME = "Achievement.db";
+    private static final String DATABASE_NAME = "Achievement1.db";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE = "Achievements";
     private  static final String KEY_ID = "_id";
@@ -64,9 +64,13 @@ public class AchievementDatabase {
     }
 
     public void deleteAchievement(int achievementID){
-        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" +achievementID);
+        db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" + achievementID);
     }
 
+
+    public void deleteAchievements(){
+        db.execSQL("DELETE FROM " + DATABASE_TABLE);
+    }
 
     public ArrayList<Achievement> getAllAchievementItems(){
         ArrayList<Achievement> items = new ArrayList<Achievement>();

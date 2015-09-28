@@ -14,6 +14,7 @@ import android.widget.Spinner;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.CreateCharacterTask;
+import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
@@ -35,6 +36,8 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     private CharacterdataDatabase characterdataDb;
     private WeaponDatabase weaponDb;
     private StatsDatabase statsDb;
+    private ArmorDatabase armorDb;
+    private AchievementDatabase achievementDatabase;
     private String sexTyp = "Maennlich";
     private String address = "http://sruball.de/game/updateCreateCharacter.php";
     private String usernr ="";
@@ -58,6 +61,8 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
         characterdataDb.close();
         weaponDb.close();
         statsDb.close();
+        armorDb.close();
+        achievementDatabase.close();
         super.onDestroy();
     }
 
@@ -80,6 +85,11 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
         weaponDb.open();
         statsDb = new StatsDatabase(this);
         statsDb.open();
+        armorDb = new ArmorDatabase(this);
+        armorDb.open();
+        achievementDatabase = new AchievementDatabase(this);
+        achievementDatabase.open();
+
     }
 
 
@@ -297,8 +307,12 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
     @Override
     public void weaponDataRetrieved(int[] weaponArray) {
+        weaponDb.deleteAllExceptRow(1);
         weaponDb.updateAll(weaponArray, 1);
+        armorDb.deleteAllExceptRow(1);
+        armorDb.updateAll(1,1,1,1,1);
         statsDb.updateAll(1,0,15,15,15,15);
+        achievementDatabase.deleteAchievements();
 
     }
 }

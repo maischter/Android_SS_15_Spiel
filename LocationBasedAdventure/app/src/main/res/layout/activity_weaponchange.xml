@@ -38,7 +38,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/layoutUsedWeapon"
 
-        android:layout_below="@+id/textViewChangeWaffen">
+        android:layout_below="@+id/textViewChangeWaffen"
+        android:background="@color/red">
 
 
     <ImageView
@@ -77,7 +78,8 @@
         android:layout_alignTop="@+id/imageViewUsedWeapon"
         android:id="@+id/tableLayoutUsedWeapon"
         android:showDividers="middle|beginning|end"
-        android:layout_alignBottom="@+id/imageViewUsedWeapon">
+        android:layout_alignBottom="@+id/imageViewUsedWeapon"
+        android:layout_marginBottom="5dp">
 
 
         <TableRow

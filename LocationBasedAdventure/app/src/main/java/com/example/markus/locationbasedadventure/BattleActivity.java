@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
+import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
+import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
@@ -46,6 +48,8 @@ public class BattleActivity extends Activity{
     private ArmorDatabase armorDb;
     private WeaponDatabase weaponDb;
     private StatsDatabase statsDb;
+    private AchievementDatabase achievementDb;
+    private CharacterdataDatabase characterdataDb;
 
     private int [] weaponData;
     private int [] armorData;
@@ -152,6 +156,10 @@ public class BattleActivity extends Activity{
         armorDb.open();
         statsDb = new StatsDatabase(this);
         statsDb.open();
+        achievementDb = new AchievementDatabase(this);
+        achievementDb.open();
+        characterdataDb = new CharacterdataDatabase(this);
+        characterdataDb.open();
     }
 
     private void initImageButtons(){
@@ -231,6 +239,8 @@ public class BattleActivity extends Activity{
         weaponDb.close();
         armorDb.close();
         statsDb.close();
+        achievementDb.close();
+        characterdataDb.close();
         super.onDestroy();
     }
     // KI wählt per Random aus welchen Skill er einsetzt
@@ -259,7 +269,7 @@ public class BattleActivity extends Activity{
 
     private void enemyAttack(Skill skill, Entity player, Entity nonPlayer) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Der Gegner hat " + lastDmg + " erhalten und führt nun einen Gegenangriff aus!")
+        builder.setMessage("Der Gegner hat " + Math.floor(lastDmg) + " erhalten und führt nun einen Gegenangriff aus!")
                 .setCancelable(false);
         final AlertDialog alert = builder.create();
         alert.show();
@@ -322,7 +332,7 @@ public class BattleActivity extends Activity{
             playerLevel.setText("Level " + Player.lvl);
             enemyLevel.setText("Level " + NonPlayer.lvl);
         } else {
-            builder.setMessage("Du hast " + lastDmg + " Schaden erhalten... Nun bist du wieder am Zug!")
+            builder.setMessage("Du hast " + Math.floor(lastDmg) + " Schaden erhalten... Nun bist du wieder am Zug!")
                     .setCancelable(false);
         }
         final AlertDialog alert = builder.create();
@@ -476,6 +486,7 @@ public class BattleActivity extends Activity{
                 updateExperience();
                 gameOver = true;
                 checkLevelUp();
+                countFights();
                 if(levelUp){
                     if(getNewWeapon){
                         playerWinsLevelUpAndNewWeapon();
@@ -497,11 +508,24 @@ public class BattleActivity extends Activity{
             System.out.println("Eigene HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
                 System.out.println(""+Player.lvl+" vs."+ NonPlayer.lvl);
+                countFights();
                 gameOver = true;
                 enemyWins();
+
             }
         }
     }
+
+    private void countFights() {
+        characterdataDb.updateFights(characterdataDb.getFights()+1);
+        switch(characterdataDb.getFights()){
+            case 5: achievementDb.insertNewAchievement(4);break;
+            case 50:achievementDb.insertNewAchievement(5);break;
+            case 250:achievementDb.insertNewAchievement(6);break;
+        }
+    }
+
+
 
     private void checkLevelUp() {
 
@@ -519,7 +543,7 @@ public class BattleActivity extends Activity{
                 if(statsDb.getLevel() == 3 && statsDb.getExp()>=306 && statsDb.getExp() <= 536){
                     //Level 3 zu 4
                     statsDb.updateAllExceptExp(4, statsDb.getStamina() + 3, statsDb.getStrength() + 3, statsDb.getDexterity() + 3, statsDb.getIntelligence() + 3);
-
+                    addAchievementLevel(4);
                 }else{
                     if(statsDb.getExp()>=536 && statsDb.getExp() <= 938){
                         //Level 4 zu 5
@@ -542,7 +566,8 @@ public class BattleActivity extends Activity{
                                     if(statsDb.getExp()>=4213 && statsDb.getExp() <= 6912){
                                         //Level 8 zu 9
                                         getNewWeapon();
-                                        statsDb.updateAllExceptExp(9, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
+                                        statsDb.updateAllExceptExp(9, statsDb.getStamina() + 3, statsDb.getStrength() + 3, statsDb.getDexterity() + 3, statsDb.getIntelligence() + 3);
+                                        addAchievementLevel(8);
                                     }else{
                                         if(statsDb.getExp()>=6912 && statsDb.getExp() <= 11470){
                                             //Level 9 zu 10
@@ -555,7 +580,8 @@ public class BattleActivity extends Activity{
                                                 if(statsDb.getExp()>=17205 && statsDb.getExp() <= 25808){
                                                     //Level 11 zu 12
                                                     getNewWeapon();
-                                                    statsDb.updateAllExceptExp(12, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
+                                                    statsDb.updateAllExceptExp(12, statsDb.getStamina() + 3, statsDb.getStrength() + 3, statsDb.getDexterity() + 3, statsDb.getIntelligence() + 3);
+                                                    addAchievementLevel(12);
                                                 }else{
                                                     levelUp = false;
                                                 }
@@ -568,6 +594,14 @@ public class BattleActivity extends Activity{
                     }
                 }
             }
+        }
+    }
+
+    private void addAchievementLevel(int level) {
+        switch(level){
+            case 4:achievementDb.insertNewAchievement(1);break;
+            case 8:achievementDb.insertNewAchievement(2);break;
+            case 12:achievementDb.insertNewAchievement(3);break;
         }
     }
 

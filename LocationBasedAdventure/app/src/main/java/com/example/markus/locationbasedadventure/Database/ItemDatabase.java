@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ItemDatabase {
 
 
-    private static final String DATABASE_NAME = "Item.db";
+    private static final String DATABASE_NAME = "Item1.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Items";

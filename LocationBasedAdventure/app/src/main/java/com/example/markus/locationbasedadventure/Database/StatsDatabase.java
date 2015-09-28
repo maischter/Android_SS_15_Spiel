@@ -13,7 +13,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 public class StatsDatabase {
 
 
-    private static final String DATABASE_NAME = "Stat3.db";
+    private static final String DATABASE_NAME = "Stat4.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Stats";
