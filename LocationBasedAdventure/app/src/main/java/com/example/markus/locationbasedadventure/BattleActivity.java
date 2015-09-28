@@ -612,7 +612,7 @@ public class BattleActivity extends Activity{
 
     //checks if a new Level is reached and updates Stats DB
     //handles receiving a new Weapon in some LevelUps
-    //handles recieving achievments by levelUps
+    //handles recieving achievements by levelUps
 
     private void checkLevelUp() {
 
@@ -771,6 +771,7 @@ public class BattleActivity extends Activity{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                        finish();
                     }
                 });
 
@@ -791,6 +792,7 @@ public class BattleActivity extends Activity{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                        finish();
                     }
                 });
 
@@ -798,8 +800,12 @@ public class BattleActivity extends Activity{
         alert.show();
 
     }
+
+
+
     //handles end of the fight if player wins and has a level up and recieives a new Weapon
     //shows alert and switches to mapActivity
+
     private void playerWinsLevelUpAndNewWeapon() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -808,6 +814,7 @@ public class BattleActivity extends Activity{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                        finish();
                     }
                 });
 
@@ -825,6 +832,7 @@ public class BattleActivity extends Activity{
                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
+                        finish();
                     }
                 });
 
