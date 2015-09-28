@@ -50,7 +50,8 @@ public class RegistrierenActivity extends Activity implements RegistrierenTask.R
     @Override
     protected void onDestroy() {
         characterdataDb.close();
-        super.onDestroy();    }
+        super.onDestroy();
+    }
 
     //initialises Database
     // Open Database

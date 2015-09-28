@@ -24,19 +24,24 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:id="@+id/characterNameMenue"
-        android:layout_marginBottom="15dp"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:layout_marginBottom="7dp" />
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/characterNameMenue"
+        android:layout_marginTop="8dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/stamina"
         android:id="@+id/TextViewStamina"
-        android:layout_below="@+id/characterNameMenue"
         android:layout_marginBottom="10dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="50dp"
         android:textStyle="bold" />
 
     <TextView
@@ -44,12 +49,10 @@
         android:layout_height="wrap_content"
         android:text="@string/strength"
         android:id="@+id/TextViewStrength"
-        android:layout_below="@+id/characterNameMenue"
         android:layout_toRightOf="@+id/TextViewStamina"
         android:layout_toEndOf="@+id/TextViewStamina"
 
         android:layout_marginLeft="20dp"
-        android:layout_marginStart="40dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold" />
 
@@ -58,11 +61,9 @@
         android:layout_height="wrap_content"
         android:text="@string/dexterity"
         android:id="@+id/TextViewDexterity"
-        android:layout_below="@+id/characterNameMenue"
         android:layout_toRightOf="@+id/TextViewStrength"
         android:layout_toEndOf="@+id/TextViewStrength"
         android:layout_marginLeft="20dp"
-        android:layout_marginStart="40dp"
         android:layout_marginBottom="10dp"
         android:textStyle="bold" />
 
@@ -71,14 +72,13 @@
         android:layout_height="wrap_content"
         android:text="@string/intelligence"
         android:id="@+id/TextViewIntelligence"
-        android:layout_below="@+id/characterNameMenue"
+        android:textStyle="bold"
+        android:layout_alignParentTop="true"
         android:layout_toRightOf="@+id/TextViewDexterity"
         android:layout_toEndOf="@+id/TextViewDexterity"
         android:layout_marginLeft="20dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginBottom="10dp"
-        android:textStyle="bold"
-        android:layout_marginRight="20dp" />
+        android:layout_marginBottom="10dp" />
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -91,6 +91,8 @@
         android:layout_alignStart="@+id/TextViewStamina"
         android:layout_toLeftOf="@+id/TextViewStrength"
         android:layout_toStartOf="@+id/TextViewStrength" />
+
+
 
     <TextView
         android:layout_width="wrap_content"
@@ -113,20 +115,21 @@
         android:layout_alignTop="@+id/TextViewStrengthValue"
         android:layout_alignLeft="@+id/TextViewDexterity"
         android:layout_alignStart="@+id/TextViewDexterity"
-        android:layout_alignRight="@+id/ButtonInventar"
-        android:layout_alignEnd="@+id/ButtonInventar" />
+        android:layout_alignRight="@+id/TextViewDexterity"
+        android:layout_alignEnd="@+id/TextViewDexterity" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/TextViewIntelligenceValue"
-        android:layout_below="@+id/TextViewIntelligence"
-        android:layout_marginBottom="10dp"
         android:gravity="center"
-        android:layout_alignRight="@+id/TextViewIntelligence"
-        android:layout_alignEnd="@+id/TextViewIntelligence"
+        android:layout_alignTop="@+id/TextViewDexterityValue"
         android:layout_alignLeft="@+id/TextViewIntelligence"
-        android:layout_alignStart="@+id/TextViewIntelligence" />
+        android:layout_alignStart="@+id/TextViewIntelligence"
+        android:layout_alignRight="@+id/TextViewIntelligence"
+        android:layout_alignEnd="@+id/TextViewIntelligence" />
+
+    </RelativeLayout>
 
     <Button
         android:layout_width="wrap_content"
