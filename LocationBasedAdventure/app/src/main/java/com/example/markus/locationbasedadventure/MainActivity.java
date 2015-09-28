@@ -85,9 +85,8 @@ public class MainActivity extends Activity{
         }
         if(itemDb.isEmpty()){
             itemDb.insertNewItem(1,2);
-        }else{
-            itemDb.updateAll(1,2);
         }
+
 
         if(characterdataDb.getStayAngemeldet() == 1){
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());

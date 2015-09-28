@@ -137,7 +137,7 @@ public class BattleActivity extends Activity{
     //selects Player Image by weaponTyp from Database
     //uses background task to load the Image
 
-    private void selectPlayerImage(){loadBitmap(R.drawable.einhandschwert,playerImage);
+    private void selectPlayerImage(){loadBitmap(R.drawable.player,playerImage);
     }
 
     //selects the image of the enemy

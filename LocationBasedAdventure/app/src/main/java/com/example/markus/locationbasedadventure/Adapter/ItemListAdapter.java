@@ -114,9 +114,9 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     private void selectImage(int itemTyp){
         switch (itemTyp) {
-            case 1:loadBitmap(R.drawable.power_up,itemImage);break;
-            case 2:loadBitmap(R.drawable.power_up,itemImage);break;
-            case 3:loadBitmap(R.drawable.power_up,itemImage);break;
+            case 1:loadBitmap(R.drawable.pot1,itemImage);break;
+            case 2:loadBitmap(R.drawable.pot2,itemImage);break;
+            case 3:loadBitmap(R.drawable.pot3,itemImage);break;
         }
     }
 
