@@ -262,13 +262,6 @@ public class ArmorDatabase {
 
 
 
-    public int deleteAll(){
-
-        db.delete(DATABASE_TABLE, null, null);
-
-        return 0;
-    }
-
 
 
     private class ToDoDBOpenHelper extends SQLiteOpenHelper {

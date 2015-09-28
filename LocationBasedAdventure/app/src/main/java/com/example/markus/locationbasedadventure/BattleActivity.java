@@ -350,12 +350,16 @@ public class BattleActivity extends Activity{
         }
     }
 
+    //sets Buttons not Clickable because enemy is on turn
+
     private void nonplayersTurn(){
         skill_a.setClickable(false);
         skill_b.setClickable(false);
         skill_c.setClickable(false);
         skill_d.setClickable(false);
     }
+
+    //checks who is on turn next
 
     private void nextTurn(){
         if (turn==players_turn){
@@ -372,6 +376,10 @@ public class BattleActivity extends Activity{
 
 
     }
+
+
+    //shows the Messages after a turn
+    //uses Alerts
 
     private void showTurnMsg() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -397,6 +405,9 @@ public class BattleActivity extends Activity{
         }, 3000);
     }
 
+
+    // loads the battle Data
+
     public void loadBattleData(){
         //Laden aller relevanten Kampfdaten
         int [] battleData = statsDb.getStats(); // KEY_ID,KEY_LEVEL,
@@ -419,6 +430,8 @@ public class BattleActivity extends Activity{
         // KEY_WEAPONSTAMINA, KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE
     }
 
+    //sets the Battle Stats
+
     private void setBattleStats() {
         Player = new Entity(sp_sta,sp_str,sp_dex,sp_int,level);
         NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level);
@@ -426,6 +439,8 @@ public class BattleActivity extends Activity{
         NonPlayer.setEntityEQ(weaponData, armorData);
 
     }
+
+    //calculates the Battle Stats
 
     private void calcBattleStats(){
         int [] randomValues = new int [4];
@@ -439,6 +454,11 @@ public class BattleActivity extends Activity{
         NonPlayer.calcDetailStats();
     }
 
+
+
+    //updates the Progress bar
+    //calculates Hit oder no Hit
+    //handles end of the Game(== hp smaller 0)
 
     private void updateProgressbar(Skill skill,Entity target, Entity source) {
         // random skill dmg hier
@@ -567,6 +587,10 @@ public class BattleActivity extends Activity{
         }
     }
 
+
+    //counts the number of fights
+    //changes it in Database
+
     private void countFights() {
         characterdataDb.updateFights(characterdataDb.getFights() + 1);
         switch(characterdataDb.getFights()){
@@ -577,6 +601,10 @@ public class BattleActivity extends Activity{
     }
 
 
+
+    //checks if a new Level is reached and updates Stats DB
+    //handles receiving a new Weapon in some LevelUps
+    //handles recieving achievments by levelUps
 
     private void checkLevelUp() {
 
@@ -648,6 +676,9 @@ public class BattleActivity extends Activity{
         }
     }
 
+
+    //inserts an Achievment by Level up
+
     private void addAchievementLevel(int level) {
         switch(level){
             case 4:achievementDb.insertNewAchievement(1);break;
@@ -655,6 +686,8 @@ public class BattleActivity extends Activity{
             case 12:achievementDb.insertNewAchievement(3);break;
         }
     }
+
+    //handles random receiving of a new Weapon
 
     private void getNewWeapon() {
         getNewWeapon = false;
@@ -677,6 +710,9 @@ public class BattleActivity extends Activity{
 
     }
 
+
+    //dds the new Weapon to the Database
+
     private void addNewWeapon(int newWeapon) {
         switch(newWeapon){
 
@@ -691,6 +727,9 @@ public class BattleActivity extends Activity{
             case 9:weaponDb.insertNewWeapon(newWeapon,2,70,60,0,0,0,0,0);break;
         }
     }
+
+    //updates the Experience
+    //diffs between level of the enemy
 
     private void updateExperience() {
         System.out.println(""+Player.lvl+" vs."+ NonPlayer.lvl);
@@ -713,6 +752,10 @@ public class BattleActivity extends Activity{
 
     }
 
+
+    //handles end of the fight if enemy wins
+    //shows alert and switches to mapActivity
+
     private void enemyWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Du hast den Kampf verloren!")
@@ -727,6 +770,10 @@ public class BattleActivity extends Activity{
         alert.show();
 
     }
+
+
+    //handles end of the fight if player wins and has a levelUp
+    //shows alert and switches to mapActivity
 
     private void playerWinsLevelUp() {
 
@@ -743,7 +790,8 @@ public class BattleActivity extends Activity{
         alert.show();
 
     }
-
+    //handles end of the fight if player wins and has a level up and recieives a new Weapon
+    //shows alert and switches to mapActivity
     private void playerWinsLevelUpAndNewWeapon() {
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -760,7 +808,8 @@ public class BattleActivity extends Activity{
 
     }
 
-
+    //handles end of the fight if player wins
+    //shows alert and switches to mapActivity
     private void playerWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setMessage("Du hast gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient!")

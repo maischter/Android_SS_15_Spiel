@@ -56,6 +56,9 @@ public class WeaponDatabase {
     }
 
 
+    //inserts standart values into Database
+    //is called in MainActivity
+
     public long insertAllmainActivity() {
 
         ContentValues newValues = new ContentValues();
@@ -74,6 +77,10 @@ public class WeaponDatabase {
     }
 
 
+
+    //inserts a new Weapon
+    //gets nine int Values to insert
+    //if aleready ten Item are in Datbase, nothing habens
 
     public long insertNewWeapon(int weapon, int weapondamage, int weaponhitchance, int weaponkritchance,int weaponextra, int weaponstamina, int weaponstrength, int weapondexterity, int weaponintelligence) {
 
@@ -101,6 +108,9 @@ public class WeaponDatabase {
         return 0;
     }
 
+
+    //checks if Database is empty
+    //returns true if Database is empty
 
     public boolean isEmpty(){
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
@@ -133,6 +143,9 @@ public class WeaponDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    //updates all Values
+    //get int[], gets int id to diff between row
+
     public void updateAll(int[] weapon,int id) {
         ContentValues values = new ContentValues();
         values.put(KEY_WEAPON, weapon[0]);
@@ -149,6 +162,10 @@ public class WeaponDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+
+    //inserts a new Weapon
+    //gets int[] Values to insert
+    //if aleready ten Item are in Datbase, nothing habens
 
     public long insertNewWeapon(int[] weapon) {
 
@@ -175,14 +192,7 @@ public class WeaponDatabase {
         return 0;
     }
 
-
-    public Cursor getCursorForAllItemsFromDatabase() {
-        Cursor cursor = db.query(DATABASE_TABLE, new String[]{ KEY_ID, KEY_WEAPON, KEY_WEAPONDAMAGE,KEY_WEAPONHITCHANCE,
-                                                                KEY_WEAPONKRITCHANCE, KEY_WEAPONEXTRA, KEY_WEAPONSTAMINA,
-                                                                KEY_WEAPONSTRENGTH, KEY_WEAPONDEXTERITY, KEY_WEAPONINTELLIGENCE
-                                                                }, null, null, null, null, null);
-        return cursor;
-    }
+    // gets int[] with all weapon values
 
     public int[] getWeapon(){
         int[] weaponArray = new int[9];
@@ -212,6 +222,8 @@ public class WeaponDatabase {
     }
 
 
+    //gets int weaponTyp of Used Weapon ( = row one)
+
     public int getWeaponTyp() {
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[]{KEY_ID, KEY_WEAPON,
@@ -224,6 +236,8 @@ public class WeaponDatabase {
 
         return cursor.getInt(1);
     }
+
+    //gets String of Used Weapon ( row one)
 
     public String getWeaponString() {
 
@@ -240,6 +254,8 @@ public class WeaponDatabase {
         return selectImage(cursor.getInt(1));
     }
 
+
+    //gets List with all Items back
 
     public ArrayList<Equip> getAllWeaponItemsFromStart(){
         ArrayList<Equip> items = new ArrayList<Equip>();
@@ -269,7 +285,7 @@ public class WeaponDatabase {
 
     }
 
-
+    //gets List with all Items except the first one back
 
     public ArrayList<Equip> getAllWeaponItems(){
         ArrayList<Equip> items = new ArrayList<Equip>();
@@ -302,6 +318,10 @@ public class WeaponDatabase {
 
     }
 
+    //slects an String
+    //gets int weaponTyp
+    //return String
+
     private String selectImage(int weaponTyp) {
         switch (weaponTyp) {
             case 8:
@@ -328,6 +348,8 @@ public class WeaponDatabase {
 
     }
 
+    //changes a weapon to used Weapon (row one)
+
     public void changeToUsedWeapon(Equip weaponItem) {
         updateAll(getWeapon(),weaponItem.getWeaponID());
         int[] newNumberOne = new int[9];
@@ -345,6 +367,9 @@ public class WeaponDatabase {
 
     }
 
+
+    //deletes a Weapon
+
     public int deleteWeapon(int weaponID){
 
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" + weaponID);
@@ -353,6 +378,8 @@ public class WeaponDatabase {
     }
 
 
+    //deletes all weapons ExceptRow1
+
     public int deleteAllExceptRow(int weaponID){
 
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "!=" + weaponID);
@@ -360,12 +387,7 @@ public class WeaponDatabase {
         return 0;
     }
 
-    public int deleteAll(){
 
-        db.delete(DATABASE_TABLE, null, null);
-
-        return 0;
-    }
 
 
 

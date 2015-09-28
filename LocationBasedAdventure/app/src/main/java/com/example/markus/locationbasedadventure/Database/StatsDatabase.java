@@ -48,6 +48,10 @@ public class StatsDatabase {
     }
 
 
+
+    //insert standard values to Database
+    //is called in MainActivity
+
     public long insertAllmainActivity() {
 
         ContentValues newValues = new ContentValues();
@@ -77,6 +81,8 @@ public class StatsDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    //updates all Values Except Exp
+
     public void updateAllExceptExp(int level, int stamina, int strength, int dexterity, int intelligence) {
         ContentValues values = new ContentValues();
         values.put(KEY_LEVEL, level);
@@ -89,6 +95,7 @@ public class StatsDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    //updates Exp
 
     public void updateExp(int exp) {
         ContentValues values = new ContentValues();
@@ -99,6 +106,10 @@ public class StatsDatabase {
     }
 
 
+
+
+    //checks if Database is empty
+    //returns true if Database is empty
 
     public boolean isEmpty(){
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
@@ -112,6 +123,9 @@ public class StatsDatabase {
         }
         return false;
     }
+
+
+    //gets all Values as int[]
 
     public int[] getStats(){
 
@@ -135,6 +149,9 @@ public class StatsDatabase {
         return statsArray;
     }
 
+
+    //gets Level
+
     public int getLevel(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_LEVEL,
@@ -146,6 +163,8 @@ public class StatsDatabase {
 
         return cursor.getInt(1);
     }
+
+    //gets Exp
 
     public int getExp(){
 
@@ -159,6 +178,8 @@ public class StatsDatabase {
         return cursor.getInt(2);
     }
 
+    //gets Stamina
+
     public int getStamina(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_LEVEL,
@@ -170,6 +191,9 @@ public class StatsDatabase {
 
         return cursor.getInt(3);
     }
+
+
+    //gets Strength
 
     public int getStrength(){
 
@@ -184,6 +208,8 @@ public class StatsDatabase {
     }
 
 
+    //gets Dexterity
+
     public int getDexterity(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID,KEY_LEVEL,
@@ -196,6 +222,7 @@ public class StatsDatabase {
         return cursor.getInt(5);
     }
 
+    //gets Intelligence
 
     public int getIntelligence(){
 

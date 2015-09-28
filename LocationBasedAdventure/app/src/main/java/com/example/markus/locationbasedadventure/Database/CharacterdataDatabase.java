@@ -74,7 +74,7 @@ public class  CharacterdataDatabase {
     }
 
 
-
+    //updates Email adress
 
     public void updateEmail(String email) {
         ContentValues values = new ContentValues();
@@ -84,6 +84,8 @@ public class  CharacterdataDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+
+    //updates the number of fights
 
     public void updateFights(int fights) {
         ContentValues values = new ContentValues();
@@ -109,6 +111,8 @@ public class  CharacterdataDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+    //checks if Database is empty
+    //returns true if database is emtpy
 
     public boolean isEmpty(){
         Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
@@ -137,6 +141,7 @@ public class  CharacterdataDatabase {
             return cursor.getInt(3);
     }
 
+    //returns String Email
 
     public String getEmail(){
 
@@ -152,6 +157,8 @@ public class  CharacterdataDatabase {
     }
 
 
+    //returns String Charactername
+
     public String getCharactername(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
@@ -165,6 +172,8 @@ public class  CharacterdataDatabase {
     }
 
 
+    //returns String Sex
+
     public String getSex(){
 
         Cursor cursor = db.query(DATABASE_TABLE, new String[] { KEY_ID, KEY_EMAIL, KEY_CHARCTERNAME, KEY_STAYANGEMELDET,
@@ -177,6 +186,7 @@ public class  CharacterdataDatabase {
         return cursor.getString(4);
     }
 
+    //returns int number of fights
 
     public int getFights(){
 

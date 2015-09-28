@@ -48,6 +48,9 @@ public class ItemDatabase {
         dbHelper.close();
     }
 
+    //inserts new Item
+    //gets item typ and item quantity
+
     public long insertNewItem(int typ, int quantity) {
 
         ContentValues newValues = new ContentValues();
@@ -69,11 +72,16 @@ public class ItemDatabase {
         db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
+
+    //deletes an item
+
     public void deleteItem(int itemID){
 
         db.execSQL("DELETE FROM " + DATABASE_TABLE + " WHERE " + KEY_ID + "=" +itemID);
     }
 
+
+    //gives back an list of allItems
 
     public ArrayList<Item> getAllItemItems(){
         ArrayList<Item> items = new ArrayList<Item>();

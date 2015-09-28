@@ -45,9 +45,14 @@ public class Entity {
 
     }
 
+    //sets EntitiyEQ
+
     public void setEntityEQ(int [] weaponData, int [] armorData){
         this.entityEQ = new Equip (weaponData, armorData);
     }
+
+
+    //calculates EQ Stats
 
     public void calcEqStats(){
         System.out.println("Hans"+ entityEQ.getArmorStats()[0]);
@@ -83,6 +88,8 @@ public class Entity {
         return -1;
     }
 
+    //calculate DetailStats
+
     public void calcDetailStats (){
         if (entityEQ.weaponTyp==1 || entityEQ.weaponTyp==2 || entityEQ.weaponTyp==3 || entityEQ.weaponTyp==4 || entityEQ.weaponTyp==5 || entityEQ.weaponTyp==6
                 || entityEQ.weaponTyp==10 || entityEQ.weaponTyp==11 || entityEQ.weaponTyp==12) { // Physical DMG
@@ -109,6 +116,8 @@ public class Entity {
 
 
     }
+
+    //randomize the Stats of the Enemy
 
     public void randomizeStats(int [] randomValues){
         int [] newStats = new int [4];
