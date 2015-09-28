@@ -7,7 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
@@ -59,7 +58,8 @@ public class EinstellungenActivity extends Activity {
         hilfe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), HilfeActivity.class);
+                startActivity(intent);
             }
         });
         back = (Button) findViewById(R.id.buttonBackEinstellungen);

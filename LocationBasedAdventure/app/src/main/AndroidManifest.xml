@@ -22,12 +22,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name" >
-            <!--
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter> -->
         </activity>
         <activity
             android:name=".AnmeldenActivity"
@@ -39,10 +33,6 @@
         </activity>
         <activity
             android:name=".CreateCharacterActivity"
-            android:label="@string/app_name" >
-        </activity>
-        <activity
-            android:name=".GifActivity"
             android:label="@string/app_name" >
         </activity>
         <activity
@@ -71,6 +61,9 @@
         </activity>
         <activity
             android:name=".ArmorChangeActivity"
+            android:label="@string/app_name" >
+        </activity>
+        <activity android:name=".HilfeActivity"
             android:label="@string/app_name" >
         </activity>
 

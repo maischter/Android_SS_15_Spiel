@@ -9,15 +9,12 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Adapter.AchievementListAdapter;
-import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadRankingTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.SyndicateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
-import com.example.markus.locationbasedadventure.Database.ItemDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Items.Achievement;
-import com.example.markus.locationbasedadventure.Items.Item;
 import com.example.markus.locationbasedadventure.Items.RankingItem;
 
 import java.util.ArrayList;
@@ -359,31 +356,31 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     //setsBackgroundColor of Row1 to Normal (==black)
 
     private void setBackgroundRow1Normal(){
-        tablerow1.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
+        tablerow1.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
     }
 
     //setsBackgroundColor of Row2 to Normal (==black)
 
     private void setBackgroundRow2Normal(){
-        tablerow2.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
+        tablerow2.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
     }
 
     //setsBackgroundColor of Row3 to Normal (==black)
 
     private void setBackgroundRow3Normal(){
-        tablerow3.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
+        tablerow3.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
     }
 
     //setsBackgroundColor of Row5 to Highlight (==white)
 
     private void setBackgroundRow5Highlight() {
-        tablerow5.setBackgroundColor(getResources().getColor(R.color.background_material_light));
+        tablerow5.setBackgroundColor(getResources().getColor(R.color.light_blue_1));
     }
 
     //setsBackgroundColor of Row5 to Normal (==black)
 
     private void setBackgroundRow5Normal() {
-        tablerow5.setBackgroundColor(getResources().getColor(R.color.background_material_dark));
+        tablerow5.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
     }
 
     //setsBackgroundColor of Row1,2,3 to Normal (==black)

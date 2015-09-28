@@ -90,7 +90,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRank1"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -98,7 +98,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharactername1"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -107,7 +107,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevel1"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -115,7 +115,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExp1"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRank2"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -141,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharactername2"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -150,7 +150,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevel2"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -158,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExp2"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -176,7 +176,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewRank3"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -184,7 +184,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewCharactername3"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -193,7 +193,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewLevel3"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>
@@ -201,7 +201,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewExp3"
                 android:layout_marginRight="10dp"
                 android:gravity="center"/>

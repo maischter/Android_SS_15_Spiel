@@ -138,7 +138,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStaminaArmorChangeValue"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -147,7 +147,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewStrengthArmorChangeValue"
                 android:layout_marginRight="10dp" />
 
@@ -157,7 +157,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewDexterityArmorChangeValue"
                 android:layout_marginRight="10dp" />
             <TextView
@@ -166,7 +166,7 @@
 
                 android:gravity="center"
                 android:textSize="15sp"
-                android:textColor="@color/accent_material_light"
+                android:textColor="@color/dark_blue"
                 android:id="@+id/textViewIntelligenceArmorChangeValue"
                 android:layout_marginRight="10dp" />
 
