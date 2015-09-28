@@ -25,17 +25,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:ems="10"
-        android:textSize="15sp"
-        android:id="@+id/editTextPasswordReg"
-        android:hint="@string/passwordHint"
-        android:layout_below="@+id/editTextEmailAdressReg"
-        android:layout_marginLeft="60dp"
-        android:layout_marginRight="60dp"/>
+
 
     <EditText
         android:layout_width="match_parent"
@@ -51,6 +41,18 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
+        android:layout_marginLeft="60dp"
+        android:layout_marginRight="60dp"/>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:ems="10"
+        android:textSize="15sp"
+        android:id="@+id/editTextPasswordReg"
+        android:hint="@string/passwordHint"
+        android:layout_below="@+id/editTextEmailAdressReg"
         android:layout_marginLeft="60dp"
         android:layout_marginRight="60dp"/>
 

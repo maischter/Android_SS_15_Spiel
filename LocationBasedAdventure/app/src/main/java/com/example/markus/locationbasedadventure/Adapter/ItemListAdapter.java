@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Items.Equip;
 import com.example.markus.locationbasedadventure.Items.Item;
 import com.example.markus.locationbasedadventure.R;
@@ -30,6 +31,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private ArrayList<Item> itemItem;
     private Context context;
     private ItemListener itemListener;
+    private ImageView itemImage;
 
     public ItemListAdapter(Context context, ArrayList<Item> itemItem, ItemListener itemListener) {
         super(context, R.layout.item_item, itemItem);
@@ -53,12 +55,11 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
         if (item != null) {
 
-            ImageView itemImage = (ImageView) v.findViewById(R.id.imageViewInventarItem);
+            itemImage = (ImageView) v.findViewById(R.id.imageViewInventarItem);
             TextView itemString = (TextView) v.findViewById(R.id.textViewInventarItem);
 
 
-            itemImage.setImageResource(R.drawable.power_up);
-
+            selectImage(item.getItemTyp());
 
             final int itemTyp =item.getItemTyp();
 
@@ -75,6 +76,23 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
         }
 
         return v;
+    }
+
+    private void selectImage(int itemTyp){
+        switch (itemTyp) {
+            case 1:loadBitmap(R.drawable.power_up,itemImage);break;
+            case 2:loadBitmap(R.drawable.power_up,itemImage);break;
+            case 3: loadBitmap(R.drawable.power_up,itemImage);break;
+            case 4: loadBitmap(R.drawable.power_up,itemImage);break;
+            case 5: loadBitmap(R.drawable.power_up,itemImage);break;
+            case 6: loadBitmap(R.drawable.power_up,itemImage);break;
+        }
+    }
+
+
+    private void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
     }
 
     private String selectItemTypString(int itemTyp) {

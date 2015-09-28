@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Items.Equip;
 import com.example.markus.locationbasedadventure.R;
 
@@ -25,6 +26,7 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
     private ArrayList<Equip> armorItem;
     private Context context;
     private ArmorListener armorListener;
+    private ImageView armorImage;
 
     public ArmorListAdapter(Context context, ArrayList<Equip> armorItem,ArmorListener armorListener) {
         super(context, R.layout.armor_item, armorItem);
@@ -51,7 +53,7 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
 
             TextView armorText = (TextView) v.findViewById(R.id.textViewArmorItemText);
 
-            ImageView armorImage = (ImageView) v.findViewById(R.id.imageViewArmorItem);
+            armorImage = (ImageView) v.findViewById(R.id.imageViewArmorItem);
 
             TextView stamina = (TextView) v.findViewById(R.id.textViewStaminaArmorItem);
             TextView strength = (TextView) v.findViewById(R.id.textViewStrengthArmorItem);
@@ -115,7 +117,7 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
 
                     // set dialog message
                     alertDialogBuilder
-                            .setMessage("Möchtest du diese Rüstung brnutzen?")
+                            .setMessage("Möchtest du diese Rüstung benutzen?")
                             .setCancelable(false)
                             .setPositiveButton("Ja",new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,int id) {
@@ -149,10 +151,10 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
             });
 
 
-            armorImage.setImageResource(R.drawable.power_up);
+            selectImage(armor.getArmorTyp());
 
 
-            armorText.setText(selectImage(armor.getArmorTyp()));
+            armorText.setText(selectArmorTyp(armor.getArmorTyp()));
             int[] armorStats = armor.getArmorStats();
             staminaValue.setText(""+armorStats[0]);
             strengthValue.setText(""+armorStats[1]);
@@ -164,12 +166,27 @@ public class ArmorListAdapter extends ArrayAdapter<Equip> {
         return v;
     }
 
+    private void selectImage(int armorTyp){
+        switch(armorTyp){
+            case 1: loadBitmap(R.drawable.power_up,armorImage);break;
+            case 2: loadBitmap(R.drawable.power_up,armorImage);break;
+        }
+    }
 
-    private String selectImage(int armorTyp) {
+
+    private String selectArmorTyp(int armorTyp) {
         switch(armorTyp){
             case 1: return "Standartrüstung";
+            case 2: return "Verstärkte Rüstung";
         }
         return "Leer";
+    }
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    private void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
     }
 
 

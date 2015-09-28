@@ -55,7 +55,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
             TextView weaponText = (TextView) v.findViewById(R.id.textViewWeaponItemText);
 
-            ImageView weaponImage = (ImageView) v.findViewById(R.id.imageViewWeaponItem);
+            weaponImage = (ImageView) v.findViewById(R.id.imageViewWeaponItem);
 
             TextView stamina = (TextView) v.findViewById(R.id.textViewStaminaWeaponItem);
             TextView strength = (TextView) v.findViewById(R.id.textViewStrengthWeaponItem);
@@ -161,7 +161,6 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
             });
 
 
-            weaponImage.setImageResource(R.drawable.power_up);
             selectImage(weapon.getWeaponTyp());
 
             int[] weaponStats = weapon.getWeaponStats();
@@ -184,9 +183,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
     private void selectImage(int weaponTyp) {
 
-
         switch (weaponTyp) {
-
             //Bogen
             case 8:
                 loadBitmap(R.drawable.bogenweiblich, weaponImage);
@@ -229,7 +226,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
 
     //loads Bitmap into ImageView by Using backgroundTask
 
-    public void loadBitmap(int resID , ImageView imageView) {
+    private void loadBitmap(int resID , ImageView imageView) {
         BitmapWorkerTask task = new BitmapWorkerTask(imageView);
         task.execute(resID);
     }

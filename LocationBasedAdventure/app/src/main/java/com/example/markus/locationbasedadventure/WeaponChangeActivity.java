@@ -38,7 +38,7 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
     private ArrayList<Equip> weaponList = new ArrayList<Equip>();
     private WeaponListAdapter weaponListAdapter;
 
-    private WeaponDatabase  weaponDb;
+    private WeaponDatabase weaponDb;
 
 
 

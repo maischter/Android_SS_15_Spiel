@@ -10,6 +10,7 @@ import android.widget.Button;
 import com.example.markus.locationbasedadventure.AsynchronTasks.SyndicateStatsLocalToServerTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.ItemDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 
@@ -22,6 +23,7 @@ public class MainActivity extends Activity{
     private StatsDatabase statsDb;
     private WeaponDatabase weaponDb;
     private ArmorDatabase armorDb;
+    private ItemDatabase itemDb;
 
     private String address2 = "http://sruball.de/game/syndicateData.php";
 
@@ -57,6 +59,7 @@ public class MainActivity extends Activity{
         statsDb.close();
         armorDb.close();
         weaponDb.close();
+        itemDb.close();
         super.onDestroy();
     }
 
@@ -80,6 +83,7 @@ public class MainActivity extends Activity{
         if(armorDb.isEmpty()) {
             armorDb.insertAllmainActivity();
         }
+        itemDb.updateAll(1,2);
         if(characterdataDb.getStayAngemeldet() == 1){
             new SyndicateStatsLocalToServerTask(this).execute(address2,characterdataDb.getEmail(),""+statsDb.getLevel(),""+statsDb.getExp(),""+statsDb.getStamina(),""+statsDb.getStrength(),""+statsDb.getDexterity(),""+statsDb.getIntelligence());
             Intent i = new Intent(getApplicationContext(),MapsActivity.class);
@@ -127,6 +131,8 @@ public class MainActivity extends Activity{
         weaponDb.open();
         armorDb = new ArmorDatabase(this);
         armorDb.open();
+        itemDb = new ItemDatabase(this);
+        itemDb.open();
     }
 
 }

@@ -14,7 +14,9 @@ import android.widget.Spinner;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.AsynchronTasks.CreateCharacterTask;
+import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 
 /**
@@ -32,6 +34,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     private int weaponNr;
     private CharacterdataDatabase characterdataDb;
     private WeaponDatabase weaponDb;
+    private StatsDatabase statsDb;
     private String sexTyp = "Maennlich";
     private String address = "http://sruball.de/game/updateCreateCharacter.php";
     private String usernr ="";
@@ -54,6 +57,7 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
     protected void onDestroy() {
         characterdataDb.close();
         weaponDb.close();
+        statsDb.close();
         super.onDestroy();
     }
 
@@ -74,11 +78,13 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
         characterdataDb.open();
         weaponDb = new WeaponDatabase(this);
         weaponDb.open();
+        statsDb = new StatsDatabase(this);
+        statsDb.open();
     }
 
 
 
-    // Initialises Spinners
+    //Initialises Spinners
     //SpinnerListener
 
     private void initSpinners() {
@@ -291,7 +297,9 @@ public class CreateCharacterActivity extends Activity implements CreateCharacter
 
     @Override
     public void weaponDataRetrieved(int[] weaponArray) {
-        weaponDb.updateAll(weaponArray,1);
+        weaponDb.updateAll(weaponArray, 1);
+        statsDb.updateAll(1,0,15,15,15,15);
+
     }
 }
 
