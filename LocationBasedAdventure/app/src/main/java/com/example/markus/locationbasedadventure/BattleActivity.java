@@ -123,14 +123,56 @@ public class BattleActivity extends Activity{
         specialSuspend = false;
     }
 
+    //initialises the Image of player and enemy
+
     private void initImages() {
         playerImage = (ImageView) findViewById(R.id.player_image);
         enemyImage = (ImageView) findViewById(R.id.enemy_image);
-        BitmapWorkerTask task = new BitmapWorkerTask(playerImage);
-        task.execute(R.drawable.zauberstabmannlich);
-        task = new BitmapWorkerTask(enemyImage);
-        task.execute(R.drawable.zauberstabmannlich);
+        selectPlayerImage();
+        selectEnemyImage();
     }
+
+    //selects Player Image by weaponTyp from Database
+    //uses background task to load the Image
+
+    private void selectPlayerImage(){
+        switch(weaponDb.getWeaponTyp()){
+            //Einhandschwert
+            case 1:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+            //Einhandaxt
+            case 2:loadBitmap(R.drawable.einhandaxt,playerImage);break;
+            //Einhandschwert mit Schild
+            case 3:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+            //Einhandaxt mit Schild
+            case 4:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+            //Zweihandschwert
+            case 5:loadBitmap(R.drawable.zweihandschwert,playerImage);break;
+            //Zweihandaxt
+            case 6:loadBitmap(R.drawable.zweihandaxt,playerImage);break;
+            //Zauberstab
+            case 7:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+            //Bogen
+            case 8:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+            //Armbrust
+            case 9:loadBitmap(R.drawable.einhandschwert,playerImage);break;
+        }
+    }
+
+    //selects the image of the enemy
+
+    public void selectEnemyImage(){
+        loadBitmap(R.drawable.special_attk,enemyImage);
+    }
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    private void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
+    }
+
+
+
 
     private void initLevels() {
         playerLevel = (TextView) findViewById(R.id.player_level);
@@ -149,6 +191,9 @@ public class BattleActivity extends Activity{
         nonPlayerHitpoints.setProgress(100);
     }
 
+
+    //init and open Databases
+
     private void initDB(){
         weaponDb = new WeaponDatabase(this);
         weaponDb.open();
@@ -161,6 +206,10 @@ public class BattleActivity extends Activity{
         characterdataDb = new CharacterdataDatabase(this);
         characterdataDb.open();
     }
+
+    //initImageButtons
+    //load Images into Buttons
+    //button Listeners
 
     private void initImageButtons(){
         skill_a = (ImageButton) findViewById(R.id.imageButton_skill1);
@@ -209,6 +258,8 @@ public class BattleActivity extends Activity{
             }
         });
     }
+
+
 
     private void execNextTurn() {
         handler.postDelayed(new Runnable() {
@@ -517,7 +568,7 @@ public class BattleActivity extends Activity{
     }
 
     private void countFights() {
-        characterdataDb.updateFights(characterdataDb.getFights()+1);
+        characterdataDb.updateFights(characterdataDb.getFights() + 1);
         switch(characterdataDb.getFights()){
             case 5: achievementDb.insertNewAchievement(4);break;
             case 50:achievementDb.insertNewAchievement(5);break;
