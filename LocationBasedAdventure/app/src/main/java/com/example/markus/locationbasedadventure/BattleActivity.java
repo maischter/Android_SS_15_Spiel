@@ -312,6 +312,9 @@ public class BattleActivity extends Activity{
             builder.setMessage("WAHH! Ein Monster! Greif es an!")
                     .setCancelable(false);
             firstRound = false;
+
+            playerLevel.setText("Level " + Player.lvl);
+            enemyLevel.setText("Level " + NonPlayer.lvl);
         } else {
             builder.setMessage("Du hast " + lastDmg + " Schaden erhalten... Nun bist du wieder am Zug!")
                     .setCancelable(false);
@@ -354,8 +357,6 @@ public class BattleActivity extends Activity{
         NonPlayer = new Entity(sp_str,sp_sta,sp_dex,sp_int,level);
         Player.setEntityEQ(weaponData, armorData);
         NonPlayer.setEntityEQ(weaponData, armorData);
-        playerLevel.setText("Level " + Player.lvl);
-        enemyLevel.setText("Level " + NonPlayer.lvl);
 
     }
 
@@ -483,6 +484,7 @@ public class BattleActivity extends Activity{
             playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Eigene HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
+                System.out.println(""+Player.lvl+" vs."+ NonPlayer.lvl);
                 gameOver = true;
                 enemyWins();
             }
@@ -551,15 +553,17 @@ public class BattleActivity extends Activity{
     }
 
     private void updateExperience() {
-        if(Player.lvl - NonPlayer.lvl < 0){
-            //Spieler kleineres Level +40Exp
-            statsDb.updateExp(40 + statsDb.getExp());
-            receiveExperience = 40;
+        System.out.println(""+Player.lvl+" vs."+ NonPlayer.lvl);
+        if(Player.lvl - NonPlayer.lvl == 0){
+
+        //Spieler gleiches Level +20Exp
+            statsDb.updateExp(20 + statsDb.getExp());
+            receiveExperience = 20;
         }else{
-            if(Player.lvl - NonPlayer.lvl==0){
-                //Spieler gleiches Level +20Exp
-                statsDb.updateExp(20 + statsDb.getExp());
-                receiveExperience = 20;
+            if(Player.lvl - NonPlayer.lvl < 0){
+            //Spieler kleineres Level +40Exp
+                statsDb.updateExp(40 + statsDb.getExp());
+                receiveExperience = 40;
             }else{
                 //Spieler größes Level +10Exp
                 statsDb.updateExp(10 + statsDb.getExp());

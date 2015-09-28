@@ -90,7 +90,7 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
                 break;
             //Einhandaxt
             case 2:
-                loadBitmap(R.drawable.einhandaxtweiblich, usedWeapon);
+                loadBitmap(R.drawable.einhandaxt, usedWeapon);
                 break;
             //EinhandaxtMitSchild
             case 4:
@@ -106,11 +106,11 @@ public class WeaponChangeActivity extends Activity implements WeaponListener {
                 break;
             //Zweihandaxt
             case 6:
-                loadBitmap(R.drawable.zweihandaxtweiblich, usedWeapon);
+                loadBitmap(R.drawable.zweihandaxt, usedWeapon);
                 break;
             //Zweihandschwert
             case 5:
-                loadBitmap(R.drawable.zweihandschwertweiblich, usedWeapon);
+                loadBitmap(R.drawable.zweihandschwert, usedWeapon);
                 break;
         }
 

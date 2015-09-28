@@ -209,7 +209,7 @@ public class MenueActivity extends Activity {
                     break;
                 //Einhandaxt
                 case 2:
-                    loadBitmap(R.drawable.einhandaxtweiblich, characterImage);
+                    loadBitmap(R.drawable.einhandaxt, characterImage);
                     break;
                 //EinhandaxtMitSchild
                 case 4:
@@ -225,11 +225,11 @@ public class MenueActivity extends Activity {
                     break;
                 //Zweihandaxt
                 case 6:
-                    loadBitmap(R.drawable.zweihandaxtweiblich, characterImage);
+                    loadBitmap(R.drawable.zweihandaxt, characterImage);
                     break;
                 //Zweihandschwert
                 case 5:
-                    loadBitmap(R.drawable.zweihandschwertweiblich, characterImage);
+                    loadBitmap(R.drawable.zweihandschwert, characterImage);
                     break;
             }
 

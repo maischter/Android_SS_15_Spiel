@@ -356,19 +356,19 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     //setsBackgroundColor of Row1 to Normal (==black)
 
     private void setBackgroundRow1Normal(){
-        tablerow1.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
+        tablerow1.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
     //setsBackgroundColor of Row2 to Normal (==black)
 
     private void setBackgroundRow2Normal(){
-        tablerow2.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
+        tablerow2.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
     //setsBackgroundColor of Row3 to Normal (==black)
 
     private void setBackgroundRow3Normal(){
-        tablerow3.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
+        tablerow3.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
     //setsBackgroundColor of Row5 to Highlight (==white)
@@ -380,7 +380,7 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
     //setsBackgroundColor of Row5 to Normal (==black)
 
     private void setBackgroundRow5Normal() {
-        tablerow5.setBackgroundColor(getResources().getColor(R.color.light_blue_2));
+        tablerow5.setBackgroundColor(getResources().getColor(R.color.white));
     }
 
     //setsBackgroundColor of Row1,2,3 to Normal (==black)
@@ -390,9 +390,9 @@ public class RankingActivity extends Activity implements LoadRankingTask.Ranking
         setBackgroundRow2Normal();
         setBackgroundRow3Normal();
         switch(persusernr){
-            case 1: tablerow1.setBackgroundColor(getResources().getColor(R.color.background_material_light));break;
-            case 2: tablerow2.setBackgroundColor(getResources().getColor(R.color.background_material_light));break;
-            case 3: tablerow3.setBackgroundColor(getResources().getColor(R.color.background_material_light));break;
+            case 1: tablerow1.setBackgroundColor(getResources().getColor(R.color.light_blue_1));break;
+            case 2: tablerow2.setBackgroundColor(getResources().getColor(R.color.light_blue_1));break;
+            case 3: tablerow3.setBackgroundColor(getResources().getColor(R.color.light_blue_1));break;
         }
     }
 

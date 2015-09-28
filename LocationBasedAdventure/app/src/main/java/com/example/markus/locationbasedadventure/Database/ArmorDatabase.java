@@ -191,7 +191,7 @@ public class ArmorDatabase {
 
     private String selectImage(int armorTyp) {
         switch(armorTyp){
-            case 1: return "Standartrüstung";
+            case 1: return "Standardrüstung";
             case 2: return "Verstärke Rüstung";
         }
         return "Leer";

@@ -186,11 +186,11 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
         switch (weaponTyp) {
             //Bogen
             case 8:
-                loadBitmap(R.drawable.bogenweiblich, weaponImage);
+                loadBitmap(R.drawable.einhandschwert, weaponImage);
                 break;
             //Einhandschwert
             case 1:
-                loadBitmap(R.drawable.einhandschwertweiblich, weaponImage);
+                loadBitmap(R.drawable.einhandschwert, weaponImage);
                 break;
             //EinhandschwertMitSchild
             case 3:
@@ -198,7 +198,7 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                 break;
             //Einhandaxt
             case 2:
-                loadBitmap(R.drawable.einhandaxtweiblich, weaponImage);
+                loadBitmap(R.drawable.einhandaxt, weaponImage);
                 break;
             //EinhandaxtMitSchild
             case 4:
@@ -214,11 +214,11 @@ public class WeaponListAdapter extends ArrayAdapter<Equip> {
                 break;
             //Zweihandaxt
             case 6:
-                loadBitmap(R.drawable.zweihandaxtweiblich, weaponImage);
+                loadBitmap(R.drawable.zweihandaxt, weaponImage);
                 break;
             //Zweihandschwert
             case 5:
-                loadBitmap(R.drawable.zweihandschwertweiblich, weaponImage);
+                loadBitmap(R.drawable.zweihandschwert, weaponImage);
                 break;
         }
 
