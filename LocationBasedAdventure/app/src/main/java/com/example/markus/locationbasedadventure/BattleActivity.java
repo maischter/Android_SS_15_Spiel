@@ -340,7 +340,7 @@ public class BattleActivity extends Activity{
             if (defSuspend){
                 target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * nullDMG;
                 defSuspend = false;
-            }else if (powerUpSuspend){
+            }else if (powerUpSuspend && suspend ==1){
                 target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * powerUpDmg;
                 powerUpSuspend=false;
             } else {
@@ -354,7 +354,7 @@ public class BattleActivity extends Activity{
             if (defSuspend){
                 target.curHitpoints = target.curHitpoints - skill.damage * nullDMG;
                 defSuspend = false;
-            } else if (powerUpSuspend){
+            } else if (powerUpSuspend && suspend ==1){
                 target.curHitpoints = target.curHitpoints - skill.damage * powerUpDmg ;
                 powerUpSuspend=false;
             } else {
@@ -416,7 +416,6 @@ public class BattleActivity extends Activity{
             System.out.println("Ziel HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
                 updateExperience();
-
                 checkLevelUp();
                 if(levelUp){
                     playerWinsLevelUp();
@@ -440,7 +439,7 @@ public class BattleActivity extends Activity{
     private void checkLevelUp() {
 
         levelUp = true;
-        if(statsDb.getExp()>=100){
+        if(statsDb.getLevel() == 1 && statsDb.getExp()>=100){
             //Level 1 zu 2
             statsDb.updateAllExceptExp(2, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
         }else{

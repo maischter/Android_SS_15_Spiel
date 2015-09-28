@@ -37,8 +37,8 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/kampferklaerung"
-        android:id="@+id/buttonKampferklaerung"
+        android:text="@string/hilfe"
+        android:id="@+id/buttonHilfe"
         android:layout_marginBottom="20dp"
 
         android:background="@color/light_blue_1"
@@ -47,20 +47,6 @@
         android:layout_alignStart="@+id/checkBoxAngemeldetBleibenEinstellungen"
         android:layout_alignRight="@+id/checkBoxAngemeldetBleibenEinstellungen"
         android:layout_alignEnd="@+id/checkBoxAngemeldetBleibenEinstellungen" />
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hilfe"
-        android:id="@+id/buttonHilfe"
-        android:layout_below="@+id/buttonKampferklaerung"
-        android:layout_alignLeft="@+id/buttonKampferklaerung"
-        android:layout_alignStart="@+id/buttonKampferklaerung"
-        android:layout_alignRight="@+id/buttonKampferklaerung"
-        android:layout_alignEnd="@+id/buttonKampferklaerung"
-        android:layout_marginBottom="20dp"
-
-        android:background="@color/light_blue_1"/>
 
 
     <Button
