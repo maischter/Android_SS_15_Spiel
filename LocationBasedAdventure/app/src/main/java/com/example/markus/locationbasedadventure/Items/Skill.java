@@ -8,7 +8,7 @@ import com.example.markus.locationbasedadventure.R;
 public class Skill {
 
     public int skillName;
-    public double damage;
+    private double damage;
     public int multiply = 1;
 
     public Skill (int sName, double dmg){
@@ -27,6 +27,10 @@ public class Skill {
                 this.damage = dmg * 2;
 
         }
+    }
+
+    public double getDamage() {
+        return damage;
     }
 
 }

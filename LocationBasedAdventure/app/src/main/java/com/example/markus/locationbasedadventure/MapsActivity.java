@@ -46,7 +46,7 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private boolean enemiesSet = false;
 
     private TextView gpsText;
-    private TextView locationCoordiantes, experience, currentLocation;
+    private TextView locationCoordiantes, experience, currentLocation, level;
     private Button menuButton;
 
     private StatsDatabase stats = new StatsDatabase(this);
@@ -82,8 +82,9 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
 
     private void setupUI() {
         gpsText = (TextView) findViewById(R.id.gpsText);
+        level = (TextView) findViewById(R.id.map_level);
         locationCoordiantes = (TextView) findViewById(R.id.map_pos);
-        experience = (TextView) findViewById(R.id.map_level);
+        experience = (TextView) findViewById(R.id.map_exp);
         currentLocation = (TextView) findViewById(R.id.map_location);
         menuButton = (Button) findViewById(R.id.buttonMenu);
 
@@ -126,7 +127,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
     private void setExperienceText() {
         stats.open();
         int nextLvl = calcNextLevel();
-        experience.setText(stats.getExp() + " / " + nextLvl);
+        experience.setText(stats.getExp() + "/" + nextLvl + " XP");
+        level.setText("Level: " + stats.getLevel());
     }
 
     private int calcNextLevel() {
@@ -258,6 +260,8 @@ public class MapsActivity extends FragmentActivity implements LocationListener{
             Location.distanceBetween(lat, lng, enemies[i].latitude, enemies[i].longitude, result);
             if(result[0] <= 8) {
                 startBattle();
+            } else if(result[0] >= 500) {
+                setupEnemies();
             }
         }
     }

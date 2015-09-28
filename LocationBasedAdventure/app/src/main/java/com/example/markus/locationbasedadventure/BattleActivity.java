@@ -9,6 +9,7 @@ import android.os.Handler;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
@@ -65,8 +66,10 @@ public class BattleActivity extends Activity{
 
     private boolean gameOver = false;
     private boolean levelUp = false;
+    private boolean firstRound = true;
 
     private int receiveExperience = 0;
+    private double lastDmg;
 
 
     @Override
@@ -174,7 +177,9 @@ public class BattleActivity extends Activity{
     private void execNextTurn() {
         handler.postDelayed(new Runnable() {
             public void run() {
-                nextTurn();
+                if(!gameOver) {
+                    nextTurn();
+                }
             }
         }, 1000);
     }
@@ -226,7 +231,7 @@ public class BattleActivity extends Activity{
 
     private void enemyAttack(Skill skill, Entity player, Entity nonPlayer) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Gegner führt einen Angriff aus. Bitte warten!")
+        builder.setMessage("Der Gegner hat " + lastDmg + " erhalten und führt nun einen Gegenangriff aus!")
                 .setCancelable(false);
         final AlertDialog alert = builder.create();
         alert.show();
@@ -246,7 +251,14 @@ public class BattleActivity extends Activity{
         skill_c.setClickable(true);
         if (level >= 5) {
             skill_d.setClickable(true);
-        } else skill_d.setClickable(false);
+            TextView specialAttack = (TextView) findViewById(R.id.textViewSpecialAttack);
+            specialAttack.setVisibility(View.VISIBLE);
+        } else {
+            skill_d.setClickable(false);
+            skill_d.setVisibility(View.INVISIBLE);
+            TextView specialAttack = (TextView) findViewById(R.id.textViewSpecialAttack);
+            specialAttack.setVisibility(View.INVISIBLE);
+        }
     }
 
     private void nonplayersTurn(){
@@ -274,15 +286,23 @@ public class BattleActivity extends Activity{
 
     private void showTurnMsg() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Du bist am Zug!")
-                .setCancelable(false);
+        if(firstRound) {
+            builder.setMessage("WAHH! Ein Monster! Greif es an!")
+                    .setCancelable(false);
+            firstRound = false;
+        } else {
+            builder.setMessage("Du hast " + lastDmg + " Schaden erhalten... Nun bist du wieder am Zug!")
+                    .setCancelable(false);
+        }
         final AlertDialog alert = builder.create();
-        alert.show();
+        if(!gameOver) {
+            alert.show();
+        }
         handler.postDelayed(new Runnable() {
             public void run() {
                 alert.dismiss();
             }
-        }, 1000);
+        }, 3000);
     }
 
     public void loadBattleData(){
@@ -334,32 +354,33 @@ public class BattleActivity extends Activity{
         int dodge = rand.nextInt(99);
         int nullDMG = 0;
         double powerUpDmg = 1.5;
+        lastDmg = skill.getDamage();
 
         //kritischer treffer
         if (hit <= source.getHitrate() && crit <= source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * nullDMG;
+                target.curHitpoints = target.curHitpoints - skill.getDamage() * source.crit_dmg * nullDMG;
                 defSuspend = false;
-            }else if (powerUpSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg * powerUpDmg;
+            }else if (powerUpSuspend && suspend == 1){
+                target.curHitpoints = target.curHitpoints - skill.getDamage() * source.crit_dmg * powerUpDmg;
                 powerUpSuspend=false;
             } else {
-                target.curHitpoints = target.curHitpoints - skill.damage * source.crit_dmg;
-                System.out.println("Kritischer Hit: " + skill.damage * source.crit_dmg );
+                target.curHitpoints = target.curHitpoints - skill.getDamage() * source.crit_dmg;
+                System.out.println("Kritischer Hit: " + skill.getDamage() * source.crit_dmg );
             }
         } else
 
         //normal getroffen
         if (hit <= source.getHitrate() && crit > source.getCritrate() && dodge > source.getDodge()){
             if (defSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * nullDMG;
+                target.curHitpoints = target.curHitpoints - skill.getDamage() * nullDMG;
                 defSuspend = false;
-            } else if (powerUpSuspend){
-                target.curHitpoints = target.curHitpoints - skill.damage * powerUpDmg ;
+            } else if (powerUpSuspend && suspend == 1){
+                target.curHitpoints = target.curHitpoints - skill.getDamage() * powerUpDmg ;
                 powerUpSuspend=false;
             } else {
-                target.curHitpoints = target.curHitpoints - skill.damage;
-                System.out.println("Normaler Hit:" + skill.damage);
+                target.curHitpoints = target.curHitpoints - skill.getDamage();
+                System.out.println("Normaler Hit:" + skill.getDamage());
             }
         }
 
@@ -371,6 +392,7 @@ public class BattleActivity extends Activity{
             } else if (powerUpSuspend && suspend ==1){
                 powerUpSuspend=false;
             }
+            lastDmg = 0;
             System.out.println("Ausgewichen");
         } else if (hit > source.getHitrate()){ //nicht getroffen
             //nothing to do here
@@ -379,11 +401,9 @@ public class BattleActivity extends Activity{
             } else if (powerUpSuspend && suspend ==1){
                 powerUpSuspend = false;
             }
+            lastDmg = 0;
             System.out.println("Nicht getroffen");
         }
-
-
-
 
 
         if (powerUpSuspend && suspend == 2){
@@ -416,7 +436,7 @@ public class BattleActivity extends Activity{
             System.out.println("Ziel HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
                 updateExperience();
-
+                gameOver = true;
                 checkLevelUp();
                 if(levelUp){
                     playerWinsLevelUp();
@@ -432,6 +452,7 @@ public class BattleActivity extends Activity{
             playerHitpoints.setProgress((int) ((target.curHitpoints / target.maxHitpoints) * 100));
             System.out.println("Eigene HP: " + target.curHitpoints);
             if(target.curHitpoints <= 0) {
+                gameOver = true;
                 enemyWins();
             }
         }
@@ -440,49 +461,49 @@ public class BattleActivity extends Activity{
     private void checkLevelUp() {
 
         levelUp = true;
-        if(statsDb.getExp()>=100){
+        if(statsDb.getLevel() == 1 &&statsDb.getExp()>=100 && statsDb.getExp() <= 175){
             //Level 1 zu 2
-            statsDb.updateAllExceptExp(2, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+            statsDb.updateAllExceptExp(2, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
         }else{
-            if(statsDb.getExp()>=175){
+            if(statsDb.getLevel() == 2 &&statsDb.getExp()>=175 && statsDb.getExp() <= 306){
                 //Level 2 zu 3
-                statsDb.updateAllExceptExp(3, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                statsDb.updateAllExceptExp(3, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
             }else{
-                if(statsDb.getExp()>=306){
+                if(statsDb.getLevel() == 3 && statsDb.getExp()>=306 && statsDb.getExp() <= 536){
                     //Level 3 zu 4
-                    statsDb.updateAllExceptExp(4, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                    statsDb.updateAllExceptExp(4, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                 }else{
-                    if(statsDb.getExp()>=536){
+                    if(statsDb.getExp()>=536 && statsDb.getExp() <= 938){
                         //Level 4 zu 5
-                        statsDb.updateAllExceptExp(5, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                        statsDb.updateAllExceptExp(5, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                     }else{
-                        if(statsDb.getExp()>=938){
+                        if(statsDb.getExp()>=938 && statsDb.getExp() <= 1548){
                             //Level 5 zu 6
-                            statsDb.updateAllExceptExp(6, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                            statsDb.updateAllExceptExp(6, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                         }else{
-                            if(statsDb.getExp()>=1548){
+                            if(statsDb.getExp()>=1548 && statsDb.getExp() <= 2553){
                                 //Level 6 zu 7
-                                statsDb.updateAllExceptExp(7, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                statsDb.updateAllExceptExp(7, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                             }else{
-                                if(statsDb.getExp()>=2553){
+                                if(statsDb.getExp()>=2553 && statsDb.getExp() <= 4213){
                                     //Level 7 zu 8
-                                    statsDb.updateAllExceptExp(8, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                    statsDb.updateAllExceptExp(8, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                 }else{
-                                    if(statsDb.getExp()>=4213){
+                                    if(statsDb.getExp()>=4213 && statsDb.getExp() <= 6912){
                                         //Level 8 zu 9
-                                        statsDb.updateAllExceptExp(9, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                        statsDb.updateAllExceptExp(9, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                     }else{
-                                        if(statsDb.getExp()>=6912){
+                                        if(statsDb.getExp()>=6912 && statsDb.getExp() <= 11470){
                                             //Level 9 zu 10
-                                            statsDb.updateAllExceptExp(10, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                            statsDb.updateAllExceptExp(10, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                         }else{
-                                            if(statsDb.getExp()>=11470){
+                                            if(statsDb.getExp()>=11470 && statsDb.getExp() <= 17205){
                                                 //Level 10 zu 11
-                                                statsDb.updateAllExceptExp(11, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                                statsDb.updateAllExceptExp(11, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                             }else{
-                                                if(statsDb.getExp()>=17205){
+                                                if(statsDb.getExp()>=17205 && statsDb.getExp() <= 25808){
                                                     //Level 11 zu 12
-                                                    statsDb.updateAllExceptExp(12, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence());
+                                                    statsDb.updateAllExceptExp(12, statsDb.getStamina() + 3, statsDb.getStrength()+3,statsDb.getDexterity()+3,statsDb.getIntelligence()+3);
                                                 }else{
                                                     levelUp = false;
                                                 }
@@ -519,9 +540,9 @@ public class BattleActivity extends Activity{
 
     private void enemyWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Sie haben verloren! Spiel ist zu Ende!")
+        builder.setMessage("Du hast verloren! Spiel ist zu Ende!")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
                     }
@@ -534,9 +555,9 @@ public class BattleActivity extends Activity{
 
     private void playerWinsLevelUp() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Sie haben gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient! Glückwunsch, sie haben Level"+ statsDb.getLevel()+"erreicht. +3 für alle Stats!")
+        builder.setMessage("Du hast gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient! Glückwunsch, du hast Level "+ statsDb.getLevel()+" erreicht. +3 für alle Stats!")
                 .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                .setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         startActivity(new Intent(BattleActivity.this, MapsActivity.class));
                     }
@@ -549,7 +570,7 @@ public class BattleActivity extends Activity{
 
     private void playerWins() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Sie haben gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient!")
+        builder.setMessage("Du hast gewonnen und "+ receiveExperience +" Erfahrungspunkte verdient!")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:id="@+id/map"
     tools:context="com.example.markus.locationbasedadventure.MapsActivity"
-    android:name="com.google.android.gms.maps.SupportMapFragment" >
+    android:name="com.google.android.gms.maps.SupportMapFragment" > -->
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -32,10 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="200/2300 XP"
-            android:id="@+id/map_level"
+            android:id="@+id/map_exp"
             android:textSize="24sp"
             android:padding="5dp"
-            android:layout_alignParentTop="true"
+            android:layout_below="@+id/map_level"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -55,7 +55,17 @@
             android:text="Du bist momentan in Regensburg"
             android:id="@+id/map_location"
             android:paddingLeft="5dp"
-            android:layout_below="@+id/map_level"
+            android:layout_below="@+id/map_exp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Level 1:"
+            android:id="@+id/map_level"
+            android:paddingLeft="5dp"
+            android:layout_alignParentTop="true"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
     </RelativeLayout>
