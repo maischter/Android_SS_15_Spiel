@@ -83,7 +83,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
                             .setCancelable(false)
                             .setPositiveButton("Ja",new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog,int id) {
-                                     itemListener.itemUsed(itemTyp);
+                                     itemListener.itemUsed(itemTyp,itemID);
 
                                 }
                             })
@@ -135,11 +135,11 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private String selectItemTypString(int itemTyp) {
         switch (itemTyp) {
             case 1:
-                return "Schwacher Trank";
+                return "Pot 1";
             case 2:
-                return "Trank";
+                return "Pot 2";
 
-            case 3: return "Starker Trank";
+            case 3: return "Pot 3";
             default:return "Leer";
         }
 
@@ -148,7 +148,7 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
 
     public interface ItemListener{
         public void showItemInfo(int itemTyp, int itemID);
-        public void itemUsed(int itemTyp);
+        public void itemUsed(int itemTyp, int itemID);
     }
 
 }
