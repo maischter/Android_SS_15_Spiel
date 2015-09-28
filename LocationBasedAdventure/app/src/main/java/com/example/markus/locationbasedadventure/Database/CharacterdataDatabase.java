@@ -11,7 +11,7 @@ public class  CharacterdataDatabase {
 
     //CharacterDatabase
 
-    private static final String DATABASE_NAME = "Characterdata5.db";
+    private static final String DATABASE_NAME = "CharacterdataDatenbank.db";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE = "Characterdatas";
     private static final String KEY_ID = "_id";

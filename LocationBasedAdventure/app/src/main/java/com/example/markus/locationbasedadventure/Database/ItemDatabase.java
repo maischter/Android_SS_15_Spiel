@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ItemDatabase {
 
 
-    private static final String DATABASE_NAME = "Item1.db";
+    private static final String DATABASE_NAME = "ItemDatenbank.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Items";
@@ -53,12 +53,34 @@ public class ItemDatabase {
 
     public long insertNewItem(int typ, int quantity) {
 
-        ContentValues newValues = new ContentValues();
+        boolean alreadyIn = false;
+        ArrayList<Item> list = getAllItemItems();
 
-        newValues.put(KEY_TYP, typ);
-        newValues.put(KEY_QUANTITY, quantity);
+        for(int i=0;i<list.size();i++){
+            if(list.get(i).getItemTyp()==typ){
+                updateQuantity(typ, quantity, list.get(i).getItemID());
+                alreadyIn = true;
+            }
+        }
 
-        return db.insert(DATABASE_TABLE, null, newValues);
+        if(!alreadyIn) {
+            ContentValues newValues = new ContentValues();
+
+            newValues.put(KEY_TYP, typ);
+            newValues.put(KEY_QUANTITY, quantity);
+
+            return db.insert(DATABASE_TABLE, null, newValues);
+        }
+        return 0;
+    }
+
+    public void updateQuantity(int typ, int quantity,int id) {
+        ContentValues values = new ContentValues();
+        values.put(KEY_TYP, typ);
+        values.put(KEY_QUANTITY, quantity);
+        String where_clause = KEY_ID + "=?";
+        String[] where_args = new String[]{String.valueOf(id)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
+        db.update(DATABASE_TABLE, values, where_clause, where_args);
     }
 
     //update weapon and weaponstats of databaserow 1
@@ -70,6 +92,22 @@ public class ItemDatabase {
         String where_clause = KEY_ID + "=?";
         String[] where_args = new String[]{String.valueOf(1)};   // Immer Zeile 1, weil nur eine Zeile vorhanden
         db.update(DATABASE_TABLE, values, where_clause, where_args);
+    }
+
+    //checks if Database is empty
+    //returns true if Database is empty
+
+    public boolean isEmpty(){
+        Cursor cur = db.rawQuery("SELECT COUNT(*) FROM " + DATABASE_TABLE, null);
+        if (cur != null){
+            cur.moveToFirst();
+            if (cur.getInt(0) == 0) {
+                // Empty
+                return true;
+            }
+
+        }
+        return false;
     }
 
 

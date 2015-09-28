@@ -17,6 +17,7 @@ import com.example.markus.locationbasedadventure.AsynchronTasks.LoadingBattleTas
 import com.example.markus.locationbasedadventure.Database.AchievementDatabase;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.CharacterdataDatabase;
+import com.example.markus.locationbasedadventure.Database.ItemDatabase;
 import com.example.markus.locationbasedadventure.Database.StatsDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
 import com.example.markus.locationbasedadventure.Items.Entity;
@@ -50,6 +51,7 @@ public class BattleActivity extends Activity{
     private StatsDatabase statsDb;
     private AchievementDatabase achievementDb;
     private CharacterdataDatabase characterdataDb;
+    private ItemDatabase itemDb;
 
     private int [] weaponData;
     private int [] armorData;
@@ -205,6 +207,8 @@ public class BattleActivity extends Activity{
         achievementDb.open();
         characterdataDb = new CharacterdataDatabase(this);
         characterdataDb.open();
+        itemDb = new ItemDatabase(this);
+        itemDb.open();
     }
 
     //initImageButtons
@@ -292,8 +296,12 @@ public class BattleActivity extends Activity{
         statsDb.close();
         achievementDb.close();
         characterdataDb.close();
+        itemDb.close();
         super.onDestroy();
     }
+
+
+
     // KI wählt per Random aus welchen Skill er einsetzt
     private void actionKI(){
 
@@ -594,9 +602,9 @@ public class BattleActivity extends Activity{
     private void countFights() {
         characterdataDb.updateFights(characterdataDb.getFights() + 1);
         switch(characterdataDb.getFights()){
-            case 5: achievementDb.insertNewAchievement(4);break;
-            case 50:achievementDb.insertNewAchievement(5);break;
-            case 250:achievementDb.insertNewAchievement(6);break;
+            case 5: achievementDb.insertNewAchievement(4);itemDb.insertNewItem(1,1);break;
+            case 50:achievementDb.insertNewAchievement(5);itemDb.insertNewItem(2, 1);break;
+            case 250:achievementDb.insertNewAchievement(6);itemDb.insertNewItem(3, 1);break;
         }
     }
 
@@ -681,9 +689,9 @@ public class BattleActivity extends Activity{
 
     private void addAchievementLevel(int level) {
         switch(level){
-            case 4:achievementDb.insertNewAchievement(1);break;
-            case 8:achievementDb.insertNewAchievement(2);break;
-            case 12:achievementDb.insertNewAchievement(3);break;
+            case 4:achievementDb.insertNewAchievement(1);itemDb.insertNewItem(1, 1);break;
+            case 8:achievementDb.insertNewAchievement(2);itemDb.insertNewItem(2, 1);break;
+            case 12:achievementDb.insertNewAchievement(3);itemDb.insertNewItem(3,1);break;
         }
     }
 

@@ -17,7 +17,7 @@ import java.util.ArrayList;
  */
 public class AchievementDatabase {
 
-    private static final String DATABASE_NAME = "Achievement1.db";
+    private static final String DATABASE_NAME = "AchievementDatenbank.db";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE = "Achievements";
     private  static final String KEY_ID = "_id";

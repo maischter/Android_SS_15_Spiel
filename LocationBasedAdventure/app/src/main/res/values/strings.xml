@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">LocationBasedAdventure</string>
     <string name="notregisteredText">Doch noch nicht registriert?</string>
-    <string name="alreadyregisteredText">Diese E-Mail-Adresse ist bereits registriert!</string>
+    <string name="alreadyregisteredText">Sie sind bereits registriert?</string>
     <string name="charakterErstellen">Charakter erstellen</string>
     <string name="anmelden">Anmelden</string>
     <string name="registrieren">Registrieren</string>

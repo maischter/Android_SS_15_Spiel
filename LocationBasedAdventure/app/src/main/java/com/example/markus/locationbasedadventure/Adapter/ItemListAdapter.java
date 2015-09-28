@@ -86,9 +86,6 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
             case 1:loadBitmap(R.drawable.power_up,itemImage);break;
             case 2:loadBitmap(R.drawable.power_up,itemImage);break;
             case 3: loadBitmap(R.drawable.power_up,itemImage);break;
-            case 4: loadBitmap(R.drawable.power_up,itemImage);break;
-            case 5: loadBitmap(R.drawable.power_up,itemImage);break;
-            case 6: loadBitmap(R.drawable.power_up,itemImage);break;
         }
     }
 
@@ -107,14 +104,11 @@ public class ItemListAdapter extends ArrayAdapter<Item> {
     private String selectItemTypString(int itemTyp) {
         switch (itemTyp) {
             case 1:
-                return "Trank";
+                return "Schwacher Trank";
             case 2:
-                return "Gegengift";
+                return "Trank";
 
-            case 3: return "StaminaUP";
-            case 4: return "StrengthUP";
-            case 5: return "DexterityUP";
-            case 6: return "IntelligenceUP";
+            case 3: return "Starker Trank";
             default:return "Leer";
         }
 

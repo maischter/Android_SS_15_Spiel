@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.markus.locationbasedadventure.Adapter.ItemListAdapter;
 import com.example.markus.locationbasedadventure.Adapter.WeaponListAdapter;
+import com.example.markus.locationbasedadventure.AsynchronTasks.BitmapWorkerTask;
 import com.example.markus.locationbasedadventure.Database.ArmorDatabase;
 import com.example.markus.locationbasedadventure.Database.ItemDatabase;
 import com.example.markus.locationbasedadventure.Database.WeaponDatabase;
@@ -262,7 +263,7 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
     //Loads usedWeapon values and sets textViews
 
     private void loadTextViewWeaponValue() {
-        weaponImage.setImageResource(R.drawable.power_up);
+        selectWeaponImage(weaponDb.getWeaponTyp());
         kindofweapon.setText(weaponDb.getWeaponString());
         damageValue.setText("" + weaponDb.getWeapon()[1]);
         hitchanceValue.setText("" + weaponDb.getWeapon()[2]);
@@ -280,7 +281,7 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
 
 
     private void loadTextViewsArmorValue() {
-        armorImage.setImageResource(R.drawable.power_up);
+        selectArmorImage(armorDb.getArmor()[0]);
         kindofarmor.setText(armorDb.getArmorString());
         staminaarmorValue.setText("" + armorDb.getArmor()[1]);
         strengtharmorValue.setText("" + armorDb.getArmor()[2]);
@@ -288,7 +289,68 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
         intelligencearmorValue.setText("" + armorDb.getArmor()[4]);
     }
 
+    //select an Image
+    //Calls loadBitmap
+    //diffs by int armorTyp
 
+
+    private void selectArmorImage(int armorTyp){
+        switch(armorTyp){
+            case 1:loadBitmap(R.drawable.power_up,armorImage);break;
+            case 2:loadBitmap(R.drawable.power_up,armorImage);break;
+        }
+
+    }
+
+    private void selectWeaponImage(int weaponTyp){
+        switch (weaponTyp) {
+
+            //Bogen
+            case 8:
+                loadBitmap(R.drawable.einhandschwert, weaponImage);
+                break;
+            //Einhandschwert
+            case 1:
+                loadBitmap(R.drawable.einhandschwert, weaponImage);
+                break;
+            //EinhandschwertMitSchild
+            case 3:
+                loadBitmap(R.drawable.einhandschwertschildweiblich, weaponImage);
+                break;
+            //Einhandaxt
+            case 2:
+                loadBitmap(R.drawable.einhandaxt, weaponImage);
+                break;
+            //EinhandaxtMitSchild
+            case 4:
+                loadBitmap(R.drawable.einhandaxtschildweiblich, weaponImage);
+                break;
+            //Armbrust
+            case 9:
+                loadBitmap(R.drawable.gewehrweiblich, weaponImage);
+                break;
+            //Zauberstab
+            case 7:
+                loadBitmap(R.drawable.zauberstabweiblich, weaponImage);
+                break;
+            //Zweihandaxt
+            case 6:
+                loadBitmap(R.drawable.zweihandaxt, weaponImage);
+                break;
+            //Zweihandschwert
+            case 5:
+                loadBitmap(R.drawable.zweihandschwert, weaponImage);
+                break;
+        }
+    }
+
+
+    //loads Bitmap into ImageView by Using backgroundTask
+
+    private void loadBitmap(int resID , ImageView imageView) {
+        BitmapWorkerTask task = new BitmapWorkerTask(imageView);
+        task.execute(resID);
+    }
 
     //setsText to show info about clicked Item
 
@@ -306,17 +368,11 @@ public class InventarActivity extends Activity implements ItemListAdapter.ItemLi
     private String selectItem(int itemTyp) {
         switch (itemTyp) {
             case 1:
-                return "Trank: Stellt eine Anzahl an LP wieder her.";
+                return " Schwacher Trank: Stellt eine geringe Anzahl an LP wieder her.";
             case 2:
-                return "Gegengift: Heilt eine Vergiftung.";
+                return "Trank: Stellt eine Anzahl an LP wieder her.";
             case 3:
-                return "StaUP: Erhöht Stamina für die Dauer dieses Kampfes.";
-            case 4:
-                return "StrUP: Erhöht Strength für die Dauer dieses Kampfes.";
-            case 5:
-                return "DexUP: Erhöht Dexterity für die Dauer dieses Kampfes.";
-            case 6:
-                return "IntUP: Erhöht Intelligence für die Dauer dieses Kampfes.";
+                return "Starker Trank: Stellt eine hohe Anzahl an LP wieder her.";
             default: return "Leer";
         }
     }

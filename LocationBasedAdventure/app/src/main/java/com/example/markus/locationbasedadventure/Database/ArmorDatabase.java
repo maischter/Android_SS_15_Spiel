@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class ArmorDatabase {
 
 
-    private static final String DATABASE_NAME = "Armor6.db";
+    private static final String DATABASE_NAME = "ArmorDatenbank.db";
     private static final int DATABASE_VERSION = 1;
 
     private static final String DATABASE_TABLE = "Armors";

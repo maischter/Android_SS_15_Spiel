@@ -19,7 +19,7 @@ import java.util.ArrayList;
 
 public class WeaponDatabase {
 
-    private static final String DATABASE_NAME = "Weapon6.db";
+    private static final String DATABASE_NAME = "WeaponDatenbank.db";
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE = "Weapons";
 
